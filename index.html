@@ -1,13 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Boost productivity with mindful work breaks. Try relaxation techniques, breathing exercises, and guided meditation to reduce stress, and improve focus."
-    />
-    <title>Mindful Work Breaks - Refresh Mind & Boost Productivity</title>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Boost productivity with mindful work breaks. Try relaxation techniques, breathing exercises, and guided meditation to reduce stress, and improve focus." />
+  <link rel="stylesheet" href="style.css" />
+  <title>Mindful Work Breaks - Refresh Mind & Boost Productivity</title>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">Take Work Breaks</div>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <h1>Take a Break. Refresh Your Mind. Return Recharged.</h1>
+    <p>Take mindful work breaks with breathing, meditation, and relaxation tools to refresh your mind and boost
+      productivity.</p>
+    <div class="buttons">
+      <a href="#features" class="start-btn">Start a Break Now</a>
+      <a href="#how" class="how-btn">How It Works</a>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <h2>Features</h2>
+    <div class="features-grid">
+
+      <div class="feature-card" tabindex="0" role="link" onclick="location.href='breathing.html'">
+        <div class="feature-icon">🧘‍♂️</div>
+        <h3>Breathing Exercise</h3>
+        <p>Follow guided inhale-exhale cycles to calm your mind and body.</p>
+        <button class="btn" onclick="event.stopPropagation(); window.location.href='breathing.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card" tabindex="0" role="link" onclick="location.href='meditation.html'">
+        <div class="feature-icon">🎧</div>
+        <h3>Meditation Sessions</h3>
+        <p>Short audio sessions to re-center your mind.</p>
+        <button class="btn" onclick="event.stopPropagation(); window.location.href='meditation.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card" tabindex="0" role="link" onclick="location.href='motivation.html'">
+        <div class="feature-icon">💬</div>
+        <h3>Motivational Quotes</h3>
+        <p>Boost your spirit with random, uplifting quotes.</p>
+        <button class="btn" onclick="event.stopPropagation(); window.location.href='motivation.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card" tabindex="0" role="link" onclick="location.href='eye-relief.html'">
+        <div class="feature-icon">👁️</div>
+        <h3>Eye Relief Mode</h3>
+        <p>A green screen plus blink reminders to reduce eye strain.</p>
+        <button class="btn" onclick="event.stopPropagation(); window.location.href='eye-relief.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card" tabindex="0" role="link" onclick="location.href='focus-game.html'">
+        <div class="feature-icon">🎯</div>
+        <h3>Focus Dot Game</h3>
+        <p>Focus your attention as the dot shifts to improve mental clarity.</p>
+        <button class="btn" onclick="event.stopPropagation(); window.location.href='focus-game.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card" tabindex="0" role="link" onclick="location.href='free-draw.html'">
+        <div class="feature-icon">✏️</div>
+        <h3>Free Draw Space</h3>
+        <p>Scribble and draw freely to unwind your mind.</p>
+        <button class="btn" onclick="event.stopPropagation(); window.location.href='free-draw.html'">Try Now</button>
+      </div>
+
+    </div>
+  </section>
+</body>
+
 </html>

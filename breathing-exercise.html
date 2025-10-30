@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Exercises - Reduce Stress & Improve Focus | Take Work Breaks</title>
+    <meta name="description"
+        content="Reduce stress and improve focus with guided breathing exercises. Box breathing, 4-7-8 technique, energizing breath and more.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/breathing-exercise.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/favicon.svg" alt="Take Work Breaks" class="logo-img" loading="eager">
+                <span class="logo-text">Take Work Breaks</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="index.html#features">Tools</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="breathing-app">
+        <!-- Technique Selector -->
+        <div class="technique-selector">
+            <h2>Choose Your Technique</h2>
+            <div class="technique-grid" id="techniqueGrid">
+                <!-- Techniques will be populated by JS -->
+            </div>
+        </div>
+
+        <!-- Breathing Interface -->
+        <div class="breathing-interface" id="breathingInterface" hidden>
+            <div class="breath-visual">
+                <div class="breath-circle" id="breathCircle">
+                    <div class="breath-text" id="breathText">Ready to Begin</div>
+                    <div class="breath-timer" id="breathTimer">0:00</div>
+                </div>
+            </div>
+
+            <div class="breath-controls">
+                <div class="breath-stats">
+                    <span class="breath-counter" id="breathCounter">Breath: 0/10</span>
+                    <span class="technique-name" id="techniqueName"></span>
+                </div>
+
+                <div class="control-buttons">
+                    <button id="startBtn" class="btn primary">Start Breathing</button>
+                    <button id="pauseBtn" class="btn secondary" disabled>Pause</button>
+                    <button id="resetBtn" class="btn outline">Reset</button>
+                </div>
+
+                <div class="session-controls">
+                    <label for="sessionLength">Session Duration:</label>
+                    <select id="sessionLength">
+                        <option value="1">1 minute</option>
+                        <option value="2">2 minutes</option>
+                        <option value="3" selected>3 minutes</option>
+                        <option value="5">5 minutes</option>
+                        <option value="10">10 minutes</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="backToTechniques" class="back-btn">← Choose Different Technique</button>
+        </div>
+
+        <!-- Custom Breathing Builder -->
+        <div class="custom-breath" id="customBreath" hidden>
+            <h2>Custom Breathing Pattern</h2>
+            <div class="pattern-builder">
+                <div class="phase-control">
+                    <label for="inhaleSlider">Inhale: <span id="inhaleValue">4</span>s</label>
+                    <input type="range" id="inhaleSlider" min="1" max="15" value="4" class="phase-slider">
+                </div>
+                <div class="phase-control">
+                    <label for="hold1Slider">Hold after inhale: <span id="hold1Value">4</span>s</label>
+                    <input type="range" id="hold1Slider" min="0" max="15" value="4" class="phase-slider">
+                </div>
+                <div class="phase-control">
+                    <label for="exhaleSlider">Exhale: <span id="exhaleValue">4</span>s</label>
+                    <input type="range" id="exhaleSlider" min="1" max="15" value="4" class="phase-slider">
+                </div>
+                <div class="phase-control">
+                    <label for="hold2Slider">Hold after exhale: <span id="hold2Value">4</span>s</label>
+                    <input type="range" id="hold2Slider" min="0" max="15" value="4" class="phase-slider">
+                </div>
+            </div>
+
+            <div class="custom-controls">
+                <button id="startCustomBtn" class="btn primary">Start Custom Breathing</button>
+                <button id="backFromCustom" class="btn outline">← Back to Techniques</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/breathing-exercise.js"></script>
+</body>
+
+</html>

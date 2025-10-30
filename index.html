@@ -5,18 +5,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Boost productivity with mindful work breaks. Try relaxation techniques, breathing exercises, and guided meditation to reduce stress, and improve focus." />
-  <link rel="stylesheet" href="style.css" />
+    content="Boost productivity with mindful work breaks. Try relaxation techniques, breathing exercises, and meditation to reduce stress, and improve focus." />
+
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="css/index.css" />
   <title>Mindful Work Breaks - Refresh Mind & Boost Productivity</title>
 </head>
 
 <body>
   <header class="site-header">
     <div class="container">
-      <div class="logo">Take Work Breaks</div>
+      <a href="index.html" class="logo">
+        <img src="assets/images/favicon.svg" alt="Take Work Breaks" class="logo-img" loading="eager">
+        <span class="logo-text">Take Work Breaks</span>
+      </a>
       <nav class="nav">
-        <a href="#home">Home</a>
-        <a href="#tools">Tools</a>
+        <a href="index.html">Home</a>
+        <a href="#features">Tools</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -24,8 +31,7 @@
   </header>
   <section class="hero">
     <h1>Take a Break. Refresh Your Mind. Return Recharged.</h1>
-    <p>Take mindful work breaks with breathing, meditation, and relaxation tools to refresh your mind and boost
-      productivity.</p>
+    <p>Boost productivity with mindful work breaks. Use breathing exercises, desk stretches, meditation, and focus tools to reduce stress and improve concentration.</p>
     <div class="buttons">
       <a href="#features" class="start-btn">Start a Break Now</a>
       <a href="#how" class="how-btn">How It Works</a>
@@ -33,49 +39,70 @@
   </section>
 
   <section id="features" class="features">
-    <h2>Features</h2>
+    <h2>Mindful Break Tools</h2>
     <div class="features-grid">
 
-      <div class="feature-card" tabindex="0" role="link" onclick="location.href='breathing.html'">
+      <a href="breathing-exercise.html" class="feature-card">
         <div class="feature-icon">🧘‍♂️</div>
-        <h3>Breathing Exercise</h3>
-        <p>Follow guided inhale-exhale cycles to calm your mind and body.</p>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='breathing.html'">Try Now</button>
+        <h3>Breathing Exercises</h3>
+        <p>Calm your nervous system with guided breathing patterns to reduce anxiety and stress.</p>
+        <button class="btn">Try Now</button>
+      </a>
+
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Mental Clarity Journal</h3>
+        <p>Clear mental clutter by releasing thoughts and organizing your mind for better focus.</p>
+        <button class="btn" onclick="window.location.href='thought-dump.html'">Try Now</button>
       </div>
 
-      <div class="feature-card" tabindex="0" role="link" onclick="location.href='meditation.html'">
-        <div class="feature-icon">🎧</div>
-        <h3>Meditation Sessions</h3>
-        <p>Short audio sessions to re-center your mind.</p>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='meditation.html'">Try Now</button>
+      <div class="feature-card">
+        <div class="feature-icon">💪</div>
+        <h3>Desk Stretch Exercises</h3>
+        <p>Quick, guided stretches to relieve muscle tension and improve circulation at your desk.</p>
+        <button class="btn" onclick="window.location.href='stretches.html'">Try Now</button>
       </div>
 
-      <div class="feature-card" tabindex="0" role="link" onclick="location.href='motivation.html'">
-        <div class="feature-icon">💬</div>
-        <h3>Motivational Quotes</h3>
-        <p>Boost your spirit with random, uplifting quotes.</p>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='motivation.html'">Try Now</button>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>Productivity Timer</h3>
+        <p>Structure your work with focused sessions and regular breaks using Pomodoro technique.</p>
+        <button class="btn" onclick="window.location.href='pomodoro.html'">Try Now</button>
       </div>
 
-      <div class="feature-card" tabindex="0" role="link" onclick="location.href='eye-relief.html'">
+      <div class="feature-card">
         <div class="feature-icon">👁️</div>
-        <h3>Eye Relief Mode</h3>
-        <p>A green screen plus blink reminders to reduce eye strain.</p>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='eye-relief.html'">Try Now</button>
+        <h3>Digital Eye Strain Relief</h3>
+        <p>Reduce eye fatigue with the 20-20-20 rule and soothing visual exercises.</p>
+        <button class="btn" onclick="window.location.href='eye-care.html'">Try Now</button>
       </div>
 
-      <div class="feature-card" tabindex="0" role="link" onclick="location.href='focus-game.html'">
+      <div class="feature-card">
+        <div class="feature-icon">💫</div>
+        <h3>Daily Motivation Quotes</h3>
+        <p>Boost your mindset with inspirational quotes tailored for productivity and focus.</p>
+        <button class="btn" onclick="window.location.href='quotes.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Short Meditation Sessions</h3>
+        <p>Quick 1-5 minute guided meditations to reset your mind and reduce stress.</p>
+        <button class="btn" onclick="window.location.href='meditation.html'">Try Now</button>
+      </div>
+
+      <div class="feature-card">
         <div class="feature-icon">🎯</div>
-        <h3>Focus Dot Game</h3>
-        <p>Focus your attention as the dot shifts to improve mental clarity.</p>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='focus-game.html'">Try Now</button>
+        <h3>Mental Focus Exercises</h3>
+        <p>Regain concentration with sensory grounding techniques and attention training.</p>
+        <button class="btn" onclick="window.location.href='focus-finder.html'">Try Now</button>
       </div>
 
-      <div class="feature-card" tabindex="0" role="link" onclick="location.href='free-draw.html'">
-        <div class="feature-icon">✏️</div>
-        <h3>Free Draw Space</h3>
-        <p>Scribble and draw freely to unwind your mind.</p>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='free-draw.html'">Try Now</button>
+      <div class="feature-card">
+        <div class="feature-icon">🔴</div>
+        <h3>Attention Training Game</h3>
+        <p>Sharpen your focus with simple concentration games that improve mental clarity.</p>
+        <button class="btn" onclick="window.location.href='focus-game.html'">Try Now</button>
       </div>
 
     </div>

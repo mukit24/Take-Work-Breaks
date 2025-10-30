@@ -3,18 +3,20 @@
      box-sizing: border-box;
      margin: 0;
      padding: 0;
+     scroll-behavior: smooth;
  }
 
  body {
      font-family: 'Segoe UI', sans-serif;
      line-height: 1.5;
      background: linear-gradient(120deg, #d9f4ec, #f0f9ff);
-     /* animation: bgFade 10s ease-in-out infinite alternate;  <-- removed */
      color: #2e7d32;
+     min-height: 100vh;
  }
 
  /* Header */
 
+ /* Header */
  .site-header {
      background-color: #ffffff;
      border-bottom: 1px solid #dce0dd;
@@ -26,13 +28,39 @@
      flex-direction: column;
      align-items: center;
      justify-content: center;
+     padding: 0 1rem;
+     /* Added for mobile */
  }
 
  .logo {
-     font-size: 1.5rem;
+     display: flex;
+     align-items: center;
+     /* Ensures vertical alignment */
+     justify-content: center;
+     /* Centers content horizontally */
+     gap: 0.75rem;
+     text-decoration: none;
+     color: inherit;
+ }
+
+ .logo-img {
+     height: 30px;
+     width: auto;
+     display: block;
+ }
+
+ .logo-text {
+     font-size: 1.4rem;
      font-weight: bold;
      color: #2e7d32;
-     margin-bottom: 0.5rem;
+     line-height: 1;
+     /* Prevents extra height from line-height */
+ }
+
+ .nav {
+     display: flex;
+     align-items: center;
+     /* Ensures nav links are also vertically centered */
  }
 
  .nav a {
@@ -43,8 +71,30 @@
      transition: color 0.3s;
  }
 
- .nav a:hover {
+ .nav a:hover,
+ .nav a:focus {
      color: #1b5e20;
+ }
+
+ .nav a:focus {
+     outline: 2px solid #2e7d32;
+     outline-offset: 2px;
+     border-radius: 2px;
+ }
+
+ /* Mobile responsive adjustment */
+ @media (max-width: 480px) {
+     .logo {
+         gap: 0.5rem;
+     }
+
+     .logo-img {
+         height: 30px;
+     }
+
+     .logo-text {
+         font-size: 1.4rem;
+     }
  }
 
  /* Desktop version */
@@ -57,6 +107,8 @@
 
      .logo {
          margin-bottom: 0;
+         justify-content: flex-start;
+         /* Align left on desktop */
      }
 
      .nav a {
@@ -145,18 +197,18 @@
  /* Desktop and up */
  @media (min-width: 1024px) {
      .hero h1 {
-         font-size: 3rem;
+         font-size: 2.8rem;
      }
 
      .hero p {
-         font-size: 1.2rem;
+         font-size: 1.3rem;
          max-width: 80%;
      }
  }
 
  /* Features */
  .features {
-     padding: 2rem 1rem;
+     padding: 1rem 2rem 1rem 1rem;
      max-width: 1000px;
      margin: 0 auto;
      text-align: center;
@@ -209,6 +261,12 @@
      font-size: 1rem;
  }
 
+ a.feature-card {
+     text-decoration: none;
+     color: inherit;
+     display: block;
+ }
+
  .btn {
      margin-top: 1rem;
      padding: 0.5rem 1.2rem;
@@ -238,3 +296,5 @@
          grid-template-columns: repeat(3, 1fr);
      }
  }
+
+ /* Breathing Exercise */

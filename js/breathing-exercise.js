@@ -42,6 +42,9 @@ let totalBreaths = 0;
 let sessionTimer = null;
 let sessionDuration = 3; // minutes
 let customPattern = [4, 4, 4, 4];
+let sessionTotalSeconds = 0;
+let sessionTimeLeft = 0;
+let sessionTimerInterval = null;
 
 // DOM Elements
 const elements = {
@@ -104,6 +107,10 @@ function setupEventListeners() {
     // Session duration
     elements.sessionLength.addEventListener('change', (e) => {
         sessionDuration = parseInt(e.target.value);
+        if (!isRunning) {
+            sessionTimeLeft = sessionDuration * 60;
+            updateSessionTimer();
+        }
     });
 
     // Custom breathing sliders
@@ -204,9 +211,15 @@ function startBreathing() {
     elements.startBtn.disabled = true;
     elements.pauseBtn.disabled = false;
 
-    // Set session timeout
-    const sessionMs = sessionDuration * 60 * 1000;
-    sessionTimer = setTimeout(endSession, sessionMs);
+    // Calculate session time
+    sessionTotalSeconds = sessionDuration * 60;
+    sessionTimeLeft = sessionTotalSeconds;
+
+    // Update timer display
+    updateSessionTimer();
+
+    // Start session timer
+    startSessionTimer();
 
     nextPhase();
 }
@@ -216,8 +229,18 @@ function togglePause() {
     isPaused = !isPaused;
     elements.pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
 
-    if (!isPaused && isRunning) {
-        nextPhase();
+    if (isPaused) {
+        // Pause session timer
+        if (sessionTimerInterval) {
+            clearInterval(sessionTimerInterval);
+            sessionTimerInterval = null;
+        }
+    } else {
+        // Resume session timer
+        if (isRunning) {
+            startSessionTimer();
+            nextPhase();
+        }
     }
 }
 
@@ -232,6 +255,45 @@ function resetBreathing() {
     elements.breathTimer.textContent = '0:00';
     elements.breathCounter.textContent = 'Breath: 0';
     elements.breathCircle.className = 'breath-circle';
+
+    // Reset session timer
+    sessionTimeLeft = sessionDuration * 60;
+    updateSessionTimer();
+}
+
+function startSessionTimer() {
+    if (sessionTimerInterval) {
+        clearInterval(sessionTimerInterval);
+    }
+
+    sessionTimerInterval = setInterval(() => {
+        if (!isPaused && isRunning) {
+            sessionTimeLeft--;
+            updateSessionTimer();
+
+            if (sessionTimeLeft <= 0) {
+                endSession();
+            }
+        }
+    }, 1000);
+}
+
+function updateSessionTimer() {
+    const timerElement = document.getElementById('sessionTimer');
+    const minutes = Math.floor(sessionTimeLeft / 60);
+    const seconds = sessionTimeLeft % 60;
+    const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    timerElement.textContent = formattedTime;
+
+    // Update visual states
+    timerElement.classList.remove('warning', 'completed');
+
+    if (sessionTimeLeft <= 0) {
+        timerElement.classList.add('completed');
+    } else if (sessionTimeLeft <= 30) {
+        timerElement.classList.add('warning');
+    }
 }
 
 // Stop breathing exercise
@@ -242,9 +304,9 @@ function stopBreathing() {
     elements.pauseBtn.disabled = true;
     elements.pauseBtn.textContent = 'Pause';
 
-    if (sessionTimer) {
-        clearTimeout(sessionTimer);
-        sessionTimer = null;
+    if (sessionTimerInterval) {
+        clearInterval(sessionTimerInterval);
+        sessionTimerInterval = null;
     }
 }
 
@@ -293,22 +355,22 @@ function stopBreathing() {
 // }
 function nextPhase() {
     if (!isRunning || isPaused) return;
-    
+
     const pattern = currentTechnique === 'custom' ? customPattern : breathingTechniques[currentTechnique].pattern;
-    
+
     // Skip zero-duration phases
     while (pattern[currentPhase] === 0) {
         currentPhase = (currentPhase + 1) % pattern.length;
     }
-    
+
     const phaseDuration = pattern[currentPhase];
     timeLeft = phaseDuration;
-    
+
     // Update display with separate hold states
     let phaseClass = '';
     let instructionText = '';
-    
-    switch(currentPhase) {
+
+    switch (currentPhase) {
         case 0:
             phaseClass = 'inhale';
             instructionText = 'Breathe In';
@@ -326,28 +388,28 @@ function nextPhase() {
             instructionText = 'Hold';
             break;
     }
-    
+
     elements.breathText.textContent = instructionText;
     elements.breathCircle.className = `breath-circle ${phaseClass}`;
-    
+
     updateTimer();
-    
+
     // Count completed breaths
     if (currentPhase === 2) { // Exhale phase
         totalBreaths++;
         elements.breathCounter.textContent = `Breath: ${totalBreaths}`;
     }
-    
+
     // Schedule next phase
     const phaseTimer = setInterval(() => {
         if (!isRunning || isPaused) {
             clearInterval(phaseTimer);
             return;
         }
-        
+
         timeLeft--;
         updateTimer();
-        
+
         if (timeLeft <= 0) {
             clearInterval(phaseTimer);
             currentPhase = (currentPhase + 1) % pattern.length;
@@ -368,7 +430,7 @@ function endSession() {
     elements.breathText.textContent = 'Session Complete!';
     elements.breathCircle.className = 'breath-circle';
 
-    // Show completion message for 3 seconds, then reset
+    // Show completion for 3 seconds, then reset
     setTimeout(() => {
         if (!isRunning) {
             resetBreathing();

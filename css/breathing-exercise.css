@@ -445,3 +445,58 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* Simple Session Timer */
+.session-timer {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a5568;
+    background: #f7fafc;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    min-width: 50px;
+    text-align: center;
+    display: inline-block;
+    font-variant-numeric: tabular-nums; /* Ensures equal character width */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .session-timer {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+        min-width: 45px;
+        border-radius: 4px;
+    }
+    
+    .breath-stats {
+        gap: 0.5rem; /* Reduce gap between items on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .session-timer {
+        font-size: 0.85rem;
+        padding: 0.2rem 0.4rem;
+        min-width: 40px;
+    }
+    
+    .breath-stats {
+        font-size: 0.9rem; /* Slightly smaller text on very small screens */
+    }
+}
+
+/* Warning state when time is running out */
+.session-timer.warning {
+    color: #c53030;
+    background: #fed7d7;
+    border-color: #feb2b2;
+}
+
+/* Completed state */
+.session-timer.completed {
+    color: #276749;
+    background: #c6f6d5;
+    border-color: #9ae6b4;
+}

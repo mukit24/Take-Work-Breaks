@@ -75,29 +75,31 @@
         <!-- Custom Breathing Builder -->
         <div class="custom-breath" id="customBreath" hidden>
             <h2>Custom Breathing Pattern</h2>
+
             <div class="pattern-builder">
                 <div class="phase-control">
                     <label for="inhaleSlider">Inhale: <span id="inhaleValue">4</span>s</label>
-                    <input type="range" id="inhaleSlider" min="1" max="15" value="4" class="phase-slider">
+                    <input type="range" id="inhaleSlider" min="2" max="10" value="4" class="phase-slider">
                 </div>
                 <div class="phase-control">
                     <label for="hold1Slider">Hold after inhale: <span id="hold1Value">4</span>s</label>
-                    <input type="range" id="hold1Slider" min="0" max="15" value="4" class="phase-slider">
+                    <input type="range" id="hold1Slider" min="0" max="8" value="4" class="phase-slider">
                 </div>
                 <div class="phase-control">
                     <label for="exhaleSlider">Exhale: <span id="exhaleValue">4</span>s</label>
-                    <input type="range" id="exhaleSlider" min="1" max="15" value="4" class="phase-slider">
+                    <input type="range" id="exhaleSlider" min="2" max="10" value="4" class="phase-slider">
                 </div>
                 <div class="phase-control">
                     <label for="hold2Slider">Hold after exhale: <span id="hold2Value">4</span>s</label>
-                    <input type="range" id="hold2Slider" min="0" max="15" value="4" class="phase-slider">
+                    <input type="range" id="hold2Slider" min="0" max="8" value="4" class="phase-slider">
                 </div>
             </div>
 
             <div class="custom-controls">
                 <button id="startCustomBtn" class="btn primary">Start Custom Breathing</button>
-                <button id="backFromCustom" class="btn outline">← Back to Techniques</button>
+                <button id="savePatternBtn" class="btn outline">Save This Pattern</button>
             </div>
+            <button id="backFromCustom" class="back-btn">← Back to Techniques</button>
         </div>
     </main>
 

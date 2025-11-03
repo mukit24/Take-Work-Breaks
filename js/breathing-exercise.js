@@ -27,7 +27,7 @@ const breathingTechniques = {
     },
     custom: {
         name: "Custom Breathing",
-        pattern: null,
+        pattern: ['X', 'X', 'X', 'X'],
         description: "Create your own breathing pattern",
     }
 };
@@ -45,6 +45,7 @@ let customPattern = [4, 4, 4, 4];
 let sessionTotalSeconds = 0;
 let sessionTimeLeft = 0;
 let sessionTimerInterval = null;
+let savedPattern = null;
 
 // DOM Elements
 const elements = {
@@ -72,6 +73,16 @@ const phaseNames = ['Inhale', 'Hold', 'Exhale', 'Hold'];
 function init() {
     renderTechniqueGrid();
     setupEventListeners();
+    initSavedPattern();
+}
+
+// Initialize - load saved pattern on page load
+function initSavedPattern() {
+    const stored = localStorage.getItem('breathingCustomPattern');
+    if (stored) {
+        savedPattern = JSON.parse(stored);
+        updateCustomPatternDisplay();
+    }
 }
 
 // Render technique selection grid
@@ -79,8 +90,8 @@ function renderTechniqueGrid() {
     elements.techniqueGrid.innerHTML = Object.entries(breathingTechniques).map(([key, tech]) => `
         <div class="technique-card" data-technique="${key}">
             <h3 class="tech-name">${tech.name}</h3>
-            ${tech.pattern ? `<div class="tech-pattern">${tech.pattern.join('-')}</div>` : ''}
-            <p class="tech-desc">${tech.description}</p>
+            <div class="tech-pattern" ${key === 'custom' ? 'id="customPatternDisplay"' : ''}>${tech.pattern.join('-')}</div>
+            <p class="tech-desc" ${key === 'custom' ? 'id="customPatternDesc"' : ''}>${tech.description}</p>
         </div>
     `).join('');
 }
@@ -167,6 +178,11 @@ function showCustomBreathing() {
     elements.techniqueGrid.hidden = true;
     elements.breathingInterface.hidden = true;
     elements.customBreath.hidden = false;
+
+    // Load saved pattern if it exists
+    if (savedPattern) {
+        loadSavedPattern();
+    }
 }
 
 // Show technique selector
@@ -175,6 +191,62 @@ function showTechniqueSelector() {
     elements.breathingInterface.hidden = true;
     elements.customBreath.hidden = true;
     stopBreathing();
+}
+
+// Save current pattern to localStorage
+function saveCurrentPattern() {
+    savedPattern = [...customPattern]; // Copy current pattern
+    localStorage.setItem('breathingCustomPattern', JSON.stringify(savedPattern));
+    updateCustomPatternDisplay();
+
+    // Show quick confirmation
+    showPatternSavedMessage();
+}
+
+// Load saved pattern into sliders
+function loadSavedPattern() {
+    if (!savedPattern) return;
+
+    // Update sliders with saved values
+    document.getElementById('inhaleSlider').value = savedPattern[0];
+    document.getElementById('hold1Slider').value = savedPattern[1];
+    document.getElementById('exhaleSlider').value = savedPattern[2];
+    document.getElementById('hold2Slider').value = savedPattern[3];
+
+    // Update the display
+    updateCustomPattern();
+}
+
+// Update custom pattern display on the card
+function updateCustomPatternDisplay() {
+    const patternDesc = document.getElementById('customPatternDesc');
+    const patternDisplay = document.getElementById('customPatternDisplay');
+
+    if (savedPattern) {
+        patternDesc.textContent = 'Your saved custom pattern';
+        patternDisplay.textContent = savedPattern.join('-');
+    } else {
+        patternDesc.textContent = 'Create your own breathing pattern';
+        patternDisplay.textContent = 'X-X-X-X';
+    }
+}
+
+// Show temporary saved message
+function showPatternSavedMessage() {
+    const saveBtn = document.getElementById('savePatternBtn');
+    const originalText = saveBtn.textContent;
+
+    saveBtn.textContent = '✓ Saved!';
+    saveBtn.style.background = '#48bb78';
+    saveBtn.style.color = 'white';
+    saveBtn.style.borderColor = '#48bb78';
+
+    setTimeout(() => {
+        saveBtn.textContent = originalText;
+        saveBtn.style.background = '';
+        saveBtn.style.color = '';
+        saveBtn.style.borderColor = '';
+    }, 2000);
 }
 
 // Update custom pattern from sliders
@@ -192,7 +264,6 @@ function updateCustomPattern() {
     document.getElementById('exhaleValue').textContent = customPattern[2];
     document.getElementById('hold2Value').textContent = customPattern[3];
 }
-
 
 // Start custom breathing
 function startCustomBreathing() {
@@ -311,48 +382,6 @@ function stopBreathing() {
 }
 
 // Move to next phase
-// function nextPhase() {
-//     if (!isRunning || isPaused) return;
-
-//     const pattern = currentTechnique === 'custom' ? customPattern : breathingTechniques[currentTechnique].pattern;
-
-//     // Skip zero-duration phases
-//     while (pattern[currentPhase] === 0) {
-//         currentPhase = (currentPhase + 1) % pattern.length;
-//     }
-
-//     const phaseDuration = pattern[currentPhase];
-//     timeLeft = phaseDuration;
-
-//     // Update display
-//     elements.breathText.textContent = phaseNames[currentPhase];
-//     elements.breathCircle.className = `breath-circle ${currentPhase === 0 ? 'inhale' : currentPhase === 2 ? 'exhale' : ''}`;
-
-//     updateTimer();
-
-//     // Count completed breaths
-//     if (currentPhase === 2) { // Exhale phase
-//         totalBreaths++;
-//         elements.breathCounter.textContent = `Breath: ${totalBreaths}`;
-//     }
-
-//     // Schedule next phase
-//     const phaseTimer = setInterval(() => {
-//         if (!isRunning || isPaused) {
-//             clearInterval(phaseTimer);
-//             return;
-//         }
-
-//         timeLeft--;
-//         updateTimer();
-
-//         if (timeLeft <= 0) {
-//             clearInterval(phaseTimer);
-//             currentPhase = (currentPhase + 1) % pattern.length;
-//             nextPhase();
-//         }
-//     }, 1000);
-// }
 function nextPhase() {
     if (!isRunning || isPaused) return;
 
@@ -428,9 +457,8 @@ function updateTimer() {
 function endSession() {
     stopBreathing();
     elements.breathText.textContent = 'Session Complete!';
-    elements.breathCircle.className = 'breath-circle';
+    elements.breathTimer.textContent = '';
 
-    // Show completion for 3 seconds, then reset
     setTimeout(() => {
         if (!isRunning) {
             resetBreathing();
@@ -440,3 +468,6 @@ function endSession() {
 
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
+
+// Add event listener for save button
+document.getElementById('savePatternBtn').addEventListener('click', saveCurrentPattern);

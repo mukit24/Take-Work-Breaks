@@ -57,7 +57,42 @@
                     <button id="resetBtn" class="btn outline">Reset</button>
                 </div>
 
-                <div class="session-controls">
+                <div class="session-controls-group">
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="sessionLength">Session Duration:</label>
+                            <div class="select-wrapper">
+                                <select id="sessionLength" class="styled-select">
+                                    <option value="1">1 minute</option>
+                                    <option value="2">2 minutes</option>
+                                    <option value="3" selected>3 minutes</option>
+                                    <option value="5">5 minutes</option>
+                                    <option value="10">10 minutes</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="soundMode">Sound Guidance:</label>
+                            <div class="select-wrapper">
+                                <select id="soundMode" class="styled-select">
+                                    <option value="none">No Sound</option>
+                                    <option value="tones">Tone Guidance</option>
+                                    <option value="voice">Voice Guidance</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="volume-control hidden" id="volumeControl">
+                        <label for="volumeSlider">Volume:</label>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                        <span id="volumeValue">50%</span>
+                    </div>
+                </div>
+                <!-- <div class="session-controls">
                     <label for="sessionLength">Session Duration:</label>
                     <select id="sessionLength">
                         <option value="1">1 minute</option>
@@ -67,6 +102,22 @@
                         <option value="10">10 minutes</option>
                     </select>
                 </div>
+
+                <div class="sound-controls">
+                    <div class="sound-selector">
+                        <label for="soundMode">Sound Guidance:</label>
+                        <select id="soundMode" class="sound-select">
+                            <option value="none">No Sound</option>
+                            <option value="tones">Tone Guidance</option>
+                            <option value="voice">Voice Guidance</option>
+                        </select>
+                    </div>
+                    <div class="volume-control hidden" id="volumeControl">
+                        <label for="volumeSlider">Volume:</label>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                        <span id="volumeValue">50%</span>
+                    </div>
+                </div> -->
             </div>
 
             <button id="backToTechniques" class="back-btn">← Choose Different Technique</button>

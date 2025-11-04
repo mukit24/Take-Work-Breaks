@@ -46,6 +46,10 @@ let sessionTotalSeconds = 0;
 let sessionTimeLeft = 0;
 let sessionTimerInterval = null;
 let savedPattern = null;
+let soundMode = 'none'; // 'none', 'tones', 'voice'
+let volume = 0.5;
+let audioContext = null;
+let gainNode = null;
 
 // DOM Elements
 const elements = {
@@ -69,11 +73,29 @@ const elements = {
 // Phase names for display
 const phaseNames = ['Inhale', 'Hold', 'Exhale', 'Hold'];
 
+// Voice sounds (add this after your existing state)
+const voiceSounds = {
+    inhale: new Audio('assets/sounds/breathe_in.mp3'),
+    exhale: new Audio('assets/sounds/breathe_out.mp3'),
+    hold: new Audio('assets/sounds/hold.mp3'),
+    complete: new Audio('assets/sounds/session_complete.mp3')
+};
+
 // Initialize the app
 function init() {
     renderTechniqueGrid();
     setupEventListeners();
     initSavedPattern();
+}
+
+// Initialize audio system
+function initAudio() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        gainNode = audioContext.createGain();
+        gainNode.connect(audioContext.destination);
+        gainNode.gain.value = 0;
+    }
 }
 
 // Initialize - load saved pattern on page load
@@ -83,6 +105,14 @@ function initSavedPattern() {
         savedPattern = JSON.parse(stored);
         updateCustomPatternDisplay();
     }
+}
+
+// Preload voice sounds
+function preloadVoiceSounds() {
+    Object.values(voiceSounds).forEach(audio => {
+        audio.preload = 'auto';
+        audio.volume = volume;
+    });
 }
 
 // Render technique selection grid
@@ -128,6 +158,19 @@ function setupEventListeners() {
     document.querySelectorAll('.phase-slider').forEach(slider => {
         slider.addEventListener('input', updateCustomPattern);
     });
+
+    // Sound controls
+    document.getElementById('soundMode').addEventListener('change', handleSoundModeChange);
+    document.getElementById('volumeSlider').addEventListener('input', (e) => {
+        updateVolume(parseInt(e.target.value));
+    });
+
+    // Initialize audio on first user interaction
+    document.addEventListener('click', function initAudioOnInteraction() {
+        initAudio();
+        preloadVoiceSounds();
+        document.removeEventListener('click', initAudioOnInteraction);
+    }, { once: true });
 }
 
 // Select a breathing technique
@@ -330,6 +373,9 @@ function resetBreathing() {
     // Reset session timer
     sessionTimeLeft = sessionDuration * 60;
     updateSessionTimer();
+
+    // Reset audio
+    resetAudio();
 }
 
 function startSessionTimer() {
@@ -398,28 +444,36 @@ function nextPhase() {
     // Update display with separate hold states
     let phaseClass = '';
     let instructionText = '';
+    let soundPhase = '';
 
     switch (currentPhase) {
         case 0:
             phaseClass = 'inhale';
             instructionText = 'Breathe In';
+            soundPhase = 'inhale';
             break;
         case 1:
             phaseClass = 'hold-inhale';
             instructionText = 'Hold';
+            soundPhase = 'hold';
             break;
         case 2:
             phaseClass = 'exhale';
             instructionText = 'Breathe Out';
+            soundPhase = 'exhale';
             break;
         case 3:
             phaseClass = 'hold-exhale';
             instructionText = 'Hold';
+            soundPhase = 'hold';
             break;
     }
 
     elements.breathText.textContent = instructionText;
     elements.breathCircle.className = `breath-circle ${phaseClass}`;
+
+    // Play phase sound
+    playPhaseSound(soundPhase);
 
     updateTimer();
 
@@ -459,11 +513,141 @@ function endSession() {
     elements.breathText.textContent = 'Session Complete!';
     elements.breathTimer.textContent = '';
 
+    // Play completion sound
+    playCompleteSound();
+
     setTimeout(() => {
         if (!isRunning) {
             resetBreathing();
         }
     }, 3000);
+}
+
+// Play sound based on current mode (replace playPhaseSound)
+function playPhaseSound(phase) {
+    if (soundMode === 'none' || !audioContext) return;
+
+    if (soundMode === 'tones') {
+        playToneSound(phase);
+    } else if (soundMode === 'voice') {
+        playVoiceSound(phase);
+    }
+}
+
+
+// Play sound for breathing phase
+function playToneSound(phase) {
+    if (audioContext.state !== 'running') return;
+
+    const oscillator = audioContext.createOscillator();
+    const envelope = audioContext.createGain();
+
+    oscillator.connect(envelope);
+    envelope.connect(gainNode);
+
+    const frequencies = {
+        inhale: 600,
+        exhale: 400,
+        hold: 500,
+        complete: 800
+    };
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequencies[phase], audioContext.currentTime);
+
+    envelope.gain.setValueAtTime(0, audioContext.currentTime);
+    envelope.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.1);
+    envelope.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.8);
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.8);
+}
+
+// Voice sounds
+function playVoiceSound(phase) {
+    const sound = voiceSounds[phase];
+    if (sound) {
+        sound.volume = volume;
+        sound.currentTime = 0; // Reset to start
+        sound.play().catch(e => console.log('Voice play failed:', e));
+    }
+}
+
+// Play session complete sound (more celebratory)
+function playCompleteSound() {
+    if (soundMode === 'none') return;
+
+    if (soundMode === 'tones') {
+        playToneSound('complete');
+    } else if (soundMode === 'voice') {
+        playVoiceSound('complete');
+    }
+}
+
+// Toggle sound on/off
+function handleSoundModeChange() {
+    const mode = document.getElementById('soundMode').value;
+    soundMode = mode;
+    const volumeControl = document.getElementById('volumeControl');
+
+    if (mode === 'none') {
+        // No sound - hide volume, mute everything
+        volumeControl.classList.add('hidden');
+        if (gainNode) gainNode.gain.value = 0;
+    } else {
+        // Sound enabled - show volume, initialize audio
+        initAudio();
+        preloadVoiceSounds();
+
+        if (audioContext && audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+
+        volumeControl.classList.remove('hidden');
+        updateVolume(volume * 100); // Apply current volume
+
+        // Set volume for both systems
+        if (gainNode) gainNode.gain.value = volume;
+        Object.values(voiceSounds).forEach(audio => {
+            audio.volume = volume;
+        });
+    }
+}
+
+// Update volume
+function updateVolume(value) {
+    volume = value / 100;
+
+    // Update tone volume
+    if (gainNode) {
+        gainNode.gain.value = volume;
+    }
+
+    // Update voice volume
+    Object.values(voiceSounds).forEach(audio => {
+        audio.volume = volume;
+    });
+
+    document.getElementById('volumeValue').textContent = `${value}%`;
+}
+
+// Reset audio state
+function resetAudio() {
+    soundMode = 'none';
+
+    // Update UI
+    document.getElementById('soundMode').value = 'none';
+    document.getElementById('volumeControl').classList.add('hidden');
+    document.getElementById('volumeSlider').value = 50;
+    document.getElementById('volumeValue').textContent = '50%';
+
+    // Mute everything
+    if (gainNode) gainNode.gain.value = 0;
+    Object.values(voiceSounds).forEach(audio => {
+        audio.volume = 0;
+        audio.pause();
+        audio.currentTime = 0;
+    });
 }
 
 // Initialize app when DOM is loaded

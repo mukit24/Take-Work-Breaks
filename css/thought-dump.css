@@ -1,0 +1,516 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(120deg, #d9f4ec, #f0f9ff);
+    color: #2e7d32;
+    min-height: 100vh;
+}
+
+/* ===== HEADER STYLES ===== */
+.site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dce0dd;
+    padding: 1rem 0;
+}
+
+.site-header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-img {
+    height: 30px;
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2e7d32;
+    line-height: 1;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav a {
+    margin: 0.5rem;
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #1b5e20;
+}
+
+/* Desktop version */
+@media (min-width: 768px) {
+    .site-header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 2rem;
+    }
+
+    .logo {
+        justify-content: flex-start;
+    }
+
+    .nav a {
+        margin: 0 1rem;
+    }
+}
+
+/* ===== MAIN APP STYLES ===== */
+.thought-dump-app {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.app-container {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Writing Area */
+.writing-area-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.thoughts-input {
+    width: 100%;
+    height: 300px;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    resize: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background: #fafafa;
+}
+
+.thoughts-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.thoughts-input::placeholder {
+    color: #a0aec0;
+    font-style: italic;
+}
+
+.character-count {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
+    font-size: 0.85rem;
+    color: #718096;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    opacity: 0.7;
+}
+
+/* Journal Controls */
+.journal-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.release-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Add this */
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.release-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Button Styles */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.btn.primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn.primary:hover:not(:disabled) {
+    background: #5a6fd8;
+}
+
+.btn.primary:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn.outline {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn.outline:hover {
+    background: #667eea;
+    color: white;
+}
+
+/* Writing Tips */
+.writing-tips {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.writing-tips h3 {
+    color: #4a5568;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.tips-list {
+    list-style: none;
+    color: #718096;
+}
+
+.tips-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.tips-list li:before {
+    content: '💡';
+    position: absolute;
+    left: 0;
+}
+
+/* Release Animation Overlay */
+/* Paper Burning Animation */
+.release-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.release-overlay.hidden {
+    display: none;
+}
+
+.burning-paper {
+    width: 300px;
+    min-height: 200px;
+    background: #fffaf0;
+    border: 1px solid #e8dcbf;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 0 auto 3rem;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 3s ease;
+}
+
+.paper-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #5d4037;
+    font-style: italic;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+/* Burning edges effect */
+.burning-paper::before,
+.burning-paper::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(45deg, #ff6b35, #ff8e53, #ff6b35);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.burning-paper::before {
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    height: 4px;
+    animation: burnEdge 3s ease-in-out;
+}
+
+.burning-paper::after {
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    height: 4px;
+    animation: burnEdge 3s ease-in-out 0.5s;
+}
+
+/* Embers */
+.ember {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ff6b35;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+}
+
+/* Completion message */
+/* Completion Message - Enhanced */
+.completion-message {
+    opacity: 0;
+    transition: opacity 1s ease;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    margin: 1rem;
+    position: fixed;
+    z-index: 10;
+    border: 2px solid rgba(72, 187, 120, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.completion-message h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.completion-message p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #4a5568;
+    line-height: 1.5;
+}
+
+/* Green Continue Button */
+.continue-btn {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+    background: linear-gradient(135deg, #38a169, #2f855a);
+}
+
+.continue-btn:active {
+    transform: translateY(0);
+}
+
+/* Ensure perfect centering */
+.paper-burning-animation {
+    position: relative;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 2rem;
+}
+
+/* Completion message specific positioning */
+.completion-message {
+    margin-top: 2rem; /* Add space between burning paper and message */
+}
+
+/* Animations */
+@keyframes burnEdge {
+    0% {
+        opacity: 0;
+        transform: scaleX(0.1);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleX(0.1);
+    }
+}
+
+@keyframes burnPaper {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(0.8) rotate(-2deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0) rotate(-5deg);
+        opacity: 0;
+    }
+}
+
+@keyframes floatEmber {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translateY(-20px) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(0.5);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px #ff6b35;
+    }
+
+    50% {
+        box-shadow: 0 0 20px #ff6b35, 0 0 30px #ff8e53;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .thought-dump-app {
+        padding: 0.5rem;
+    }
+
+    .app-container {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .journal-hero h1 {
+        font-size: 2rem;
+    }
+
+    .thoughts-input {
+        height: 250px;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .journal-controls {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .completion-message h2 {
+        font-size: 1.5rem;
+    }
+
+    .completion-message p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .journal-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .thoughts-input {
+        height: 200px;
+    }
+
+    .writing-tips {
+        padding: 1rem;
+    }
+}

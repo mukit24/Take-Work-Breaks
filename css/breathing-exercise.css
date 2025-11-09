@@ -388,8 +388,8 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem;
+    .technique-selector h2 {
+        font-size: 1.5rem;
     }
 
     .breath-circle {

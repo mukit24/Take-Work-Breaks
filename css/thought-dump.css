@@ -154,7 +154,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Add this */
     gap: 0.5rem;
     transition: all 0.3s ease;
 }
@@ -234,7 +233,6 @@ body {
 }
 
 /* Release Animation Overlay */
-/* Paper Burning Animation */
 .release-overlay {
     position: fixed;
     top: 0;
@@ -246,10 +244,23 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow: hidden;
 }
 
 .release-overlay.hidden {
     display: none;
+}
+
+.paper-burning-animation {
+    position: relative;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 2rem;
 }
 
 .burning-paper {
@@ -259,7 +270,7 @@ body {
     border: 1px solid #e8dcbf;
     border-radius: 8px;
     padding: 2rem;
-    margin: 0 auto 3rem;
+    margin: 0 auto;
     position: relative;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 3s ease;
@@ -311,8 +322,7 @@ body {
     filter: blur(1px);
 }
 
-/* Completion message */
-/* Completion Message - Enhanced */
+/* Completion Message */
 .completion-message {
     opacity: 0;
     transition: opacity 1s ease;
@@ -324,13 +334,12 @@ body {
     max-width: 400px;
     margin: 1rem;
     position: fixed;
-    z-index: 10;
     border: 2px solid rgba(72, 187, 120, 0.2);
     backdrop-filter: blur(10px);
 }
 
 .completion-message h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
     font-weight: 600;
     color: #2d3748;
@@ -347,47 +356,6 @@ body {
     line-height: 1.5;
 }
 
-/* Green Continue Button */
-.continue-btn {
-    background: linear-gradient(135deg, #48bb78, #38a169);
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
-}
-
-.continue-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
-    background: linear-gradient(135deg, #38a169, #2f855a);
-}
-
-.continue-btn:active {
-    transform: translateY(0);
-}
-
-/* Ensure perfect centering */
-.paper-burning-animation {
-    position: relative;
-    text-align: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    gap: 2rem;
-}
-
-/* Completion message specific positioning */
-.completion-message {
-    margin-top: 2rem; /* Add space between burning paper and message */
-}
 
 /* Animations */
 @keyframes burnEdge {
@@ -469,16 +437,41 @@ body {
         border-radius: 16px;
     }
 
-    .journal-hero h1 {
-        font-size: 2rem;
-    }
-
     .thoughts-input {
         height: 250px;
         padding: 1rem;
         font-size: 1rem;
     }
 
+    .paper-burning-animation {
+        min-height: 100vh;
+        padding: 1rem;
+        justify-content: flex-start;
+        padding-top: 20vh;
+    }
+
+    .burning-paper {
+        width: 280px;
+        min-height: 180px;
+        padding: 1.5rem;
+    }
+
+    .completion-message {
+        max-width: 320px;
+        padding: 2rem 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .completion-message h2 {
+        font-size: 1.7rem;
+    }
+
+    .completion-message p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
     .journal-controls {
         flex-direction: column;
     }
@@ -488,29 +481,35 @@ body {
         min-width: auto;
     }
 
-    .completion-message h2 {
-        font-size: 1.5rem;
-    }
-
-    .completion-message p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .journal-hero h1 {
-        font-size: 1.8rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
     .thoughts-input {
         height: 200px;
     }
 
     .writing-tips {
         padding: 1rem;
+    }
+
+    .paper-burning-animation {
+        padding-top: 15vh;
+    }
+
+    .burning-paper {
+        width: 250px;
+        min-height: 160px;
+        padding: 1rem;
+    }
+
+    .paper-content {
+        font-size: 1rem;
+        max-height: 120px;
+    }
+
+    .completion-message {
+        max-width: 280px;
+        padding: 1.5rem;
+    }
+
+    .completion-message h2 {
+        font-size: 1.5rem;
     }
 }

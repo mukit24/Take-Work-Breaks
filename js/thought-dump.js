@@ -69,10 +69,10 @@ class ThoughtDump {
         if (charCount === 0) {
             input.style.borderColor = '#e2e8f0';
             input.style.background = '#fafafa';
-        } else if (charCount < 100) {
+        } else if (charCount < 50) {
             input.style.borderColor = '#a0aec0';
             input.style.background = '#f7fafc';
-        } else if (charCount < 500) {
+        } else if (charCount < 100) {
             input.style.borderColor = '#667eea';
             input.style.background = '#ffffff';
         } else {
@@ -98,39 +98,46 @@ class ThoughtDump {
     }
 
     startReleaseAnimation(text) {
+        // Force dismiss keyboard first
+        this.elements.thoughtsInput.blur();
+
         // Set paper content (first 100 chars)
-        const previewText = text.length > 100 ? text.substring(0, 100) + '...' : text;
+        const previewText = text.length > 200 ? text.substring(0, 200) + '...' : text;
         document.getElementById('paperContent').textContent = `"${previewText}"`;
 
         // Show overlay
         this.elements.releaseOverlay.classList.remove('hidden');
 
+        // Prevent body scrolling on mobile
+        document.body.style.overflow = 'hidden';
+
         // Start burning animation
         this.startBurningAnimation();
     }
 
+
     startBurningAnimation() {
-    const paper = document.getElementById('burningPaper');
-    const embersContainer = document.getElementById('embersContainer');
-    const completionMessage = document.querySelector('.completion-message');
-    
-    // Reset completion message opacity
-    completionMessage.style.opacity = '0';
-    
-    // Step 1: Paper starts to burn after a brief pause
-    setTimeout(() => {
-        paper.style.animation = 'burnPaper 3s ease-in forwards, glow 1s ease-in-out infinite';
-        
-        // Create embers
-        this.createEmbers(embersContainer);
-        
-    }, 1000);
-    
-    // Step 2: Show completion message AFTER burn animation completes (3 seconds + buffer)
-    setTimeout(() => {
-        completionMessage.style.opacity = '1';
-    }, 4500); // Increased from 4000 to 4500 to ensure burn completes
-}
+        const paper = document.getElementById('burningPaper');
+        const embersContainer = document.getElementById('embersContainer');
+        const completionMessage = document.querySelector('.completion-message');
+
+        // Reset completion message opacity
+        completionMessage.style.opacity = '0';
+
+        // Step 1: Paper starts to burn after a brief pause
+        setTimeout(() => {
+            paper.style.animation = 'burnPaper 3s ease-in forwards, glow 1s ease-in-out infinite';
+
+            // Create embers
+            this.createEmbers(embersContainer);
+
+        }, 1000);
+
+        // Step 2: Show completion message AFTER burn animation completes (3 seconds + buffer)
+        setTimeout(() => {
+            completionMessage.style.opacity = '1';
+        }, 4000); // Increased from 4000 to 4500 to ensure burn completes
+    }
 
     createEmbers(container) {
         const emberCount = 15;
@@ -164,9 +171,12 @@ class ThoughtDump {
     closeOverlay() {
         this.elements.releaseOverlay.classList.add('hidden');
 
-        // Clear all particles
-        const particles = document.querySelectorAll('.floating-particle');
-        particles.forEach(particle => particle.remove());
+        // Restore body scrolling
+        document.body.style.overflow = '';
+
+        // Clear all embers
+        const embers = document.querySelectorAll('.ember');
+        embers.forEach(ember => ember.remove());
     }
 
     clearThoughts() {

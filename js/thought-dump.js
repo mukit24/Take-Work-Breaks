@@ -87,6 +87,9 @@ class ThoughtDump {
 
         if (!text.trim()) return;
 
+        // Force dismiss keyboard BEFORE starting animation
+        this.elements.thoughtsInput.blur();
+
         // Start release animation
         this.startReleaseAnimation(text);
 
@@ -95,6 +98,11 @@ class ThoughtDump {
 
         // Clear session storage
         this.clearSession();
+
+        // Mobile: ensure focus is completely removed
+        setTimeout(() => {
+            document.body.focus();
+        }, 50);
     }
 
     startReleaseAnimation(text) {

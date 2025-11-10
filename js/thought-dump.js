@@ -17,6 +17,30 @@ class ThoughtDump {
     init() {
         this.setupEventListeners();
         this.restoreSession();
+        this.cleanupAudioContext();
+    }
+
+    cleanupAudioContext() {
+        // Check if audio context exists from breathing page and close it
+        if (window.audioContext) {
+            window.audioContext.close().catch(() => {
+                // Silent catch - it's okay if it's already closed
+            });
+            window.audioContext = null;
+        }
+
+        // Also cleanup gainNode if it exists
+        if (window.gainNode) {
+            window.gainNode = null;
+        }
+
+        // Stop any playing voice sounds
+        if (window.voiceSounds) {
+            Object.values(window.voiceSounds).forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
     }
 
     setupEventListeners() {

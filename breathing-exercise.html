@@ -8,24 +8,13 @@
     <meta name="description"
         content="Reduce stress and improve focus with guided breathing exercises. Box breathing, 4-7-8 technique, energizing breath and more.">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/breathing-exercise.css">
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/favicon.svg" alt="Take Work Breaks" class="logo-img" loading="eager">
-                <span class="logo-text">Take Work Breaks</span>
-            </a>
-            <nav class="nav">
-                <a href="index.html">Home</a>
-                <a href="index.html#features">Tools</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
+    <div id="header-container"></div>
 
     <main class="breathing-app">
         <!-- Technique Selector -->
@@ -92,32 +81,6 @@
                         <span id="volumeValue">50%</span>
                     </div>
                 </div>
-                <!-- <div class="session-controls">
-                    <label for="sessionLength">Session Duration:</label>
-                    <select id="sessionLength">
-                        <option value="1">1 minute</option>
-                        <option value="2">2 minutes</option>
-                        <option value="3" selected>3 minutes</option>
-                        <option value="5">5 minutes</option>
-                        <option value="10">10 minutes</option>
-                    </select>
-                </div>
-
-                <div class="sound-controls">
-                    <div class="sound-selector">
-                        <label for="soundMode">Sound Guidance:</label>
-                        <select id="soundMode" class="sound-select">
-                            <option value="none">No Sound</option>
-                            <option value="tones">Tone Guidance</option>
-                            <option value="voice">Voice Guidance</option>
-                        </select>
-                    </div>
-                    <div class="volume-control hidden" id="volumeControl">
-                        <label for="volumeSlider">Volume:</label>
-                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
-                        <span id="volumeValue">50%</span>
-                    </div>
-                </div> -->
             </div>
 
             <button id="backToTechniques" class="back-btn">← Choose Different Technique</button>
@@ -154,6 +117,7 @@
         </div>
     </main>
 
+    <script src="js/components.js"></script>
     <script src="js/breathing-exercise.js"></script>
 </body>
 

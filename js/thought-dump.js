@@ -177,15 +177,37 @@ class ThoughtDump {
         // Clear all embers
         const embers = document.querySelectorAll('.ember');
         embers.forEach(ember => ember.remove());
+
+        // Force remove focus from any input and blur
+        this.elements.thoughtsInput.blur();
+
+        // Add timeout to prevent mobile refocus
+        setTimeout(() => {
+            // Force focus on body to ensure no inputs are focused
+            document.body.focus();
+
+            // Additional mobile-specific blur
+            if (document.activeElement && document.activeElement.tagName === 'INPUT') {
+                document.activeElement.blur();
+            }
+        }, 100);
     }
 
     clearThoughts() {
         this.elements.thoughtsInput.value = '';
-        this.elements.thoughtsInput.focus();
+
+        // Remove focus and blur on mobile
+        this.elements.thoughtsInput.blur();
+
         this.handleInputChange();
 
         // Add visual feedback
         this.showClearFeedback();
+
+        // Mobile: ensure focus is completely removed
+        setTimeout(() => {
+            document.body.focus();
+        }, 50);
     }
 
     showClearFeedback() {

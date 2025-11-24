@@ -1,16 +1,9 @@
 /* Main App Styles */
 .breathing-app {
-    padding: 1rem 2rem 1rem 1rem;
+    padding: 1rem;
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
-}
-
-.app-container {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Technique Selector */

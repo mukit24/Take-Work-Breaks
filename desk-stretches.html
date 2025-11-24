@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desk Stretch Exercises - Relieve Office Tension | Take Work Breaks</title>
+    <meta name="description"
+        content="Quick desk stretches and exercises to relieve muscle tension, improve posture, and reduce physical stress during work breaks.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/desk-stretches.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main class="stretches-app">
+        <div class="exercise-selector">
+            <h2>Choose Your Exercise</h2>
+            <div class="stretches-grid" id="stretchGrid">
+                <!-- Stretch cards will be populated by JavaScript -->
+            </div>
+        </div>
+
+
+        <!-- Stretch Interface -->
+        <div class="stretch-interface" id="stretchInterface" hidden>
+            <div class="stretch-display">
+                <!-- Image and Instructions Side by Side -->
+                <div class="stretch-main">
+                    <div class="stretch-visual">
+                        <img id="stretchGif" src="" alt="" class="stretch-image">
+                    </div>
+
+                    <div class="stretch-instructions">
+                        <div class="instructions-container">
+                            <h3 id="stretchName"></h3>
+                            <ul id="stretchInstructions" class="instructions-list">
+                                <!-- Instructions will be populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timer and Controls Below -->
+                <div class="stretch-controls">
+                    <div class="timer-container">
+                        <div class="stretch-timer" id="stretchTimer">30</div>
+                        <span class="timer-label">seconds</span>
+                    </div>
+
+                    <div class="control-buttons">
+                        <button id="startBtn" class="btn primary">Start Stretch</button>
+                        <button id="pauseBtn" class="btn secondary" disabled>Pause</button>
+                        <button id="resetBtn" class="btn outline">Reset</button>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button id="backToStretches" class="btn outline">← Back to All Stretches</button>
+                        <button id="endExercise" class="btn outline">End Exercise</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/components.js"></script>
+    <script src="js/desk-stretches.js"></script>
+</body>
+
+</html>

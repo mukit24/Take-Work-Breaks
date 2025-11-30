@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eye Exercises - Reduce Digital Eye Strain | Take Work Breaks</title>
-    <meta name="description" content="Reduce digital eye strain with guided eye exercises. Palming, figure eight, focus switching and more techniques to relieve tired eyes.">
+    <meta name="description"
+        content="Reduce digital eye strain with guided eye exercises. Palming, figure eight, focus switching and more techniques to relieve tired eyes.">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="css/global.css">
@@ -32,57 +33,15 @@
                         <!-- Dynamic animation content will be inserted here -->
                     </div>
                     <div class="exercise-instruction" id="exerciseInstruction">Get Ready</div>
-                    <div class="exercise-timer" id="exerciseTimer">0:30</div>
+                    <div class="exercise-timer" id="exerciseTimer">1:00</div>
                 </div>
             </div>
 
-            <span class="session-timer" id="sessionTimer">2:00</span>
-            
             <div class="exercise-controls">
-                <div class="exercise-stats">
-                    <span class="reps-counter" id="repsCounter">Reps: 0</span>
-                    <span class="exercise-name" id="exerciseName"></span>
-                </div>
-
                 <div class="control-buttons">
                     <button id="startBtn" class="btn primary">Start Exercise</button>
                     <button id="pauseBtn" class="btn secondary" disabled>Pause</button>
                     <button id="resetBtn" class="btn outline">Reset</button>
-                </div>
-
-                <div class="session-controls-group">
-                    <div class="control-row">
-                        <div class="control-item">
-                            <label for="sessionLength">Session Duration:</label>
-                            <div class="select-wrapper">
-                                <select id="sessionLength" class="styled-select">
-                                    <option value="1">1 minute</option>
-                                    <option value="2" selected>2 minutes</option>
-                                    <option value="3">3 minutes</option>
-                                    <option value="5">5 minutes</option>
-                                </select>
-                                <span class="select-arrow">▼</span>
-                            </div>
-                        </div>
-
-                        <div class="control-item">
-                            <label for="soundMode">Sound Guidance:</label>
-                            <div class="select-wrapper">
-                                <select id="soundMode" class="styled-select">
-                                    <option value="none">No Sound</option>
-                                    <option value="tones">Tone Guidance</option>
-                                    <option value="voice">Voice Guidance</option>
-                                </select>
-                                <span class="select-arrow">▼</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="volume-control hidden" id="volumeControl">
-                        <label for="volumeSlider">Volume:</label>
-                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
-                        <span id="volumeValue">50%</span>
-                    </div>
                 </div>
             </div>
 

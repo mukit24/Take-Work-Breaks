@@ -9,7 +9,7 @@
 /* Exercise Selector */
 .exercise-selector h2 {
     font-size: 2rem;
-    color: #2c5282;
+    color: #2e7d32;
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -21,10 +21,10 @@
 }
 
 .exercise-card {
-    background-color: #ebf8ff;
+    background-color: #e8f5e9;
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(44, 82, 130, 0.15);
+    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.15);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -34,31 +34,29 @@
 }
 
 .exercise-card:hover {
-    border-color: #4299e1;
+    border-color: #667eea;
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(66, 153, 225, 0.1);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.1);
 }
 
 .exercise-name {
-    color: #2c5282;
+    color: #2e7d32;
     margin-bottom: 0.75rem;
-    font-size: 1.2rem;
-    font-weight: 600;
 }
 
 .exercise-desc {
     color: #444;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
 }
 
-.exercise-duration {
+.exercise-type {
     background: #ffffff;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 600;
     color: #2c5282;
+    border: 2px solid #4299e1;
 }
 
 /* Exercise Interface */
@@ -68,25 +66,30 @@
 
 .exercise-visual {
     margin: 2rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .exercise-animation {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: #f7fafc;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border: 3px solid #e2e8f0;
 }
 
 .animation-container {
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -94,28 +97,31 @@
 }
 
 .exercise-instruction {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: 600;
     color: #2d3748;
-    margin-bottom: 0.5rem;
-    min-height: 2rem;
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    padding: 0 2rem;
 }
 
 .exercise-timer {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 300;
     color: #4a5568;
     font-variant-numeric: tabular-nums;
+    margin-bottom: 1rem;
 }
 
 /* Animation Elements */
 .eye-target {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background: #4299e1;
     border-radius: 50%;
     transition: all 0.8s ease;
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
 }
 
 .eye-target.moving {
@@ -124,7 +130,7 @@
 
 .eye-path {
     position: absolute;
-    border: 2px dashed #cbd5e0;
+    border: 3px dashed #cbd5e0;
     border-radius: 50%;
     pointer-events: none;
 }
@@ -137,21 +143,31 @@
     height: 100%;
     background: #1a202c;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    padding: 2rem;
 }
 
 .palming-hands {
-    font-size: 3rem;
-    color: white;
+    font-size: 4rem;
+    margin-bottom: 1rem;
     animation: pulse 2s infinite;
 }
 
+.palming-text {
+    font-size: 1.3rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
 .breathing-circle {
-    width: 100px;
-    height: 100px;
-    border: 3px solid #4299e1;
+    width: 150px;
+    height: 150px;
+    border: 4px solid #4299e1;
     border-radius: 50%;
     animation: breathe 4s ease-in-out infinite;
 }
@@ -197,29 +213,30 @@
 }
 
 .blinking-eye {
-    font-size: 4rem;
-    animation: blink 1s ease-in-out;
+    font-size: 6rem;
+    animation: blink 1s ease-in-out infinite;
+}
+
+.instruction-text {
+    font-size: 1.4rem;
+    color: #4a5568;
+    text-align: center;
+    max-width: 400px;
+    line-height: 1.6;
+    margin-top: 1rem;
 }
 
 /* Exercise Controls */
 .exercise-controls {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.exercise-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-    color: #4a5568;
+    max-width: 500px;
+    margin: 0 auto 2rem;
 }
 
 .control-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .back-btn {
@@ -227,24 +244,28 @@
     border: none;
     color: #4299e1;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .back-btn:hover {
-    text-decoration: underline;
+    background: #ebf8ff;
+    text-decoration: none;
 }
 
 /* Button Styles */
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2rem;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 120px;
+    min-width: 140px;
 }
 
 .btn.primary {
@@ -254,7 +275,8 @@
 
 .btn.primary:hover:not(:disabled) {
     background: #3182ce;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(66, 153, 225, 0.3);
 }
 
 .btn.secondary {
@@ -264,6 +286,7 @@
 
 .btn.secondary:hover:not(:disabled) {
     background: #cbd5e0;
+    transform: translateY(-2px);
 }
 
 .btn.outline {
@@ -275,152 +298,13 @@
 .btn.outline:hover {
     background: #4299e1;
     color: white;
+    transform: translateY(-2px);
 }
 
 .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none !important;
-}
-
-/* Session Timer */
-.session-timer {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #4a5568;
-    background: #f7fafc;
-    padding: 0.3rem 0.6rem;
-    border-radius: 6px;
-    border: 1px solid #e2e8f0;
-    min-width: 50px;
-    text-align: center;
-    display: inline-block;
-    font-variant-numeric: tabular-nums;
-    margin-bottom: 1rem;
-}
-
-.session-timer.warning {
-    color: #c53030;
-    background: #fed7d7;
-    border-color: #feb2b2;
-}
-
-.session-timer.completed {
-    color: #276749;
-    background: #c6f6d5;
-    border-color: #9ae6b4;
-}
-
-/* Session Controls Group */
-.session-controls-group {
-    margin: 1.5rem 0;
-    text-align: center;
-}
-
-.control-row {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-end;
-    margin-bottom: 1rem;
-}
-
-.control-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.control-item label {
-    font-weight: 500;
-    color: #4a5568;
-    font-size: 0.95rem;
-    white-space: nowrap;
-}
-
-/* Select Styles */
-.select-wrapper {
-    position: relative;
-    display: inline-block;
-    min-width: 180px;
-}
-
-.styled-select {
-    width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    background: white;
-    font-size: 1rem;
-    color: #4a5568;
-    cursor: pointer;
-    appearance: none;
-    transition: all 0.3s ease;
-    font-family: inherit;
-}
-
-.styled-select:hover {
-    border-color: #cbd5e0;
-}
-
-.styled-select:focus {
-    outline: none;
-    border-color: #4299e1;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-}
-
-.select-arrow {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #718096;
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.styled-select:focus+.select-arrow {
-    transform: translateY(-50%) rotate(180deg);
-    color: #4299e1;
-}
-
-/* Volume Control */
-.volume-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-top: 1rem;
-    animation: fadeIn 0.3s ease;
-}
-
-.volume-control.hidden {
-    display: none !important;
-}
-
-.volume-slider {
-    width: 150px;
-    height: 6px;
-    border-radius: 3px;
-    background: #e2e8f0;
-    outline: none;
-}
-
-.volume-slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #4299e1;
-    cursor: pointer;
-}
-
-#volumeValue {
-    font-size: 0.9rem;
-    color: #718096;
-    min-width: 40px;
 }
 
 /* Completion Overlay */
@@ -430,24 +314,24 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(34, 197, 94, 0.9);
+    background: rgba(34, 197, 94, 0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
-    border-radius: 15px;
+    border-radius: 20px;
     z-index: 10;
 }
 
 .completion-message {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 .completion-subtitle {
-    font-size: 1rem;
+    font-size: 1.3rem;
     opacity: 0.9;
 }
 
@@ -458,71 +342,60 @@
     }
 
     .exercise-animation {
-        width: 250px;
-        height: 250px;
+        width: 350px;
+        height: 350px;
     }
 
     .animation-container {
-        width: 180px;
-        height: 180px;
+        width: 280px;
+        height: 280px;
+    }
+
+    .exercise-instruction {
+        font-size: 1.4rem;
+    }
+
+    .exercise-timer {
+        font-size: 2.5rem;
     }
 
     .control-buttons {
         flex-direction: column;
+        gap: 1rem;
     }
 
     .btn {
         min-width: auto;
         width: 100%;
-    }
-
-    .control-row {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .control-item {
-        width: 100%;
         max-width: 250px;
-    }
-
-    .select-wrapper {
-        min-width: 100%;
-    }
-
-    .volume-control {
-        flex-direction: column;
-        gap: 0.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .exercise-animation {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
     }
 
     .animation-container {
-        width: 150px;
-        height: 150px;
+        width: 240px;
+        height: 240px;
     }
 
     .exercise-instruction {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .exercise-timer {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
-    .control-item label {
-        font-size: 0.9rem;
+    .exercise-name {
+        font-size: 1.3rem;
     }
 
-    .styled-select {
-        padding: 0.7rem 2.5rem 0.7rem 1rem;
-        font-size: 0.95rem;
+    .exercise-desc {
+        font-size: 1rem;
     }
 }
 

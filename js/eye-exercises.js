@@ -2,43 +2,39 @@
 const eyeExercises = {
     palming: {
         name: "Palming Relaxation",
-        duration: 30,
-        description: "Relaxes eye muscles and reduces strain",
-        steps: [
-            { duration: 5, instruction: "Rub your hands together to warm them" },
-            { duration: 20, instruction: "Close eyes and cup palms over them" },
-            { duration: 5, instruction: "Slowly remove hands and open eyes" }
-        ]
+        description: "Close your eyes and cover them with your palms to relax eye muscles",
+        type: "Instruction-based",
+        duration: 60
     },
     figureEight: {
         name: "Figure Eight Tracing",
-        duration: 60,
-        description: "Improves eye coordination and flexibility",
-        reps: 5
+        description: "Follow the animated figure eight pattern with your eyes",
+        type: "Screen-based",
+        duration: 60
     },
     focusSwitching: {
         name: "Near-Far Focus",
-        duration: 60,
-        description: "Exercises focusing muscles",
-        reps: 10
+        description: "Switch focus between near and distant objects in your environment",
+        type: "Instruction-based", 
+        duration: 60
     },
     directional: {
         name: "Directional Movements",
-        duration: 45,
-        description: "Strengthens eye muscles in all directions",
-        reps: 3
+        description: "Move your eyes in different directions to strengthen eye muscles",
+        type: "Screen-based",
+        duration: 60
     },
     zooming: {
         name: "Zooming Exercise",
-        duration: 45,
-        description: "Works on accommodation ability",
-        reps: 8
+        description: "Follow the expanding and contracting circle with your eyes",
+        type: "Screen-based",
+        duration: 60
     },
     blinking: {
-        name: "Blinking Exercise",
-        duration: 30,
-        description: "Prevents dry eyes and refreshes vision",
-        reps: 10
+        name: "Blinking Exercise", 
+        description: "Practice conscious blinking to refresh your eyes and prevent dryness",
+        type: "Instruction-based",
+        duration: 60
     }
 };
 
@@ -46,18 +42,8 @@ const eyeExercises = {
 let currentExercise = null;
 let isRunning = false;
 let isPaused = false;
-let timeLeft = 0;
-let currentStep = 0;
-let totalReps = 0;
-let sessionDuration = 2; // minutes
-let sessionTotalSeconds = 0;
-let sessionTimeLeft = 0;
-let sessionTimerInterval = null;
+let timeLeft = 60; // 1 minute default
 let exerciseInterval = null;
-let soundMode = 'none';
-let volume = 0.5;
-let audioContext = null;
-let gainNode = null;
 
 // DOM Elements
 const elements = {
@@ -67,12 +53,9 @@ const elements = {
     animationContainer: document.getElementById('animationContainer'),
     exerciseInstruction: document.getElementById('exerciseInstruction'),
     exerciseTimer: document.getElementById('exerciseTimer'),
-    repsCounter: document.getElementById('repsCounter'),
-    exerciseName: document.getElementById('exerciseName'),
     startBtn: document.getElementById('startBtn'),
     pauseBtn: document.getElementById('pauseBtn'),
     resetBtn: document.getElementById('resetBtn'),
-    sessionLength: document.getElementById('sessionLength'),
     backToExercises: document.getElementById('backToExercises')
 };
 
@@ -80,6 +63,10 @@ const elements = {
 function init() {
     renderExerciseGrid();
     setupEventListeners();
+    
+    // Ensure exercise interface is hidden initially
+    elements.exerciseInterface.hidden = true;
+    elements.exerciseGrid.hidden = false;
 }
 
 // Render exercise selection grid
@@ -88,7 +75,6 @@ function renderExerciseGrid() {
         <div class="exercise-card" data-exercise="${key}">
             <h3 class="exercise-name">${exercise.name}</h3>
             <p class="exercise-desc">${exercise.description}</p>
-            <div class="exercise-duration">${exercise.duration} seconds</div>
         </div>
     `).join('');
 }
@@ -109,44 +95,12 @@ function setupEventListeners() {
     elements.pauseBtn.addEventListener('click', togglePause);
     elements.resetBtn.addEventListener('click', resetExercise);
     elements.backToExercises.addEventListener('click', showExerciseSelector);
-
-    // Session duration
-    elements.sessionLength.addEventListener('change', (e) => {
-        sessionDuration = parseInt(e.target.value);
-        if (!isRunning) {
-            sessionTimeLeft = sessionDuration * 60;
-            updateSessionTimer();
-        }
-    });
-
-    // Sound controls
-    document.getElementById('soundMode').addEventListener('change', handleSoundModeChange);
-    document.getElementById('volumeSlider').addEventListener('input', (e) => {
-        updateVolume(parseInt(e.target.value));
-    });
-
-    // Initialize audio on first user interaction
-    document.addEventListener('click', function initAudioOnInteraction() {
-        initAudio();
-        document.removeEventListener('click', initAudioOnInteraction);
-    }, { once: true });
-}
-
-// Initialize audio system
-function initAudio() {
-    if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        gainNode = audioContext.createGain();
-        gainNode.connect(audioContext.destination);
-        gainNode.gain.value = 0;
-    }
 }
 
 // Select an exercise
 function selectExercise(exercise) {
     currentExercise = exercise;
     showExerciseInterface();
-    elements.exerciseName.textContent = eyeExercises[exercise].name;
     resetExercise();
 
     // Scroll to exercise interface
@@ -165,11 +119,16 @@ function showExerciseInterface() {
     elements.exerciseInterface.hidden = false;
 }
 
-// Show exercise selector
 function showExerciseSelector() {
     elements.exerciseGrid.hidden = false;
     elements.exerciseInterface.hidden = true;
     stopExercise();
+    
+    // Clear any completion overlay
+    const existingOverlay = elements.exerciseAnimation.querySelector('.completion-overlay');
+    if (existingOverlay) {
+        existingOverlay.remove();
+    }
 }
 
 // Start exercise
@@ -181,58 +140,44 @@ function startExercise() {
     elements.startBtn.disabled = true;
     elements.pauseBtn.disabled = false;
 
-    // Calculate session time
-    sessionTotalSeconds = sessionDuration * 60;
-    sessionTimeLeft = sessionTotalSeconds;
-    updateSessionTimer();
-    startSessionTimer();
+    // Initialize exercise
+    setupExercise();
+    updateTimerDisplay();
 
-    // Initialize exercise-specific state
-    totalReps = 0;
-    currentStep = 0;
-    elements.repsCounter.textContent = `Reps: ${totalReps}`;
+    // Start the timer
+    exerciseInterval = setInterval(() => {
+        if (!isRunning || isPaused) return;
 
-    // Start the exercise
-    runExercise();
+        timeLeft--;
+        updateTimerDisplay();
+
+        if (timeLeft <= 0) {
+            completeExercise();
+        }
+    }, 1000);
 }
 
 // Toggle pause state
 function togglePause() {
     isPaused = !isPaused;
     elements.pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
-
-    if (isPaused) {
-        if (sessionTimerInterval) {
-            clearInterval(sessionTimerInterval);
-            sessionTimerInterval = null;
-        }
-        if (exerciseInterval) {
-            clearInterval(exerciseInterval);
-        }
-    } else {
-        if (isRunning) {
-            startSessionTimer();
-            runExercise();
-        }
-    }
 }
 
 // Reset exercise
 function resetExercise() {
     stopExercise();
-    timeLeft = 0;
-    totalReps = 0;
-    currentStep = 0;
-
-    elements.exerciseInstruction.textContent = 'Get Ready';
-    elements.exerciseTimer.textContent = '0:30';
-    elements.repsCounter.textContent = 'Reps: 0';
+    timeLeft = 60;
+    updateTimerDisplay();
     clearAnimationContainer();
-
-    // Reset session timer
-    sessionTimeLeft = sessionDuration * 60;
-    updateSessionTimer();
+    elements.exerciseInstruction.textContent = 'Get Ready';
+    
+    // Clear any completion overlay that might be lingering
+    const existingOverlay = elements.exerciseAnimation.querySelector('.completion-overlay');
+    if (existingOverlay) {
+        existingOverlay.remove();
+    }
 }
+
 
 // Stop exercise
 function stopExercise() {
@@ -242,169 +187,70 @@ function stopExercise() {
     elements.pauseBtn.disabled = true;
     elements.pauseBtn.textContent = 'Pause';
 
-    if (sessionTimerInterval) {
-        clearInterval(sessionTimerInterval);
-        sessionTimerInterval = null;
-    }
     if (exerciseInterval) {
         clearInterval(exerciseInterval);
+        exerciseInterval = null;
     }
 }
 
-// Start session timer
-function startSessionTimer() {
-    if (sessionTimerInterval) {
-        clearInterval(sessionTimerInterval);
-    }
-
-    sessionTimerInterval = setInterval(() => {
-        if (!isPaused && isRunning) {
-            sessionTimeLeft--;
-            updateSessionTimer();
-
-            if (sessionTimeLeft <= 0) {
-                endSession();
-            }
-        }
-    }, 1000);
-}
-
-// Update session timer display
-function updateSessionTimer() {
-    const timerElement = document.getElementById('sessionTimer');
-    const minutes = Math.floor(sessionTimeLeft / 60);
-    const seconds = sessionTimeLeft % 60;
-    const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-    timerElement.textContent = formattedTime;
-    timerElement.classList.remove('warning', 'completed');
-
-    if (sessionTimeLeft <= 0) {
-        timerElement.classList.add('completed');
-    } else if (sessionTimeLeft <= 30) {
-        timerElement.classList.add('warning');
-    }
-}
-
-// Main exercise runner
-function runExercise() {
-    if (!isRunning || isPaused) return;
-
+// Setup exercise based on type
+function setupExercise() {
     const exercise = eyeExercises[currentExercise];
+    
+    clearAnimationContainer();
+    
+    if (exercise.type === "Screen-based") {
+        setupScreenBasedExercise();
+    } else {
+        setupInstructionBasedExercise();
+    }
+}
 
+// Setup screen-based exercises
+function setupScreenBasedExercise() {
     switch (currentExercise) {
-        case 'palming':
-            runPalmingExercise();
-            break;
         case 'figureEight':
-            runFigureEightExercise();
-            break;
-        case 'focusSwitching':
-            runFocusSwitchingExercise();
+            elements.exerciseInstruction.textContent = "Follow the dot along the figure eight path";
+            createFigureEightAnimation();
             break;
         case 'directional':
-            runDirectionalExercise();
+            elements.exerciseInstruction.textContent = "Follow the dot as it moves around";
+            createDirectionalAnimation();
             break;
         case 'zooming':
-            runZoomingExercise();
+            elements.exerciseInstruction.textContent = "Follow the expanding and contracting circle";
+            createZoomingAnimation();
+            break;
+    }
+}
+
+// Setup instruction-based exercises
+function setupInstructionBasedExercise() {
+    switch (currentExercise) {
+        case 'palming':
+            elements.exerciseInstruction.textContent = "Rub your hands together to warm them up";
+            createPalmingAnimation();
+            break;
+        case 'focusSwitching':
+            elements.exerciseInstruction.textContent = "Find a near object and a distant object";
+            createFocusSwitchingInstruction();
             break;
         case 'blinking':
-            runBlinkingExercise();
+            elements.exerciseInstruction.textContent = "Get ready to practice conscious blinking";
+            createBlinkingAnimation();
             break;
     }
 }
 
-// Palming Exercise
-function runPalmingExercise() {
-    const steps = eyeExercises.palming.steps;
-    
-    if (currentStep >= steps.length) {
-        completeExercise();
-        return;
-    }
-
-    const step = steps[currentStep];
-    timeLeft = step.duration;
-    elements.exerciseInstruction.textContent = step.instruction;
-    
-    // Visual for palming
-    clearAnimationContainer();
-    if (currentStep === 1) {
-        // Show dark overlay for palming
-        const overlay = document.createElement('div');
-        overlay.className = 'palming-overlay';
-        overlay.innerHTML = '<div class="palming-hands">👐</div>';
-        elements.animationContainer.appendChild(overlay);
-    } else if (currentStep === 0) {
-        // Show breathing circle for warming hands
-        const circle = document.createElement('div');
-        circle.className = 'breathing-circle';
-        elements.animationContainer.appendChild(circle);
-    }
-
-    updateExerciseTimer();
-
-    exerciseInterval = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(exerciseInterval);
-            return;
-        }
-
-        timeLeft--;
-        updateExerciseTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(exerciseInterval);
-            currentStep++;
-            runExercise();
-        }
-    }, 1000);
-}
-
-// Figure Eight Exercise
-function runFigureEightExercise() {
-    const reps = eyeExercises.figureEight.reps;
-    
-    if (totalReps >= reps) {
-        completeExercise();
-        return;
-    }
-
-    elements.exerciseInstruction.textContent = `Follow the dot - Rep ${totalReps + 1}/${reps}`;
-    timeLeft = 12; // 12 seconds per rep for smooth movement
-    updateExerciseTimer();
-
-    // Create figure eight animation
-    clearAnimationContainer();
-    createFigureEightAnimation();
-
-    exerciseInterval = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(exerciseInterval);
-            return;
-        }
-
-        timeLeft--;
-        updateExerciseTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(exerciseInterval);
-            totalReps++;
-            elements.repsCounter.textContent = `Reps: ${totalReps}`;
-            runExercise();
-        }
-    }, 1000);
-}
-
-// Create figure eight animation
+// Screen-based exercise animations
 function createFigureEightAnimation() {
     const container = elements.animationContainer;
     
     // Create path
     const path = document.createElement('div');
     path.className = 'eye-path';
-    path.style.width = '180px';
-    path.style.height = '100px';
+    path.style.width = '300px';
+    path.style.height = '150px';
     container.appendChild(path);
 
     // Create moving target
@@ -420,188 +266,56 @@ function createFigureEightAnimation() {
             return;
         }
 
-        progress = (progress + 0.02) % 1;
-        const x = Math.sin(progress * Math.PI * 2) * 80;
-        const y = Math.sin(progress * Math.PI * 4) * 40;
+        progress = (progress + 0.01) % 1;
+        const x = Math.sin(progress * Math.PI * 2) * 120;
+        const y = Math.sin(progress * Math.PI * 4) * 60;
         
         target.style.transform = `translate(${x}px, ${y}px)`;
     }, 50);
 }
 
-// Focus Switching Exercise
-function runFocusSwitchingExercise() {
-    const reps = eyeExercises.focusSwitching.reps;
-    
-    if (totalReps >= reps) {
-        completeExercise();
-        return;
-    }
-
-    elements.exerciseInstruction.textContent = `Switch focus - Rep ${totalReps + 1}/${reps}`;
-    timeLeft = 6; // 6 seconds per rep
-    updateExerciseTimer();
-
-    clearAnimationContainer();
-    createFocusSwitchingAnimation();
-
-    exerciseInterval = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(exerciseInterval);
-            return;
-        }
-
-        timeLeft--;
-        updateExerciseTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(exerciseInterval);
-            totalReps++;
-            elements.repsCounter.textContent = `Reps: ${totalReps}`;
-            runExercise();
-        }
-    }, 1000);
-}
-
-// Create focus switching animation
-function createFocusSwitchingAnimation() {
-    const container = elements.animationContainer;
-    
-    // Create near and far points
-    const nearPoint = document.createElement('div');
-    nearPoint.className = 'eye-target';
-    nearPoint.style.width = '30px';
-    nearPoint.style.height = '30px';
-    nearPoint.style.background = '#e53e3e';
-    nearPoint.style.transform = 'translate(0, 0)';
-    container.appendChild(nearPoint);
-
-    const farPoint = document.createElement('div');
-    farPoint.className = 'eye-target';
-    farPoint.style.width = '15px';
-    farPoint.style.height = '15px';
-    farPoint.style.background = '#4299e1';
-    farPoint.style.transform = 'translate(80px, 0)';
-    container.appendChild(farPoint);
-
-    // Alternate highlighting
-    let currentPoint = 'near';
-    const switchInterval = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(switchInterval);
-            return;
-        }
-
-        if (currentPoint === 'near') {
-            nearPoint.style.boxShadow = '0 0 0 3px rgba(229, 62, 62, 0.5)';
-            farPoint.style.boxShadow = 'none';
-            currentPoint = 'far';
-        } else {
-            farPoint.style.boxShadow = '0 0 0 3px rgba(66, 153, 225, 0.5)';
-            nearPoint.style.boxShadow = 'none';
-            currentPoint = 'near';
-        }
-    }, 2000);
-}
-
-// Directional Movements Exercise
-function runDirectionalExercise() {
-    const reps = eyeExercises.directional.reps;
-    const directions = ['up', 'right', 'down', 'left'];
-    
-    if (totalReps >= reps * directions.length) {
-        completeExercise();
-        return;
-    }
-
-    const currentDirection = directions[totalReps % directions.length];
-    elements.exerciseInstruction.textContent = `Look ${currentDirection}`;
-    timeLeft = 3; // 3 seconds per direction
-    updateExerciseTimer();
-
-    clearAnimationContainer();
-    createDirectionalAnimation(currentDirection);
-
-    exerciseInterval = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(exerciseInterval);
-            return;
-        }
-
-        timeLeft--;
-        updateExerciseTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(exerciseInterval);
-            totalReps++;
-            elements.repsCounter.textContent = `Reps: ${Math.ceil(totalReps / directions.length)}`;
-            runExercise();
-        }
-    }, 1000);
-}
-
-// Create directional animation
-function createDirectionalAnimation(direction) {
+function createDirectionalAnimation() {
     const container = elements.animationContainer;
     const target = document.createElement('div');
     target.className = 'eye-target';
-    
-    let position = { x: 0, y: 0 };
-    switch (direction) {
-        case 'up': position.y = -60; break;
-        case 'right': position.x = 60; break;
-        case 'down': position.y = 60; break;
-        case 'left': position.x = -60; break;
-    }
-    
-    target.style.transform = `translate(${position.x}px, ${position.y}px)`;
     container.appendChild(target);
-}
 
-// Zooming Exercise
-function runZoomingExercise() {
-    const reps = eyeExercises.zooming.reps;
+    const positions = [
+        { x: 0, y: -100 },   // Up
+        { x: 100, y: 0 },    // Right
+        { x: 0, y: 100 },    // Down
+        { x: -100, y: 0 },   // Left
+        { x: -70, y: -70 },  // Top-left
+        { x: 70, y: -70 },   // Top-right
+        { x: 70, y: 70 },    // Bottom-right
+        { x: -70, y: 70 }    // Bottom-left
+    ];
+
+    let currentPos = 0;
     
-    if (totalReps >= reps) {
-        completeExercise();
-        return;
-    }
-
-    elements.exerciseInstruction.textContent = `Follow the circle - Rep ${totalReps + 1}/${reps}`;
-    timeLeft = 6; // 6 seconds per rep
-    updateExerciseTimer();
-
-    clearAnimationContainer();
-    createZoomingAnimation();
-
-    exerciseInterval = setInterval(() => {
+    const moveInterval = setInterval(() => {
         if (!isRunning || isPaused) {
-            clearInterval(exerciseInterval);
+            clearInterval(moveInterval);
             return;
         }
 
-        timeLeft--;
-        updateExerciseTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(exerciseInterval);
-            totalReps++;
-            elements.repsCounter.textContent = `Reps: ${totalReps}`;
-            runExercise();
-        }
-    }, 1000);
+        const pos = positions[currentPos];
+        target.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+        
+        currentPos = (currentPos + 1) % positions.length;
+    }, 2000);
 }
 
-// Create zooming animation
 function createZoomingAnimation() {
     const container = elements.animationContainer;
     const circle = document.createElement('div');
     circle.className = 'eye-target';
     circle.style.borderRadius = '50%';
     circle.style.background = 'transparent';
-    circle.style.border = '3px solid #4299e1';
+    circle.style.border = '4px solid #4299e1';
     container.appendChild(circle);
 
-    let scale = 0.3;
+    let scale = 0.5;
     let growing = true;
     
     const zoomInterval = setInterval(() => {
@@ -611,65 +325,94 @@ function createZoomingAnimation() {
         }
 
         if (growing) {
-            scale += 0.05;
+            scale += 0.03;
             if (scale >= 1.5) growing = false;
         } else {
-            scale -= 0.05;
-            if (scale <= 0.3) growing = true;
+            scale -= 0.03;
+            if (scale <= 0.5) growing = true;
         }
         
-        circle.style.width = `${scale * 50}px`;
-        circle.style.height = `${scale * 50}px`;
-    }, 100);
+        circle.style.width = `${scale * 80}px`;
+        circle.style.height = `${scale * 80}px`;
+    }, 80);
 }
 
-// Blinking Exercise
-function runBlinkingExercise() {
-    const reps = eyeExercises.blinking.reps;
+// Instruction-based exercise displays
+function createPalmingAnimation() {
+    const container = elements.animationContainer;
+    const overlay = document.createElement('div');
+    overlay.className = 'palming-overlay';
+    overlay.innerHTML = `
+        <div class="palming-hands">👐</div>
+        <div class="palming-text">Close your eyes and cover them with your warm palms</div>
+    `;
+    container.appendChild(overlay);
+
+    // Update instruction after 5 seconds
+    setTimeout(() => {
+        if (isRunning && !isPaused) {
+            elements.exerciseInstruction.textContent = "Keep your eyes closed and relaxed";
+        }
+    }, 5000);
+}
+
+function createFocusSwitchingInstruction() {
+    const container = elements.animationContainer;
+    const instruction = document.createElement('div');
+    instruction.className = 'instruction-text';
+    instruction.innerHTML = `
+        <p>1. Focus on an object close to you (like your finger)</p>
+        <p>2. Then focus on something distant (across the room)</p>
+        <p>3. Alternate between near and far every few seconds</p>
+    `;
+    container.appendChild(instruction);
+
+    // Rotate instructions
+    const instructions = [
+        "Focus on a nearby object",
+        "Now focus on something far away",
+        "Keep alternating your focus",
+        "Breathe deeply and relax your eyes"
+    ];
     
-    if (totalReps >= reps) {
-        completeExercise();
-        return;
-    }
-
-    elements.exerciseInstruction.textContent = `Blink slowly - Rep ${totalReps + 1}/${reps}`;
-    timeLeft = 3; // 3 seconds per blink
-    updateExerciseTimer();
-
-    clearAnimationContainer();
-    createBlinkingAnimation();
-
-    exerciseInterval = setInterval(() => {
+    let instructionIndex = 0;
+    const instructionInterval = setInterval(() => {
         if (!isRunning || isPaused) {
-            clearInterval(exerciseInterval);
+            clearInterval(instructionInterval);
             return;
         }
-
-        timeLeft--;
-        updateExerciseTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(exerciseInterval);
-            totalReps++;
-            elements.repsCounter.textContent = `Reps: ${totalReps}`;
-            runExercise();
-        }
-    }, 1000);
+        
+        instructionIndex = (instructionIndex + 1) % instructions.length;
+        elements.exerciseInstruction.textContent = instructions[instructionIndex];
+    }, 8000);
 }
 
-// Create blinking animation
 function createBlinkingAnimation() {
     const container = elements.animationContainer;
     const eye = document.createElement('div');
     eye.className = 'blinking-eye';
     eye.textContent = '👁️';
     container.appendChild(eye);
+
+    // Blink instruction rhythm
+    const blinkInterval = setInterval(() => {
+        if (!isRunning || isPaused) return;
+        
+        elements.exerciseInstruction.textContent = "Blink slowly and consciously";
+        
+        setTimeout(() => {
+            if (isRunning && !isPaused) {
+                elements.exerciseInstruction.textContent = "Keep your eyes open and relaxed";
+            }
+        }, 2000);
+    }, 4000);
 }
 
-// Update exercise timer display
-function updateExerciseTimer() {
-    const seconds = timeLeft.toString().padStart(2, '0');
-    elements.exerciseTimer.textContent = `0:${seconds}`;
+// Update timer display
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    elements.exerciseTimer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
 // Clear animation container
@@ -677,68 +420,34 @@ function clearAnimationContainer() {
     elements.animationContainer.innerHTML = '';
 }
 
-// Complete current exercise
+// Complete exercise
 function completeExercise() {
-    showCompletionMessage();
-    
-    setTimeout(() => {
-        if (isRunning) {
-            resetExercise();
-            elements.exerciseInstruction.textContent = 'Exercise Complete!';
-        }
-    }, 3000);
-}
-
-// Show completion message
-function showCompletionMessage() {
-    const overlay = document.createElement('div');
-    overlay.className = 'completion-overlay';
-    overlay.innerHTML = `
-        <div class="completion-message">✓ Complete!</div>
-        <div class="completion-subtitle">Great job taking care of your eyes</div>
-    `;
-    elements.exerciseAnimation.appendChild(overlay);
-}
-
-// End session
-function endSession() {
     stopExercise();
     showCompletionMessage();
     
+    // Wait 3 seconds then reset and go back to selector
     setTimeout(() => {
-        if (!isRunning) {
-            resetExercise();
-        }
+        resetExercise();
+        showExerciseSelector();
     }, 3000);
 }
 
-// Handle sound mode change
-function handleSoundModeChange() {
-    const mode = document.getElementById('soundMode').value;
-    soundMode = mode;
-    const volumeControl = document.getElementById('volumeControl');
 
-    if (mode === 'none') {
-        volumeControl.classList.add('hidden');
-        if (gainNode) gainNode.gain.value = 0;
-    } else {
-        initAudio();
-        if (audioContext && audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
-        volumeControl.classList.remove('hidden');
-        updateVolume(volume * 100);
-        if (gainNode) gainNode.gain.value = volume;
+// Show completion message
+function showCompletionMessage() {
+    // Clear any existing completion message first
+    const existingOverlay = elements.exerciseAnimation.querySelector('.completion-overlay');
+    if (existingOverlay) {
+        existingOverlay.remove();
     }
-}
-
-// Update volume
-function updateVolume(value) {
-    volume = value / 100;
-    if (gainNode) {
-        gainNode.gain.value = volume;
-    }
-    document.getElementById('volumeValue').textContent = `${value}%`;
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'completion-overlay';
+    overlay.innerHTML = `
+        <div class="completion-message">✓ Exercise Complete!</div>
+        <div class="completion-subtitle">Great job taking care of your eyes</div>
+    `;
+    elements.exerciseAnimation.appendChild(overlay);
 }
 
 // Initialize app when DOM is loaded

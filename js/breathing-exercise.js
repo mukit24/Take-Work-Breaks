@@ -186,9 +186,6 @@ function selectTechnique(technique) {
                 behavior: 'smooth',
                 block: 'start'
             });
-
-            // Focus on the first interactive element for accessibility
-            document.getElementById('startCustomBtn').focus();
         }, 100);
     } else {
         showBreathingInterface();
@@ -202,9 +199,6 @@ function selectTechnique(technique) {
                 behavior: 'smooth',
                 block: 'start'
             });
-
-            // Focus on start button for accessibility
-            document.getElementById('startBtn').focus();
         }, 100);
     }
 }

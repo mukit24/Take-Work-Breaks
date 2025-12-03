@@ -4,16 +4,16 @@ const eyeExercises = {
         name: "Palming Relaxation",
         description: "Relieve eye strain and reduce fatigue by warming and relaxing your eye muscles",
         type: "Instruction-based",
-        instructionType: "two-steps", // Two alternating steps
+        instructionType: "two-steps",
         steps: [
             {
                 instruction: "Rub your hands together vigorously",
-                duration: 10, // First 10 seconds
+                duration: 10,
                 voice: "assets/sounds/rub-hands.mp3"
             },
             {
                 instruction: "Close eyes and cup palms gently over them",
-                duration: 5, // Next 5 seconds
+                duration: 5,
                 voice: "assets/sounds/close-eyes-palm.mp3"
             }
         ]
@@ -27,7 +27,7 @@ const eyeExercises = {
         name: "Near-Far Focus",
         description: "Prevent eye strain from prolonged screen use by exercising your focusing ability",
         type: "Instruction-based",
-        instructionType: "two-steps", // Two alternating steps
+        instructionType: "two-steps",
         steps: [
             {
                 instruction: "Focus on a distant object",
@@ -55,21 +55,23 @@ const eyeExercises = {
         name: "Blinking Exercise",
         description: "Refresh tear film and prevent dry eyes caused by reduced blinking at screens",
         type: "Instruction-based",
-        instructionType: "two-steps", // Changed from "single-step" to "two-steps"
+        instructionType: "two-steps",
         steps: [
             {
                 instruction: "Close your eyes gently",
-                duration: 3, // Close eyes for 3 seconds
+                duration: 3,
                 voice: "assets/sounds/blink-close.mp3"
             },
             {
                 instruction: "Open eyes and blink normally",
-                duration: 2, // Open and blink for 2 seconds
+                duration: 3,
                 voice: "assets/sounds/blink-open.mp3"
             }
         ]
     }
 };
+
+const completionVoice = "assets/sounds/session_complete.mp3";
 
 // App State
 let currentExercise = null;
@@ -81,6 +83,7 @@ let useVoice = false;
 let voiceAudio = null;
 let currentStepIndex = 0;
 let sessionDuration = 60;
+let volume = 0.5; // Default volume 50%
 
 // DOM Elements
 let elements = {};
@@ -176,7 +179,7 @@ function setupInitialDisplay() {
     const exercise = eyeExercises[currentExercise];
     
     if (exercise.type === "Instruction-based") {
-        // Create instruction layout - update step descriptions to show relative timing
+        // Create instruction layout
         let layoutHTML = '';
         
         if (currentExercise === 'palming') {
@@ -191,7 +194,7 @@ function setupInitialDisplay() {
                             ${exercise.steps.map((step, index) => `
                                 <div class="instruction-step">
                                     <span class="step-number">${index + 1}</span>
-                                    <span class="step-text">${step.instruction} (${step.duration}s each)</span>
+                                    <span class="step-text">${step.instruction} for ${step.duration} seconds</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -201,6 +204,11 @@ function setupInitialDisplay() {
                                 <span class="checkmark"></span>
                                 Enable Voice Guidance
                             </label>
+                            <div class="volume-control" id="volumeControl">
+                                <label for="volumeSlider">Volume:</label>
+                                <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                                <span id="volumeValue">50%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,7 +225,7 @@ function setupInitialDisplay() {
                             ${exercise.steps.map((step, index) => `
                                 <div class="instruction-step">
                                     <span class="step-number">${index + 1}</span>
-                                    <span class="step-text">${step.instruction} (${step.duration}s each)</span>
+                                    <span class="step-text">${step.instruction} for ${step.duration} seconds</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -227,6 +235,11 @@ function setupInitialDisplay() {
                                 <span class="checkmark"></span>
                                 Enable Voice Guidance
                             </label>
+                            <div class="volume-control" id="volumeControl">
+                                <label for="volumeSlider">Volume:</label>
+                                <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                                <span id="volumeValue">50%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +256,7 @@ function setupInitialDisplay() {
                             ${exercise.steps.map((step, index) => `
                                 <div class="instruction-step">
                                     <span class="step-number">${index + 1}</span>
-                                    <span class="step-text">${step.instruction} (${step.duration}s each)</span>
+                                    <span class="step-text">${step.instruction} for ${step.duration} seconds</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -253,6 +266,11 @@ function setupInitialDisplay() {
                                 <span class="checkmark"></span>
                                 Enable Voice Guidance
                             </label>
+                            <div class="volume-control" id="volumeControl">
+                                <label for="volumeSlider">Volume:</label>
+                                <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                                <span id="volumeValue">50%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,9 +281,27 @@ function setupInitialDisplay() {
         
         // Set voice toggle event listener
         const voiceToggle = document.getElementById('voiceToggle');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        
         if (voiceToggle) {
             voiceToggle.addEventListener('change', (e) => {
                 useVoice = e.target.checked;
+                if (volumeControl) {
+                    if (useVoice) {
+                        volumeControl.classList.add('visible');
+                    } else {
+                        volumeControl.classList.remove('visible');
+                    }
+                }
+            });
+        }
+        
+        if (volumeSlider && volumeValue) {
+            volumeSlider.addEventListener('input', (e) => {
+                volume = parseInt(e.target.value) / 100;
+                volumeValue.textContent = `${e.target.value}%`;
             });
         }
         
@@ -301,7 +337,7 @@ function showExerciseSelector() {
     elements.exerciseGrid.hidden = false;
     elements.exerciseInterface.hidden = true;
     stopExercise();
-    hideCompletionMessage();
+    hideCompletionDisplay();
     
     // Reset session duration to 1 minute when leaving exercise
     sessionDuration = 60;
@@ -321,7 +357,7 @@ function startExercise() {
     document.querySelector('.session-controls-group').classList.add('running');
 
     const exercise = eyeExercises[currentExercise];
-    timeLeft = sessionDuration; // Always use sessionDuration
+    timeLeft = sessionDuration;
     
     if (exercise.type === "Instruction-based") {
         // For instruction-based exercises, hide animation container
@@ -339,7 +375,7 @@ function startExercise() {
     } else {
         // For screen-based exercises, keep animation container visible
         elements.animationContainer.style.display = "flex";
-        timeLeft = sessionDuration; // Ensure sessionDuration is used
+        timeLeft = sessionDuration;
         updateTimerDisplay();
         setupScreenBasedExercise();
     }
@@ -367,10 +403,9 @@ function startExercise() {
 // Handle instruction step changes based on time
 function handleInstructionStepChange() {
     const exercise = eyeExercises[currentExercise];
-    const timeElapsed = sessionDuration - timeLeft; // Use sessionDuration
+    const timeElapsed = sessionDuration - timeLeft;
     
     if (exercise.instructionType === "two-steps") {
-        // For two-step exercises
         const totalStepDuration = exercise.steps[0].duration + exercise.steps[1].duration;
         const timeInCurrentCycle = timeElapsed % totalStepDuration;
         
@@ -381,7 +416,6 @@ function handleInstructionStepChange() {
             newStepIndex = 1;
         }
         
-        // If step changed, update instruction and play voice
         if (newStepIndex !== currentStepIndex) {
             currentStepIndex = newStepIndex;
             updateInstructionStep();
@@ -408,7 +442,6 @@ function togglePause() {
     if (isPaused) {
         stopVoice();
     } else if (eyeExercises[currentExercise].type === "Instruction-based" && useVoice) {
-        // Resume voice for current step
         const exercise = eyeExercises[currentExercise];
         const step = exercise.steps[currentStepIndex];
         if (step && step.voice) {
@@ -429,7 +462,7 @@ function resetExercise() {
     currentStepIndex = 0;
     useVoice = false;
     stopVoice();
-    hideCompletionMessage();
+    hideCompletionDisplay();
     
     // Reset to initial display
     setupInitialDisplay();
@@ -444,9 +477,12 @@ function resetExercise() {
     const voiceToggle = document.getElementById('voiceToggle');
     if (voiceToggle) {
         voiceToggle.checked = false;
+        const volumeControl = document.getElementById('volumeControl');
+        if (volumeControl) {
+            volumeControl.classList.remove('visible');
+        }
     }
     
-    // Update timer display with current session duration
     updateTimerDisplay();
 }
 
@@ -465,18 +501,30 @@ function stopExercise() {
     }
 }
 
-// Play voice audio
+// Play voice audio with volume control
 function playVoice(audioPath) {
+    if (!useVoice || !audioPath) return;
+    
+    // Stop any current audio first
     if (voiceAudio) {
         voiceAudio.pause();
         voiceAudio.currentTime = 0;
     }
 
     voiceAudio = new Audio(audioPath);
-    voiceAudio.volume = 1.0;
-    voiceAudio.play().catch(e => {
-        console.log("Voice playback failed:", e);
-    });
+    voiceAudio.volume = volume; // Use volume setting
+    
+    // Use a promise chain to handle playback
+    const playPromise = voiceAudio.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            // Only log errors that aren't aborts
+            if (error.name !== 'AbortError') {
+                console.log("Voice playback failed:", error);
+            }
+        });
+    }
 }
 
 // Stop voice audio
@@ -494,37 +542,76 @@ function updateTimerDisplay() {
     elements.exerciseTimer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// Complete exercise
+// Complete exercise - Updated to show completion in interface
 function completeExercise() {
     stopExercise();
-    showCompletionMessage();
+    
+    // Play completion voice only if voice guidance was enabled
+    setTimeout(() => {
+        if (useVoice) {
+            playVoice(completionVoice);
+        }
+    }, 100);
+    
+    // Show completion message in interface (hide timer, show completion text)
+    showCompletionDisplay();
     
     // Wait 3 seconds then reset to initial phase
     setTimeout(() => {
-        hideCompletionMessage();
-        resetExercise(); // This will reset dropdown to 1 minute
+        hideCompletionDisplay();
+        stopExercise();
+        timeLeft = sessionDuration;
+        currentStepIndex = 0;
+        // Keep useVoice as user selected (don't reset)
+        stopVoice();
+        setupInitialDisplay();
+        elements.animationContainer.style.display = "flex";
+        document.querySelector('.session-controls-group').classList.remove('running');
+        updateTimerDisplay();
     }, 3000);
 }
 
-
-// Show completion message
-function showCompletionMessage() {
-    hideCompletionMessage();
-
-    const overlay = document.createElement('div');
-    overlay.className = 'completion-overlay';
-    overlay.innerHTML = `
+// Show completion display in interface
+function showCompletionDisplay() {
+    // Hide timer and instruction
+    elements.exerciseTimer.style.display = 'none';
+    elements.exerciseInstruction.style.display = 'none';
+    
+    // Create completion message
+    const completionHTML = `
         <div class="completion-message">✓ Exercise Complete!</div>
         <div class="completion-subtitle">Great job taking care of your eyes</div>
     `;
-    elements.exerciseAnimation.appendChild(overlay);
+    
+    // Insert completion message
+    const instructionArea = document.querySelector('.instruction-timer-area');
+    if (instructionArea) {
+        instructionArea.innerHTML = completionHTML;
+        instructionArea.style.display = 'flex';
+        instructionArea.style.flexDirection = 'column';
+        instructionArea.style.justifyContent = 'center';
+        instructionArea.style.alignItems = 'center';
+        instructionArea.style.height = '150px';
+    }
 }
 
-// Hide completion message
-function hideCompletionMessage() {
-    const overlay = elements.exerciseAnimation.querySelector('.completion-overlay');
-    if (overlay) {
-        overlay.remove();
+// Hide completion display
+function hideCompletionDisplay() {
+    // Show timer and instruction again
+    elements.exerciseTimer.style.display = 'block';
+    elements.exerciseInstruction.style.display = 'block';
+    
+    // Restore original instruction/timer area
+    const instructionArea = document.querySelector('.instruction-timer-area');
+    
+    if (instructionArea) {
+        instructionArea.innerHTML = `
+            <div class="exercise-instruction" id="exerciseInstruction"></div>
+            <div class="exercise-timer" id="exerciseTimer"></div>
+        `;
+        // Re-get elements after changing HTML
+        elements.exerciseInstruction = document.getElementById('exerciseInstruction');
+        elements.exerciseTimer = document.getElementById('exerciseTimer');
     }
 }
 
@@ -533,7 +620,7 @@ function clearAnimationContainer() {
     elements.animationContainer.innerHTML = '';
 }
 
-// Setup screen-based exercises (for non-instruction-based exercises)
+// Setup screen-based exercises
 function setupScreenBasedExercise() {
     const exercise = eyeExercises[currentExercise];
 
@@ -557,19 +644,16 @@ function setupScreenBasedExercise() {
 function createFigureEightAnimation() {
     const container = elements.animationContainer;
 
-    // Create path
     const path = document.createElement('div');
     path.className = 'eye-path';
     path.style.width = '300px';
     path.style.height = '150px';
     container.appendChild(path);
 
-    // Create moving target
     const target = document.createElement('div');
     target.className = 'eye-target moving';
     container.appendChild(target);
 
-    // Animate along figure eight path
     let progress = 0;
     const animation = setInterval(() => {
         if (!isRunning || isPaused) {
@@ -592,14 +676,14 @@ function createDirectionalAnimation() {
     container.appendChild(target);
 
     const positions = [
-        { x: 0, y: -100 },   // Up
-        { x: 100, y: 0 },    // Right
-        { x: 0, y: 100 },    // Down
-        { x: -100, y: 0 },   // Left
-        { x: -70, y: -70 },  // Top-left
-        { x: 70, y: -70 },   // Top-right
-        { x: 70, y: 70 },    // Bottom-right
-        { x: -70, y: 70 }    // Bottom-left
+        { x: 0, y: -100 },
+        { x: 100, y: 0 },
+        { x: 0, y: 100 },
+        { x: -100, y: 0 },
+        { x: -70, y: -70 },
+        { x: 70, y: -70 },
+        { x: 70, y: 70 },
+        { x: -70, y: 70 }
     ];
 
     let currentPos = 0;

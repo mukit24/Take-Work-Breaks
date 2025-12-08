@@ -640,33 +640,119 @@ function setupScreenBasedExercise() {
     }
 }
 
-// Animation functions for screen-based exercises
 function createFigureEightAnimation() {
     const container = elements.animationContainer;
-
+    
+    // Clear container
+    container.innerHTML = '';
+    
+    // Create the figure-eight path visualization
     const path = document.createElement('div');
-    path.className = 'eye-path';
-    path.style.width = '300px';
-    path.style.height = '150px';
+    path.className = 'figure-eight-path';
     container.appendChild(path);
-
-    const target = document.createElement('div');
-    target.className = 'eye-target moving';
-    container.appendChild(target);
-
+    
+    // Create the main dot
+    const dot = document.createElement('div');
+    dot.className = 'figure-eight-dot';
+    container.appendChild(dot);
+    
+    // Animation variables
     let progress = 0;
-    const animation = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(animation);
-            return;
+    let animationId = null;
+    let lastTimestamp = 0;
+    
+    // Calculate position on figure-eight path
+    function calculatePosition(t) {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        
+        // Use container dimensions for responsive sizing
+        const amplitudeX = containerWidth * 0.42;
+        const amplitudeY = containerHeight * 0.3;
+        const centerX = containerWidth / 2;
+        const centerY = containerHeight / 2;
+        
+        // Figure-eight (lemniscate) parametric equations
+        const x = centerX + amplitudeX * Math.sin(t * Math.PI * 2);
+        const y = centerY + amplitudeY * Math.sin(t * Math.PI * 2) * Math.cos(t * Math.PI * 2);
+        
+        return { x, y };
+    }
+    
+    // Main animation function
+    function animate(timestamp) {
+        if (!lastTimestamp) lastTimestamp = timestamp;
+        
+        // Calculate time-based progress (slower movement)
+        const deltaTime = timestamp - lastTimestamp;
+        const speed = 0.00012; // Adjust for speed (lower = slower)
+        progress = (progress + (deltaTime * speed)) % 1;
+        lastTimestamp = timestamp;
+        
+        // Calculate new position
+        const { x, y } = calculatePosition(progress);
+        
+        // Update dot position with smooth transition
+        dot.style.left = `${x}px`;
+        dot.style.top = `${y}px`;
+        
+        // Add subtle pulsing effect
+        const pulseScale = 1 + 0.05 * Math.sin(progress * Math.PI * 8);
+        dot.style.transform = `translate(-50%, -50%) scale(${pulseScale})`;
+        
+        // Continue animation only if exercise is running and not paused
+        if (isRunning && !isPaused) {
+            animationId = requestAnimationFrame(animate);
         }
-
-        progress = (progress + 0.01) % 1;
-        const x = Math.sin(progress * Math.PI * 2) * 120;
-        const y = Math.sin(progress * Math.PI * 4) * 60;
-
-        target.style.transform = `translate(${x}px, ${y}px)`;
-    }, 50);
+    }
+    
+    // Start the animation
+    function startAnimation() {
+        if (!animationId) {
+            // Set initial position
+            const initialPos = calculatePosition(0);
+            dot.style.left = `${initialPos.x}px`;
+            dot.style.top = `${initialPos.y}px`;
+            
+            // Start animation loop
+            lastTimestamp = 0;
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+    
+    // Stop the animation
+    function stopAnimation() {
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }
+    
+    // Store cleanup reference
+    let cleanupFunction = null;
+    
+    // Listen for exercise state changes
+    const checkAnimationState = () => {
+        if (isRunning && !isPaused && !animationId) {
+            startAnimation();
+        } else if ((!isRunning || isPaused) && animationId) {
+            stopAnimation();
+        }
+    };
+    
+    // Set up state monitoring
+    const stateCheckInterval = setInterval(checkAnimationState, 100);
+    
+    // Initial check
+    checkAnimationState();
+    
+    // Cleanup function
+    cleanupFunction = () => {
+        stopAnimation();
+        clearInterval(stateCheckInterval);
+    };
+    
+    return cleanupFunction;
 }
 
 function createDirectionalAnimation() {

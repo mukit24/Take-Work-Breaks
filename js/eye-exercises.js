@@ -46,11 +46,6 @@ const eyeExercises = {
         description: "Strengthen eye muscles and increase blood circulation to reduce tension",
         type: "Screen-based",
     },
-    zooming: {
-        name: "Zooming Exercise",
-        description: "Enhance visual flexibility and prevent accommodative spasms from screen work",
-        type: "Screen-based",
-    },
     blinking: {
         name: "Blinking Exercise",
         description: "Refresh tear film and prevent dry eyes caused by reduced blinking at screens",
@@ -68,7 +63,12 @@ const eyeExercises = {
                 voice: "assets/sounds/blink-open.mp3"
             }
         ]
-    }
+    },
+    zooming: {
+        name: "Zooming Exercise",
+        description: "Enhance visual flexibility and prevent accommodative spasms from screen work",
+        type: "Screen-based",
+    },
 };
 
 const completionVoice = "assets/sounds/session_complete.mp3";
@@ -668,7 +668,7 @@ function createFigureEightAnimation() {
         
         // Use container dimensions for responsive sizing
         const amplitudeX = containerWidth * 0.42;
-        const amplitudeY = containerHeight * 0.3;
+        const amplitudeY = containerHeight * 0.6;
         const centerX = containerWidth / 2;
         const centerY = containerHeight / 2;
         
@@ -757,65 +757,215 @@ function createFigureEightAnimation() {
 
 function createDirectionalAnimation() {
     const container = elements.animationContainer;
-    const target = document.createElement('div');
-    target.className = 'eye-target';
-    container.appendChild(target);
-
-    const positions = [
-        { x: 0, y: -100 },
-        { x: 100, y: 0 },
-        { x: 0, y: 100 },
-        { x: -100, y: 0 },
-        { x: -70, y: -70 },
-        { x: 70, y: -70 },
-        { x: 70, y: 70 },
-        { x: -70, y: 70 }
-    ];
-
-    let currentPos = 0;
-
-    const moveInterval = setInterval(() => {
+    
+    // Clear container
+    container.innerHTML = '';
+    
+    // Create a single dot
+    const dot = document.createElement('div');
+    dot.className = 'directional-dot';
+    container.appendChild(dot);
+    
+    // Animation variables
+    let currentCorner = 0;
+    let animationId = null;
+    let startTime = null;
+    
+    // Calculate rectangle corners (full width movement)
+    function calculateCorners() {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        
+        // Use 85% of container size to keep dot fully visible
+        const marginX = containerWidth * 0.075; // 7.5% margin
+        const marginY = containerHeight * 0.085; // 7.5% margin
+        
+        const top = marginY;
+        const bottom = containerHeight - marginY;
+        const left = marginX;
+        const right = containerWidth - marginX;
+        
+        return [
+            { x: left, y: top },      // Top-left corner
+            { x: right, y: top },     // Top-right corner
+            { x: right, y: bottom },  // Bottom-right corner
+            { x: left, y: bottom }    // Bottom-left corner
+        ];
+    }
+    
+    // Calculate position between two corners (for smooth movement)
+    function interpolatePosition(startCorner, endCorner, progress) {
+        const x = startCorner.x + (endCorner.x - startCorner.x) * progress;
+        const y = startCorner.y + (endCorner.y - startCorner.y) * progress;
+        return { x, y };
+    }
+    
+    // Main animation function
+    function animate(timestamp) {
+        if (!startTime) startTime = timestamp;
         if (!isRunning || isPaused) {
-            clearInterval(moveInterval);
+            animationId = null;
             return;
         }
-
-        const pos = positions[currentPos];
-        target.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-
-        currentPos = (currentPos + 1) % positions.length;
-    }, 2000);
+        
+        const corners = calculateCorners();
+        
+        // ===== ADJUST THESE VALUES FOR SLOWER MOVEMENT =====
+        const HOLD_TIME = 1200;        // Time holding at corner (ms) - was 1500
+        const MOVE_TIME = 1000;        // Time moving between corners (ms) - was 500
+        // ===================================================
+        
+        const cornerTime = HOLD_TIME + MOVE_TIME; // Total time per corner
+        const totalCycleTime = cornerTime * 4;    // Total for all 4 corners
+        
+        // Calculate timing
+        const elapsed = (timestamp - startTime) % totalCycleTime;
+        const cornerIndex = Math.floor(elapsed / cornerTime);
+        const timeInCorner = elapsed % cornerTime;
+        
+        let currentPos;
+        
+        if (timeInCorner < HOLD_TIME) {
+            // Hold at current corner
+            currentPos = corners[cornerIndex];
+            dot.style.transition = 'all .8s ease';
+            dot.style.transform = `translate(-50%, -50%) scale(1.1)`;
+        } else {
+            // Move to next corner
+            const moveProgress = (timeInCorner - HOLD_TIME) / MOVE_TIME;
+            const nextCornerIndex = (cornerIndex + 1) % 4;
+            currentPos = interpolatePosition(corners[cornerIndex], corners[nextCornerIndex], moveProgress);
+            dot.style.transition = `all ${MOVE_TIME / 1000}s cubic-bezier(0.4, 0, 0.2, 1)`; // Dynamic timing
+            dot.style.transform = `translate(-50%, -50%) scale(1)`;
+        }
+        
+        // Update dot position
+        dot.style.left = `${currentPos.x}px`;
+        dot.style.top = `${currentPos.y}px`;
+        
+        // Update current corner
+        currentCorner = cornerIndex;
+        
+        // Continue animation
+        if (isRunning && !isPaused) {
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+    
+    // Start the animation
+    function startAnimation() {
+        if (!animationId) {
+            const corners = calculateCorners();
+            
+            // Set initial position to first corner
+            dot.style.left = `${corners[0].x}px`;
+            dot.style.top = `${corners[0].y}px`;
+            
+            startTime = null;
+            currentCorner = 0;
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+    
+    // Stop the animation
+    function stopAnimation() {
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }
+    
+    // State monitoring
+    const checkAnimationState = () => {
+        if (isRunning && !isPaused && !animationId) {
+            startAnimation();
+        } else if ((!isRunning || isPaused) && animationId) {
+            stopAnimation();
+        }
+    };
+    
+    // Set up state monitoring
+    const stateCheckInterval = setInterval(checkAnimationState, 100);
+    
+    // Initial setup
+    const initialCorners = calculateCorners();
+    dot.style.left = `${initialCorners[0].x}px`;
+    dot.style.top = `${initialCorners[0].y}px`;
+    
+    // Start if exercise is already running
+    if (isRunning && !isPaused) {
+        setTimeout(startAnimation, 100);
+    }
+    
+    // Handle window resize
+    const handleResize = () => {
+        const corners = calculateCorners();
+        
+        // Update dot position if animation is running
+        if (animationId) {
+            const currentCornerObj = corners[currentCorner];
+            dot.style.left = `${currentCornerObj.x}px`;
+            dot.style.top = `${currentCornerObj.y}px`;
+        }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup function
+    return () => {
+        stopAnimation();
+        clearInterval(stateCheckInterval);
+        window.removeEventListener('resize', handleResize);
+    };
 }
 
 function createZoomingAnimation() {
     const container = elements.animationContainer;
+    
+    // Clear container
+    container.innerHTML = '';
+    
+    // Create the zooming circle with CSS animation
     const circle = document.createElement('div');
-    circle.className = 'eye-target';
-    circle.style.borderRadius = '50%';
-    circle.style.background = 'transparent';
-    circle.style.border = '4px solid #4299e1';
+    circle.className = 'zooming-circle-css';
+    
     container.appendChild(circle);
-
-    let scale = 0.5;
-    let growing = true;
-
-    const zoomInterval = setInterval(() => {
-        if (!isRunning || isPaused) {
-            clearInterval(zoomInterval);
-            return;
-        }
-
-        if (growing) {
-            scale += 0.03;
-            if (scale >= 1.5) growing = false;
+    
+    // Add CSS animation via style tag
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+    
+    // Create center dot
+    const centerDot = document.createElement('div');
+    centerDot.className = 'center-dot';
+    container.appendChild(centerDot);
+    
+    // Set instruction
+    elements.exerciseInstruction.textContent = "Follow the expanding and contracting circle";
+    
+    // Control animation based on exercise state
+    const checkAnimationState = () => {
+        if (isRunning && !isPaused) {
+            circle.style.animationPlayState = 'running';
         } else {
-            scale -= 0.03;
-            if (scale <= 0.5) growing = true;
+            circle.style.animationPlayState = 'paused';
         }
-
-        circle.style.width = `${scale * 80}px`;
-        circle.style.height = `${scale * 80}px`;
-    }, 80);
+    };
+    
+    // Start monitoring
+    const stateCheckInterval = setInterval(checkAnimationState, 100);
+    
+    // Initial check
+    checkAnimationState();
+    
+    // Cleanup
+    return () => {
+        clearInterval(stateCheckInterval);
+        circle.style.animationPlayState = 'paused';
+        if (style.parentNode) {
+            document.head.removeChild(style);
+        }
+    };
 }
 
 // Initialize app when DOM is loaded

@@ -5,48 +5,42 @@ class DeskStretches {
             {
                 id: 'neck-tilt',
                 name: 'Neck Tilt',
-                duration: 30,
-                instructions: 'Slowly tilt your head to the left, bringing ear toward shoulder. Hold for 5 seconds. Return to center. Repeat on the right side. Keep shoulders relaxed throughout.',
+                instructions: 'Sit up straight with your shoulders relaxed. Slowly tilt your head to the left, bringing your ear toward your shoulder. Hold for 5 seconds, feeling the stretch on the right side of your neck. Return to center position slowly.Repeat on the right side, tilting head to the right. Hold for 5 seconds. Return to center and relax',
                 image: 'assets/stretches/neck-tilt.jpg',
                 benefit: 'Relieves neck tension and improves flexibility'
             },
             {
                 id: 'shoulder-roll',
                 name: 'Shoulder Roll',
-                duration: 30,
-                instructions: 'Slowly roll your shoulders up toward your ears. Move them back in a circular motion. Then roll them down and forward. Complete 5 rotations forward. Reverse direction and complete 5 rotations backward. Keep your arms relaxed throughout the movement.',
+                instructions: 'Sit or stand with your arms relaxed at your sides. Slowly roll your shoulders up toward your ears. Move them back in a circular motion. Continue rolling them down and forward. Complete 5 rotations in the forward direction. Pause briefly. Now reverse direction and complete 5 backward rotations. Keep your arms relaxed throughout the movement.',
                 image: 'assets/stretches/shoulder-roll.jpg',
                 benefit: 'Reduces shoulder stiffness and improves circulation'
             },
             {
                 id: 'side-stretch',
                 name: 'Side Stretch',
-                duration: 30,
-                instructions: 'Sit tall with your feet flat on the floor. Raise your right arm straight overhead. Gently lean to the left side until you feel a stretch. Hold for 10 seconds. Return to center and lower your arm. Repeat on the opposite side with left arm overhead leaning right. Keep your hips firmly planted in the chair.',
+                instructions: 'Sit tall with your feet flat on the floor. Place your right hand on your right hip. Raise your left arm straight overhead. Gently lean to the right side until you feel a stretch along your left side. Hold for 10 seconds while breathing deeply. Return to center position slowly. Lower your left arm. Repeat on the opposite side with right arm overhead.',
                 image: 'assets/stretches/side-stretch.jpg',
                 benefit: 'Stretches side muscles and improves posture'
             },
             {
                 id: 'wrist-flex',
                 name: 'Wrist Flex',
-                duration: 30,
-                instructions: 'Extend your right arm straight forward with palm facing down. Use your left hand to gently pull the fingers back toward your body. Hold for 10 seconds until you feel a stretch in your forearm. Release and turn palm facing up. Gently pull fingers downward and Hold for 10 seconds. Repeat with the left arm.',
+                instructions: 'Extend your right arm straight forward with palm facing down. Use your left hand to gently pull the fingers back toward your body. Hold for 10 seconds until you feel a stretch in your forearm. Release and turn your right palm facing up. Gently pull fingers downward with your left hand. Hold for 10 seconds. Release and shake out your right hand. Repeat with the left arm.',
                 image: 'assets/stretches/wrist-flex.jpg',
                 benefit: 'Prevents wrist strain from typing and mouse use'
             },
             {
                 id: 'spinal-twist',
                 name: 'Spinal Twist',
-                duration: 30,
-                instructions: 'Sit tall with both feet flat on the floor. Place your right hand on your left knee. Gently twist your upper body to the left. Use your left hand on the chair back for support. Hold for 15 seconds while breathing deeply. Return to center slowly. Repeat on the opposite side twisting to the right.',
+                instructions: 'Sit tall with both feet flat on the floor. Place your right hand on your left knee. Place your left hand on the chair back for support. Gently twist your upper body to the left. Look over your left shoulder if comfortable. Hold for 15 seconds while breathing deeply. Return to center slowly. Repeat on the opposite side twisting to the right.',
                 image: 'assets/stretches/spinal-twist.jpg',
                 benefit: 'Increases spinal mobility and relieves back tension'
             },
             {
                 id: 'leg-extensions',
                 name: 'Leg Extensions',
-                duration: 30,
-                instructions: 'Sit tall with your back against the chair. Extend your right leg straight out until it is parallel to the floor. Flex your foot and point your toes toward the ceiling. Hold for 5 seconds while squeezing your thigh muscle. Slowly lower your leg back to the floor. Alternate and repeat with your left leg. Complete 5 extensions per leg.',
+                instructions: 'Sit tall with your back against the chair. Extend your right leg straight out until parallel to the floor. Flex your foot and point your toes toward the ceiling. Hold for 5 seconds while squeezing your thigh muscle. Slowly lower your leg back to the floor. Repeat with your left leg. Complete 5 extensions per leg. Focus on controlled movements.',
                 image: 'assets/stretches/leg-extensions.jpg',
                 benefit: 'Improves leg circulation and prevents stiffness'
             }

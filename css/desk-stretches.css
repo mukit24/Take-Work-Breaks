@@ -65,7 +65,6 @@
 }
 
 .stretch-main {
-    margin-bottom: 2rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;

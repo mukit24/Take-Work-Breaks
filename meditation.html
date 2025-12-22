@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation - Mental Reset & Focus | Take Work Breaks</title>
+    <meta name="description"
+        content="Guided and self-guided meditation sessions to reset your mind, reduce stress, and improve focus at work.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/meditation.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main class="meditation-app">
+        <!-- Category Selector -->
+        <div class="category-selector">
+            <h2>Choose Your Meditation Style</h2>
+            <div class="category-grid">
+                <div class="category-card" id="guidedCard">
+                    <div class="category-icon">🎧</div>
+                    <h3>Guided Meditation</h3>
+                    <p>Audio-led sessions with specific goals. Perfect for quick mental resets during work.</p>
+                    <div class="session-count">6 sessions • 30 sec - 5 min</div>
+                </div>
+
+                <div class="category-card" id="selfGuidedCard">
+                    <div class="category-icon">🧘</div>
+                    <h3>Self-Guided Meditation</h3>
+                    <p>Create your own peaceful space. Choose silence, nature sounds, or mantra focus.</p>
+                    <div class="session-count">3 tools • Customizable</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guided Meditation Interface -->
+        <div class="guided-interface" id="guidedInterface" hidden>
+            <h2>Guided Meditation Sessions</h2>
+
+            <div class="session-selector">
+                <div class="session-grid" id="sessionGrid">
+                    <!-- Sessions will be populated by JS -->
+                </div>
+            </div>
+
+            <div class="meditation-player" id="meditationPlayer" hidden>
+                <div class="player-header">
+                    <h3 id="currentSessionTitle">The Purposeful Pause</h3>
+                    <p id="currentSessionGoal">Break a stress loop instantly</p>
+                </div>
+
+                <div class="meditation-visual">
+                    <div class="meditation-circle" id="meditationCircle">
+                        <div class="meditation-timer" id="meditationTimer">0:30</div>
+                        <div class="meditation-status" id="meditationStatus">Ready</div>
+                    </div>
+                </div>
+
+                <div class="player-controls">
+                    <div class="control-buttons">
+                        <button id="playBtn" class="btn primary">Play Session</button>
+                        <button id="pauseBtn" class="btn secondary" disabled>Pause</button>
+                        <button id="stopBtn" class="btn outline">Stop</button>
+                    </div>
+
+                    <div class="session-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span> / <span id="totalTime">0:30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="backToGuided" class="back-btn">← Back to Sessions</button>
+            </div>
+        </div>
+
+        <!-- Self-Guided Meditation Interface -->
+        <div class="selfguided-interface" id="selfGuidedInterface" hidden>
+            <h2>Self-Guided Meditation Tools</h2>
+
+            <div class="tool-selector">
+                <div class="tool-grid">
+                    <div class="tool-card" data-tool="nature">
+                        <div class="tool-icon">🌿</div>
+                        <h4>Nature Sounds</h4>
+                        <p>Ambient sounds for focus and relaxation</p>
+                    </div>
+                    <div class="tool-card" data-tool="silent">
+                        <div class="tool-icon">🔕</div>
+                        <h4>Silent Mode</h4>
+                        <p>Pure silence with optional bell cues</p>
+                    </div>
+                    <div class="tool-card" data-tool="mantra">
+                        <div class="tool-icon">🕉️</div>
+                        <h4>Mantra Focus</h4>
+                        <p>Repeat a calming word or phrase</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nature Sounds Player -->
+            <div class="tool-player" id="naturePlayer" hidden>
+                <h3>Nature Sounds</h3>
+
+                <div class="sound-visual">
+                    <div class="sound-circle" id="soundCircle">
+                        <div class="sound-timer" id="soundTimer">3:00</div>
+                        <div class="sound-name" id="soundName">Forest</div>
+                    </div>
+                </div>
+
+                <div class="sound-controls">
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="soundSelect">Nature Sound:</label>
+                            <div class="select-wrapper">
+                                <select id="soundSelect" class="styled-select">
+                                    <option value="forest">Forest (Birds & Leaves)</option>
+                                    <option value="rain">Rain (Gentle Shower)</option>
+                                    <option value="waves">Ocean Waves</option>
+                                    <option value="stream">Mountain Stream</option>
+                                    <option value="thunder">Distant Thunderstorm</option>
+                                    <option value="cafe">Coffee Shop Ambience</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="natureDuration">Session Duration:</label>
+                            <div class="select-wrapper">
+                                <select id="natureDuration" class="styled-select">
+                                    <option value="1">1 minute</option>
+                                    <option value="2">2 minutes</option>
+                                    <option value="3" selected>3 minutes</option>
+                                    <option value="5">5 minutes</option>
+                                    <option value="10">10 minutes</option>
+                                    <option value="0">No limit</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-buttons">
+                        <button id="natureStartBtn" class="btn primary">Start Soundscape</button>
+                        <button id="naturePauseBtn" class="btn secondary" disabled>Pause</button>
+                        <button id="natureStopBtn" class="btn outline">Stop</button>
+                    </div>
+
+                    <div class="volume-control">
+                        <label for="natureVolume">Volume:</label>
+                        <input type="range" id="natureVolume" min="0" max="100" value="50" class="volume-slider">
+                        <span id="natureVolumeValue">50%</span>
+                    </div>
+                </div>
+
+                <button class="back-btn tool-back">← Back to Tools</button>
+            </div>
+
+            <!-- Silent Mode Player -->
+            <div class="tool-player" id="silentPlayer" hidden>
+                <h3>Silent Mode</h3>
+
+                <div class="silent-visual">
+                    <div class="silent-circle" id="silentCircle">
+                        <div class="silent-timer" id="silentTimer">3:00</div>
+                        <div class="silent-status" id="silentStatus">Silence</div>
+                    </div>
+                </div>
+
+                <div class="silent-controls">
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="silentDuration">Session Duration:</label>
+                            <div class="select-wrapper">
+                                <select id="silentDuration" class="styled-select">
+                                    <option value="1">1 minute</option>
+                                    <option value="2">2 minutes</option>
+                                    <option value="3" selected>3 minutes</option>
+                                    <option value="5">5 minutes</option>
+                                    <option value="10">10 minutes</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="bellOption">Bell Cues:</label>
+                            <div class="select-wrapper">
+                                <select id="bellOption" class="styled-select">
+                                    <option value="none">No bells</option>
+                                    <option value="start">Start only</option>
+                                    <option value="startend">Start & End</option>
+                                    <option value="all" selected>Start, Middle & End</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bell-preview">
+                        <button id="testBellBtn" class="btn outline">Test Bell Sound</button>
+                    </div>
+
+                    <div class="control-buttons">
+                        <button id="silentStartBtn" class="btn primary">Begin Silence</button>
+                        <button id="silentPauseBtn" class="btn secondary" disabled>Pause</button>
+                        <button id="silentStopBtn" class="btn outline">Stop</button>
+                    </div>
+                </div>
+
+                <button class="back-btn tool-back">← Back to Tools</button>
+            </div>
+
+            <!-- Mantra Focus Player -->
+            <div class="tool-player" id="mantraPlayer" hidden>
+                <h3>Mantra Focus</h3>
+
+                <div class="mantra-visual">
+                    <div class="mantra-display" id="mantraDisplay">
+                        <div class="mantra-text" id="mantraText">Peace</div>
+                        <div class="mantra-subtext">Focus on your chosen word</div>
+                    </div>
+                    <div class="mantra-timer" id="mantraTimer">2:00</div>
+                </div>
+
+                <div class="mantra-controls">
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="mantraInput">Your Mantra/Word:</label>
+                            <input type="text" id="mantraInput" class="mantra-input"
+                                placeholder="e.g., Calm, Focus, Peace" value="Peace" maxlength="20">
+                        </div>
+
+                        <div class="control-item">
+                            <label for="mantraDuration">Session Duration:</label>
+                            <div class="select-wrapper">
+                                <select id="mantraDuration" class="styled-select">
+                                    <option value="1">1 minute</option>
+                                    <option value="2" selected>2 minutes</option>
+                                    <option value="3">3 minutes</option>
+                                    <option value="5">5 minutes</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="mantraStyle">Display Style:</label>
+                            <div class="select-wrapper">
+                                <select id="mantraStyle" class="styled-select">
+                                    <option value="fade">Gentle Fade</option>
+                                    <option value="pulse">Soft Pulse</option>
+                                    <option value="breath">Sync with Breath</option>
+                                    <option value="still">Still & Calm</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="mantraBreath">Breath Sync:</label>
+                            <div class="select-wrapper">
+                                <select id="mantraBreath" class="styled-select">
+                                    <option value="4">4 sec inhale, 4 sec exhale</option>
+                                    <option value="5">5 sec inhale, 5 sec exhale</option>
+                                    <option value="6">6 sec inhale, 6 sec exhale</option>
+                                    <option value="0" selected>No breath sync</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-buttons">
+                        <button id="mantraStartBtn" class="btn primary">Start Mantra Focus</button>
+                        <button id="mantraPauseBtn" class="btn secondary" disabled>Pause</button>
+                        <button id="mantraStopBtn" class="btn outline">Stop</button>
+                    </div>
+                </div>
+
+                <button class="back-btn tool-back">← Back to Tools</button>
+            </div>
+        </div>
+
+        <button id="backToCategories" class="back-btn global-back" hidden>← Back to Categories</button>
+    </main>
+
+    <script src="js/components.js"></script>
+    <script src="js/meditation.js"></script>
+</body>
+
+</html>

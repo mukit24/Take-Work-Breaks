@@ -7,7 +7,7 @@ const meditationSessions = [
         duration: 30, // seconds
         goal: 'Break a stress loop instantly',
         description: 'Focuses on three "anchor breaths" to lower the heart rate after a stressful email or notification.',
-        audioFile: 'assets/audio/meditation-1.mp3'
+        audioFile: 'assets/sounds/close-eyes-palm.mp3'
     },
     {
         id: 'instant-grounding',
@@ -109,16 +109,16 @@ const elements = {
     // Category selection
     guidedCard: document.getElementById('guidedCard'),
     selfGuidedCard: document.getElementById('selfGuidedCard'),
-    
+
     // Interfaces
     categorySelector: document.querySelector('.category-selector'),
     guidedInterface: document.getElementById('guidedInterface'),
     selfGuidedInterface: document.getElementById('selfGuidedInterface'),
-    
+
     // Session selection
     sessionGrid: document.getElementById('sessionGrid'),
     meditationPlayer: document.getElementById('meditationPlayer'),
-    
+
     // Player elements
     currentSessionTitle: document.getElementById('currentSessionTitle'),
     currentSessionGoal: document.getElementById('currentSessionGoal'),
@@ -128,18 +128,18 @@ const elements = {
     progressFill: document.getElementById('progressFill'),
     currentTime: document.getElementById('currentTime'),
     totalTime: document.getElementById('totalTime'),
-    
+
     // Control buttons
     playBtn: document.getElementById('playBtn'),
     pauseBtn: document.getElementById('pauseBtn'),
     stopBtn: document.getElementById('stopBtn'),
     backToGuided: document.getElementById('backToGuided'),
-    
+
     // Tool players
     naturePlayer: document.getElementById('naturePlayer'),
     silentPlayer: document.getElementById('silentPlayer'),
     mantraPlayer: document.getElementById('mantraPlayer'),
-    
+
     // Back buttons
     backToCategories: document.getElementById('backToCategories')
 };
@@ -177,7 +177,7 @@ function setupEventListeners() {
     // Category selection
     elements.guidedCard.addEventListener('click', () => showGuidedMeditation());
     elements.selfGuidedCard.addEventListener('click', () => showSelfGuided());
-    
+
     // Session selection
     elements.sessionGrid.addEventListener('click', (e) => {
         const card = e.target.closest('.session-card');
@@ -186,7 +186,7 @@ function setupEventListeners() {
             selectSession(sessionId);
         }
     });
-    
+
     // Tool selection
     document.querySelector('.tool-grid').addEventListener('click', (e) => {
         const card = e.target.closest('.tool-card');
@@ -195,35 +195,46 @@ function setupEventListeners() {
             selectTool(tool);
         }
     });
-    
+
     // Player controls
     elements.playBtn.addEventListener('click', playMeditation);
     elements.pauseBtn.addEventListener('click', togglePause);
     elements.stopBtn.addEventListener('click', stopMeditation);
-    elements.backToGuided.addEventListener('click', () => showGuidedMeditation());
-    
+    elements.backToGuided.addEventListener('click', function () {
+        document.querySelector('.session-selector').hidden = false;
+        elements.meditationPlayer.hidden = true;
+        stopMeditation();
+    });
+
     // Back to categories
     elements.backToCategories.addEventListener('click', showCategories);
-    
+
     // Tool back buttons
     document.querySelectorAll('.tool-back').forEach(btn => {
-        btn.addEventListener('click', () => showSelfGuided());
+        btn.addEventListener('click', function () {
+            // Show tool selector and hide all tool players
+            document.querySelector('.tool-selector').hidden = false;
+            elements.naturePlayer.hidden = true;
+            elements.silentPlayer.hidden = true;
+            elements.mantraPlayer.hidden = true;
+            stopAllPlayers();
+        });
     });
-    
+
     // Nature sounds controls
     document.getElementById('natureStartBtn').addEventListener('click', startNatureSound);
     document.getElementById('naturePauseBtn').addEventListener('click', toggleNaturePause);
     document.getElementById('natureStopBtn').addEventListener('click', stopNatureSound);
     document.getElementById('natureVolume').addEventListener('input', updateNatureVolume);
     document.getElementById('soundSelect').addEventListener('change', updateSoundVisual);
-    
+
     // Silent mode controls
     document.getElementById('silentStartBtn').addEventListener('click', startSilentMode);
     document.getElementById('silentPauseBtn').addEventListener('click', toggleSilentPause);
     document.getElementById('silentStopBtn').addEventListener('click', stopSilentMode);
     document.getElementById('testBellBtn').addEventListener('click', testBell);
     document.getElementById('bellOption').addEventListener('change', updateBellSetting);
-    
+
     // Mantra focus controls
     document.getElementById('mantraStartBtn').addEventListener('click', startMantraFocus);
     document.getElementById('mantraPauseBtn').addEventListener('click', toggleMantraPause);
@@ -231,7 +242,7 @@ function setupEventListeners() {
     document.getElementById('mantraInput').addEventListener('input', updateMantra);
     document.getElementById('mantraStyle').addEventListener('change', updateMantraStyle);
     document.getElementById('mantraBreath').addEventListener('change', updateMantraBreath);
-    
+
     // Duration changes
     document.getElementById('natureDuration').addEventListener('change', updateNatureDuration);
     document.getElementById('silentDuration').addEventListener('change', updateSilentDuration);
@@ -246,6 +257,14 @@ function showCategories() {
     elements.selfGuidedInterface.hidden = true;
     elements.backToCategories.hidden = true;
     stopAllPlayers();
+
+    // Reset any hidden states
+    document.querySelector('.tool-selector').hidden = false;
+    document.querySelector('.session-selector').hidden = false;
+    elements.meditationPlayer.hidden = true;
+    elements.naturePlayer.hidden = true;
+    elements.silentPlayer.hidden = true;
+    elements.mantraPlayer.hidden = true;
 }
 
 // Show guided meditation
@@ -254,9 +273,17 @@ function showGuidedMeditation() {
     elements.categorySelector.hidden = true;
     elements.guidedInterface.hidden = false;
     elements.selfGuidedInterface.hidden = true;
-    elements.meditationPlayer.hidden = true;
     elements.backToCategories.hidden = false;
     stopAllPlayers();
+
+    // Reset to session selector view
+    document.querySelector('.session-selector').hidden = false;
+    elements.meditationPlayer.hidden = true;
+
+    // Hide any tool players that might be visible
+    elements.naturePlayer.hidden = true;
+    elements.silentPlayer.hidden = true;
+    elements.mantraPlayer.hidden = true;
 }
 
 // Show self-guided tools
@@ -266,14 +293,17 @@ function showSelfGuided() {
     elements.guidedInterface.hidden = true;
     elements.selfGuidedInterface.hidden = false;
     elements.backToCategories.hidden = false;
-    
-    // Hide all tool players
+
+    // Show tool selector and hide all tool players
+    document.querySelector('.tool-selector').hidden = false;
     elements.naturePlayer.hidden = true;
     elements.silentPlayer.hidden = true;
     elements.mantraPlayer.hidden = true;
-    
-    // Show tool selector
-    document.querySelector('.tool-selector').hidden = false;
+
+    // Hide meditation player if it was visible
+    elements.meditationPlayer.hidden = true;
+    document.querySelector('.session-selector').hidden = true;
+
     stopAllPlayers();
 }
 
@@ -281,7 +311,7 @@ function showSelfGuided() {
 function selectSession(sessionId) {
     currentSession = meditationSessions.find(s => s.id === sessionId);
     if (!currentSession) return;
-    
+
     // Update UI
     elements.currentSessionTitle.textContent = currentSession.title;
     elements.currentSessionGoal.textContent = currentSession.goal;
@@ -289,24 +319,24 @@ function selectSession(sessionId) {
     elements.totalTime.textContent = formatTime(currentSession.duration);
     elements.currentTime.textContent = '0:00';
     elements.progressFill.style.width = '0%';
-    
-    // Show player
+
+    // Show player and hide session selector
     document.querySelector('.session-selector').hidden = true;
     elements.meditationPlayer.hidden = false;
-    
+
     // Reset controls
     elements.playBtn.disabled = false;
     elements.pauseBtn.disabled = true;
     elements.stopBtn.disabled = false;
     elements.playBtn.textContent = 'Play Session';
     elements.pauseBtn.textContent = 'Pause';
-    
+
     // Create audio element
     if (audioElement) {
         audioElement.pause();
         audioElement = null;
     }
-    
+
     audioElement = new Audio(currentSession.audioFile);
     audioElement.addEventListener('ended', onMeditationEnded);
     audioElement.addEventListener('timeupdate', updateMeditationProgress);
@@ -315,9 +345,17 @@ function selectSession(sessionId) {
 // Select a tool
 function selectTool(tool) {
     currentTool = tool;
+
+    // Hide tool selector
     document.querySelector('.tool-selector').hidden = true;
-    
-    switch(tool) {
+
+    // Hide all tool players first
+    elements.naturePlayer.hidden = true;
+    elements.silentPlayer.hidden = true;
+    elements.mantraPlayer.hidden = true;
+
+    // Show the selected tool
+    switch (tool) {
         case 'nature':
             elements.naturePlayer.hidden = false;
             initNatureSound();
@@ -336,14 +374,14 @@ function selectTool(tool) {
 // Play meditation
 function playMeditation() {
     if (!audioElement || !currentSession) return;
-    
+
     isPlaying = true;
     isPaused = false;
-    
+
     // Update buttons
     elements.playBtn.disabled = true;
     elements.pauseBtn.disabled = false;
-    
+
     // Play audio
     audioElement.play().catch(e => {
         console.error('Audio play failed:', e);
@@ -351,7 +389,7 @@ function playMeditation() {
         elements.playBtn.disabled = false;
         elements.pauseBtn.disabled = true;
     });
-    
+
     // Start timer
     startTimer(currentSession.duration);
 }
@@ -359,10 +397,10 @@ function playMeditation() {
 // Toggle pause
 function togglePause() {
     if (!audioElement) return;
-    
+
     isPaused = !isPaused;
     elements.pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
-    
+
     if (isPaused) {
         audioElement.pause();
         clearInterval(timerInterval);
@@ -376,14 +414,14 @@ function togglePause() {
 function stopMeditation() {
     isPlaying = false;
     isPaused = false;
-    
+
     if (audioElement) {
         audioElement.pause();
         audioElement.currentTime = 0;
     }
-    
+
     clearInterval(timerInterval);
-    
+
     // Reset UI
     elements.playBtn.disabled = false;
     elements.pauseBtn.disabled = true;
@@ -398,7 +436,7 @@ function stopMeditation() {
 // Update meditation progress
 function updateMeditationProgress() {
     if (!audioElement) return;
-    
+
     currentTime = audioElement.currentTime;
     const progress = (currentTime / totalDuration) * 100;
     elements.progressFill.style.width = `${progress}%`;
@@ -418,19 +456,19 @@ function onMeditationEnded() {
 function startTimer(duration) {
     totalDuration = duration;
     currentTime = 0;
-    
+
     clearInterval(timerInterval);
-    
+
     timerInterval = setInterval(() => {
         if (!isPaused && isPlaying) {
             currentTime++;
             const timeLeft = totalDuration - currentTime;
             elements.meditationTimer.textContent = formatTime(timeLeft);
-            
+
             // Update circle animation
             const pulseValue = 1 + (Math.sin(currentTime) * 0.05);
             elements.meditationCircle.style.transform = `scale(${pulseValue})`;
-            
+
             if (currentTime >= totalDuration) {
                 clearInterval(timerInterval);
                 onMeditationEnded();
@@ -443,7 +481,7 @@ function startTimer(duration) {
 function initNatureSound() {
     const soundSelect = document.getElementById('soundSelect');
     updateSoundVisual();
-    
+
     // Set initial timer
     const duration = parseInt(document.getElementById('natureDuration').value);
     updateNatureTimer(duration);
@@ -461,23 +499,23 @@ function updateSoundVisual() {
 function startNatureSound() {
     const soundId = document.getElementById('soundSelect').value;
     const duration = parseInt(document.getElementById('natureDuration').value);
-    
+
     // In a real implementation, you would play the audio file
     // For now, we'll simulate it with a timer
-    
+
     isPlaying = true;
     isPaused = false;
-    
+
     document.getElementById('natureStartBtn').disabled = true;
     document.getElementById('naturePauseBtn').disabled = false;
-    
+
     startNatureTimer(duration * 60); // Convert to seconds
 }
 
 function toggleNaturePause() {
     isPaused = !isPaused;
     document.getElementById('naturePauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
-    
+
     if (isPaused) {
         clearInterval(timerInterval);
     } else {
@@ -490,11 +528,11 @@ function stopNatureSound() {
     isPlaying = false;
     isPaused = false;
     clearInterval(timerInterval);
-    
+
     document.getElementById('natureStartBtn').disabled = false;
     document.getElementById('naturePauseBtn').disabled = true;
     document.getElementById('naturePauseBtn').textContent = 'Pause';
-    
+
     const duration = parseInt(document.getElementById('natureDuration').value);
     updateNatureTimer(duration);
 }
@@ -502,20 +540,20 @@ function stopNatureSound() {
 function startNatureTimer(duration) {
     totalDuration = duration;
     currentTime = 0;
-    
+
     clearInterval(timerInterval);
-    
+
     timerInterval = setInterval(() => {
         if (!isPaused && isPlaying) {
             currentTime++;
             const timeLeft = totalDuration - currentTime;
             document.getElementById('soundTimer').textContent = formatTime(timeLeft);
-            
+
             // Animate circle
             const soundCircle = document.getElementById('soundCircle');
             const scale = 1 + (Math.sin(currentTime * 0.5) * 0.03);
             soundCircle.style.transform = `scale(${scale})`;
-            
+
             if (currentTime >= totalDuration && totalDuration > 0) {
                 clearInterval(timerInterval);
                 stopNatureSound();
@@ -549,25 +587,25 @@ function initSilentMode() {
 function startSilentMode() {
     const duration = parseInt(document.getElementById('silentDuration').value);
     const bellOption = document.getElementById('bellOption').value;
-    
+
     isPlaying = true;
     isPaused = false;
-    
+
     document.getElementById('silentStartBtn').disabled = true;
     document.getElementById('silentPauseBtn').disabled = false;
-    
+
     // Play start bell if selected
     if (bellOption !== 'none') {
         playBell();
     }
-    
+
     startSilentTimer(duration * 60, bellOption);
 }
 
 function toggleSilentPause() {
     isPaused = !isPaused;
     document.getElementById('silentPauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
-    
+
     if (isPaused) {
         clearInterval(timerInterval);
     } else {
@@ -581,11 +619,11 @@ function stopSilentMode() {
     isPlaying = false;
     isPaused = false;
     clearInterval(timerInterval);
-    
+
     document.getElementById('silentStartBtn').disabled = false;
     document.getElementById('silentPauseBtn').disabled = true;
     document.getElementById('silentPauseBtn').textContent = 'Pause';
-    
+
     const duration = parseInt(document.getElementById('silentDuration').value);
     updateSilentTimer(duration);
     document.getElementById('silentStatus').textContent = 'Silence';
@@ -594,30 +632,30 @@ function stopSilentMode() {
 function startSilentTimer(duration, bellOption) {
     totalDuration = duration;
     currentTime = 0;
-    
+
     clearInterval(timerInterval);
-    
+
     timerInterval = setInterval(() => {
         if (!isPaused && isPlaying) {
             currentTime++;
             const timeLeft = totalDuration - currentTime;
             document.getElementById('silentTimer').textContent = formatTime(timeLeft);
-            
+
             // Update status with breathing guidance
             const breathPhase = (currentTime % 8 < 4) ? 'Breathe In' : 'Breathe Out';
             document.getElementById('silentStatus').textContent = breathPhase;
-            
+
             // Animate circle for breathing
             const silentCircle = document.getElementById('silentCircle');
             const isInhale = (currentTime % 8 < 4);
             const scale = isInhale ? 1 + (currentTime % 4) * 0.025 : 1 - (currentTime % 4) * 0.025;
             silentCircle.style.transform = `scale(${scale})`;
-            
+
             // Play middle bell
-            if (bellOption === 'all' && Math.abs(currentTime - totalDuration/2) < 1) {
+            if (bellOption === 'all' && Math.abs(currentTime - totalDuration / 2) < 1) {
                 playBell();
             }
-            
+
             if (currentTime >= totalDuration) {
                 clearInterval(timerInterval);
                 // Play end bell if selected
@@ -659,7 +697,7 @@ function playBell() {
 function initMantraFocus() {
     updateMantra();
     updateMantraStyle();
-    
+
     const duration = parseInt(document.getElementById('mantraDuration').value);
     updateMantraTimer(duration);
 }
@@ -672,10 +710,10 @@ function updateMantra() {
 function updateMantraStyle() {
     mantraAnimation = document.getElementById('mantraStyle').value;
     const mantraText = document.getElementById('mantraText');
-    
+
     // Remove all animation classes
     mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
-    
+
     // Add selected animation class
     if (mantraAnimation !== 'still') {
         mantraText.classList.add(`mantra-${mantraAnimation}`);
@@ -689,20 +727,20 @@ function updateMantraBreath() {
 
 function startMantraFocus() {
     const duration = parseInt(document.getElementById('mantraDuration').value);
-    
+
     isPlaying = true;
     isPaused = false;
-    
+
     document.getElementById('mantraStartBtn').disabled = true;
     document.getElementById('mantraPauseBtn').disabled = false;
-    
+
     startMantraTimer(duration * 60);
 }
 
 function toggleMantraPause() {
     isPaused = !isPaused;
     document.getElementById('mantraPauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
-    
+
     const mantraText = document.getElementById('mantraText');
     if (isPaused) {
         clearInterval(timerInterval);
@@ -718,14 +756,14 @@ function stopMantraFocus() {
     isPlaying = false;
     isPaused = false;
     clearInterval(timerInterval);
-    
+
     document.getElementById('mantraStartBtn').disabled = false;
     document.getElementById('mantraPauseBtn').disabled = true;
     document.getElementById('mantraPauseBtn').textContent = 'Pause';
-    
+
     const duration = parseInt(document.getElementById('mantraDuration').value);
     updateMantraTimer(duration);
-    
+
     // Reset animation
     const mantraText = document.getElementById('mantraText');
     mantraText.style.animationPlayState = 'running';
@@ -734,20 +772,20 @@ function stopMantraFocus() {
 function startMantraTimer(duration) {
     totalDuration = duration;
     currentTime = 0;
-    
+
     clearInterval(timerInterval);
-    
+
     timerInterval = setInterval(() => {
         if (!isPaused && isPlaying) {
             currentTime++;
             const timeLeft = totalDuration - currentTime;
             document.getElementById('mantraTimer').textContent = formatTime(timeLeft);
-            
+
             // Change mantra color gradually
             const hue = (currentTime * 0.5) % 360;
-            document.getElementById('mantraDisplay').style.background = 
+            document.getElementById('mantraDisplay').style.background =
                 `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${hue + 20}, 70%, 50%))`;
-            
+
             if (currentTime >= totalDuration) {
                 clearInterval(timerInterval);
                 stopMantraFocus();
@@ -780,15 +818,36 @@ function darkenColor(color, percent) {
 }
 
 function stopAllPlayers() {
-    // Stop any currently playing audio/timers
+    // Stop meditation player
+    if (isPlaying) {
+        stopMeditation();
+    }
+    
+    // Stop nature sounds
+    if (document.getElementById('natureStartBtn')) {
+        document.getElementById('natureStartBtn').disabled = false;
+        document.getElementById('naturePauseBtn').disabled = true;
+        isPlaying = false;
+        isPaused = false;
+        clearInterval(timerInterval);
+    }
+    
+    // Stop silent mode
+    if (document.getElementById('silentStartBtn')) {
+        document.getElementById('silentStartBtn').disabled = false;
+        document.getElementById('silentPauseBtn').disabled = true;
+    }
+    
+    // Stop mantra focus
+    if (document.getElementById('mantraStartBtn')) {
+        document.getElementById('mantraStartBtn').disabled = false;
+        document.getElementById('mantraPauseBtn').disabled = true;
+    }
+    
+    // Clear any intervals
+    clearInterval(timerInterval);
     isPlaying = false;
     isPaused = false;
-    clearInterval(timerInterval);
-    
-    if (audioElement) {
-        audioElement.pause();
-        audioElement.currentTime = 0;
-    }
 }
 
 // Initialize app when DOM is loaded

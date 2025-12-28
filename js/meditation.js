@@ -56,37 +56,37 @@ const meditationSessions = [
     }
 ];
 
-// Nature Sounds Data
+// Nature Sounds Data - Add duration if known (optional)
 const natureSounds = {
     forest: {
         name: 'Forest',
-        file: 'assets/audio/nature-forest.mp3',
-        color: '#38b2ac'
+        file: 'assets/sounds/nature-forest.mp3',
+        color: '#38b2ac',
+        duration: null // Will be populated when loaded
     },
     rain: {
         name: 'Rain',
-        file: 'assets/audio/nature-rain.mp3',
-        color: '#4c51bf'
+        file: 'assets/sounds/nature-rain.mp3',
+        color: '#4c51bf',
+        duration: null
     },
     waves: {
         name: 'Ocean Waves',
-        file: 'assets/audio/nature-waves.mp3',
-        color: '#3182ce'
+        file: 'assets/sounds/nature-waves.mp3',
+        color: '#3182ce',
+        duration: null
     },
     stream: {
         name: 'Mountain Stream',
-        file: 'assets/audio/nature-stream.mp3',
-        color: '#319795'
+        file: 'assets/sounds/nature-stream.mp3',
+        color: '#319795',
+        duration: null
     },
     thunder: {
         name: 'Distant Thunder',
-        file: 'assets/audio/nature-thunder.mp3',
-        color: '#553c9a'
-    },
-    cafe: {
-        name: 'Coffee Shop',
-        file: 'assets/audio/nature-cafe.mp3',
-        color: '#d69e2e'
+        file: 'assets/sounds/nature-thunder.mp3',
+        color: '#553c9a',
+        duration: null
     }
 };
 
@@ -94,33 +94,40 @@ const natureSounds = {
 let currentView = 'categories'; // 'categories', 'guided', 'selfguided'
 let currentTool = ''; // 'nature', 'silent', 'mantra'
 let currentSession = null;
+
+// Guided Meditation State
 let isPlaying = false;
 let isPaused = false;
 let currentTime = 0;
 let totalDuration = 0;
 let timerInterval = null;
 let audioElement = null;
+
+// Nature Sounds State (SEPARATE from guided meditation)
+let natureAudio = null;
+let isNaturePlaying = false;
+let isNaturePaused = false;
+let natureTimerInterval = null;
+let natureCurrentTime = 0;
+let natureSessionDuration = 0; // User-selected session time
+let currentNatureSound = null;
+let isNatureLoading = false;
+let natureLoadingAbortController = null;
+
+// Other State
 let bellAudio = null;
 let currentMantra = 'Peace';
 let mantraAnimation = 'fade';
-let natureAudio = null; // Add this to your app state variables
 
 // DOM Elements
 const elements = {
-    // Category selection
     guidedCard: document.getElementById('guidedCard'),
     selfGuidedCard: document.getElementById('selfGuidedCard'),
-
-    // Interfaces
     categorySelector: document.querySelector('.category-selector'),
     guidedInterface: document.getElementById('guidedInterface'),
     selfGuidedInterface: document.getElementById('selfGuidedInterface'),
-
-    // Session selection
     sessionGrid: document.getElementById('sessionGrid'),
     meditationPlayer: document.getElementById('meditationPlayer'),
-
-    // Player elements
     currentSessionTitle: document.getElementById('currentSessionTitle'),
     currentSessionGoal: document.getElementById('currentSessionGoal'),
     meditationTimer: document.getElementById('meditationTimer'),
@@ -129,31 +136,31 @@ const elements = {
     progressFill: document.getElementById('progressFill'),
     currentTime: document.getElementById('currentTime'),
     totalTime: document.getElementById('totalTime'),
-
-    // Control buttons
     playBtn: document.getElementById('playBtn'),
     pauseBtn: document.getElementById('pauseBtn'),
     stopBtn: document.getElementById('stopBtn'),
     backToGuided: document.getElementById('backToGuided'),
-
-    // Tool players
     naturePlayer: document.getElementById('naturePlayer'),
     silentPlayer: document.getElementById('silentPlayer'),
     mantraPlayer: document.getElementById('mantraPlayer'),
-
-    // Back buttons
-    backToCategories: document.getElementById('backToCategories')
+    backToCategories: document.getElementById('backToCategories'),
+    natureStartBtn: document.getElementById('natureStartBtn'),
+    naturePauseBtn: document.getElementById('naturePauseBtn'),
+    natureStopBtn: document.getElementById('natureStopBtn'),
+    soundTimer: document.getElementById('soundTimer'),
+    soundName: document.getElementById('soundName'),
+    soundCircle: document.getElementById('soundCircle')
 };
 
 // Initialize the app
 function init() {
     renderSessions();
     setupEventListeners();
-    preloadAudio();
+    preloadBellSound();
 }
 
-// Preload bell sound
-function preloadAudio() {
+// Preload only bell sound (small file)
+function preloadBellSound() {
     bellAudio = new Audio('assets/sounds/bell.mp3');
     bellAudio.preload = 'auto';
     bellAudio.volume = 0.5;
@@ -213,21 +220,22 @@ function setupEventListeners() {
     // Tool back buttons
     document.querySelectorAll('.tool-back').forEach(btn => {
         btn.addEventListener('click', function () {
-            // Show tool selector and hide all tool players
-            document.querySelector('.tool-selector').hidden = false;
-            elements.naturePlayer.hidden = true;
-            elements.silentPlayer.hidden = true;
-            elements.mantraPlayer.hidden = true;
-            stopAllPlayers();
+            showSelfGuided();
         });
     });
 
     // Nature sounds controls
-    document.getElementById('natureStartBtn').addEventListener('click', startNatureSound);
-    document.getElementById('naturePauseBtn').addEventListener('click', toggleNaturePause);
-    document.getElementById('natureStopBtn').addEventListener('click', stopNatureSound);
+    elements.natureStartBtn.addEventListener('click', startNatureSound);
+    elements.naturePauseBtn.addEventListener('click', toggleNaturePause);
+    elements.natureStopBtn.addEventListener('click', stopNatureSound);
     document.getElementById('natureVolume').addEventListener('input', updateNatureVolume);
-    document.getElementById('soundSelect').addEventListener('change', updateSoundVisual);
+    document.getElementById('soundSelect').addEventListener('change', handleSoundChange);
+
+    // Load sound when dropdown changes
+    document.getElementById('soundSelect').addEventListener('change', function () {
+        const soundId = this.value;
+        loadNatureSound(soundId);
+    });
 
     // Silent mode controls
     document.getElementById('silentStartBtn').addEventListener('click', startSilentMode);
@@ -372,7 +380,434 @@ function selectTool(tool) {
     }
 }
 
-// Play meditation
+// ==================== NATURE SOUNDS FUNCTIONS ====================
+
+function initNatureSound() {
+    // Get initial sound from dropdown
+    const soundId = document.getElementById('soundSelect').value;
+    const duration = parseInt(document.getElementById('natureDuration').value);
+
+    // Update visual and load sound
+    updateSoundVisual(soundId);
+    updateNatureTimer(duration);
+
+    // Load the sound asynchronously
+    loadNatureSound(soundId);
+}
+
+function updateSoundVisual(soundId) {
+    const sound = natureSounds[soundId];
+    if (sound) {
+        elements.soundName.textContent = sound.name;
+        elements.soundCircle.style.background = `linear-gradient(135deg, ${sound.color}, #2d3748)`;
+    }
+}
+
+function handleSoundChange(e) {
+    const soundId = e.target.value;
+    updateSoundVisual(soundId);
+
+    // If sound is currently playing, stop it and load new one
+    if (isNaturePlaying && currentNatureSound === soundId) {
+        return; // Already playing this sound
+    }
+
+    if (isNaturePlaying) {
+        stopNatureSound();
+    }
+
+    loadNatureSound(soundId);
+}
+
+// Efficient lazy loading of nature sounds
+async function loadNatureSound(soundId) {
+    const sound = natureSounds[soundId];
+    if (!sound) return;
+
+    // Cancel previous loading if any
+    if (natureLoadingAbortController) {
+        natureLoadingAbortController.abort();
+    }
+
+    // Set loading state
+    isNatureLoading = true;
+    currentNatureSound = soundId;
+
+    // Disable play button while loading
+    elements.natureStartBtn.disabled = true;
+    elements.natureStartBtn.textContent = 'Loading...';
+
+    // Create new abort controller
+    natureLoadingAbortController = new AbortController();
+
+    try {
+        // Clean up previous audio
+        if (natureAudio) {
+            natureAudio.pause();
+            natureAudio = null;
+        }
+
+        // Create new audio element
+        natureAudio = new Audio(sound.file);
+
+        // Set up event listeners with abort signal
+        const signal = natureLoadingAbortController.signal;
+
+        // Wait for audio to be ready
+        await new Promise((resolve, reject) => {
+            if (signal.aborted) {
+                reject(new Error('Loading cancelled'));
+                return;
+            }
+
+            const onLoaded = () => {
+                if (!signal.aborted) {
+                    resolve();
+                }
+                cleanup();
+            };
+
+            const onError = (e) => {
+                if (!signal.aborted) {
+                    reject(e);
+                }
+                cleanup();
+            };
+
+            const cleanup = () => {
+                natureAudio.removeEventListener('canplaythrough', onLoaded);
+                natureAudio.removeEventListener('error', onError);
+                signal.removeEventListener('abort', onAbort);
+            };
+
+            const onAbort = () => {
+                reject(new Error('Loading cancelled'));
+                cleanup();
+            };
+
+            natureAudio.addEventListener('canplaythrough', onLoaded, { once: true });
+            natureAudio.addEventListener('error', onError, { once: true });
+            signal.addEventListener('abort', onAbort, { once: true });
+
+            // Start loading
+            natureAudio.preload = 'auto';
+            natureAudio.load();
+        });
+
+        // Audio loaded successfully
+        console.log(`Loaded nature sound: ${sound.name}`);
+
+        // Configure audio properties
+        natureAudio.loop = true;
+        natureAudio.volume = parseInt(document.getElementById('natureVolume').value) / 100;
+
+        // Set up smooth loop
+        setupSmoothLoop(natureAudio);
+
+        // Enable play button
+        elements.natureStartBtn.disabled = false;
+        elements.natureStartBtn.textContent = 'Start Soundscape';
+
+        // Store duration if not already known
+        if (!sound.duration || sound.duration !== natureAudio.duration) {
+            sound.duration = natureAudio.duration;
+        }
+
+    } catch (error) {
+        if (error.message !== 'Loading cancelled') {
+            console.error('Failed to load nature sound:', error);
+
+            // Show error state
+            elements.natureStartBtn.textContent = 'Load Failed';
+            elements.natureStartBtn.disabled = true;
+
+            // Reset after delay
+            setTimeout(() => {
+                if (currentNatureSound === soundId) {
+                    elements.natureStartBtn.textContent = 'Start Soundscape';
+                    elements.natureStartBtn.disabled = false;
+                }
+            }, 2000);
+        }
+    } finally {
+        isNatureLoading = false;
+        natureLoadingAbortController = null;
+    }
+}
+
+// Simple fade-based solution using only standard Audio API
+function setupSmoothLoop(audioElement) {
+    // Ensure loop is enabled
+    audioElement.loop = true;
+
+    // Remove any existing listener to avoid duplicates
+    audioElement.removeEventListener('timeupdate', handleSmoothFade);
+
+    // Define the fade handler
+    function handleSmoothFade() {
+        const fadeTime = 3; // 3-second fade
+        const currentTime = audioElement.currentTime;
+        const duration = audioElement.duration;
+
+        // Safety check
+        if (!duration || !isFinite(duration) || duration <= 0) return;
+
+        // Get current volume from slider
+        const volumeSlider = document.getElementById('natureVolume');
+        const targetVolume = volumeSlider ? parseInt(volumeSlider.value) / 100 : 0.5;
+
+        // Fade out at the end (last 3 seconds)
+        if (duration - currentTime < fadeTime) {
+            const fadeProgress = (duration - currentTime) / fadeTime;
+            audioElement.volume = Math.max(0.01, fadeProgress * targetVolume); // Never go to 0
+        }
+        // Fade in at the start (first 3 seconds after loop)
+        else if (currentTime < fadeTime) {
+            const fadeProgress = currentTime / fadeTime;
+            audioElement.volume = Math.min(1, fadeProgress * targetVolume);
+        }
+        // Middle section - full target volume
+        else {
+            audioElement.volume = targetVolume;
+        }
+    }
+
+    // Add the event listener
+    audioElement.addEventListener('timeupdate', handleSmoothFade);
+
+    // Also update volume when slider changes
+    const volumeSlider = document.getElementById('natureVolume');
+    if (volumeSlider) {
+        // Remove existing listener to avoid duplicates
+        volumeSlider.removeEventListener('input', updateVolumeForLoop);
+
+        function updateVolumeForLoop() {
+            const targetVolume = parseInt(volumeSlider.value) / 100;
+
+            // If currently in fade zone, don't override fade
+            const currentTime = audioElement.currentTime;
+            const duration = audioElement.duration;
+            const fadeTime = 3;
+
+            if (duration && isFinite(duration)) {
+                // Only update if not in fade zone
+                if (!(duration - currentTime < fadeTime) && !(currentTime < fadeTime)) {
+                    audioElement.volume = targetVolume;
+                }
+            }
+        }
+
+        volumeSlider.addEventListener('input', updateVolumeForLoop);
+    }
+}
+
+function startNatureSound() {
+    if (!natureAudio || isNatureLoading) return;
+    // QUICK FIX: Reset volume and position
+    natureAudio.volume = parseInt(document.getElementById('natureVolume').value) / 100;
+    natureAudio.currentTime = 0;
+    const sessionDuration = parseInt(document.getElementById('natureDuration').value);
+
+    // Start playing
+    natureAudio.play().then(() => {
+        isNaturePlaying = true;
+        isNaturePaused = false;
+
+        // Update UI
+        elements.natureStartBtn.disabled = true;
+        elements.naturePauseBtn.disabled = false;
+
+        // Start timer
+        if (sessionDuration === 0) {
+            // "No limit" mode
+            startUnlimitedNatureTimer();
+        } else {
+            // Fixed duration mode
+            natureSessionDuration = sessionDuration * 60;
+            natureCurrentTime = 0;
+            startNatureCountdownTimer();
+        }
+
+    }).catch(error => {
+        console.error('Failed to play nature sound:', error);
+        elements.natureStartBtn.textContent = 'Play Failed';
+    });
+}
+
+function toggleNaturePause() {
+    if (!natureAudio || !isNaturePlaying) return;
+
+    if (isNaturePaused) {
+        // Resume
+        natureAudio.play();
+        isNaturePaused = false;
+        elements.naturePauseBtn.textContent = 'Pause';
+
+        // Resume timer
+        const sessionDuration = parseInt(document.getElementById('natureDuration').value);
+        if (sessionDuration === 0) {
+            resumeUnlimitedNatureTimer();
+        } else {
+            resumeNatureCountdownTimer();
+        }
+    } else {
+        // Pause
+        natureAudio.pause();
+        isNaturePaused = true;
+        elements.naturePauseBtn.textContent = 'Resume';
+
+        // Pause timer
+        clearInterval(natureTimerInterval);
+    }
+}
+
+function stopNatureSound() {
+    // Stop audio
+    if (natureAudio) {
+        natureAudio.pause();
+        natureAudio.currentTime = 0;
+    }
+
+    // Stop timer
+    clearInterval(natureTimerInterval);
+
+    // Reset state
+    isNaturePlaying = false;
+    isNaturePaused = false;
+    natureCurrentTime = 0;
+
+    // Reset UI
+    elements.natureStartBtn.disabled = false;
+    elements.naturePauseBtn.disabled = true;
+    elements.naturePauseBtn.textContent = 'Pause';
+
+    // Reset timer display
+    const duration = parseInt(document.getElementById('natureDuration').value);
+    updateNatureTimer(duration);
+
+    // Reset circle animation
+    elements.soundCircle.style.transform = 'scale(1)';
+}
+
+function startNatureCountdownTimer() {
+    clearInterval(natureTimerInterval);
+
+    natureTimerInterval = setInterval(() => {
+        if (!natureAudio || natureAudio.paused || isNaturePaused) return;
+
+        natureCurrentTime++;
+        const timeLeft = Math.max(0, natureSessionDuration - natureCurrentTime);
+
+        // Update display
+        elements.soundTimer.textContent = formatTime(timeLeft);
+
+        // Animate circle
+        const scale = 1 + (Math.sin(natureCurrentTime * 0.5) * 0.03);
+        elements.soundCircle.style.transform = `scale(${scale})`;
+
+        // Check if session ended
+        if (natureCurrentTime >= natureSessionDuration) {
+            clearInterval(natureTimerInterval);
+            stopNatureSound();
+        }
+    }, 1000);
+}
+
+function startUnlimitedNatureTimer() {
+    clearInterval(natureTimerInterval);
+    natureCurrentTime = 0;
+
+    // Show infinity symbol
+    elements.soundTimer.textContent = '∞';
+
+    natureTimerInterval = setInterval(() => {
+        if (!natureAudio || natureAudio.paused || isNaturePaused) return;
+
+        natureCurrentTime++;
+
+        // Update display (count up)
+        elements.soundTimer.textContent = formatTime(natureCurrentTime);
+
+        // Animate circle
+        const scale = 1 + (Math.sin(natureCurrentTime * 0.5) * 0.03);
+        elements.soundCircle.style.transform = `scale(${scale})`;
+    }, 1000);
+}
+
+function resumeNatureCountdownTimer() {
+    // Get remaining time from display
+    const timerText = elements.soundTimer.textContent;
+    if (timerText === '∞') return;
+
+    const [mins, secs] = timerText.split(':').map(Number);
+    const timeLeft = mins * 60 + secs;
+
+    natureCurrentTime = natureSessionDuration - timeLeft;
+    startNatureCountdownTimer();
+}
+
+function resumeUnlimitedNatureTimer() {
+    // Get current time from display
+    const timerText = elements.soundTimer.textContent;
+    if (timerText !== '∞') {
+        const [mins, secs] = timerText.split(':').map(Number);
+        natureCurrentTime = mins * 60 + secs;
+    }
+    startUnlimitedNatureTimer();
+}
+
+function updateNatureTimer(minutes) {
+    if (minutes === 0) {
+        elements.soundTimer.textContent = '∞';
+    } else {
+        const seconds = minutes * 60;
+        elements.soundTimer.textContent = formatTime(seconds);
+    }
+}
+
+function updateNatureVolume(e) {
+    const value = e.target.value;
+    document.getElementById('natureVolumeValue').textContent = `${value}%`;
+    
+    // Update audio volume if playing
+    if (natureAudio) {
+        const targetVolume = value / 100;
+        const currentTime = natureAudio.currentTime;
+        const duration = natureAudio.duration;
+        const fadeTime = 3;
+        
+        // Only update if not currently in a fade zone
+        if (duration && isFinite(duration)) {
+            const isFadingOut = (duration - currentTime < fadeTime);
+            const isFadingIn = (currentTime < fadeTime);
+            
+            if (!isFadingOut && !isFadingIn) {
+                natureAudio.volume = targetVolume;
+            }
+            // If in fade zone, the timeupdate handler will adjust it
+        }
+    }
+}
+
+function updateNatureDuration() {
+    const duration = parseInt(document.getElementById('natureDuration').value);
+    updateNatureTimer(duration);
+
+    // If currently playing with a fixed duration, update the timer
+    if (isNaturePlaying && !isNaturePaused && duration !== 0) {
+        const sessionDuration = duration * 60;
+        const progress = natureCurrentTime / natureSessionDuration;
+        natureSessionDuration = sessionDuration;
+        natureCurrentTime = Math.floor(sessionDuration * progress);
+
+        // Restart timer with new duration
+        clearInterval(natureTimerInterval);
+        startNatureCountdownTimer();
+    }
+}
+
+// ==================== GUIDED MEDITATION FUNCTIONS ====================
+
 function playMeditation() {
     if (!audioElement || !currentSession) return;
 
@@ -395,7 +830,6 @@ function playMeditation() {
     startTimer(currentSession.duration);
 }
 
-// Toggle pause
 function togglePause() {
     if (!audioElement) return;
 
@@ -411,7 +845,6 @@ function togglePause() {
     }
 }
 
-// Stop meditation
 function stopMeditation() {
     isPlaying = false;
     isPaused = false;
@@ -434,7 +867,6 @@ function stopMeditation() {
     elements.meditationCircle.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
 }
 
-// Update meditation progress
 function updateMeditationProgress() {
     if (!audioElement) return;
 
@@ -444,7 +876,6 @@ function updateMeditationProgress() {
     elements.currentTime.textContent = formatTime(currentTime);
 }
 
-// When meditation ends
 function onMeditationEnded() {
     isPlaying = false;
     elements.playBtn.disabled = false;
@@ -453,7 +884,6 @@ function onMeditationEnded() {
     clearInterval(timerInterval);
 }
 
-// Start timer
 function startTimer(duration) {
     totalDuration = duration;
     currentTime = 0;
@@ -478,166 +908,8 @@ function startTimer(duration) {
     }, 1000);
 }
 
-// --- Nature Sounds Functions ---
-function initNatureSound() {
-    updateSoundVisual();
-    const duration = parseInt(document.getElementById('natureDuration').value);
-    updateNatureTimer(duration);
-}
+// ==================== SILENT MODE FUNCTIONS ====================
 
-function updateSoundVisual() {
-    const soundId = document.getElementById('soundSelect').value;
-    const sound = natureSounds[soundId];
-    if (sound) {
-        document.getElementById('soundName').textContent = sound.name;
-        document.getElementById('soundCircle').style.background = `linear-gradient(135deg, ${sound.color}, ${darkenColor(sound.color, 20)})`;
-    }
-}
-
-function startNatureSound() {
-    const soundId = document.getElementById('soundSelect').value;
-    const duration = parseInt(document.getElementById('natureDuration').value);
-    
-    isPlaying = true;
-    isPaused = false;
-    
-    document.getElementById('natureStartBtn').disabled = true;
-    document.getElementById('naturePauseBtn').disabled = false;
-    
-    // Create and play audio
-    if (natureAudio) {
-        natureAudio.pause();
-        natureAudio = null;
-    }
-    
-    const sound = natureSounds[soundId];
-    if (sound) {
-        natureAudio = new Audio(sound.file);
-        natureAudio.loop = true; // Enable looping
-        natureAudio.volume = parseInt(document.getElementById('natureVolume').value) / 100;
-        
-        natureAudio.play().catch(e => {
-            console.log('Nature sound play failed:', e);
-        });
-    }
-    
-    // Start timer (convert minutes to seconds)
-    const timerDuration = duration === 0 ? null : duration * 60;
-    startNatureTimer(timerDuration);
-}
-
-function toggleNaturePause() {
-    isPaused = !isPaused;
-    document.getElementById('naturePauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
-    
-    if (natureAudio) {
-        if (isPaused) {
-            natureAudio.pause();
-            clearInterval(timerInterval);
-        } else {
-            natureAudio.play();
-            // Get remaining time from display
-            const timerText = document.getElementById('soundTimer').textContent;
-            const [mins, secs] = timerText.split(':').map(Number);
-            const timeLeft = mins * 60 + secs;
-            startNatureTimer(timeLeft);
-        }
-    }
-}
-
-function stopNatureSound() {
-    isPlaying = false;
-    isPaused = false;
-    clearInterval(timerInterval);
-    
-    // Stop audio
-    if (natureAudio) {
-        natureAudio.pause();
-        natureAudio.currentTime = 0;
-    }
-    
-    document.getElementById('natureStartBtn').disabled = false;
-    document.getElementById('naturePauseBtn').disabled = true;
-    document.getElementById('naturePauseBtn').textContent = 'Pause';
-    
-    // Reset timer display
-    const duration = parseInt(document.getElementById('natureDuration').value);
-    if (duration === 0) {
-        document.getElementById('soundTimer').textContent = '∞';
-    } else {
-        updateNatureTimer(duration);
-    }
-}
-
-function startNatureTimer(durationSeconds) {
-    totalDuration = durationSeconds;
-    currentTime = 0;
-    
-    clearInterval(timerInterval);
-    
-    if (durationSeconds === null || durationSeconds === 0) {
-        // "No limit" mode - count up indefinitely
-        document.getElementById('soundTimer').textContent = '0:00';
-        
-        timerInterval = setInterval(() => {
-            if (!isPaused && isPlaying) {
-                currentTime++;
-                // Display counting up
-                document.getElementById('soundTimer').textContent = formatTime(currentTime);
-                
-                // Animate circle
-                const soundCircle = document.getElementById('soundCircle');
-                const scale = 1 + (Math.sin(currentTime * 0.5) * 0.03);
-                soundCircle.style.transform = `scale(${scale})`;
-            }
-        }, 1000);
-    } else {
-        // Fixed duration mode - count down
-        timerInterval = setInterval(() => {
-            if (!isPaused && isPlaying) {
-                currentTime++;
-                const timeLeft = Math.max(0, totalDuration - currentTime);
-                document.getElementById('soundTimer').textContent = formatTime(timeLeft);
-                
-                // Animate circle
-                const soundCircle = document.getElementById('soundCircle');
-                const scale = 1 + (Math.sin(currentTime * 0.5) * 0.03);
-                soundCircle.style.transform = `scale(${scale})`;
-                
-                if (currentTime >= totalDuration) {
-                    clearInterval(timerInterval);
-                    stopNatureSound();
-                }
-            }
-        }, 1000);
-    }
-}
-
-function updateNatureTimer(minutes) {
-    if (minutes === 0) {
-        document.getElementById('soundTimer').textContent = '∞';
-    } else {
-        const seconds = minutes * 60;
-        document.getElementById('soundTimer').textContent = formatTime(seconds);
-    }
-}
-
-function updateNatureVolume(e) {
-    const value = e.target.value;
-    document.getElementById('natureVolumeValue').textContent = `${value}%`;
-    
-    // Update audio volume
-    if (natureAudio) {
-        natureAudio.volume = value / 100;
-    }
-}
-
-function updateNatureDuration() {
-    const duration = parseInt(document.getElementById('natureDuration').value);
-    updateNatureTimer(duration);
-}
-
-// --- Silent Mode Functions ---
 function initSilentMode() {
     const duration = parseInt(document.getElementById('silentDuration').value);
     updateSilentTimer(duration);
@@ -752,7 +1024,8 @@ function playBell() {
     }
 }
 
-// --- Mantra Focus Functions ---
+// ==================== MANTRA FOCUS FUNCTIONS ====================
+
 function initMantraFocus() {
     updateMantra();
     updateMantraStyle();
@@ -863,7 +1136,8 @@ function updateMantraDuration() {
     updateMantraTimer(duration);
 }
 
-// --- Utility Functions ---
+// ==================== UTILITY FUNCTIONS ====================
+
 function formatTime(seconds) {
     if (seconds === 0) return '0:00';
     const mins = Math.floor(seconds / 60);
@@ -871,42 +1145,36 @@ function formatTime(seconds) {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
-function darkenColor(color, percent) {
-    // Simple color darkening for gradients
-    return color; // In real implementation, would calculate darker shade
-}
-
 function stopAllPlayers() {
-    // Stop meditation player
+    // Stop guided meditation
     if (isPlaying) {
         stopMeditation();
     }
-    
+
     // Stop nature sounds
-    if (document.getElementById('natureStartBtn')) {
-        document.getElementById('natureStartBtn').disabled = false;
-        document.getElementById('naturePauseBtn').disabled = true;
-        isPlaying = false;
-        isPaused = false;
-        clearInterval(timerInterval);
+    if (isNaturePlaying) {
+        stopNatureSound();
     }
-    
+
     // Stop silent mode
     if (document.getElementById('silentStartBtn')) {
         document.getElementById('silentStartBtn').disabled = false;
         document.getElementById('silentPauseBtn').disabled = true;
     }
-    
+
     // Stop mantra focus
     if (document.getElementById('mantraStartBtn')) {
         document.getElementById('mantraStartBtn').disabled = false;
         document.getElementById('mantraPauseBtn').disabled = true;
     }
-    
+
     // Clear any intervals
     clearInterval(timerInterval);
+    clearInterval(natureTimerInterval);
     isPlaying = false;
     isPaused = false;
+    isNaturePlaying = false;
+    isNaturePaused = false;
 }
 
 // Initialize app when DOM is loaded

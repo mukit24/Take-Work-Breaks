@@ -225,8 +225,7 @@
 
 .meditation-timer,
 .sound-timer,
-.silent-timer,
-.mantra-timer {
+.silent-timer {
     font-size: 2.5rem;
     font-weight: 300;
     font-variant-numeric: tabular-nums;
@@ -247,11 +246,11 @@
 }
 
 .mantra-display {
-    background: linear-gradient(135deg, #f6ad55, #ed8936);
+    background: linear-gradient(135deg, #38b2ac, #319795);
     padding: 3rem;
     border-radius: 12px;
     margin-bottom: 1.5rem;
-    box-shadow: 0 10px 25px rgba(246, 173, 85, 0.3);
+    box-shadow: 0 15px 35px rgba(56, 178, 172, 0.4);
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -261,20 +260,15 @@
 
 .mantra-text {
     font-size: 3.5rem;
-    font-weight: 300;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     color: white;
     margin-bottom: 0.5rem;
     transition: all 0.5s ease;
 }
 
-.mantra-subtext {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    font-style: italic;
-}
-
 .mantra-timer {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #4a5568;
     background: #f7fafc;
     padding: 0.5rem 1rem;
@@ -589,7 +583,7 @@
     }
 
     50% {
-        transform: scale(1.1);
+        transform: scale(1.3);
         opacity: 1;
     }
 }
@@ -603,7 +597,7 @@
 }
 
 .mantra-breath {
-    animation: breath 8s infinite ease-in-out;
+    animation: breath 6s infinite ease-in-out;
 }
 
 /* Responsive Design */
@@ -631,7 +625,11 @@
     }
 
     .mantra-text {
-        font-size: 2.5rem;
+        font-size: 3rem;
+    }
+
+    .mantra-timer {
+        font-size: 1.2rem;
     }
 
     .control-row {
@@ -672,7 +670,11 @@
     }
 
     .mantra-text {
-        font-size: 2rem;
+        font-size: 2.3rem;
+    }
+
+     .mantra-timer {
+        font-size: 1rem;
     }
 
     .category-card {

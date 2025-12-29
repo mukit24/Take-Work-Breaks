@@ -119,6 +119,12 @@ let bellAudio = null;
 let currentMantra = 'Peace';
 let mantraAnimation = 'fade';
 
+let isSilentPlaying = false;
+let isSilentPaused = false;
+let silentCurrentTime = 0;
+let silentTotalDuration = 0;
+let silentTimerInterval = null;
+
 // DOM Elements
 const elements = {
     guidedCard: document.getElementById('guidedCard'),
@@ -183,8 +189,15 @@ function renderSessions() {
 // Setup event listeners
 function setupEventListeners() {
     // Category selection
-    elements.guidedCard.addEventListener('click', () => showGuidedMeditation());
-    elements.selfGuidedCard.addEventListener('click', () => showSelfGuided());
+    elements.guidedCard.addEventListener('click', () => {
+        showGuidedMeditation();
+        ensureScrollToTop();
+    });
+
+    elements.selfGuidedCard.addEventListener('click', () => {
+        showSelfGuided();
+        ensureScrollToTop();
+    });
 
     // Session selection
     elements.sessionGrid.addEventListener('click', (e) => {
@@ -192,6 +205,7 @@ function setupEventListeners() {
         if (card) {
             const sessionId = card.dataset.session;
             selectSession(sessionId);
+            ensureScrollToTop();
         }
     });
 
@@ -201,6 +215,7 @@ function setupEventListeners() {
         if (card) {
             const tool = card.dataset.tool;
             selectTool(tool);
+            ensureScrollToTop();
         }
     });
 
@@ -212,15 +227,20 @@ function setupEventListeners() {
         document.querySelector('.session-selector').hidden = false;
         elements.meditationPlayer.hidden = true;
         stopMeditation();
+        ensureScrollToTop();
     });
 
     // Back to categories
-    elements.backToCategories.addEventListener('click', showCategories);
+    elements.backToCategories.addEventListener('click', () => {
+        showCategories();
+        ensureScrollToTop();
+    });
 
     // Tool back buttons
     document.querySelectorAll('.tool-back').forEach(btn => {
         btn.addEventListener('click', function () {
             showSelfGuided();
+            ensureScrollToTop();
         });
     });
 
@@ -250,12 +270,27 @@ function setupEventListeners() {
     document.getElementById('mantraStopBtn').addEventListener('click', stopMantraFocus);
     document.getElementById('mantraInput').addEventListener('input', updateMantra);
     document.getElementById('mantraStyle').addEventListener('change', updateMantraStyle);
-    document.getElementById('mantraBreath').addEventListener('change', updateMantraBreath);
 
     // Duration changes
     document.getElementById('natureDuration').addEventListener('change', updateNatureDuration);
     document.getElementById('silentDuration').addEventListener('change', updateSilentDuration);
     document.getElementById('mantraDuration').addEventListener('change', updateMantraDuration);
+
+    // Add scroll on all start buttons
+    const startButtons = [
+        elements.playBtn,
+        elements.natureStartBtn,
+        document.getElementById('silentStartBtn'),
+        document.getElementById('mantraStartBtn')
+    ];
+
+    startButtons.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                scrollToCurrentPlayer();
+            });
+        }
+    });
 }
 
 // Show categories view
@@ -768,19 +803,19 @@ function updateNatureTimer(minutes) {
 function updateNatureVolume(e) {
     const value = e.target.value;
     document.getElementById('natureVolumeValue').textContent = `${value}%`;
-    
+
     // Update audio volume if playing
     if (natureAudio) {
         const targetVolume = value / 100;
         const currentTime = natureAudio.currentTime;
         const duration = natureAudio.duration;
         const fadeTime = 3;
-        
+
         // Only update if not currently in a fade zone
         if (duration && isFinite(duration)) {
             const isFadingOut = (duration - currentTime < fadeTime);
             const isFadingIn = (currentTime < fadeTime);
-            
+
             if (!isFadingOut && !isFadingIn) {
                 natureAudio.volume = targetVolume;
             }
@@ -913,15 +948,20 @@ function startTimer(duration) {
 function initSilentMode() {
     const duration = parseInt(document.getElementById('silentDuration').value);
     updateSilentTimer(duration);
+    document.getElementById('silentStatus').textContent = 'Silence';
 }
 
 function startSilentMode() {
     const duration = parseInt(document.getElementById('silentDuration').value);
     const bellOption = document.getElementById('bellOption').value;
 
-    isPlaying = true;
-    isPaused = false;
+    // Reset state
+    isSilentPlaying = true;
+    isSilentPaused = false;
+    silentCurrentTime = 0;
+    silentTotalDuration = duration * 60;
 
+    // Update UI
     document.getElementById('silentStartBtn').disabled = true;
     document.getElementById('silentPauseBtn').disabled = false;
 
@@ -930,70 +970,84 @@ function startSilentMode() {
         playBell();
     }
 
-    startSilentTimer(duration * 60, bellOption);
+    // Start timer
+    startSilentTimer(bellOption);
 }
 
 function toggleSilentPause() {
-    isPaused = !isPaused;
-    document.getElementById('silentPauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
+    if (!isSilentPlaying) return;
 
-    if (isPaused) {
-        clearInterval(timerInterval);
+    isSilentPaused = !isSilentPaused;
+    document.getElementById('silentPauseBtn').textContent = isSilentPaused ? 'Resume' : 'Pause';
+
+    if (isSilentPaused) {
+        clearInterval(silentTimerInterval);
     } else {
-        const duration = parseInt(document.getElementById('silentDuration').value);
-        const bellOption = document.getElementById('bellOption').value;
-        startSilentTimer(duration * 60 - currentTime, bellOption);
+        // Resume - no bell
+        startSilentTimer(document.getElementById('bellOption').value);
     }
 }
 
 function stopSilentMode() {
-    isPlaying = false;
-    isPaused = false;
-    clearInterval(timerInterval);
+    // Stop timer
+    clearInterval(silentTimerInterval);
 
+    // Reset state
+    isSilentPlaying = false;
+    isSilentPaused = false;
+    silentCurrentTime = 0;
+
+    // Update UI
     document.getElementById('silentStartBtn').disabled = false;
     document.getElementById('silentPauseBtn').disabled = true;
     document.getElementById('silentPauseBtn').textContent = 'Pause';
 
+    // Reset timer display
     const duration = parseInt(document.getElementById('silentDuration').value);
     updateSilentTimer(duration);
     document.getElementById('silentStatus').textContent = 'Silence';
+
+    // Reset circle animation
+    document.getElementById('silentCircle').style.transform = 'scale(1)';
 }
 
-function startSilentTimer(duration, bellOption) {
-    totalDuration = duration;
-    currentTime = 0;
+function startSilentTimer(bellOption) {
+    clearInterval(silentTimerInterval);
 
-    clearInterval(timerInterval);
+    silentTimerInterval = setInterval(() => {
+        if (!isSilentPaused && isSilentPlaying) {
+            silentCurrentTime++;
+            const timeLeft = Math.max(0, silentTotalDuration - silentCurrentTime);
 
-    timerInterval = setInterval(() => {
-        if (!isPaused && isPlaying) {
-            currentTime++;
-            const timeLeft = totalDuration - currentTime;
+            // Update timer display only
             document.getElementById('silentTimer').textContent = formatTime(timeLeft);
 
-            // Update status with breathing guidance
-            const breathPhase = (currentTime % 8 < 4) ? 'Breathe In' : 'Breathe Out';
-            document.getElementById('silentStatus').textContent = breathPhase;
+            // Status remains "Silence" - no text changes
 
-            // Animate circle for breathing
-            const silentCircle = document.getElementById('silentCircle');
-            const isInhale = (currentTime % 8 < 4);
-            const scale = isInhale ? 1 + (currentTime % 4) * 0.025 : 1 - (currentTime % 4) * 0.025;
-            silentCircle.style.transform = `scale(${scale})`;
+            // Very subtle pulse animation (almost imperceptible)
+            const pulse = 1 + (Math.sin(silentCurrentTime * 0.05) * 0.01);
+            document.getElementById('silentCircle').style.transform = `scale(${pulse})`;
 
-            // Play middle bell
-            if (bellOption === 'all' && Math.abs(currentTime - totalDuration / 2) < 1) {
+            // Play middle bell (only if we cross the halfway point exactly)
+            if (bellOption === 'all' &&
+                silentCurrentTime === Math.floor(silentTotalDuration / 2)) {
                 playBell();
             }
 
-            if (currentTime >= totalDuration) {
-                clearInterval(timerInterval);
+            // Check if session ended
+            if (silentCurrentTime >= silentTotalDuration) {
+                clearInterval(silentTimerInterval);
+
                 // Play end bell if selected
                 if (bellOption === 'startend' || bellOption === 'all') {
                     playBell();
                 }
-                stopSilentMode();
+
+                // Show completion briefly
+                document.getElementById('silentStatus').textContent = 'Complete';
+                setTimeout(() => {
+                    stopSilentMode();
+                }, 1000);
             }
         }
     }, 1000);
@@ -1010,7 +1064,7 @@ function updateSilentDuration() {
 }
 
 function updateBellSetting() {
-    // No action needed, setting is read when starting
+    // No action needed
 }
 
 function testBell() {
@@ -1019,8 +1073,11 @@ function testBell() {
 
 function playBell() {
     if (bellAudio) {
-        bellAudio.currentTime = 0;
-        bellAudio.play().catch(e => console.log('Bell play failed:', e));
+        // Clone to allow overlapping
+        const bellClone = bellAudio.cloneNode();
+        bellClone.volume = bellAudio.volume;
+        bellClone.currentTime = 0;
+        bellClone.play().catch(e => console.log('Bell play failed:', e));
     }
 }
 
@@ -1028,8 +1085,12 @@ function playBell() {
 
 function initMantraFocus() {
     updateMantra();
-    updateMantraStyle();
-
+    
+    // Don't apply style until start - just reset
+    const mantraText = document.getElementById('mantraText');
+    mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
+    mantraText.style.animationPlayState = 'paused';
+    
     const duration = parseInt(document.getElementById('mantraDuration').value);
     updateMantraTimer(duration);
 }
@@ -1040,33 +1101,43 @@ function updateMantra() {
 }
 
 function updateMantraStyle() {
-    mantraAnimation = document.getElementById('mantraStyle').value;
-    const mantraText = document.getElementById('mantraText');
-
-    // Remove all animation classes
-    mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
-
-    // Add selected animation class
-    if (mantraAnimation !== 'still') {
-        mantraText.classList.add(`mantra-${mantraAnimation}`);
+    // Only update if currently playing
+    if (isPlaying) {
+        applyMantraStyle();
     }
-}
-
-function updateMantraBreath() {
-    const breathSync = document.getElementById('mantraBreath').value;
-    // This would sync animation with breath timing in real implementation
+    // Otherwise, style will be applied when user clicks Start
 }
 
 function startMantraFocus() {
     const duration = parseInt(document.getElementById('mantraDuration').value);
-
+    
     isPlaying = true;
     isPaused = false;
-
+    
     document.getElementById('mantraStartBtn').disabled = true;
     document.getElementById('mantraPauseBtn').disabled = false;
-
+    
+    // Apply the selected display style ONLY when starting
+    applyMantraStyle();
+    
     startMantraTimer(duration * 60);
+}
+
+// New function to apply style on start
+function applyMantraStyle() {
+    const mantraStyle = document.getElementById('mantraStyle').value;
+    const mantraText = document.getElementById('mantraText');
+    
+    // Remove all animation classes first
+    mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
+    
+    // Add selected animation class and start it
+    if (mantraStyle !== 'still') {
+        mantraText.classList.add(`mantra-${mantraStyle}`);
+        mantraText.style.animationPlayState = 'running';
+    } else {
+        mantraText.style.animationPlayState = 'paused';
+    }
 }
 
 function toggleMantraPause() {
@@ -1098,7 +1169,8 @@ function stopMantraFocus() {
 
     // Reset animation
     const mantraText = document.getElementById('mantraText');
-    mantraText.style.animationPlayState = 'running';
+    mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
+    mantraText.style.animationPlayState = 'paused';
 }
 
 function startMantraTimer(duration) {
@@ -1114,9 +1186,9 @@ function startMantraTimer(duration) {
             document.getElementById('mantraTimer').textContent = formatTime(timeLeft);
 
             // Change mantra color gradually
-            const hue = (currentTime * 0.5) % 360;
-            document.getElementById('mantraDisplay').style.background =
-                `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${hue + 20}, 70%, 50%))`;
+            // const hue = (currentTime * 0.5) % 360;
+            // document.getElementById('mantraDisplay').style.background =
+            //     `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${hue + 20}, 70%, 50%))`;
 
             if (currentTime >= totalDuration) {
                 clearInterval(timerInterval);
@@ -1157,9 +1229,8 @@ function stopAllPlayers() {
     }
 
     // Stop silent mode
-    if (document.getElementById('silentStartBtn')) {
-        document.getElementById('silentStartBtn').disabled = false;
-        document.getElementById('silentPauseBtn').disabled = true;
+    if (isSilentPlaying) {
+        stopSilentMode();
     }
 
     // Stop mantra focus
@@ -1171,11 +1242,42 @@ function stopAllPlayers() {
     // Clear any intervals
     clearInterval(timerInterval);
     clearInterval(natureTimerInterval);
+    clearInterval(silentTimerInterval);
+
+    // Reset all states
     isPlaying = false;
     isPaused = false;
     isNaturePlaying = false;
     isNaturePaused = false;
+    isSilentPlaying = false;
+    isSilentPaused = false;
 }
+
+function scrollToCurrentPlayer() {
+    // Wait a tiny bit for UI to update
+    setTimeout(() => {
+        // Check which player is visible and scroll to it
+        if (!elements.meditationPlayer.hidden) {
+            elements.meditationPlayer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (!elements.naturePlayer.hidden) {
+            elements.naturePlayer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (!elements.silentPlayer.hidden) {
+            elements.silentPlayer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (!elements.mantraPlayer.hidden) {
+            elements.mantraPlayer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 50);
+};
+
+function ensureScrollToTop() {
+    // Small delay to ensure DOM has updated
+    setTimeout(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, 100); // 100ms delay for UI updates
+};
 
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);

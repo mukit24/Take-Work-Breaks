@@ -25,7 +25,7 @@
                     <div class="category-icon">🎧</div>
                     <h3>Guided Meditation</h3>
                     <p>Audio-led sessions with specific goals. Perfect for quick mental resets during work.</p>
-                    <div class="session-count">6 sessions • 30 sec - 5 min</div>
+                    <div class="session-count">9 sessions • 30 sec - 5 min</div>
                 </div>
 
                 <div class="category-card" id="selfGuidedCard">
@@ -56,7 +56,6 @@
                 <div class="meditation-visual">
                     <div class="meditation-circle" id="meditationCircle">
                         <div class="meditation-timer" id="meditationTimer">0:30</div>
-                        <div class="meditation-status" id="meditationStatus">Ready</div>
                     </div>
                 </div>
 
@@ -73,6 +72,30 @@
                         </div>
                         <div class="time-display">
                             <span id="currentTime">0:00</span> / <span id="totalTime">0:30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-controls">
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="voiceSelect">Voice Type:</label>
+                            <div class="select-wrapper">
+                                <select id="voiceSelect" class="styled-select">
+                                    <option value="male" selected>Male Voice</option>
+                                    <option value="female">Female Voice</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="guidedVolume">Volume:</label>
+                            <div class="volume-control">
+                                <input type="range" id="guidedVolume" min="0" max="100" value="80"
+                                    class="volume-slider">
+                                <span id="guidedVolumeValue">80%</span>
+                            </div>
                         </div>
                     </div>
                 </div>

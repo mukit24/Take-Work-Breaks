@@ -159,6 +159,36 @@
     line-height: 1.4;
 }
 
+/* Guided meditation controls */
+.session-controls {
+    margin: 1.5rem 0;
+}
+
+.session-controls .control-row {
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.session-controls .control-item {
+    min-width: 200px;
+}
+
+.session-controls .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.session-controls .volume-slider {
+    width: 120px;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
 /* Meditation Player */
 .meditation-player,
 .tool-player {
@@ -231,7 +261,6 @@
     font-variant-numeric: tabular-nums;
 }
 
-.meditation-status,
 .sound-name,
 .silent-status {
     font-size: 1.2rem;
@@ -308,7 +337,7 @@
     height: 100%;
     background: #667eea;
     width: 0%;
-    transition: width 0.3s ease;
+    transition: width 0.5s linear;
 }
 
 .time-display {

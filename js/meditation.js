@@ -1,31 +1,66 @@
 // Meditation Sessions Data
 const meditationSessions = [
+    // --- 30 SECOND SESSIONS (2) ---
     {
         id: 'purposeful-pause',
         title: 'The Purposeful Pause',
         time: '30 sec',
-        duration: 30, // seconds
+        duration: 30,
         goal: 'Break a stress loop instantly',
         description: 'Focuses on three "anchor breaths" to lower the heart rate after a stressful email or notification.',
-        audioFile: 'assets/sounds/close-eyes-palm.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-1-male.mp3',
+            female: 'assets/sounds/meditation-1-female.mp3'
+        }
     },
+    {
+        id: 'mindful-gear-shift', // NEW
+        title: 'The Mindful Gear-Shift',
+        time: '30 sec',
+        duration: 30,
+        goal: 'Clear mental residue between tasks',
+        description: 'A 30-second ritual to "close the tab" on your previous task and set a fresh intention for the next one.',
+        audioFile: 'assets/audio/meditation-2.mp3'
+    },
+
+    // --- 1 MINUTE SESSIONS (3) ---
     {
         id: 'instant-grounding',
         title: 'Instant Grounding',
         time: '1 min',
         duration: 60,
         goal: 'Stop "head-spinning" thoughts',
-        description: 'Focuses on the physical sensation of feet on floor and back against chair to bring you to present.',
-        audioFile: 'assets/audio/meditation-2.mp3'
+        description: 'Focuses on the physical sensation of feet on floor and back against chair to bring you to the present.',
+        audioFile: 'assets/audio/meditation-3.mp3'
     },
+    {
+        id: 'sensory-54321', // NEW
+        title: 'The 5-4-3-2-1 Reset',
+        time: '1 min',
+        duration: 60,
+        goal: 'Quickly anchor a racing mind',
+        description: 'A sensory scan technique (5 things you see, 4 you feel...) to pull your brain out of anxiety and back into the room.',
+        audioFile: 'assets/audio/meditation-4.mp3'
+    },
+    {
+        id: 'box-breath-minute', // NEW
+        title: 'The Box Breath Minute',
+        time: '1 min',
+        duration: 60,
+        goal: 'Directly calm the nervous system',
+        description: 'Uses the rhythmic 4-4-4-4 box breathing pattern to physically force the body into a state of calm.',
+        audioFile: 'assets/audio/meditation-5.mp3'
+    },
+
+    // --- 2 MINUTE SESSIONS (2) ---
     {
         id: 'post-meeting',
         title: 'Post-Meeting Decompress',
         time: '2 min',
         duration: 120,
         goal: 'Cleanse the "social heat" of a call',
-        description: 'Uses "Exhale-Sigh" technique to release tension held in jaw and neck during video meetings.',
-        audioFile: 'assets/audio/meditation-3.mp3'
+        description: 'Uses the "Exhale-Sigh" technique to release tension held in the jaw and neck during video meetings.',
+        audioFile: 'assets/audio/meditation-6.mp3'
     },
     {
         id: 'digital-reset',
@@ -33,9 +68,11 @@ const meditationSessions = [
         time: '2 min',
         duration: 120,
         goal: 'Soften "screen-stare" eyes',
-        description: 'Guides you through a mental scan of face and eyes, encouraging you to look away from screen.',
-        audioFile: 'assets/audio/meditation-4.mp3'
+        description: 'Guides you through a mental scan of face and eyes, encouraging you to look away from the screen.',
+        audioFile: 'assets/audio/meditation-7.mp3'
     },
+
+    // --- 5 MINUTE SESSIONS (2) ---
     {
         id: 'creative-unblock',
         title: 'The Creative Unblock',
@@ -43,7 +80,7 @@ const meditationSessions = [
         duration: 300,
         goal: 'Refresh the brain for new ideas',
         description: 'Visualization session imagining a "blank screen" or flowing river to clear mental clutter.',
-        audioFile: 'assets/audio/meditation-5.mp3'
+        audioFile: 'assets/audio/meditation-8.mp3'
     },
     {
         id: 'work-transition',
@@ -51,8 +88,8 @@ const meditationSessions = [
         time: '5 min',
         duration: 300,
         goal: 'Mentally "sign off" for the day',
-        description: 'Deep body scan to systematically "shut down" work-mode and transition to personal time.',
-        audioFile: 'assets/audio/meditation-6.mp3'
+        description: 'Deep body scan to systematically "shut down" work-mode and transition to your personal time.',
+        audioFile: 'assets/audio/meditation-9.mp3'
     }
 ];
 
@@ -125,6 +162,11 @@ let silentCurrentTime = 0;
 let silentTotalDuration = 0;
 let silentTimerInterval = null;
 
+let currentVoice = 'male'; // Default voice
+let guidedVolume = 0.8; // Default volume (80%)
+let completionBell = null;
+let guidedTimerInterval = null;
+
 // DOM Elements
 const elements = {
     guidedCard: document.getElementById('guidedCard'),
@@ -137,7 +179,6 @@ const elements = {
     currentSessionTitle: document.getElementById('currentSessionTitle'),
     currentSessionGoal: document.getElementById('currentSessionGoal'),
     meditationTimer: document.getElementById('meditationTimer'),
-    meditationStatus: document.getElementById('meditationStatus'),
     meditationCircle: document.getElementById('meditationCircle'),
     progressFill: document.getElementById('progressFill'),
     currentTime: document.getElementById('currentTime'),
@@ -163,6 +204,7 @@ function init() {
     renderSessions();
     setupEventListeners();
     preloadBellSound();
+    initGuidedAudio();
 }
 
 // Preload only bell sound (small file)
@@ -843,13 +885,118 @@ function updateNatureDuration() {
 
 // ==================== GUIDED MEDITATION FUNCTIONS ====================
 
+function initGuidedAudio() {
+    // Preload completion bell
+    completionBell = new Audio('assets/sounds/bell.mp3');
+    completionBell.volume = 0.6;
+    completionBell.preload = 'auto';
+}
+
+function selectSession(sessionId) {
+    currentSession = meditationSessions.find(s => s.id === sessionId);
+    if (!currentSession) return;
+
+    // Update UI
+    elements.currentSessionTitle.textContent = currentSession.title;
+    elements.currentSessionGoal.textContent = currentSession.goal;
+    elements.meditationTimer.textContent = formatTime(currentSession.duration);
+    elements.totalTime.textContent = formatTime(currentSession.duration);
+    elements.currentTime.textContent = '0:00';
+    elements.progressFill.style.width = '0%';
+
+    // Show player and hide session selector
+    document.querySelector('.session-selector').hidden = true;
+    elements.meditationPlayer.hidden = false;
+
+    // Reset controls
+    elements.playBtn.disabled = false;
+    elements.pauseBtn.disabled = true;
+    elements.playBtn.textContent = 'Play Session';
+    elements.pauseBtn.textContent = 'Pause';
+
+    // Load default male voice immediately
+    loadSelectedVoice();
+
+    // Setup event listeners for voice and volume controls
+    setupGuidedControls();
+}
+
+function setupGuidedControls() {
+    // Voice selector
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (voiceSelect) {
+        voiceSelect.value = currentVoice;
+        voiceSelect.addEventListener('change', function () {
+            currentVoice = this.value;
+            if (audioElement) {
+                loadSelectedVoice();
+            }
+        });
+    }
+
+    // Volume control
+    const volumeSlider = document.getElementById('guidedVolume');
+    const volumeValue = document.getElementById('guidedVolumeValue');
+
+    if (volumeSlider && volumeValue) {
+        volumeSlider.value = guidedVolume * 100;
+        volumeValue.textContent = `${Math.round(guidedVolume * 100)}%`;
+
+        volumeSlider.addEventListener('input', function () {
+            guidedVolume = this.value / 100;
+            volumeValue.textContent = `${this.value}%`;
+
+            // Update audio volume if playing
+            if (audioElement) {
+                audioElement.volume = guidedVolume;
+            }
+        });
+    }
+}
+
+function loadSelectedVoice() {
+    if (!currentSession) return;
+
+    // Get the correct audio file based on selected voice
+    const audioFile = currentSession.audioFile[currentVoice];
+
+    // Clean up previous audio
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.removeEventListener('ended', onMeditationEnded);
+        audioElement.removeEventListener('timeupdate', updateMeditationProgress);
+        audioElement = null;
+    }
+
+    // Create new audio element
+    audioElement = new Audio(audioFile);
+    audioElement.volume = guidedVolume;
+
+    // Add event listeners
+    audioElement.addEventListener('ended', onMeditationEnded);
+    audioElement.addEventListener('timeupdate', updateMeditationProgress);
+    audioElement.addEventListener('error', handleAudioError);
+
+    // Preload the audio
+    audioElement.preload = 'auto';
+
+    console.log(`Loaded ${currentVoice} voice for: ${currentSession.title}`);
+}
+
+function handleAudioError(e) {
+    console.error('Audio loading error:', e);
+}
+
 function playMeditation() {
     if (!audioElement || !currentSession) return;
+
+    // Scroll to top
+    scrollToCurrentPlayer();
 
     isPlaying = true;
     isPaused = false;
 
-    // Update buttons
+    // Update UI - hide status, show timer only
     elements.playBtn.disabled = true;
     elements.pauseBtn.disabled = false;
 
@@ -861,22 +1008,64 @@ function playMeditation() {
         elements.pauseBtn.disabled = true;
     });
 
-    // Start timer
-    startTimer(currentSession.duration);
+    // Start timer with full duration
+    totalDuration = currentSession.duration;
+    startGuidedTimer();
+}
+
+function startGuidedTimer() {
+    clearInterval(guidedTimerInterval);
+
+    let lastUpdateSecond = -1;
+
+    guidedTimerInterval = setInterval(() => {
+        if (!isPaused && isPlaying && audioElement) {
+            const elapsed = audioElement.currentTime;
+            const currentSecond = Math.floor(elapsed);
+
+            // Only update displays when second changes
+            if (currentSecond !== lastUpdateSecond) {
+                lastUpdateSecond = currentSecond;
+
+                const timeLeft = Math.max(0, totalDuration - currentSecond);
+                elements.meditationTimer.textContent = formatTime(timeLeft);
+                elements.currentTime.textContent = formatTime(currentSecond);
+
+                // Update progress bar when second changes
+                const progress = (currentSecond / totalDuration) * 100;
+                elements.progressFill.style.width = `${progress}%`;
+            }
+
+            // Always update animation (smooth)
+            const pulseValue = 1 + (Math.sin(elapsed) * 0.05);
+            elements.meditationCircle.style.transform = `scale(${pulseValue})`;
+
+            if (elapsed >= totalDuration) {
+                clearInterval(guidedTimerInterval);
+            }
+        }
+    }, 50); // Fast updates for smooth animation
 }
 
 function togglePause() {
-    if (!audioElement) return;
+    if (!audioElement || !isPlaying) return;
 
     isPaused = !isPaused;
     elements.pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
 
     if (isPaused) {
         audioElement.pause();
-        clearInterval(timerInterval);
+        clearInterval(guidedTimerInterval);
     } else {
-        audioElement.play();
-        startTimer(totalDuration - currentTime);
+        // Resume playback
+        audioElement.play().then(() => {
+            // RESTART THE TIMER - it will read from audio.currentTime
+            startGuidedTimer();
+        }).catch(e => {
+            console.error('Resume failed:', e);
+            isPaused = true; // Keep paused state on error
+            elements.pauseBtn.textContent = 'Resume';
+        });
     }
 }
 
@@ -889,59 +1078,56 @@ function stopMeditation() {
         audioElement.currentTime = 0;
     }
 
-    clearInterval(timerInterval);
+    clearInterval(guidedTimerInterval);
 
-    // Reset UI
+    // Reset UI immediately
+    resetMeditationUI();
+
+    // Update button states
     elements.playBtn.disabled = false;
     elements.pauseBtn.disabled = true;
     elements.pauseBtn.textContent = 'Pause';
-    elements.meditationTimer.textContent = formatTime(currentSession.duration);
-    elements.currentTime.textContent = '0:00';
-    elements.progressFill.style.width = '0%';
-    elements.meditationStatus.textContent = 'Ready';
-    elements.meditationCircle.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
 }
 
-function updateMeditationProgress() {
-    if (!audioElement) return;
-
-    currentTime = audioElement.currentTime;
-    const progress = (currentTime / totalDuration) * 100;
-    elements.progressFill.style.width = `${progress}%`;
-    elements.currentTime.textContent = formatTime(currentTime);
-}
+function updateMeditationProgress() { }
 
 function onMeditationEnded() {
     isPlaying = false;
+
+    // Clear timer
+    clearInterval(guidedTimerInterval);
+
+    // Update UI for completion
     elements.playBtn.disabled = false;
     elements.pauseBtn.disabled = true;
-    elements.meditationStatus.textContent = 'Complete';
-    clearInterval(timerInterval);
+    elements.meditationTimer.textContent = '0:00';
+    elements.currentTime.textContent = formatTime(currentSession.duration);
+    elements.progressFill.style.width = '100%';
+
+    // Play bell
+    if (completionBell) {
+        completionBell.currentTime = 0;
+        completionBell.play().catch(e => console.log('Bell failed:', e));
+    }
+
+    // RESET TO INITIAL STATE AFTER 2 SECONDS
+    setTimeout(() => {
+        resetMeditationUI();
+    }, 2000);
 }
 
-function startTimer(duration) {
-    totalDuration = duration;
-    currentTime = 0;
-
-    clearInterval(timerInterval);
-
-    timerInterval = setInterval(() => {
-        if (!isPaused && isPlaying) {
-            currentTime++;
-            const timeLeft = totalDuration - currentTime;
-            elements.meditationTimer.textContent = formatTime(timeLeft);
-
-            // Update circle animation
-            const pulseValue = 1 + (Math.sin(currentTime) * 0.05);
-            elements.meditationCircle.style.transform = `scale(${pulseValue})`;
-
-            if (currentTime >= totalDuration) {
-                clearInterval(timerInterval);
-                onMeditationEnded();
-            }
-        }
-    }, 1000);
+function resetMeditationUI() {
+    // Only reset if not currently playing
+    if (!isPlaying) {
+        elements.meditationTimer.textContent = formatTime(currentSession.duration);
+        elements.currentTime.textContent = '0:00';
+        elements.progressFill.style.width = '0%';
+        elements.meditationCircle.style.transform = 'scale(1)';
+        elements.meditationCircle.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+    }
 }
+
+
 
 // ==================== SILENT MODE FUNCTIONS ====================
 
@@ -1085,12 +1271,12 @@ function playBell() {
 
 function initMantraFocus() {
     updateMantra();
-    
+
     // Don't apply style until start - just reset
     const mantraText = document.getElementById('mantraText');
     mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
     mantraText.style.animationPlayState = 'paused';
-    
+
     const duration = parseInt(document.getElementById('mantraDuration').value);
     updateMantraTimer(duration);
 }
@@ -1110,16 +1296,16 @@ function updateMantraStyle() {
 
 function startMantraFocus() {
     const duration = parseInt(document.getElementById('mantraDuration').value);
-    
+
     isPlaying = true;
     isPaused = false;
-    
+
     document.getElementById('mantraStartBtn').disabled = true;
     document.getElementById('mantraPauseBtn').disabled = false;
-    
+
     // Apply the selected display style ONLY when starting
     applyMantraStyle();
-    
+
     startMantraTimer(duration * 60);
 }
 
@@ -1127,10 +1313,10 @@ function startMantraFocus() {
 function applyMantraStyle() {
     const mantraStyle = document.getElementById('mantraStyle').value;
     const mantraText = document.getElementById('mantraText');
-    
+
     // Remove all animation classes first
     mantraText.classList.remove('mantra-fade', 'mantra-pulse', 'mantra-breath', 'mantra-still');
-    
+
     // Add selected animation class and start it
     if (mantraStyle !== 'still') {
         mantraText.classList.add(`mantra-${mantraStyle}`);
@@ -1184,11 +1370,6 @@ function startMantraTimer(duration) {
             currentTime++;
             const timeLeft = totalDuration - currentTime;
             document.getElementById('mantraTimer').textContent = formatTime(timeLeft);
-
-            // Change mantra color gradually
-            // const hue = (currentTime * 0.5) % 360;
-            // document.getElementById('mantraDisplay').style.background =
-            //     `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${hue + 20}, 70%, 50%))`;
 
             if (currentTime >= totalDuration) {
                 clearInterval(timerInterval);

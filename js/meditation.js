@@ -20,7 +20,10 @@ const meditationSessions = [
         duration: 30,
         goal: 'Clear mental residue between tasks',
         description: 'A 30-second ritual to "close the tab" on your previous task and set a fresh intention for the next one.',
-        audioFile: 'assets/audio/meditation-2.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-2-male.mp3',
+            female: 'assets/sounds/meditation-2-female.mp3'
+        }
     },
 
     // --- 1 MINUTE SESSIONS (3) ---
@@ -31,25 +34,34 @@ const meditationSessions = [
         duration: 60,
         goal: 'Stop "head-spinning" thoughts',
         description: 'Focuses on the physical sensation of feet on floor and back against chair to bring you to the present.',
-        audioFile: 'assets/audio/meditation-3.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-3-male.mp3',
+            female: 'assets/sounds/meditation-3-female.mp3'
+        }
     },
     {
         id: 'sensory-54321', // NEW
         title: 'The 5-4-3-2-1 Reset',
         time: '1 min',
-        duration: 60,
+        duration: 72,
         goal: 'Quickly anchor a racing mind',
         description: 'A sensory scan technique (5 things you see, 4 you feel...) to pull your brain out of anxiety and back into the room.',
-        audioFile: 'assets/audio/meditation-4.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-4-male.mp3',
+            female: 'assets/sounds/meditation-4-female.mp3'
+        }
     },
     {
         id: 'box-breath-minute', // NEW
         title: 'The Box Breath Minute',
         time: '1 min',
-        duration: 60,
+        duration: 75,
         goal: 'Directly calm the nervous system',
         description: 'Uses the rhythmic 4-4-4-4 box breathing pattern to physically force the body into a state of calm.',
-        audioFile: 'assets/audio/meditation-5.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-5-male.mp3',
+            female: 'assets/sounds/meditation-5-female.mp3'
+        }
     },
 
     // --- 2 MINUTE SESSIONS (2) ---
@@ -60,7 +72,10 @@ const meditationSessions = [
         duration: 120,
         goal: 'Cleanse the "social heat" of a call',
         description: 'Uses the "Exhale-Sigh" technique to release tension held in the jaw and neck during video meetings.',
-        audioFile: 'assets/audio/meditation-6.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-6-male.mp3',
+            female: 'assets/sounds/meditation-6-female.mp3'
+        }
     },
     {
         id: 'digital-reset',
@@ -69,7 +84,10 @@ const meditationSessions = [
         duration: 120,
         goal: 'Soften "screen-stare" eyes',
         description: 'Guides you through a mental scan of face and eyes, encouraging you to look away from the screen.',
-        audioFile: 'assets/audio/meditation-7.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-7-male.mp3',
+            female: 'assets/sounds/meditation-7-female.mp3'
+        }
     },
 
     // --- 5 MINUTE SESSIONS (2) ---

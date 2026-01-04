@@ -98,16 +98,22 @@ const meditationSessions = [
         duration: 300,
         goal: 'Refresh the brain for new ideas',
         description: 'Visualization session imagining a "blank screen" or flowing river to clear mental clutter.',
-        audioFile: 'assets/audio/meditation-8.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-8-male.mp3',
+            female: 'assets/sounds/meditation-8-female.mp3'
+        }
     },
     {
         id: 'work-transition',
         title: 'The Work Transition',
         time: '5 min',
-        duration: 300,
+        duration: 287,
         goal: 'Mentally "sign off" for the day',
         description: 'Deep body scan to systematically "shut down" work-mode and transition to your personal time.',
-        audioFile: 'assets/audio/meditation-9.mp3'
+        audioFile: {
+            male: 'assets/sounds/meditation-9-male.mp3',
+            female: 'assets/sounds/meditation-9-female.mp3'
+        }
     }
 ];
 

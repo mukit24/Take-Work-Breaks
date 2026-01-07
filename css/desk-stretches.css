@@ -15,7 +15,7 @@
 /* Stretches Grid */
 .exercise-selector h2 {
     font-size: 2rem;
-    color: #2e7d32;
+    color: #5a67d8;
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -26,17 +26,14 @@
     gap: 1.5rem;
 }
 
-/* Make entire card clickable */
+/* Stretch Card */
 .stretch-card {
-    background-color: #e8f5e9;
+    background: #f7fafc;
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.15);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
     text-align: center;
 }
 
@@ -47,16 +44,29 @@
 }
 
 .stretch-grid-name {
-    color: #2e7d32;
-    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
 }
 
 .stretch-benefit {
-    color: #444;
-    font-size: 1rem;
+    color: #718096;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 500;
+    padding-bottom: .75rem;
 }
 
-/* Stretch Interface - Updated Layout */
+.stretch-meta {
+    padding: 0.25rem 0.75rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background: #c6f6d5;
+    color: #276749;
+    font-weight: 600;
+}
+
+/* Stretch Interface */
 .stretch-interface {
     background: #f8fafc;
     border-radius: 20px;
@@ -68,6 +78,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    align-items: start;
 }
 
 .stretch-visual {
@@ -87,6 +98,20 @@
 .stretch-instructions {
     flex: 1;
     min-width: 0;
+}
+
+.stretch-instructions::-webkit-scrollbar {
+    width: 6px;
+}
+
+.stretch-instructions::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.stretch-instructions::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
 }
 
 .stretch-name {
@@ -128,51 +153,258 @@
     left: 0;
 }
 
-/* Stretch Controls */
-.stretch-controls {
+/* Session Controls */
+.session-controls {
+    padding: 1.5rem;
+}
+
+.control-row {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 200px;
+}
+
+.control-item label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    min-width: 180px;
+}
+
+.styled-select {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+    color: #4a5568;
+    cursor: pointer;
+    appearance: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.styled-select:hover {
+    border-color: #cbd5e0;
+}
+
+.styled-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #718096;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.styled-select:focus+.select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+    color: #667eea;
+}
+
+.estimated-time {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #4a5568;
+}
+
+.estimated-time span {
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+/* Exercise Interface */
+.exercise-interface {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.exercise-header h2 {
+    font-size: 1.8rem;
+    color: #2e7d32;
+    margin: 0;
+}
+
+.exercise-timer {
     text-align: center;
 }
 
-.timer-container {
-    margin-bottom: 1.5rem;
-}
-
-.stretch-timer {
-    font-size: 3rem;
-    font-weight: 400;
+.timer-display {
+    font-size: 2.5rem;
+    font-weight: 600;
     color: #2e7d32;
-    margin-bottom: 0.4rem;
     font-variant-numeric: tabular-nums;
 }
 
-.stretch-timer.warning {
-    color: #c53030;
-    animation: pulse 1s infinite;
-}
-
-.stretch-timer.completed {
-    color: #48bb78;
-}
-
 .timer-label {
-    font-size: 1rem;
-    color: #666;
+    font-size: 0.9rem;
+    color: #718096;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+/* Step Display */
+.step-display {
+    border-top: 1px solid #e9f3e6;
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.step-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.step-counter {
+    font-size: 1.1rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.step-counter span {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.rep-counter {
+    font-size: 1.1rem;
+    color: #4a5568;
+    font-weight: 500;
+    background: #e8f5e9;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.rep-counter span {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.step-instruction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+}
+
+.step-instruction p {
+    font-size: 1.4rem;
+    color: #2d3748;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.step-visual {
+    text-align: center;
+}
+
+.exercise-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Exercise Controls */
+.exercise-controls {
+    text-align: center;
+}
+
+.exercise-controls,
 .control-buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
 
-.navigation-buttons {
+/* Completion Overlay */
+.completion-view {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.completion-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.completion-icon {
+    font-size: 4rem;
+    color: #48bb78;
+    margin-bottom: 1.5rem;
+    animation: scaleIn 0.5s ease;
+}
+
+.completion-view h2 {
+    font-size: 2rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+
+.completion-view p {
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.completion-stats {
+    font-size: 1.2rem;
+    color: #2e7d32;
+    font-weight: 600;
+    margin: 1.5rem 0;
+}
+
+.completion-buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-top: 2rem;
     flex-wrap: wrap;
 }
 
@@ -231,76 +463,69 @@
     transform: translateY(-2px);
 }
 
-/* Animations */
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-}
-
-/* Mobile Layout */
+/* Responsive Design */
 @media (max-width: 768px) {
     .exercise-selector h2 {
         font-size: 1.5rem;
     }
 
-    .stretch-card {
-        padding: 1.25rem;
-    }
-
-    .stretch-interface {
+    .stretch-interface,
+    .exercise-interface {
         padding: 1.2rem;
         border-radius: 16px;
     }
 
-    .stretch-visual,
-    .stretch-instructions {
-        width: 100%;
+    .timer-display {
+        font-size: 2rem;
     }
 
-    .stretch-name {
-        font-size: 1.8rem;
-        text-align: center;
+    .step-display {
+        padding: 1.5rem;
     }
 
-    .instructions-container {
-        padding: 0rem 1.25rem;
+    .step-instruction p {
+        font-size: 1.2rem;
     }
 
-    .stretch-timer {
+    .completion-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .completion-icon {
         font-size: 3rem;
+    }
+
+    .control-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .control-item {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
 @media (max-width: 480px) {
-    .stretch-interface {
+    .stretches-app {
+        padding: 0.5rem;
+    }
+
+    .stretch-interface,
+    .exercise-interface {
         padding: 1rem;
     }
 
-    .stretch-name {
-        font-size: 1.5rem;
+    .step-display {
+        padding: 1rem;
     }
 
-    .instructions-container {
-        padding: 0rem 1rem;
+    .step-instruction p {
+        font-size: 1.1rem;
     }
 
-    .instructions-list li {
-        font-size: 0.95rem;
-    }
-
-    .stretch-timer {
-        font-size: 2.5rem;
-    }
-
-    .control-buttons,
-    .navigation-buttons {
+    .exercise-controls .control-buttons {
         flex-direction: column;
         align-items: center;
     }
@@ -309,6 +534,26 @@
         width: 100%;
         max-width: 280px;
         min-width: auto;
+    }
+
+    .exercise-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .timer-display {
+        font-size: 1.3rem;
+    }
+
+    .timer-label {
+        font-size: .8rem;
+    }
+
+    .step-counter {
+        font-size: 1rem;
+    }
+
+    .rep-counter {
+        font-size: 1rem;
     }
 }
 
@@ -321,6 +566,12 @@
     .stretch-main {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .stretch-instructions {
+        height: 300px;
+        overflow-y: auto;
+        padding-right: 1rem;
+    }
 }
 
 /* Desktop and larger */
@@ -328,4 +579,13 @@
     .stretches-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .exercise-header {
+        flex-direction: row;
+    }
+}
+
+#customReps:invalid {
+    border-color: #e53e3e;
+    background-color: #fff5f5;
 }

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Training Games - Sharpen Your Focus | Take Work Breaks</title>
+    <meta name="description"
+        content="Train your attention span with interactive games. Improve focus, reaction time, memory and cognitive control.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/attention-game.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main class="game-app">
+        <!-- Game Selection -->
+        <div class="game-selector">
+            <h2>Choose Your Focus Game</h2>
+            <div class="game-grid" id="gameGrid">
+                <!-- Games will be populated by JS -->
+            </div>
+        </div>
+
+        <!-- Game Interface -->
+        <div class="game-interface" id="gameInterface" hidden>
+            <div class="game-header">
+                <h2 id="gameName"></h2>
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Score</span>
+                        <span class="stat-value" id="gameScore">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time</span>
+                        <span class="stat-value" id="gameTimer">0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Container - Different for each game -->
+            <div class="game-container" id="gameContainer">
+                <!-- Will be populated based on selected game -->
+            </div>
+
+            <div class="game-controls">
+                <div class="instructions" id="gameInstructions">
+                    <p>Get ready to start...</p>
+                </div>
+
+                <div class="control-buttons">
+                    <button id="startGameBtn" class="btn primary">Start Game</button>
+                    <button id="pauseGameBtn" class="btn secondary" disabled>Pause</button>
+                    <button id="restartGameBtn" class="btn outline">Restart</button>
+                </div>
+
+                <div class="session-controls">
+                    <div class="control-row">
+                        <div class="control-item">
+                            <label for="gameDuration">Game Duration:</label>
+                            <div class="select-wrapper">
+                                <select id="gameDuration" class="styled-select">
+                                    <option value="60">1 minute</option>
+                                    <option value="120" selected>2 minutes</option>
+                                    <option value="180">3 minutes</option>
+                                    <option value="300">5 minutes</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="control-item">
+                            <label for="difficultyLevel">Difficulty:</label>
+                            <div class="select-wrapper">
+                                <select id="difficultyLevel" class="styled-select">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button id="backToGames" class="btn outline">← Back to All Games</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="results-screen" id="resultsScreen" hidden>
+            <div class="results-content">
+                <div class="results-icon">🏆</div>
+                <h2>Game Complete!</h2>
+                
+                <div class="results-stats">
+                    <div class="result-item">
+                        <span class="result-label">Final Score</span>
+                        <span class="result-value" id="finalScore">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Accuracy</span>
+                        <span class="result-value" id="finalAccuracy">0%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Reaction Time</span>
+                        <span class="result-value" id="finalReaction">0ms</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Best Streak</span>
+                        <span class="result-value" id="finalStreak">0</span>
+                    </div>
+                </div>
+
+                <div class="skill-progress">
+                    <h3>Skills Trained:</h3>
+                    <div class="skill-meter">
+                        <span class="skill-name">Reaction</span>
+                        <div class="skill-bar">
+                            <div class="skill-fill" id="reactionSkill"></div>
+                        </div>
+                    </div>
+                    <div class="skill-meter">
+                        <span class="skill-name">Memory</span>
+                        <div class="skill-bar">
+                            <div class="skill-fill" id="memorySkill"></div>
+                        </div>
+                    </div>
+                    <div class="skill-meter">
+                        <span class="skill-name">Focus</span>
+                        <div class="skill-bar">
+                            <div class="skill-fill" id="focusSkill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-buttons">
+                    <button id="playAgainBtn" class="btn secondary">Play Again</button>
+                    <button id="tryDifferentBtn" class="btn secondary">Try Different Game</button>
+                    <button id="backToAllBtn" class="btn secondary">Back to All Games</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/components.js"></script>
+    <script src="js/attention-game.js"></script>
+</body>
+
+</html>

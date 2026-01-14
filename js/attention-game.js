@@ -8,11 +8,11 @@ class AttentionTrainingGame {
                 name: 'Color Reactor',
                 description: 'Click only red circles, ignore others',
                 skill: 'Reaction & Inhibition',
-                instruction: 'Click only RED circles. Ignore all other colors.',  // ADD THIS
+                instruction: 'Click only RED circles. Ignore all other colors.',
                 difficulty: {
-                    easy: { targetColor: 'red', distractors: ['blue'], speed: 1500 },
-                    medium: { targetColor: 'red', distractors: ['blue', 'green'], speed: 1000 },
-                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow'], speed: 700 }
+                    easy: { targetColor: 'red', distractors: ['blue', 'green'], speed: 1500 },
+                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow'], speed: 1000 },
+                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple'], speed: 700 }
                 }
             },
             {
@@ -20,7 +20,7 @@ class AttentionTrainingGame {
                 name: 'Memory Grid',
                 description: 'Remember and reproduce lit patterns',
                 skill: 'Visual Memory',
-                instruction: 'Memorize the pattern, then click cells in same order.',  // ADD THIS
+                instruction: 'Memorize the pattern, then click cells in same order.',
                 difficulty: {
                     easy: { gridSize: 3, sequenceLength: 3, timeLimit: 5 },
                     medium: { gridSize: 4, sequenceLength: 4, timeLimit: 4 },
@@ -32,7 +32,7 @@ class AttentionTrainingGame {
                 name: 'Sound Hunter',
                 description: 'Identify target sound among noise',
                 skill: 'Auditory Focus',
-                instruction: 'Listen for the target sound. Is it present?',  // ADD THIS
+                instruction: 'Listen for the target sound. Is it present?',
                 difficulty: {
                     easy: { tones: 3, backgroundNoise: 0.1, timeLimit: 3 },
                     medium: { tones: 5, backgroundNoise: 0.3, timeLimit: 2 },
@@ -44,7 +44,7 @@ class AttentionTrainingGame {
                 name: 'Flanker Focus',
                 description: 'Identify center arrow direction',
                 skill: 'Selective Attention',
-                instruction: 'Identify direction of CENTER arrow only',  // ADD THIS
+                instruction: 'Identify direction of CENTER arrow only',
                 difficulty: {
                     easy: { arrows: 3, speed: 2000, congruentOnly: true },
                     medium: { arrows: 5, speed: 1500, congruentOnly: false },
@@ -56,7 +56,7 @@ class AttentionTrainingGame {
                 name: 'Switching Task',
                 description: 'Apply changing rules to shapes',
                 skill: 'Mental Flexibility',
-                instruction: 'Follow the changing rules for shapes',  // ADD THIS
+                instruction: 'Follow the changing rules for shapes',
                 difficulty: {
                     easy: { rules: 2, switchEvery: 10, timeLimit: 4 },
                     medium: { rules: 3, switchEvery: 8, timeLimit: 3 },
@@ -68,7 +68,7 @@ class AttentionTrainingGame {
                 name: 'Tracking Test',
                 description: 'Follow moving object among distractors',
                 skill: 'Sustained Attention',
-                instruction: 'Follow the BLUE circle. Click when it turns GREEN!',  // ADD THIS
+                instruction: 'Follow the BLUE circle. Click when it turns GREEN!',
                 difficulty: {
                     easy: { targets: 1, distractors: 5, speed: 2 },
                     medium: { targets: 1, distractors: 10, speed: 3 },
@@ -98,6 +98,11 @@ class AttentionTrainingGame {
         this.timerInterval = null;
         this.audioContext = null;
         this.gainNode = null;
+
+        // Add these for cleanup
+        this.gameTimeouts = [];  // Store timeouts for cleanup
+        this.moveElementsInterval = null;
+        this.clickableTimeout = null;
 
         // DOM Elements
         this.elements = {
@@ -149,7 +154,7 @@ class AttentionTrainingGame {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
             this.gainNode = this.audioContext.createGain();
             this.gainNode.connect(this.audioContext.destination);
-            this.gainNode.gain.value = 0.3;
+            this.gainNode.gain.value = 0.5;
         } catch (error) {
             console.log('Audio not supported:', error);
         }
@@ -180,7 +185,7 @@ class AttentionTrainingGame {
         // Control buttons
         this.elements.startGameBtn.addEventListener('click', () => this.startGame());
         this.elements.pauseGameBtn.addEventListener('click', () => this.togglePause());
-        this.elements.restartGameBtn.addEventListener('click', () => this.resetGame());  // Changed from restartGame
+        this.elements.restartGameBtn.addEventListener('click', () => this.resetGame());
         this.elements.restartGameBtn.textContent = 'Reset';
         this.elements.backToGames.addEventListener('click', () => this.showGameGrid());
 
@@ -216,6 +221,11 @@ class AttentionTrainingGame {
     }
 
     selectGame(gameId) {
+        // Stop current game if running
+        if (this.isRunning) {
+            this.stopGame();
+        }
+
         this.currentGame = this.games.find(g => g.id === gameId);
         if (!this.currentGame) return;
 
@@ -270,7 +280,7 @@ class AttentionTrainingGame {
         if (this.currentGame && this.currentGame.instruction) {
             this.updateInstructions(this.currentGame.instruction);
         } else {
-            this.updateInstructions('Ready to play!');  // Fallback
+            this.updateInstructions('Ready to play!');
         }
 
         // Reset game state
@@ -297,6 +307,12 @@ class AttentionTrainingGame {
         for (let i = 0; i < 9; i++) {
             const circle = document.createElement('div');
             circle.className = 'color-circle';
+
+            // Add neutral initial color (gray)
+            circle.classList.add('gray');
+            circle.style.opacity = '0.6';
+
+            // Add click handler
             circle.addEventListener('click', (e) => this.handleColorReactorClick(e));
             grid.appendChild(circle);
         }
@@ -305,14 +321,26 @@ class AttentionTrainingGame {
     }
 
     startColorReactor() {
+        if (!this.isRunning) return;
+
+        // Remove initial gray state and make all circles active
+        const circles = this.elements.gameContainer.querySelectorAll('.color-circle');
+        circles.forEach(circle => {
+            circle.style.opacity = '1';
+            circle.style.cursor = 'pointer';
+        });
+
         this.generateNewColors();
         this.startTime = Date.now();
     }
 
     handleColorReactorClick(e) {
+        // Prevent clicking on gray (initial) circles
+        const circle = e.target;
+        if (circle.classList.contains('gray')) return;
+
         if (!this.isRunning || this.isPaused) return;
 
-        const circle = e.target;
         const isCorrect = circle.classList.contains('red');
 
         this.totalAnswers++;
@@ -349,15 +377,47 @@ class AttentionTrainingGame {
     }
 
     generateNewColors() {
+        if (!this.isRunning) return;
+
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const colors = [difficulty.targetColor, ...difficulty.distractors];
         const circles = this.elements.gameContainer.querySelectorAll('.color-circle');
 
+        // Count how many red circles we have
+        let redCount = 0;
+
+        // First pass: assign random colors
         circles.forEach(circle => {
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             circle.className = 'color-circle';
             circle.classList.add(randomColor);
+            circle.style.opacity = '1'; // Reset opacity
+
+            if (randomColor === 'red') {
+                redCount++;
+            }
         });
+
+        const minRedCount = 1;
+
+        if (redCount < minRedCount) {
+            // Replace some non-red circles with red
+            const circlesArray = Array.from(circles);
+            const nonRedCircles = circlesArray.filter(circle => !circle.classList.contains('red'));
+
+            // Shuffle non-red circles
+            for (let i = nonRedCircles.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [nonRedCircles[i], nonRedCircles[j]] = [nonRedCircles[j], nonRedCircles[i]];
+            }
+
+            // Replace some with red
+            const neededRed = minRedCount - redCount;
+            for (let i = 0; i < Math.min(neededRed, nonRedCircles.length); i++) {
+                nonRedCircles[i].className = 'color-circle';
+                nonRedCircles[i].classList.add('red');
+            }
+        }
     }
 
     // Game 2: Memory Grid
@@ -383,10 +443,13 @@ class AttentionTrainingGame {
     }
 
     startMemoryGrid() {
+        if (!this.isRunning) return;
         this.showMemorySequence();
     }
 
     showMemorySequence() {
+        if (!this.isRunning) return;
+
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const cells = this.elements.gameContainer.querySelectorAll('.memory-cell');
         this.currentSequence = [];
@@ -402,9 +465,13 @@ class AttentionTrainingGame {
         let index = 0;
 
         const showNext = () => {
+            if (!this.isRunning || !this.isShowingSequence) return;
+
             if (index >= this.currentSequence.length) {
                 this.isShowingSequence = false;
-                this.updateInstructions('Now click cells in the same order!');
+                if (this.isRunning) {
+                    this.updateInstructions('Now click cells in the same order!');
+                }
                 return;
             }
 
@@ -412,13 +479,17 @@ class AttentionTrainingGame {
             const cell = cells[cellIndex];
 
             cell.classList.add('active');
-            setTimeout(() => {
+
+            const timeout1 = setTimeout(() => {
                 cell.classList.remove('active');
-                setTimeout(() => {
+                const timeout2 = setTimeout(() => {
                     index++;
                     showNext();
                 }, 200);
+                this.gameTimeouts.push(timeout2);
             }, 500);
+
+            this.gameTimeouts.push(timeout1);
         };
 
         showNext();
@@ -474,7 +545,6 @@ class AttentionTrainingGame {
     }
 
     // Game 3: Sound Hunter
-    // Split from setupSoundHunter()
     setupSoundHunterElements() {
         const container = document.createElement('div');
         container.className = 'sound-hunter-container';
@@ -514,11 +584,12 @@ class AttentionTrainingGame {
     }
 
     startSoundHunter() {
+        if (!this.isRunning) return;
         this.playSoundSet();
     }
 
     playSoundSet() {
-        if (!this.audioContext) return;
+        if (!this.audioContext || !this.isRunning) return;
 
         const difficulty = this.currentGame.difficulty[this.difficulty];
         this.currentTones = [];
@@ -542,7 +613,9 @@ class AttentionTrainingGame {
         // Play tones
         this.currentTones.forEach((freq, index) => {
             setTimeout(() => {
-                this.playTone(freq, 0.3);
+                if (this.isRunning && !this.isPaused) {
+                    this.playTone(freq, 0.3);
+                }
             }, index * 300);
         });
 
@@ -581,7 +654,6 @@ class AttentionTrainingGame {
     }
 
     // Game 4: Flanker Focus
-    // Split from setupFlankerFocus()
     setupFlankerFocusElements() {
         const container = document.createElement('div');
         container.className = 'flanker-container';
@@ -625,10 +697,13 @@ class AttentionTrainingGame {
     }
 
     startFlankerFocus() {
+        if (!this.isRunning) return;
         this.generateFlankerArrows();
     }
 
     generateFlankerArrows() {
+        if (!this.isRunning) return;
+
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const arrows = this.elements.gameContainer.querySelectorAll('.arrow-box');
         const directions = ['←', '→'];
@@ -658,6 +733,8 @@ class AttentionTrainingGame {
     }
 
     handleFlankerAnswer(userAnswer) {
+        if (!this.isRunning) return;
+
         this.totalAnswers++;
         const reactionTime = Date.now() - this.startTime;
         this.reactionTimes.push(reactionTime);
@@ -684,7 +761,6 @@ class AttentionTrainingGame {
     }
 
     // Game 5: Switching Task
-    // Split from setupSwitchingTask()
     setupSwitchingTaskElements() {
         const container = document.createElement('div');
         container.className = 'switching-container';
@@ -718,10 +794,13 @@ class AttentionTrainingGame {
     }
 
     startSwitchingTask() {
+        if (!this.isRunning) return;
         this.updateSwitchingInstructions();
     }
 
     updateSwitchingInstructions() {
+        if (!this.isRunning) return;
+
         const instructions = document.getElementById('switchingInstructions');
         if (this.currentRule === 'color') {
             instructions.textContent = 'RULE: Click BLUE shapes only';
@@ -784,7 +863,6 @@ class AttentionTrainingGame {
     }
 
     // Game 6: Tracking Test
-    // Split from setupTrackingTest()
     setupTrackingTestElements() {
         const container = document.createElement('div');
         container.className = 'tracking-container';
@@ -803,11 +881,14 @@ class AttentionTrainingGame {
     }
 
     startTrackingTest() {
+        if (!this.isRunning) return;
         this.startTracking();
         this.scheduleClickable();
     }
 
     startTracking() {
+        if (!this.isRunning) return;
+
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const area = document.getElementById('trackingArea');
 
@@ -833,13 +914,15 @@ class AttentionTrainingGame {
 
         // Start movement
         this.moveElements();
-        this.trackingInterval = setInterval(() => this.moveElements(), 50);
+        this.moveElementsInterval = setInterval(() => this.moveElements(), 50);
 
         // Randomly make target clickable
         this.scheduleClickable();
     }
 
     moveElements() {
+        if (!this.isRunning) return;
+
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const area = document.getElementById('trackingArea');
         const areaWidth = area.offsetWidth - 40;
@@ -886,20 +969,28 @@ class AttentionTrainingGame {
     }
 
     scheduleClickable() {
-        this.isClickable = false;
-        this.targetElement.classList.remove('clickable');
+        if (!this.isRunning) return;
 
-        setTimeout(() => {
+        this.isClickable = false;
+        if (this.targetElement) {
+            this.targetElement.classList.remove('clickable');
+        }
+
+        this.clickableTimeout = setTimeout(() => {
             if (this.isRunning && !this.isPaused) {
                 this.isClickable = true;
-                this.targetElement.classList.add('clickable');
+                if (this.targetElement) {
+                    this.targetElement.classList.add('clickable');
+                }
                 this.startTime = Date.now();
 
                 // Auto-disable after 2 seconds if not clicked
                 setTimeout(() => {
-                    if (this.isClickable) {
+                    if (this.isClickable && this.isRunning) {
                         this.isClickable = false;
-                        this.targetElement.classList.remove('clickable');
+                        if (this.targetElement) {
+                            this.targetElement.classList.remove('clickable');
+                        }
                         this.scheduleClickable();
                     }
                 }, 2000);
@@ -923,13 +1014,25 @@ class AttentionTrainingGame {
         this.updateDisplay();
 
         this.isClickable = false;
-        this.targetElement.classList.remove('clickable');
+        if (this.targetElement) {
+            this.targetElement.classList.remove('clickable');
+        }
         this.scheduleClickable();
     }
 
     // Common game methods
     startGame() {
-        if (this.isRunning) return;
+        // Double-check we're not already running
+        if (this.isRunning) {
+            console.log('Game already running');
+            return;
+        }
+
+        // Make sure we have a current game
+        if (!this.currentGame) {
+            console.error('No game selected');
+            return;
+        }
 
         this.isRunning = true;
         this.isPaused = false;
@@ -949,11 +1052,15 @@ class AttentionTrainingGame {
 
         this.updateDisplay();
         this.updateTimerDisplay();
-        this.updateInstructions(this.currentGame.instruction + ' Game started!');
+
+        // Show game started message
+        if (this.currentGame && this.currentGame.instruction) {
+            this.updateInstructions(this.currentGame.instruction + ' Game started!');
+        }
 
         // Start game timer
         this.timerInterval = setInterval(() => {
-            if (!this.isPaused) {
+            if (!this.isPaused && this.isRunning) {
                 this.timeLeft--;
                 this.updateTimerDisplay();
 
@@ -964,6 +1071,13 @@ class AttentionTrainingGame {
         }, 1000);
 
         // Initialize game-specific logic
+        this.startGameSpecificLogic();
+    }
+
+    startGameSpecificLogic() {
+        // Make sure we're running and have a current game
+        if (!this.isRunning || !this.currentGame) return;
+
         switch (this.currentGame.id) {
             case 'color-reactor':
                 this.startColorReactor();
@@ -990,11 +1104,14 @@ class AttentionTrainingGame {
         this.isPaused = !this.isPaused;
         this.elements.pauseGameBtn.textContent = this.isPaused ? 'Resume' : 'Pause';
 
-        if (this.currentGame.id === 'tracking-test' && this.trackingInterval) {
+        if (this.currentGame.id === 'tracking-test') {
             if (this.isPaused) {
-                clearInterval(this.trackingInterval);
+                if (this.moveElementsInterval) {
+                    clearInterval(this.moveElementsInterval);
+                    this.moveElementsInterval = null;
+                }
             } else {
-                this.trackingInterval = setInterval(() => this.moveElements(), 50);
+                this.moveElementsInterval = setInterval(() => this.moveElements(), 50);
             }
         }
 
@@ -1052,25 +1169,29 @@ class AttentionTrainingGame {
         switch (this.currentGame.id) {
             case 'color-reactor':
                 this.setupColorReactorElements();
+                this.updateInstructions(this.currentGame.instruction);
                 break;
             case 'memory-grid':
                 this.setupMemoryGridElements();
+                this.updateInstructions(this.currentGame.instruction);
                 break;
             case 'sound-hunter':
                 this.setupSoundHunterElements();
+                this.updateInstructions(this.currentGame.instruction);
                 break;
             case 'flanker-focus':
                 this.setupFlankerFocusElements();
+                this.updateInstructions(this.currentGame.instruction);
                 break;
             case 'switching-task':
                 this.setupSwitchingTaskElements();
+                this.updateInstructions(this.currentGame.instruction);
                 break;
             case 'tracking-test':
                 this.setupTrackingTestElements();
+                this.updateInstructions(this.currentGame.instruction);
                 break;
         }
-
-        // Don't start the game, just set up visuals
     }
 
     endGame() {
@@ -1086,11 +1207,16 @@ class AttentionTrainingGame {
         this.elements.pauseGameBtn.disabled = true;
         this.elements.pauseGameBtn.textContent = 'Pause';
 
-        clearInterval(this.timerInterval);
+        // Stop timer
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
 
-        if (this.trackingInterval) {
-            clearInterval(this.trackingInterval);
-            this.trackingInterval = null;
+        // Stop tracking interval
+        if (this.moveElementsInterval) {
+            clearInterval(this.moveElementsInterval);
+            this.moveElementsInterval = null;
         }
 
         // Remove keyboard listener for flanker game
@@ -1098,6 +1224,42 @@ class AttentionTrainingGame {
             document.removeEventListener('keydown', this.keydownHandler);
             this.keydownHandler = null;
         }
+
+        // Clear any timeouts
+        this.gameTimeouts.forEach(timeout => clearTimeout(timeout));
+        this.gameTimeouts = [];
+
+        if (this.clickableTimeout) {
+            clearTimeout(this.clickableTimeout);
+            this.clickableTimeout = null;
+        }
+
+        // Reset game-specific states
+        this.resetGameStates();
+    }
+
+    resetGameStates() {
+        // Reset all game-specific flags and states
+        this.isShowingSequence = false;
+        this.currentSequence = [];
+        this.userSequence = [];
+        this.currentTones = [];
+        this.isClickable = false;
+        this.currentArrows = [];
+
+        // Clear any animation intervals
+        if (this.moveElementsInterval) {
+            clearInterval(this.moveElementsInterval);
+            this.moveElementsInterval = null;
+        }
+
+        // Clear any scheduled clickable timeouts
+        if (this.clickableTimeout) {
+            clearTimeout(this.clickableTimeout);
+            this.clickableTimeout = null;
+        }
+
+        // DO NOT reset audio gain - keep it at default volume
     }
 
     updateDisplay() {

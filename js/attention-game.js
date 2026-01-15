@@ -1,7 +1,7 @@
 // Attention Training Games Application
 class AttentionTrainingGame {
     constructor() {
-        // Game data
+        // Game data with orange color added
         this.games = [
             {
                 id: 'color-reactor',
@@ -10,9 +10,9 @@ class AttentionTrainingGame {
                 skill: 'Reaction & Inhibition',
                 instruction: 'Click only RED circles. Ignore all other colors.',
                 difficulty: {
-                    easy: { targetColor: 'red', distractors: ['blue', 'green'], speed: 1500 },
-                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow'], speed: 1000 },
-                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple'], speed: 700 }
+                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
+                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
+                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
                 }
             },
             {
@@ -137,7 +137,64 @@ class AttentionTrainingGame {
             focusSkill: document.getElementById('focusSkill'),
             playAgainBtn: document.getElementById('playAgainBtn'),
             tryDifferentBtn: document.getElementById('tryDifferentBtn'),
-            backToAllBtn: document.getElementById('backToAllBtn')
+            backToAllBtn: document.getElementById('backToAllBtn'),
+
+            // Previous best scores elements
+            previousScore: document.getElementById('previousScore'),
+            previousAccuracy: document.getElementById('previousAccuracy'),
+            previousReaction: document.getElementById('previousReaction'),
+            previousStreak: document.getElementById('previousStreak'),
+
+            // Tooltip container
+            tooltipContainer: document.getElementById('tooltipContainer')
+        };
+
+        // Tooltips data
+        this.tooltips = {
+            score: {
+                title: 'Final Score',
+                content: 'Total points earned. Higher is better.'
+            },
+            accuracy: {
+                title: 'Accuracy',
+                content: 'Percentage of correct actions. 100% means perfect focus.'
+            },
+            reaction: {
+                title: 'Reaction Time',
+                content: 'Average time to respond. Lower is better.'
+            },
+            streak: {
+                title: 'Best Streak',
+                content: 'Longest sequence of correct actions in a row.'
+            }
+        };
+
+        // Game-specific tooltips
+        this.gameSpecificTooltips = {
+            'color-reactor': {
+                score: 'Points: +100 for correct red clicks, -50 for wrong colors.',
+                reaction: 'Time from color change to your click. Tests visual processing speed.'
+            },
+            'memory-grid': {
+                accuracy: 'How well you remembered the sequence of lit cells.',
+                reaction: 'Memory games don\'t measure reaction time.'
+            },
+            'sound-hunter': {
+                reaction: 'Time to identify if target sound is present. Tests auditory processing.',
+                accuracy: 'Correctly identifying presence/absence of target tone.'
+            },
+            'flanker-focus': {
+                reaction: 'Time to identify center arrow direction despite flankers.',
+                accuracy: 'Maintaining focus on center arrow while ignoring surrounding arrows.'
+            },
+            'switching-task': {
+                accuracy: 'Correctly applying changing rules to shapes.',
+                streak: 'Consistency in adapting to rule changes.'
+            },
+            'tracking-test': {
+                reaction: 'Time to click moving target when it becomes clickable.',
+                accuracy: 'Successfully tracking and clicking the target.'
+            }
         };
 
         this.init();
@@ -377,46 +434,36 @@ class AttentionTrainingGame {
     }
 
     generateNewColors() {
-        if (!this.isRunning) return;
-
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const colors = [difficulty.targetColor, ...difficulty.distractors];
         const circles = this.elements.gameContainer.querySelectorAll('.color-circle');
 
-        // Count how many red circles we have
-        let redCount = 0;
+        // Ensure at least one red circle
+        let hasRed = false;
 
-        // First pass: assign random colors
         circles.forEach(circle => {
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            let randomColor;
+
+            // If we haven't placed a red yet and this is the last circle, force red
+            if (!hasRed && circle === circles[circles.length - 1]) {
+                randomColor = difficulty.targetColor;
+            } else {
+                randomColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            if (randomColor === difficulty.targetColor) {
+                hasRed = true;
+            }
+
             circle.className = 'color-circle';
             circle.classList.add(randomColor);
-            circle.style.opacity = '1'; // Reset opacity
-
-            if (randomColor === 'red') {
-                redCount++;
-            }
         });
 
-        const minRedCount = 1;
-
-        if (redCount < minRedCount) {
-            // Replace some non-red circles with red
-            const circlesArray = Array.from(circles);
-            const nonRedCircles = circlesArray.filter(circle => !circle.classList.contains('red'));
-
-            // Shuffle non-red circles
-            for (let i = nonRedCircles.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [nonRedCircles[i], nonRedCircles[j]] = [nonRedCircles[j], nonRedCircles[i]];
-            }
-
-            // Replace some with red
-            const neededRed = minRedCount - redCount;
-            for (let i = 0; i < Math.min(neededRed, nonRedCircles.length); i++) {
-                nonRedCircles[i].className = 'color-circle';
-                nonRedCircles[i].classList.add('red');
-            }
+        // If still no red (shouldn't happen with above logic), add one
+        if (!hasRed) {
+            const randomCircle = circles[Math.floor(Math.random() * circles.length)];
+            randomCircle.className = 'color-circle';
+            randomCircle.classList.add(difficulty.targetColor);
         }
     }
 
@@ -1258,8 +1305,6 @@ class AttentionTrainingGame {
             clearTimeout(this.clickableTimeout);
             this.clickableTimeout = null;
         }
-
-        // DO NOT reset audio gain - keep it at default volume
     }
 
     updateDisplay() {
@@ -1331,12 +1376,194 @@ class AttentionTrainingGame {
             ? Math.round(this.reactionTimes.reduce((a, b) => a + b, 0) / this.reactionTimes.length)
             : 0;
 
+        // Update current results
         this.elements.finalScore.textContent = this.score;
         this.elements.finalAccuracy.textContent = `${accuracy}%`;
         this.elements.finalReaction.textContent = `${avgReaction}ms`;
         this.elements.finalStreak.textContent = this.bestStreak;
 
-        // Update skill meters based on game performance
+        // Save to localStorage and show previous best
+        const savedData = this.saveScoreToStorage();
+        const previousBest = this.loadPreviousBest();
+
+        // Update previous best displays
+        if (this.elements.previousScore) {
+            this.elements.previousScore.textContent = previousBest ? `Previous best: ${previousBest.score}` : 'Previous best: --';
+        }
+        if (this.elements.previousAccuracy) {
+            this.elements.previousAccuracy.textContent = previousBest ? `Previous best: ${previousBest.accuracy}%` : 'Previous best: --';
+        }
+        if (this.elements.previousReaction) {
+            this.elements.previousReaction.textContent = previousBest && previousBest.reaction !== '--'
+                ? `Previous best: ${previousBest.reaction}ms`
+                : 'Previous best: --';
+        }
+        if (this.elements.previousStreak) {
+            this.elements.previousStreak.textContent = previousBest ? `Previous best: ${previousBest.streak}` : 'Previous best: --';
+        }
+
+        // Hide irrelevant indicators
+        this.hideIrrelevantIndicators();
+
+        this.hideMemorySkill();
+
+        // Update skill meters
+        this.updateSkillMeters(accuracy, avgReaction);
+
+        // Setup tooltip events
+        this.setupTooltipEvents();
+    }
+
+    // Hide irrelevant indicators based on game
+    hideIrrelevantIndicators() {
+        // Get all result items
+        const resultItems = document.querySelectorAll('.result-item');
+
+        // Reaction time is the 3rd item (index 2)
+        const reactionItem = resultItems[2];
+
+        if (reactionItem && this.currentGame.id === 'memory-grid') {
+            reactionItem.classList.add('hidden');
+        } else if (reactionItem) {
+            reactionItem.classList.remove('hidden');
+        }
+    }
+
+    hideMemorySkill() {
+        const memorySkillElement = document.querySelector('.skill-meter:nth-child(2)');
+
+        if (memorySkillElement) {
+            if (this.currentGame.id !== 'memory-grid') {
+                memorySkillElement.classList.add('hidden');
+            } else {
+                memorySkillElement.classList.remove('hidden');
+            }
+        }
+    }
+
+    setupTooltipEvents() {
+        const tooltipIcons = document.querySelectorAll('.tooltip-icon');
+        const tooltipContainer = this.elements.tooltipContainer;
+
+        // Add click event to all tooltip icons
+        tooltipIcons.forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tooltipType = icon.dataset.tooltip;
+                this.showTooltip(tooltipType);
+            });
+        });
+
+        // Close tooltip when clicking outside or on close button
+        if (tooltipContainer) {
+            tooltipContainer.addEventListener('click', (e) => {
+                if (e.target === tooltipContainer || e.target.classList.contains('tooltip-close')) {
+                    this.hideTooltip();
+                }
+            });
+        }
+
+        // Close tooltip with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && tooltipContainer && tooltipContainer.style.display === 'flex') {
+                this.hideTooltip();
+            }
+        });
+    }
+
+    // Also update showTooltip to remove targetElement parameter:
+    showTooltip(tooltipType) {
+        const tooltipContainer = this.elements.tooltipContainer;
+        const tooltipData = this.tooltips[tooltipType];
+
+        if (!tooltipData || !tooltipContainer) return;
+
+        // Get game-specific content if available
+        let content = tooltipData.content;
+        if (this.gameSpecificTooltips[this.currentGame.id] &&
+            this.gameSpecificTooltips[this.currentGame.id][tooltipType]) {
+            content = this.gameSpecificTooltips[this.currentGame.id][tooltipType];
+        }
+
+        tooltipContainer.innerHTML = `
+        <div class="tooltip-content">
+            <button class="tooltip-close">×</button>
+            <h4>${tooltipData.title}</h4>
+            <p>${content}</p>
+            <p><small>Click outside or press ESC to close</small></p>
+        </div>
+    `;
+
+        tooltipContainer.style.display = 'flex';
+    }
+
+    hideTooltip() {
+        const tooltipContainer = this.elements.tooltipContainer;
+        if (tooltipContainer) {
+            tooltipContainer.style.display = 'none';
+        }
+    }
+
+    formatTime(seconds) {
+        if (seconds < 0) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Save score to localStorage
+    saveScoreToStorage() {
+        if (!this.currentGame) return null;
+
+        const storageKey = `attention-game-${this.currentGame.id}-${this.totalTime}`;
+        const previousData = JSON.parse(localStorage.getItem(storageKey)) || {
+            score: 0,
+            accuracy: 0,
+            reaction: Infinity,
+            streak: 0,
+            count: 0
+        };
+
+        const accuracy = this.totalAnswers > 0
+            ? Math.round((this.correctAnswers / this.totalAnswers) * 100)
+            : 0;
+
+        const avgReaction = this.reactionTimes.length > 0
+            ? Math.round(this.reactionTimes.reduce((a, b) => a + b, 0) / this.reactionTimes.length)
+            : 0;
+
+        const newData = {
+            score: Math.max(previousData.score, this.score),
+            accuracy: Math.max(previousData.accuracy, accuracy),
+            reaction: this.reactionTimes.length > 0 ? Math.min(previousData.reaction, avgReaction) : previousData.reaction,
+            streak: Math.max(previousData.streak, this.bestStreak),
+            count: previousData.count + 1,
+            lastUpdated: new Date().toISOString()
+        };
+
+        localStorage.setItem(storageKey, JSON.stringify(newData));
+        return newData;
+    }
+
+    // Load previous best scores
+    loadPreviousBest() {
+        if (!this.currentGame) return null;
+
+        const storageKey = `attention-game-${this.currentGame.id}-${this.totalTime}`;
+        const data = JSON.parse(localStorage.getItem(storageKey));
+
+        if (!data) return null;
+
+        return {
+            score: data.score || 0,
+            accuracy: data.accuracy || 0,
+            reaction: data.reaction !== Infinity ? data.reaction : '--',
+            streak: data.streak || 0
+        };
+    }
+
+    // Update skill meters
+    updateSkillMeters(accuracy, avgReaction) {
         let reactionSkill = 0;
         let memorySkill = 0;
         let focusSkill = 0;
@@ -1344,15 +1571,15 @@ class AttentionTrainingGame {
         switch (this.currentGame.id) {
             case 'color-reactor':
             case 'flanker-focus':
-                reactionSkill = Math.min(100, accuracy + this.level * 5);
+                reactionSkill = Math.min(100, accuracy + this.bestStreak * 5);
                 focusSkill = Math.min(100, this.bestStreak * 10);
                 break;
             case 'memory-grid':
-                memorySkill = Math.min(100, accuracy + this.level * 8);
+                memorySkill = Math.min(100, accuracy + this.bestStreak * 8);
                 focusSkill = Math.min(100, this.bestStreak * 12);
                 break;
             case 'sound-hunter':
-                reactionSkill = Math.min(100, 100 - avgReaction / 20);
+                reactionSkill = Math.min(100, 100 - Math.min(avgReaction / 20, 100));
                 focusSkill = Math.min(100, accuracy);
                 break;
             case 'switching-task':
@@ -1361,20 +1588,22 @@ class AttentionTrainingGame {
                 break;
             case 'tracking-test':
                 focusSkill = Math.min(100, accuracy * 2);
-                reactionSkill = Math.min(100, 100 - avgReaction / 30);
+                reactionSkill = Math.min(100, 100 - Math.min(avgReaction / 30, 100));
                 break;
         }
 
-        this.elements.reactionSkill.style.width = `${reactionSkill}%`;
-        this.elements.memorySkill.style.width = `${memorySkill}%`;
-        this.elements.focusSkill.style.width = `${focusSkill}%`;
-    }
+        if (this.elements.reactionSkill) {
+            this.elements.reactionSkill.style.width = `${reactionSkill}%`;
+        }
 
-    formatTime(seconds) {
-        if (seconds < 0) return '0:00';
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
+        // Only update memory skill for memory grid game
+        if (this.elements.memorySkill && this.currentGame.id === 'memory-grid') {
+            this.elements.memorySkill.style.width = `${memorySkill}%`;
+        }
+
+        if (this.elements.focusSkill) {
+            this.elements.focusSkill.style.width = `${focusSkill}%`;
+        }
     }
 }
 

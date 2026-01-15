@@ -63,8 +63,8 @@
                             <label for="gameDuration">Game Duration:</label>
                             <div class="select-wrapper">
                                 <select id="gameDuration" class="styled-select">
-                                    <option value="60">1 minute</option>
-                                    <option value="120" selected>2 minutes</option>
+                                    <option value="3">1 minute</option>
+                                    <option value="12" selected>2 minutes</option>
                                     <option value="180">3 minutes</option>
                                     <option value="300">5 minutes</option>
                                 </select>
@@ -96,25 +96,43 @@
             <div class="results-content">
                 <div class="results-icon">🏆</div>
                 <h2>Game Complete!</h2>
-                
+
                 <div class="results-stats">
                     <div class="result-item">
-                        <span class="result-label">Final Score</span>
+                        <div class="result-header">
+                            <span class="result-label">Final Score <span class="tooltip-icon" data-tooltip="score">i</span></span>
+                        </div>
                         <span class="result-value" id="finalScore">0</span>
+                        <div class="previous-best" id="previousScore">Previous best: --</div>
                     </div>
+
                     <div class="result-item">
-                        <span class="result-label">Accuracy</span>
+                        <div class="result-header">
+                            <span class="result-label">Accuracy <span class="tooltip-icon" data-tooltip="accuracy">i</span></span>
+                        </div>
                         <span class="result-value" id="finalAccuracy">0%</span>
+                        <div class="previous-best" id="previousAccuracy">Previous best: --</div>
                     </div>
+
                     <div class="result-item">
-                        <span class="result-label">Reaction Time</span>
+                        <div class="result-header">
+                            <span class="result-label">Reaction Time <span class="tooltip-icon" data-tooltip="reaction">i</span></span>
+                        </div>
                         <span class="result-value" id="finalReaction">0ms</span>
+                        <div class="previous-best" id="previousReaction">Previous best: --</div>
                     </div>
+
                     <div class="result-item">
-                        <span class="result-label">Best Streak</span>
+                        <div class="result-header">
+                            <span class="result-label">Best Streak <span class="tooltip-icon" data-tooltip="streak">i</span></span>
+                        </div>
                         <span class="result-value" id="finalStreak">0</span>
+                        <div class="previous-best" id="previousStreak">Previous best: --</div>
                     </div>
                 </div>
+
+                <!-- Tooltip container -->
+                <div class="tooltip-container" id="tooltipContainer"></div>
 
                 <div class="skill-progress">
                     <h3>Skills Trained:</h3>

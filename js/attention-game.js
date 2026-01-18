@@ -4,6 +4,18 @@ class AttentionTrainingGame {
         // Game data with orange color added
         this.games = [
             {
+                id: 'memory-grid',
+                name: 'Memory Grid',
+                description: 'Remember and reproduce lit patterns',
+                skill: 'Visual Memory',
+                instruction: 'Memorize the pattern, then click cells in same order.',
+                difficulty: {
+                    easy: { gridSize: 3, sequenceLength: 3 },
+                    medium: { gridSize: 4, sequenceLength: 4 },
+                    hard: { gridSize: 4, sequenceLength: 6 }
+                }
+            },
+            {
                 id: 'color-reactor',
                 name: 'Color Reactor',
                 description: 'Click only red circles, ignore others',
@@ -13,18 +25,6 @@ class AttentionTrainingGame {
                     easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
                     medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
                     hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
-                }
-            },
-            {
-                id: 'memory-grid',
-                name: 'Memory Grid',
-                description: 'Remember and reproduce lit patterns',
-                skill: 'Visual Memory',
-                instruction: 'Memorize the pattern, then click cells in same order.',
-                difficulty: {
-                    easy: { gridSize: 3, sequenceLength: 3, timeLimit: 5 },
-                    medium: { gridSize: 4, sequenceLength: 4, timeLimit: 4 },
-                    hard: { gridSize: 4, sequenceLength: 6, timeLimit: 3 }
                 }
             },
             {
@@ -46,9 +46,24 @@ class AttentionTrainingGame {
                 skill: 'Selective Attention',
                 instruction: 'Identify direction of CENTER arrow only',
                 difficulty: {
-                    easy: { arrows: 3, speed: 2000, congruentOnly: true },
-                    medium: { arrows: 5, speed: 1500, congruentOnly: false },
-                    hard: { arrows: 7, speed: 1000, congruentOnly: false }
+                    easy: {
+                        arrows: 3,
+                        directionTypes: ['←', '→', '↑', '↓'], // All 4 directions
+                        speed: 2000,
+                        congruentOnly: false  // All arrows same direction
+                    },
+                    medium: {
+                        arrows: 3,
+                        directionTypes: ['←', '→', '↑', '↓'], // All 4 directions
+                        speed: 1500,
+                        congruentOnly: false  // Mixed directions
+                    },
+                    hard: {
+                        arrows: 5,
+                        directionTypes: ['←', '→', '↑', '↓'], // All 4 directions
+                        speed: 1000,
+                        congruentOnly: false  // Mixed directions
+                    }
                 }
             },
             {
@@ -84,8 +99,8 @@ class AttentionTrainingGame {
         this.score = 0;
         this.level = 1;
         this.timeLeft = 0;
-        this.totalTime = 120; // 2 minutes default
-        this.difficulty = 'medium';
+        this.totalTime = 60; // 1 minute default
+        this.difficulty = 'easy';
         this.currentRound = 0;
         this.totalRounds = 0;
         this.correctAnswers = 0;
@@ -99,10 +114,18 @@ class AttentionTrainingGame {
         this.audioContext = null;
         this.gainNode = null;
 
+        // Memory grid specific tracking
+        this.sequenceTimes = [];
+        this.averageSequenceTime = 0;
+
         // Add these for cleanup
         this.gameTimeouts = [];  // Store timeouts for cleanup
         this.moveElementsInterval = null;
         this.clickableTimeout = null;
+
+        // Audio elements for completion sound
+        this.completionSound = null;
+        this.loadCompletionSound();
 
         // DOM Elements
         this.elements = {
@@ -177,7 +200,7 @@ class AttentionTrainingGame {
             },
             'memory-grid': {
                 accuracy: 'How well you remembered the sequence of lit cells.',
-                reaction: 'Memory games don\'t measure reaction time.'
+                streak: 'Consecutive correctly remembered sequences.'
             },
             'sound-hunter': {
                 reaction: 'Time to identify if target sound is present. Tests auditory processing.',
@@ -211,10 +234,44 @@ class AttentionTrainingGame {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
             this.gainNode = this.audioContext.createGain();
             this.gainNode.connect(this.audioContext.destination);
-            this.gainNode.gain.value = 0.5;
+            this.gainNode.gain.value = 1.0; // Full volume
         } catch (error) {
             console.log('Audio not supported:', error);
         }
+    }
+
+    loadCompletionSound() {
+        // Create completion sound using Web Audio API
+        this.completionSound = new Audio();
+        // Use a simple beep sound (could be replaced with actual audio file)
+        this.completionSound.volume = 1.0; // Full volume
+    }
+
+    playCompletionSound() {
+        if (!this.audioContext) return;
+
+        // Create a more pleasant completion sound
+        const oscillator = this.audioContext.createOscillator();
+        const envelope = this.audioContext.createGain();
+
+        oscillator.connect(envelope);
+        envelope.connect(this.gainNode);
+
+        // Play a short melody for completion
+        oscillator.type = 'sine';
+
+        // Play a short ascending scale
+        const frequencies = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+
+        oscillator.frequency.setValueAtTime(frequencies[0], this.audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(frequencies[3], this.audioContext.currentTime + 0.5);
+
+        envelope.gain.setValueAtTime(0, this.audioContext.currentTime);
+        envelope.gain.linearRampToValueAtTime(0.3, this.audioContext.currentTime + 0.1);
+        envelope.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.6);
+
+        oscillator.start();
+        oscillator.stop(this.audioContext.currentTime + 0.6);
     }
 
     renderGameGrid() {
@@ -230,6 +287,12 @@ class AttentionTrainingGame {
     }
 
     setupEventListeners() {
+        // Add to setupEventListeners or create separate method
+        window.addEventListener('resize', () => {
+            if (this.currentGame && this.currentGame.id === 'flanker-focus') {
+                this.checkDeviceType();
+            }
+        });
         // Game selection
         this.elements.gameGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.game-card');
@@ -321,6 +384,9 @@ class AttentionTrainingGame {
         this.elements.resultsScreen.hidden = false;
         this.updateResults();
 
+        // Play completion sound
+        this.playCompletionSound();
+
         // Scroll to results
         setTimeout(() => {
             this.elements.resultsScreen.scrollIntoView({
@@ -350,6 +416,8 @@ class AttentionTrainingGame {
         this.currentStreak = 0;
         this.bestStreak = 0;
         this.reactionTimes = [];
+        this.sequenceTimes = [];
+        this.averageSequenceTime = 0;
         this.timeLeft = this.totalTime;
 
         this.updateDisplay();
@@ -417,7 +485,7 @@ class AttentionTrainingGame {
                 this.generateNewColors();
             }, 300);
 
-            this.playSound('correct');
+            this.playSound('correct', 1.0);
         } else {
             this.score = Math.max(0, this.score - 50);
             this.currentStreak = 0;
@@ -426,7 +494,7 @@ class AttentionTrainingGame {
                 circle.style.animation = '';
             }, 500);
 
-            this.playSound('wrong');
+            this.playSound('wrong', 1.0);
         }
 
         this.startTime = Date.now();
@@ -547,20 +615,40 @@ class AttentionTrainingGame {
 
         const cell = e.target;
         const cellIndex = parseInt(cell.dataset.index);
+
+        // Track sequence start time on first click
+        if (this.userSequence.length === 0) {
+            this.sequenceStartTime = Date.now();
+        }
+
         this.userSequence.push(cellIndex);
+
+        // COUNT EACH CLICK AS AN ATTEMPT
+        this.totalAnswers++;
 
         cell.classList.add('active');
         setTimeout(() => cell.classList.remove('active'), 300);
 
         // Check if correct
         const currentIndex = this.userSequence.length - 1;
-        if (this.userSequence[currentIndex] === this.currentSequence[currentIndex]) {
-            this.playSound('correct');
+        const isCorrect = this.userSequence[currentIndex] === this.currentSequence[currentIndex];
+
+        if (isCorrect) {
+            // COUNT CORRECT CLICK
+            this.correctAnswers++;
+
+            this.playSound('correct', 1.0);
 
             if (this.userSequence.length === this.currentSequence.length) {
-                // Complete sequence
+                // Complete sequence - track time
+                const sequenceTime = Date.now() - this.sequenceStartTime;
+                this.sequenceTimes.push(sequenceTime);
+
+                // Calculate average sequence time
+                this.averageSequenceTime = this.sequenceTimes.reduce((a, b) => a + b, 0) / this.sequenceTimes.length;
+
+                // Give bonus points for completing sequence
                 this.score += 500;
-                this.correctAnswers++;
                 this.currentStreak++;
                 if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
 
@@ -572,8 +660,13 @@ class AttentionTrainingGame {
                 this.updateInstructions('Correct! Remember the next pattern...');
             }
         } else {
-            // Wrong answer
-            this.playSound('wrong');
+            // Wrong answer - track time for partial attempt
+            if (this.userSequence.length > 0) {
+                const sequenceTime = Date.now() - this.sequenceStartTime;
+                this.sequenceTimes.push(sequenceTime);
+            }
+
+            this.playSound('wrong', 1.0);
             cell.classList.add('wrong');
             setTimeout(() => cell.classList.remove('wrong'), 500);
 
@@ -682,12 +775,12 @@ class AttentionTrainingGame {
             this.correctAnswers++;
             this.currentStreak++;
             if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
-            this.playSound('correct');
+            this.playSound('correct', 1.0);
             this.updateInstructions('Correct! Listen for next sound...');
         } else {
             this.score = Math.max(0, this.score - 100);
             this.currentStreak = 0;
-            this.playSound('wrong');
+            this.playSound('wrong', 1.0);
             this.updateInstructions('Wrong! The target was ' + (this.correctAnswer ? 'present' : 'not present'));
         }
 
@@ -700,20 +793,42 @@ class AttentionTrainingGame {
         }, 1000);
     }
 
-    // Game 4: Flanker Focus
+    // Game 4: Flanker Focus - UPDATED VERSION
     setupFlankerFocusElements() {
         const container = document.createElement('div');
         container.className = 'flanker-container';
 
+        // Create instructions section
+        const instructions = document.createElement('div');
+        instructions.className = 'flanker-instructions';
+        instructions.innerHTML = `
+        <p><strong>Identify direction of CENTER arrow only</strong></p>
+        <p class="instruction-hint">Use keyboard arrows (← → ↑ ↓) or buttons below</p>
+    `;
+        container.appendChild(instructions);
+
+        // Create arrows container
         const arrowsDiv = document.createElement('div');
         arrowsDiv.className = 'flanker-arrows';
 
         const difficulty = this.currentGame.difficulty[this.difficulty];
         this.currentArrows = [];
 
+        // Create arrow boxes based on difficulty
         for (let i = 0; i < difficulty.arrows; i++) {
             const arrowBox = document.createElement('div');
             arrowBox.className = 'arrow-box';
+
+            // Add spacing classes for 5-arrow layout (hard mode)
+            if (difficulty.arrows === 5) {
+                if (i === 0 || i === 4) {
+                    arrowBox.classList.add('outer');
+                } else if (i === 1 || i === 3) {
+                    arrowBox.classList.add('middle');
+                } else {
+                    arrowBox.classList.add('center');
+                }
+            }
 
             if (i === Math.floor(difficulty.arrows / 2)) {
                 arrowBox.classList.add('focus');
@@ -724,23 +839,149 @@ class AttentionTrainingGame {
 
         container.appendChild(arrowsDiv);
 
-        const keyInstructions = document.createElement('div');
-        keyInstructions.className = 'arrow-key';
-        keyInstructions.innerHTML = 'Press ← for LEFT or → for RIGHT';
-        container.appendChild(keyInstructions);
+        // Create controls container
+        const controlsContainer = document.createElement('div');
+        controlsContainer.className = 'flanker-controls-container';
 
+        // Desktop keyboard controls (always visible)
+        const desktopControls = document.createElement('div');
+        desktopControls.className = 'desktop-controls';
+        desktopControls.innerHTML = `
+        <div class="key-row">
+            <button class="key-button up-btn" title="Up Arrow (↑)">↑</button>
+        </div>
+        <div class="key-row">
+            <button class="key-button left-btn" title="Left Arrow (←)">←</button>
+            <button class="key-button down-btn" title="Down Arrow (↓)">↓</button>
+            <button class="key-button right-btn" title="Right Arrow (→)">→</button>
+        </div>
+    `;
+        controlsContainer.appendChild(desktopControls);
+
+        container.appendChild(controlsContainer);
         this.elements.gameContainer.appendChild(container);
 
-        // Keyboard controls
+        // Set up event listeners for both desktop and mobile controls
+        this.setupFlankerControls();
+
+        // Remove device type check - show both controls always
+    }
+
+    setupFlankerControls() {
+        // Keyboard controls for desktop - all 4 directions
         this.keydownHandler = (e) => {
+            // Only prevent default for our game keys when game is running
+            if (this.isRunning && !this.isPaused) {
+                const gameKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'w', 'a', 's', 'd'];
+                const key = e.key.toLowerCase();
+
+                // Check if pressed key is one of our game keys
+                if (gameKeys.includes(e.key) || gameKeys.includes(key)) {
+                    e.preventDefault(); // Prevent default scrolling behavior
+                    e.stopPropagation(); // Stop event bubbling
+                }
+            }
+
             if (!this.isRunning || this.isPaused || e.repeat) return;
 
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                this.handleFlankerAnswer(e.key === 'ArrowRight' ? 'right' : 'left');
+            let answer = null;
+            let button = null;
+
+            // Map arrow keys
+            if (e.key === 'ArrowLeft') {
+                answer = 'left';
+                button = this.elements.gameContainer.querySelector('.left-btn');
+            } else if (e.key === 'ArrowRight') {
+                answer = 'right';
+                button = this.elements.gameContainer.querySelector('.right-btn');
+            } else if (e.key === 'ArrowUp') {
+                answer = 'up';
+                button = this.elements.gameContainer.querySelector('.up-btn');
+            } else if (e.key === 'ArrowDown') {
+                answer = 'down';
+                button = this.elements.gameContainer.querySelector('.down-btn');
+            }
+            // Map WASD keys
+            else if (e.key.toLowerCase() === 'a') {
+                answer = 'left';
+                button = this.elements.gameContainer.querySelector('.left-btn');
+            } else if (e.key.toLowerCase() === 'd') {
+                answer = 'right';
+                button = this.elements.gameContainer.querySelector('.right-btn');
+            } else if (e.key.toLowerCase() === 'w') {
+                answer = 'up';
+                button = this.elements.gameContainer.querySelector('.up-btn');
+            } else if (e.key.toLowerCase() === 's') {
+                answer = 'down';
+                button = this.elements.gameContainer.querySelector('.down-btn');
+            }
+
+            if (answer) {
+                // Add visual feedback for keyboard press
+                if (button) {
+                    button.classList.add('pressed');
+                    setTimeout(() => button.classList.remove('pressed'), 200);
+                }
+                this.handleFlankerAnswer(answer);
+                return false; // Prevent default and stop propagation
             }
         };
 
-        document.addEventListener('keydown', this.keydownHandler);
+        // Button controls for both desktop and mobile
+        const setupButtonListeners = (selector, className) => {
+            const buttons = this.elements.gameContainer.querySelectorAll(selector);
+            buttons.forEach(btn => {
+                const answer = this.getAnswerFromButton(btn);
+                if (answer) {
+                    // Click event
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (!this.isRunning || this.isPaused) return;
+                        btn.classList.add('pressed');
+                        setTimeout(() => btn.classList.remove('pressed'), 200);
+                        this.handleFlankerAnswer(answer);
+                        return false;
+                    });
+
+                    // Touch events for mobile
+                    btn.addEventListener('touchstart', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (!this.isRunning || this.isPaused) return;
+                        btn.classList.add('pressed');
+                    });
+
+                    btn.addEventListener('touchend', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (!this.isRunning || this.isPaused) return;
+                        btn.classList.remove('pressed');
+                        this.handleFlankerAnswer(answer);
+                    });
+
+                    // Prevent context menu on long press
+                    btn.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        return false;
+                    });
+                }
+            });
+        };
+
+        // Setup both desktop and mobile button listeners
+        setupButtonListeners('.key-button', 'key-button');
+        setupButtonListeners('.flanker-btn', 'flanker-btn');
+
+        document.addEventListener('keydown', this.keydownHandler, true); // Use capture phase
+    }
+
+    getAnswerFromButton(button) {
+        if (button.classList.contains('left-btn')) return 'left';
+        if (button.classList.contains('right-btn')) return 'right';
+        if (button.classList.contains('up-btn')) return 'up';
+        if (button.classList.contains('down-btn')) return 'down';
+        return null;
     }
 
     startFlankerFocus() {
@@ -753,54 +994,116 @@ class AttentionTrainingGame {
 
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const arrows = this.elements.gameContainer.querySelectorAll('.arrow-box');
-        const directions = ['←', '→'];
-
-        // Choose center direction
-        const centerDirection = directions[Math.floor(Math.random() * 2)];
+        const directions = difficulty.directionTypes;
         const centerIndex = Math.floor(difficulty.arrows / 2);
 
-        // Determine if congruent (all same direction) or incongruent
-        let flankerDirection;
-        if (difficulty.congruentOnly || Math.random() > 0.5) {
-            flankerDirection = centerDirection; // Congruent
-        } else {
-            flankerDirection = centerDirection === '←' ? '→' : '←'; // Incongruent
-        }
+        // Remove previous feedback classes
+        arrows.forEach(arrow => {
+            arrow.classList.remove('correct', 'wrong');
+        });
+
+        // Choose center direction - can be any of the 4 directions
+        const centerDirection = directions[Math.floor(Math.random() * directions.length)];
+
+        // Determine answer based on center arrow
+        this.correctAnswer = this.getDirectionName(centerDirection);
 
         arrows.forEach((arrow, index) => {
+            // Remove previous content and classes
+            arrow.textContent = '';
+            arrow.classList.remove('active');
+
             if (index === centerIndex) {
+                // CENTER ARROW - the one to identify
                 arrow.textContent = centerDirection;
-                this.correctAnswer = centerDirection === '→' ? 'right' : 'left';
+                arrow.classList.add('focus');
+
             } else {
-                arrow.textContent = flankerDirection;
+                // FLANKER ARROWS - distractors around the center
+                if (difficulty.congruentOnly) {
+                    // EASY MODE: All flankers same direction as center
+                    arrow.textContent = centerDirection;
+                } else {
+                    // MEDIUM/HARD MODE: Mix of directions
+                    let flankerDirection;
+
+                    if (Math.random() > 0.5) {
+                        // 50% chance: CONGRUENT - same as center
+                        flankerDirection = centerDirection;
+                    } else {
+                        // 50% chance: INCONGRUENT - different from center
+                        const possibleDirections = directions.filter(dir => dir !== centerDirection);
+                        flankerDirection = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
+                    }
+
+                    arrow.textContent = flankerDirection;
+                }
             }
         });
+
+        // Add a brief highlight to help identify center arrow
+        setTimeout(() => {
+            const centerArrow = arrows[centerIndex];
+            if (centerArrow) {
+                centerArrow.classList.add('active');
+                setTimeout(() => {
+                    centerArrow.classList.remove('active');
+                }, 200);
+            }
+        }, 100);
 
         this.startTime = Date.now();
     }
 
+    getDirectionName(directionSymbol) {
+        const directionMap = {
+            '←': 'left',
+            '→': 'right',
+            '↑': 'up',
+            '↓': 'down'
+        };
+        return directionMap[directionSymbol] || 'left';
+    }
+
     handleFlankerAnswer(userAnswer) {
-        if (!this.isRunning) return;
+        if (!this.isRunning || this.isPaused) return;
 
         this.totalAnswers++;
         const reactionTime = Date.now() - this.startTime;
         this.reactionTimes.push(reactionTime);
+
+        const centerArrow = this.elements.gameContainer.querySelector('.arrow-box.center, .arrow-box.focus');
 
         if (userAnswer === this.correctAnswer) {
             this.score += 150;
             this.correctAnswers++;
             this.currentStreak++;
             if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
-            this.playSound('correct');
+
+            // Visual feedback - green for correct
+            if (centerArrow) {
+                centerArrow.classList.add('correct');
+            }
+            this.playSound('correct', 1.0);
         } else {
             this.score = Math.max(0, this.score - 75);
             this.currentStreak = 0;
-            this.playSound('wrong');
+
+            // Visual feedback - red for wrong
+            if (centerArrow) {
+                centerArrow.classList.add('wrong');
+            }
+            this.playSound('wrong', 1.0);
         }
 
         this.updateDisplay();
 
+        // Clear feedback and generate new arrows after delay
         setTimeout(() => {
+            if (centerArrow) {
+                centerArrow.classList.remove('correct', 'wrong');
+            }
+
             if (this.isRunning && !this.isPaused) {
                 this.generateFlankerArrows();
             }
@@ -892,7 +1195,7 @@ class AttentionTrainingGame {
             this.correctAnswers++;
             this.currentStreak++;
             if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
-            this.playSound('correct');
+            this.playSound('correct', 1.0);
 
             // Switch rule after certain number of correct answers
             const difficulty = this.currentGame.difficulty[this.difficulty];
@@ -903,7 +1206,7 @@ class AttentionTrainingGame {
         } else {
             this.score = Math.max(0, this.score - 50);
             this.currentStreak = 0;
-            this.playSound('wrong');
+            this.playSound('wrong', 1.0);
         }
 
         this.updateDisplay();
@@ -1057,7 +1360,7 @@ class AttentionTrainingGame {
         this.currentStreak++;
         if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
 
-        this.playSound('correct');
+        this.playSound('correct', 1.0);
         this.updateDisplay();
 
         this.isClickable = false;
@@ -1182,6 +1485,8 @@ class AttentionTrainingGame {
         this.currentStreak = 0;
         this.bestStreak = 0;
         this.reactionTimes = [];
+        this.sequenceTimes = [];
+        this.averageSequenceTime = 0;
         this.timeLeft = this.totalTime;
 
         // Reset game state
@@ -1321,7 +1626,8 @@ class AttentionTrainingGame {
         this.elements.gameInstructions.innerHTML = `<p>${text}</p>`;
     }
 
-    playSound(type) {
+    playSound(type, volume = 1.0) {
+        volume = 0.7; // lower volume
         if (!this.audioContext) return;
 
         const oscillator = this.audioContext.createOscillator();
@@ -1340,7 +1646,7 @@ class AttentionTrainingGame {
         oscillator.frequency.setValueAtTime(frequencies[type] || 500, this.audioContext.currentTime);
 
         envelope.gain.setValueAtTime(0, this.audioContext.currentTime);
-        envelope.gain.linearRampToValueAtTime(0.2, this.audioContext.currentTime + 0.1);
+        envelope.gain.linearRampToValueAtTime(volume * 0.3, this.audioContext.currentTime + 0.1);
         envelope.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.3);
 
         oscillator.start();
@@ -1360,7 +1666,7 @@ class AttentionTrainingGame {
         oscillator.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
 
         envelope.gain.setValueAtTime(0, this.audioContext.currentTime);
-        envelope.gain.linearRampToValueAtTime(0.1, this.audioContext.currentTime + 0.05);
+        envelope.gain.linearRampToValueAtTime(1.0, this.audioContext.currentTime + 0.05);
         envelope.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration);
 
         oscillator.start();
@@ -1405,9 +1711,7 @@ class AttentionTrainingGame {
         // Hide irrelevant indicators
         this.hideIrrelevantIndicators();
 
-        this.hideMemorySkill();
-
-        // Update skill meters
+        // Update skill meters with improved memory game calculation
         this.updateSkillMeters(accuracy, avgReaction);
 
         // Setup tooltip events
@@ -1426,18 +1730,6 @@ class AttentionTrainingGame {
             reactionItem.classList.add('hidden');
         } else if (reactionItem) {
             reactionItem.classList.remove('hidden');
-        }
-    }
-
-    hideMemorySkill() {
-        const memorySkillElement = document.querySelector('.skill-meter:nth-child(2)');
-
-        if (memorySkillElement) {
-            if (this.currentGame.id !== 'memory-grid') {
-                memorySkillElement.classList.add('hidden');
-            } else {
-                memorySkillElement.classList.remove('hidden');
-            }
         }
     }
 
@@ -1471,7 +1763,6 @@ class AttentionTrainingGame {
         });
     }
 
-    // Also update showTooltip to remove targetElement parameter:
     showTooltip(tooltipType) {
         const tooltipContainer = this.elements.tooltipContainer;
         const tooltipData = this.tooltips[tooltipType];
@@ -1562,7 +1853,7 @@ class AttentionTrainingGame {
         };
     }
 
-    // Update skill meters
+    // Update skill meters with improved calculation for memory games
     updateSkillMeters(accuracy, avgReaction) {
         let reactionSkill = 0;
         let memorySkill = 0;
@@ -1570,22 +1861,100 @@ class AttentionTrainingGame {
 
         switch (this.currentGame.id) {
             case 'color-reactor':
+                // Reaction skill = 60% accuracy + 40% reaction speed
+                let reactionSpeedScore = 0;
+                if (avgReaction > 0) {
+                    // Convert reaction time to score: 300ms = 40, 1000ms = 0
+                    reactionSpeedScore = Math.max(0, Math.min(40, 40 - (avgReaction - 300) / 17.5));
+                }
+                reactionSkill = Math.min(100, (accuracy * 0.6) + reactionSpeedScore);
+
+                // Focus skill = 50% accuracy + 30% streak + 20% consistency
+                const consistency = this.totalAnswers > 0 ? (this.correctAnswers / this.totalAnswers) * 20 : 0;
+                focusSkill = Math.min(100, (accuracy * 0.5) + Math.min(30, this.bestStreak * 3) + consistency);
+                break;
             case 'flanker-focus':
-                reactionSkill = Math.min(100, accuracy + this.bestStreak * 5);
-                focusSkill = Math.min(100, this.bestStreak * 10);
+                // Reaction skill considers both speed and accuracy
+                let reactionTimeScore = 0;
+                if (avgReaction > 0) {
+                    // More complex arrows = slower expected reaction time
+                    const baseTime = this.currentGame.difficulty[this.difficulty].directionTypes.length > 2 ? 600 : 400;
+                    const maxTime = baseTime * 2.5;
+                    reactionTimeScore = Math.max(0, Math.min(40, 50 - ((avgReaction - baseTime) / (maxTime - baseTime) * 40)));
+                }
+
+                reactionSkill = Math.min(100, (accuracy * 0.7) + reactionTimeScore);
+
+                // Focus skill: penalize errors more heavily in complex versions
+                const errorPenalty = (this.totalAnswers - this.correctAnswers) * (this.difficulty === 'hard' ? 3 : 2);
+                const baseFocus = (accuracy * 0.6) + Math.min(30, this.bestStreak * (this.difficulty === 'hard' ? 2.5 : 3));
+                focusSkill = Math.max(0, Math.min(100, baseFocus - Math.min(25, errorPenalty)));
                 break;
+
             case 'memory-grid':
-                memorySkill = Math.min(100, accuracy + this.bestStreak * 8);
-                focusSkill = Math.min(100, this.bestStreak * 12);
+                // IMPROVED MEMORY GAME CALCULATION
+                const difficulty = this.currentGame.difficulty[this.difficulty];
+
+                // 1. Base memory from accuracy (40% weight)
+                const memoryFromAccuracy = accuracy * 0.4;
+
+                // 2. Memory from sequence length (30% weight)
+                // Longer sequences = better memory
+                const maxSequenceLength = 6; // Hard difficulty
+                const sequenceLengthBonus = (difficulty.sequenceLength / maxSequenceLength) * 30;
+
+                // 3. Memory from consistency (30% weight)
+                // Streak shows consistency in memory recall
+                const consistencyBonus = Math.min(30, this.bestStreak * 3);
+
+                // 4. Penalty for time (if tracking sequence completion time)
+                let timePenalty = 0;
+                if (this.averageSequenceTime > 0) {
+                    // If average time > 10 seconds per sequence, apply penalty
+                    const timePenaltyPercent = Math.max(0, (this.averageSequenceTime - 10000) / 100);
+                    timePenalty = Math.min(15, timePenaltyPercent);
+                }
+
+                // Calculate final memory skill
+                memorySkill = Math.min(100,
+                    memoryFromAccuracy +
+                    sequenceLengthBonus +
+                    consistencyBonus -
+                    timePenalty
+                );
+
+                // Focus calculation for memory grid
+                // Focus = ability to maintain attention during memory task
+                // 1. From accuracy (40%)
+                const focusFromAccuracy = accuracy * 0.4;
+
+                // 2. From streak - shows sustained focus (40%)
+                const focusFromStreak = Math.min(40, this.bestStreak * 5);
+
+                // 3. From grid size - larger grid requires more focus (20%)
+                const maxGridSize = 4;
+                const focusFromGridSize = (difficulty.gridSize / maxGridSize) * 20;
+
+                focusSkill = Math.min(100,
+                    focusFromAccuracy +
+                    focusFromStreak +
+                    focusFromGridSize
+                );
+
+                // Hide reaction skill for memory grid
+                reactionSkill = 0;
                 break;
+
             case 'sound-hunter':
                 reactionSkill = Math.min(100, 100 - Math.min(avgReaction / 20, 100));
                 focusSkill = Math.min(100, accuracy);
                 break;
+
             case 'switching-task':
                 reactionSkill = Math.min(100, accuracy);
                 focusSkill = Math.min(100, this.bestStreak * 15);
                 break;
+
             case 'tracking-test':
                 focusSkill = Math.min(100, accuracy * 2);
                 reactionSkill = Math.min(100, 100 - Math.min(avgReaction / 30, 100));
@@ -1594,11 +1963,24 @@ class AttentionTrainingGame {
 
         if (this.elements.reactionSkill) {
             this.elements.reactionSkill.style.width = `${reactionSkill}%`;
+
+            // Hide reaction skill element for memory grid
+            const reactionSkillElement = this.elements.reactionSkill.parentElement.parentElement;
+            if (this.currentGame.id === 'memory-grid') {
+                reactionSkillElement.classList.add('hidden');
+            } else {
+                reactionSkillElement.classList.remove('hidden');
+            }
         }
 
         // Only update memory skill for memory grid game
-        if (this.elements.memorySkill && this.currentGame.id === 'memory-grid') {
-            this.elements.memorySkill.style.width = `${memorySkill}%`;
+        if (this.elements.memorySkill) {
+            if (this.currentGame.id === 'memory-grid') {
+                this.elements.memorySkill.style.width = `${memorySkill}%`;
+                this.elements.memorySkill.parentElement.parentElement.classList.remove('hidden');
+            } else {
+                this.elements.memorySkill.parentElement.parentElement.classList.add('hidden');
+            }
         }
 
         if (this.elements.focusSkill) {

@@ -207,9 +207,17 @@
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Memory Grid Game */
@@ -254,9 +262,19 @@
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
 }
 
 /* Sound Hunter Game */
@@ -285,8 +303,15 @@
 }
 
 @keyframes soundWave {
-    0% { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 .sound-controls {
@@ -327,11 +352,36 @@
     transform: translateY(-2px);
 }
 
-/* Flanker Game */
+/* Flanker Game - Updated */
 .flanker-container {
     text-align: center;
+    padding: 1rem;
 }
 
+.flanker-instructions {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 10px;
+}
+
+.flanker-instructions p {
+    margin: 0.5rem 0;
+    color: #4a5568;
+}
+
+.flanker-instructions strong {
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+.instruction-hint {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-top: 0.5rem;
+}
+
+/* Arrows Layout */
 .flanker-arrows {
     display: flex;
     justify-content: center;
@@ -341,29 +391,254 @@
 }
 
 .arrow-box {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-size: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    user-select: none;
+    color: #4a5568;
+}
+
+/* For 5-arrow layout (hard mode) */
+.arrow-box.outer {
+    opacity: 0.6;
+    transform: scale(0.85);
+}
+
+.arrow-box.middle {
+    opacity: 0.8;
+    transform: scale(0.95);
+}
+
+.arrow-box.center {
+    transform: scale(1.05);
 }
 
 .arrow-box.focus {
     background: #667eea;
     color: white;
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.arrow-key {
-    font-size: 1.2rem;
+.arrow-box.correct {
+    background: #48bb78 !important; /* Green for correct */
+    color: white;
+    animation: correctPulse 0.5s ease;
+}
+
+.arrow-box.wrong {
+    background: #f56565 !important; /* Red for wrong */
+    color: white;
+    animation: shake 0.5s ease;
+}
+
+.arrow-box.active {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+    animation: pulse 0.5s ease;
+}
+
+/* Controls Container */
+.flanker-controls-container {
+    margin-top: 2rem;
+}
+
+/* Desktop Controls - always visible */
+.desktop-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.key-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.key-button {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.key-button:hover {
+    border-color: #667eea;
+    background: #f7fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.key-button:active, .key-button.pressed {
+    transform: translateY(1px);
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+/* Mobile Controls - always visible but styled differently */
+.mobile-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.mobile-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.flanker-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.flanker-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.flanker-btn:active, .flanker-btn.pressed {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+}
+
+.mobile-hint {
+    font-size: 0.9rem;
     color: #718096;
     margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes correctPulse {
+    0%, 100% { 
+        transform: scale(1);
+        background: #48bb78;
+    }
+    50% { 
+        transform: scale(1.15);
+        background: #38a169;
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .flanker-arrows {
+        gap: 15px;
+    }
+    
+    .arrow-box {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .key-button {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .flanker-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .mobile-buttons, .key-row {
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .flanker-arrows {
+        gap: 10px;
+    }
+    
+    .arrow-box {
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+    }
+    
+    .key-button, .flanker-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .mobile-buttons, .key-row {
+        gap: 0.5rem;
+    }
+}
+
+/* Hidden state */
+.hidden {
+    display: none !important;
+}
+
+/* Add to your existing CSS */
+.key-button:focus,
+.flanker-btn:focus {
+    outline-offset: 2px;
+}
+
+/* Prevent button text selection */
+.key-button,
+.flanker-btn {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 /* Switching Task Game */
@@ -531,8 +806,15 @@
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .results-content h2 {
@@ -840,12 +1122,6 @@
         height: 150px;
     }
 
-    .arrow-box {
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
-    }
-
     .shape-item {
         width: 80px;
         height: 80px;
@@ -933,12 +1209,6 @@
     .tracking-area {
         width: 250px;
         height: 120px;
-    }
-
-    .arrow-box {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
     }
 
     .sound-controls,

@@ -16,15 +16,27 @@ class AttentionTrainingGame {
                 }
             },
             {
-                id: 'color-reactor',
-                name: 'Color Reactor',
-                description: 'Click only red circles, ignore others',
-                skill: 'Reaction & Inhibition',
-                instruction: 'Click only RED circles. Ignore all other colors.',
+                id: 'color-word-stroop', // Changed from 'switching-task'
+                name: 'Color-Word Stroop',
+                description: 'Identify font color, ignore word meaning',
+                skill: 'Cognitive Inhibition',
+                instruction: 'Click the COLOR of the word, NOT what it says',
                 difficulty: {
-                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
-                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
-                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
+                    easy: {
+                        words: ['RED', 'BLUE', 'GREEN'],
+                        colors: ['red', 'blue', 'green'],
+                        timeLimit: 4
+                    },
+                    medium: {
+                        words: ['RED', 'BLUE', 'GREEN', 'YELLOW'],
+                        colors: ['red', 'blue', 'green', 'yellow'],
+                        timeLimit: 3
+                    },
+                    hard: {
+                        words: ['RED', 'BLUE', 'GREEN', 'YELLOW', 'PURPLE'],
+                        colors: ['red', 'blue', 'green', 'yellow', 'purple'],
+                        timeLimit: 2
+                    }
                 }
             },
             {
@@ -49,33 +61,30 @@ class AttentionTrainingGame {
                     easy: {
                         arrows: 3,
                         directionTypes: ['←', '→', '↑', '↓'], // All 4 directions
-                        speed: 2000,
                         congruentOnly: false  // All arrows same direction
                     },
                     medium: {
                         arrows: 3,
                         directionTypes: ['←', '→', '↑', '↓'], // All 4 directions
-                        speed: 1500,
                         congruentOnly: false  // Mixed directions
                     },
                     hard: {
                         arrows: 5,
                         directionTypes: ['←', '→', '↑', '↓'], // All 4 directions
-                        speed: 1000,
                         congruentOnly: false  // Mixed directions
                     }
                 }
             },
             {
-                id: 'switching-task',
-                name: 'Switching Task',
-                description: 'Apply changing rules to shapes',
-                skill: 'Mental Flexibility',
-                instruction: 'Follow the changing rules for shapes',
+                id: 'color-reactor',
+                name: 'Color Reactor',
+                description: 'Click only red circles, ignore others',
+                skill: 'Reaction & Inhibition',
+                instruction: 'Click only RED circles. Ignore all other colors.',
                 difficulty: {
-                    easy: { rules: 2, switchEvery: 10, timeLimit: 4 },
-                    medium: { rules: 3, switchEvery: 8, timeLimit: 3 },
-                    hard: { rules: 4, switchEvery: 6, timeLimit: 2 }
+                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
+                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
+                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
                 }
             },
             {
@@ -85,9 +94,9 @@ class AttentionTrainingGame {
                 skill: 'Sustained Attention',
                 instruction: 'Follow the BLUE circle. Click when it turns GREEN!',
                 difficulty: {
-                    easy: { targets: 1, distractors: 5, speed: 2 },
-                    medium: { targets: 1, distractors: 10, speed: 3 },
-                    hard: { targets: 1, distractors: 15, speed: 4 }
+                    easy: { targets: 1, distractors: 5, speed: 1 },
+                    medium: { targets: 1, distractors: 10, speed: 2 },
+                    hard: { targets: 1, distractors: 15, speed: 3 }
                 }
             }
         ];
@@ -1110,106 +1119,396 @@ class AttentionTrainingGame {
         }, 500);
     }
 
-    // Game 5: Switching Task
-    setupSwitchingTaskElements() {
+    // Game 5: Color-Word Stroop - UPDATED VERSION
+    setupStroopTaskElements() {
         const container = document.createElement('div');
-        container.className = 'switching-container';
+        container.className = 'stroop-container';
 
+        // Create instructions container
         const instructions = document.createElement('div');
-        instructions.className = 'switching-instructions';
-        instructions.id = 'switchingInstructions';
+        instructions.className = 'stroop-instructions';
+        instructions.id = 'stroopInstructions';
+        instructions.innerHTML = `
+        <div>
+            <p class="rule-text">Click the COLOR of the word, NOT the word itself</p>
+        </div>
+    `;
         container.appendChild(instructions);
 
-        const shapesDiv = document.createElement('div');
-        shapesDiv.className = 'switching-shapes';
+        // Create target word display
+        const targetDiv = document.createElement('div');
+        targetDiv.className = 'stroop-target';
+        targetDiv.id = 'stroopTarget';
 
-        const circle = document.createElement('div');
-        circle.className = 'shape-item shape-circle';
-        circle.innerHTML = '<div class="shape-icon">○</div>';
-        circle.addEventListener('click', () => this.handleShapeClick('circle'));
+        const wordDisplay = document.createElement('div');
+        wordDisplay.className = 'stroop-word';
+        wordDisplay.id = 'stroopWord';
+        wordDisplay.textContent = 'READY';
+        wordDisplay.style.color = '#4a5568'; // Default color
 
-        const square = document.createElement('div');
-        square.className = 'shape-item shape-square';
-        square.innerHTML = '<div class="shape-icon">□</div>';
-        square.addEventListener('click', () => this.handleShapeClick('square'));
+        targetDiv.appendChild(wordDisplay);
+        container.appendChild(targetDiv);
 
-        shapesDiv.appendChild(circle);
-        shapesDiv.appendChild(square);
-        container.appendChild(shapesDiv);
+        // Create color buttons (will be populated based on difficulty)
+        const controls = document.createElement('div');
+        controls.className = 'stroop-controls';
 
+        const colorButtons = document.createElement('div');
+        colorButtons.className = 'stroop-color-buttons';
+        colorButtons.id = 'stroopColorButtons';
+
+        controls.appendChild(colorButtons);
+
+        container.appendChild(controls);
         this.elements.gameContainer.appendChild(container);
 
-        this.currentRule = 'color';
-        this.currentColor = 'blue';
+        // Initialize game state
+        this.stroopTimeLimit = 0;
+        this.stroopTimer = null;
+        this.stroopTimerInterval = null;
+        this.stroopTimeLeft = 0;
+        this.stroopCurrentWord = '';
+        this.stroopCurrentColor = '';
+        this.stroopStreak = 0;
+        this.stroopTotalCorrect = 0;
+        this.stroopTotalAttempts = 0;
+        this.stroopReactionTimes = [];
     }
 
-    startSwitchingTask() {
-        if (!this.isRunning) return;
-        this.updateSwitchingInstructions();
-    }
-
-    updateSwitchingInstructions() {
+    startStroopTask() {
         if (!this.isRunning) return;
 
-        const instructions = document.getElementById('switchingInstructions');
-        if (this.currentRule === 'color') {
-            instructions.textContent = 'RULE: Click BLUE shapes only';
-        } else {
-            instructions.textContent = 'RULE: Click CIRCLES only';
+        // Reset game state
+        this.stroopStreak = 0;
+        this.stroopTotalCorrect = 0;
+        this.stroopTotalAttempts = 0;
+        this.stroopReactionTimes = [];
+
+        // Set time limit based on difficulty
+        const difficulty = this.currentGame.difficulty[this.difficulty];
+        this.stroopTimeLimit = difficulty.timeLimit * 1000; // Convert to milliseconds
+
+        // Clear any existing timers
+        this.clearStroopTimers();
+
+        // Update difficulty indicator
+        const difficultyElement = document.getElementById('stroopDifficulty');
+        if (difficultyElement) {
+            difficultyElement.innerHTML = `Difficulty: <span class="level">${this.difficulty.toUpperCase()}</span>`;
         }
 
-        const shapes = this.elements.gameContainer.querySelectorAll('.shape-item');
-        shapes.forEach(shape => {
-            const isCircle = shape.classList.contains('shape-circle');
-            const isBlue = shape.classList.contains('shape-circle'); // Circle is blue
+        // Set up color buttons based on difficulty
+        this.setupStroopColorButtons();
 
-            if (this.currentRule === 'color') {
-                shape.style.opacity = isBlue ? '1' : '0.5';
-            } else {
-                shape.style.opacity = isCircle ? '1' : '0.5';
-            }
+        // Replace instructions with timer display
+        this.showTimerDisplay();
+
+        // Generate first word
+        this.generateStroopWord();
+    }
+
+    clearStroopTimers() {
+        if (this.stroopTimer) {
+            clearTimeout(this.stroopTimer);
+            this.stroopTimer = null;
+        }
+        if (this.stroopTimerInterval) {
+            clearInterval(this.stroopTimerInterval);
+            this.stroopTimerInterval = null;
+        }
+    }
+
+    showTimerDisplay() {
+        const instructions = document.getElementById('stroopInstructions');
+        if (!instructions) return;
+
+        // Save original instructions for when game ends
+        if (!this.stroopOriginalInstructions) {
+            this.stroopOriginalInstructions = instructions.innerHTML;
+        }
+
+        // Show timer in place of instructions
+        instructions.innerHTML = `
+        <div>
+            <p class="timer-display" id="stroopTimerDisplay"></p>
+        </div>
+    `;
+    }
+
+    showOriginalInstructions() {
+        const instructions = document.getElementById('stroopInstructions');
+        if (!instructions || !this.stroopOriginalInstructions) return;
+
+        instructions.innerHTML = this.stroopOriginalInstructions;
+    }
+
+    setupStroopColorButtons() {
+        const colorButtons = document.getElementById('stroopColorButtons');
+        if (!colorButtons) return;
+
+        // Clear existing buttons
+        colorButtons.innerHTML = '';
+
+        // Define colors based on difficulty
+        let colors = [];
+
+        if (this.difficulty === 'easy') {
+            // Easy: 4 colors
+            colors = [
+                { name: 'red', display: 'RED', className: 'stroop-red', hex: '#f56565' },
+                { name: 'blue', display: 'BLUE', className: 'stroop-blue', hex: '#4299e1' },
+                { name: 'green', display: 'GREEN', className: 'stroop-green', hex: '#48bb78' },
+                { name: 'yellow', display: 'YELLOW', className: 'stroop-yellow', hex: '#ecc94b' }
+            ];
+        } else {
+            // Medium/Hard: 6 colors
+            colors = [
+                { name: 'red', display: 'RED', className: 'stroop-red', hex: '#f56565' },
+                { name: 'blue', display: 'BLUE', className: 'stroop-blue', hex: '#4299e1' },
+                { name: 'green', display: 'GREEN', className: 'stroop-green', hex: '#48bb78' },
+                { name: 'yellow', display: 'YELLOW', className: 'stroop-yellow', hex: '#ecc94b' },
+                { name: 'purple', display: 'PURPLE', className: 'stroop-purple', hex: '#9f7aea' },
+                { name: 'orange', display: 'ORANGE', className: 'stroop-orange', hex: '#ed8936' }
+            ];
+        }
+
+        // Store colors for game logic
+        this.stroopColors = colors;
+        this.stroopWords = colors.map(color => color.display);
+
+        // Create buttons for each color
+        colors.forEach(color => {
+            const button = document.createElement('button');
+            button.className = `stroop-btn ${color.className}`;
+            button.dataset.color = color.name;
+            button.textContent = color.display;
+            button.addEventListener('click', () => this.handleStroopAnswer(color.name));
+
+            // Touch support
+            button.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (!this.isRunning || this.isPaused) return;
+                button.classList.add('pressed');
+            });
+
+            button.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                if (!this.isRunning || this.isPaused) return;
+                button.classList.remove('pressed');
+                this.handleStroopAnswer(color.name);
+            });
+
+            colorButtons.appendChild(button);
         });
+    }
+
+    generateStroopWord() {
+        if (!this.isRunning) return;
+
+        // Clear any existing timers
+        this.clearStroopTimers();
+
+        // Get random word and color (must be different to create conflict)
+        let randomWord, randomColor;
+        let attempts = 0;
+        const maxAttempts = 10;
+
+        do {
+            randomWord = this.stroopWords[Math.floor(Math.random() * this.stroopWords.length)];
+            randomColor = this.stroopColors[Math.floor(Math.random() * this.stroopColors.length)].name;
+            attempts++;
+
+            // Prevent infinite loop
+            if (attempts > maxAttempts) {
+                // If we can't find a conflict after max attempts, just use any combination
+                break;
+            }
+        } while (randomWord.toLowerCase() === randomColor); // Ensure conflict
+
+        this.stroopCurrentWord = randomWord;
+        this.stroopCurrentColor = randomColor;
+        this.correctAnswer = randomColor; // Correct answer is the COLOR, not the word
+
+        // Update display
+        const wordElement = document.getElementById('stroopWord');
+        if (wordElement) {
+            wordElement.textContent = this.stroopCurrentWord;
+            wordElement.style.color = this.getColorValue(this.stroopCurrentColor);
+            wordElement.classList.remove('correct', 'wrong');
+        }
+
+        // Start timer for this word
+        this.stroopTimeLeft = this.stroopTimeLimit;
+        this.startStroopTimer();
 
         this.startTime = Date.now();
     }
 
-    handleShapeClick(shapeType) {
+    startStroopTimer() {
+        const timerDisplay = document.getElementById('stroopTimerDisplay');
+
+        // Update timer immediately
+        this.updateStroopTimerDisplay();
+
+        // Update timer every 100ms for smooth countdown
+        this.stroopTimerInterval = setInterval(() => {
+            if (!this.isRunning || this.isPaused) {
+                this.clearStroopTimers();
+                return;
+            }
+
+            this.stroopTimeLeft -= 100;
+            this.updateStroopTimerDisplay();
+
+            if (this.stroopTimeLeft <= 0) {
+                this.clearStroopTimers();
+                this.handleTimeOut();
+            }
+        }, 100);
+
+        // Set timeout for word expiration
+        this.stroopTimer = setTimeout(() => {
+            if (this.stroopTimerInterval) {
+                clearInterval(this.stroopTimerInterval);
+                this.stroopTimerInterval = null;
+            }
+            if (this.isRunning && !this.isPaused) {
+                this.handleTimeOut();
+            }
+        }, this.stroopTimeLimit);
+    }
+
+    updateStroopTimerDisplay() {
+        const timerDisplay = document.getElementById('stroopTimerDisplay');
+        if (!timerDisplay) return;
+
+        const secondsLeft = Math.ceil(this.stroopTimeLeft / 1000);
+        const colorClass = secondsLeft <= 1 ? 'time-warning' : secondsLeft <= 2 ? 'time-low' : '';
+
+        timerDisplay.innerHTML = `<span class="${colorClass}">Time left: ${secondsLeft}s</span>`;
+    }
+
+    handleTimeOut() {
         if (!this.isRunning || this.isPaused) return;
 
         this.totalAnswers++;
-        const reactionTime = Date.now() - this.startTime;
-        this.reactionTimes.push(reactionTime);
+        this.stroopTotalAttempts++;
 
-        const isCircle = shapeType === 'circle';
-        const isBlue = isCircle; // In our design, circle is blue
+        // Timeout counts as wrong answer
+        this.score = Math.max(0, this.score - 50);
+        this.currentStreak = 0;
+        this.stroopStreak = 0;
 
-        let isCorrect = false;
-        if (this.currentRule === 'color') {
-            isCorrect = isBlue;
-        } else {
-            isCorrect = isCircle;
+        // Visual feedback for timeout
+        const wordElement = document.getElementById('stroopWord');
+        if (wordElement) {
+            wordElement.classList.add('wrong');
         }
 
-        if (isCorrect) {
-            this.score += 100;
-            this.correctAnswers++;
-            this.currentStreak++;
-            if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
-            this.playSound('correct', 1.0);
+        this.playSound('wrong', 1.0);
 
-            // Switch rule after certain number of correct answers
-            const difficulty = this.currentGame.difficulty[this.difficulty];
-            if (this.correctAnswers % difficulty.switchEvery === 0) {
-                this.currentRule = this.currentRule === 'color' ? 'shape' : 'color';
-                this.updateSwitchingInstructions();
-            }
+        // Show timeout message in timer display area
+        const timerDisplay = document.getElementById('stroopTimerDisplay');
+        if (timerDisplay) {
+            timerDisplay.innerHTML = `<span class="time-warning">Too slow! Time's up.</span>`;
+
+            setTimeout(() => {
+                if (this.isRunning && !this.isPaused) {
+                    this.generateStroopWord();
+                }
+            }, 1000);
         } else {
-            this.score = Math.max(0, this.score - 50);
-            this.currentStreak = 0;
-            this.playSound('wrong', 1.0);
+            setTimeout(() => {
+                if (this.isRunning && !this.isPaused) {
+                    this.generateStroopWord();
+                }
+            }, 1000);
         }
 
         this.updateDisplay();
+        this.updateStroopStreakDisplay();
+    }
+
+    getColorValue(colorName) {
+        const colorMap = {
+            'red': '#f56565',
+            'blue': '#4299e1',
+            'green': '#48bb78',
+            'yellow': '#ecc94b',
+            'purple': '#9f7aea',
+            'orange': '#ed8936'
+        };
+        return colorMap[colorName] || '#4a5568';
+    }
+
+    handleStroopAnswer(userAnswer) {
+        if (!this.isRunning || this.isPaused) return;
+
+        // Clear timers since user responded
+        this.clearStroopTimers();
+
+        this.totalAnswers++;
+        this.stroopTotalAttempts++;
+
+        const reactionTime = Date.now() - this.startTime;
+        this.reactionTimes.push(reactionTime);
+        this.stroopReactionTimes.push(reactionTime);
+
+        const wordElement = document.getElementById('stroopWord');
+
+        if (userAnswer === this.correctAnswer) {
+            // CORRECT: Identified the color correctly
+            this.score += 150;
+            this.correctAnswers++;
+            this.currentStreak++;
+            this.stroopStreak++;
+            this.stroopTotalCorrect++;
+
+            if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
+
+            // Visual feedback
+            if (wordElement) {
+                wordElement.classList.add('correct');
+            }
+
+            this.playSound('correct', 1.0);
+
+            // Bonus for fast reaction (under 1 second)
+            if (reactionTime < 1000) {
+                this.score += 50; // Speed bonus
+            }
+        } else {
+            // WRONG: Clicked based on word meaning or wrong color
+            this.score = Math.max(0, this.score - 75);
+            this.currentStreak = 0;
+            this.stroopStreak = 0;
+
+            // Visual feedback
+            if (wordElement) {
+                wordElement.classList.add('wrong');
+            }
+
+            this.playSound('wrong', 1.0);
+        }
+
+        // Update display
+        this.updateDisplay();
+        this.updateStroopStreakDisplay();
+
+        // Generate new word after delay
+        setTimeout(() => {
+            if (this.isRunning && !this.isPaused) {
+                this.generateStroopWord();
+            }
+        }, 600);
+    }
+
+    updateStroopStreakDisplay() {
+        // Update streak
+        const streakElement = document.getElementById('stroopStreak');
+        if (streakElement) {
+            streakElement.textContent = this.stroopStreak;
+        }
     }
 
     // Game 6: Tracking Test
@@ -1372,6 +1671,13 @@ class AttentionTrainingGame {
 
     // Common game methods
     startGame() {
+        setTimeout(() => {
+            this.elements.gameInterface.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }, 100);
+
         // Double-check we're not already running
         if (this.isRunning) {
             console.log('Game already running');
@@ -1421,7 +1727,9 @@ class AttentionTrainingGame {
         }, 1000);
 
         // Initialize game-specific logic
-        this.startGameSpecificLogic();
+        setTimeout(() => {
+            this.startGameSpecificLogic();
+        }, 300);
     }
 
     startGameSpecificLogic() {
@@ -1441,8 +1749,8 @@ class AttentionTrainingGame {
             case 'flanker-focus':
                 this.startFlankerFocus();
                 break;
-            case 'switching-task':
-                this.startSwitchingTask();
+            case 'color-word-stroop': // Changed from 'switching-task'
+                this.startStroopTask();
                 break;
             case 'tracking-test':
                 this.startTrackingTest();
@@ -1535,8 +1843,8 @@ class AttentionTrainingGame {
                 this.setupFlankerFocusElements();
                 this.updateInstructions(this.currentGame.instruction);
                 break;
-            case 'switching-task':
-                this.setupSwitchingTaskElements();
+            case 'color-word-stroop':
+                this.setupStroopTaskElements();
                 this.updateInstructions(this.currentGame.instruction);
                 break;
             case 'tracking-test':
@@ -1584,6 +1892,12 @@ class AttentionTrainingGame {
         if (this.clickableTimeout) {
             clearTimeout(this.clickableTimeout);
             this.clickableTimeout = null;
+        }
+
+        // Clear Stroop timers and restore instructions
+        if (this.currentGame && this.currentGame.id === 'color-word-stroop') {
+            this.clearStroopTimers();
+            this.showOriginalInstructions();
         }
 
         // Reset game-specific states
@@ -1950,9 +2264,33 @@ class AttentionTrainingGame {
                 focusSkill = Math.min(100, accuracy);
                 break;
 
-            case 'switching-task':
-                reactionSkill = Math.min(100, accuracy);
-                focusSkill = Math.min(100, this.bestStreak * 15);
+            case 'color-word-stroop': // Update game ID in your games array
+                // Reaction skill: Very important in Stroop - faster = better
+                let reactionTimeScoreForColorStroop = 0;
+                if (avgReaction > 0) {
+                    // Stroop effect makes reactions slower, so adjust expectations
+                    const baseTime = 800; // Normal Stroop reaction is slower
+                    const maxTime = 2000;
+                    reactionTimeScoreForColorStroop = Math.max(0, Math.min(40, 40 - (avgReaction - baseTime) / 30));
+                }
+                reactionSkill = Math.min(100, (accuracy * 0.6) + reactionTimeScoreForColorStroop);
+
+                // Focus skill: Ability to inhibit automatic reading response
+                // Streak shows consistency in overcoming the Stroop effect
+                const streakScore = Math.min(30, this.stroopStreak * 2);
+
+                // Interference effect measurement (how much word meaning affects you)
+                let interferenceScore = 0;
+                if (this.stroopTotalAttempts > 10) {
+                    // Higher accuracy = better inhibition of automatic reading
+                    interferenceScore = Math.min(40, (this.stroopTotalCorrect / this.stroopTotalAttempts) * 40);
+                }
+
+                focusSkill = Math.max(0, Math.min(100,
+                    (accuracy * 0.3) +
+                    streakScore +
+                    interferenceScore
+                ));
                 break;
 
             case 'tracking-test':

@@ -428,13 +428,15 @@
 }
 
 .arrow-box.correct {
-    background: #48bb78 !important; /* Green for correct */
+    background: #48bb78 !important;
+    /* Green for correct */
     color: white;
     animation: correctPulse 0.5s ease;
 }
 
 .arrow-box.wrong {
-    background: #f56565 !important; /* Red for wrong */
+    background: #f56565 !important;
+    /* Red for wrong */
     color: white;
     animation: shake 0.5s ease;
 }
@@ -489,7 +491,8 @@
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 }
 
-.key-button:active, .key-button.pressed {
+.key-button:active,
+.key-button.pressed {
     transform: translateY(1px);
     background: #667eea;
     color: white;
@@ -534,7 +537,8 @@
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
-.flanker-btn:active, .flanker-btn.pressed {
+.flanker-btn:active,
+.flanker-btn.pressed {
     transform: translateY(1px);
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
     background: linear-gradient(135deg, #5a67d8, #6b46c1);
@@ -549,25 +553,52 @@
 
 /* Animations */
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 @keyframes correctPulse {
-    0%, 100% { 
+
+    0%,
+    100% {
         transform: scale(1);
         background: #48bb78;
     }
-    50% { 
+
+    50% {
         transform: scale(1.15);
         background: #38a169;
     }
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
 }
 
 /* Responsive Design */
@@ -575,26 +606,27 @@
     .flanker-arrows {
         gap: 15px;
     }
-    
+
     .arrow-box {
         width: 60px;
         height: 60px;
         font-size: 2rem;
     }
-    
+
     .key-button {
         width: 70px;
         height: 70px;
         font-size: 1.8rem;
     }
-    
+
     .flanker-btn {
         width: 60px;
         height: 60px;
         font-size: 1.8rem;
     }
-    
-    .mobile-buttons, .key-row {
+
+    .mobile-buttons,
+    .key-row {
         gap: 0.8rem;
     }
 }
@@ -603,20 +635,22 @@
     .flanker-arrows {
         gap: 10px;
     }
-    
+
     .arrow-box {
         width: 40px;
         height: 40px;
         font-size: 1.8rem;
     }
-    
-    .key-button, .flanker-btn {
+
+    .key-button,
+    .flanker-btn {
         width: 50px;
         height: 50px;
         font-size: 1.5rem;
     }
-    
-    .mobile-buttons, .key-row {
+
+    .mobile-buttons,
+    .key-row {
         gap: 0.5rem;
     }
 }
@@ -641,56 +675,408 @@
     -ms-user-select: none;
 }
 
-/* Switching Task Game */
-.switching-container {
+/* Color-Word Stroop Game - UPDATED */
+.stroop-container {
     text-align: center;
-}
-
-.switching-instructions {
-    font-size: 1.2rem;
-    color: #4a5568;
-    margin-bottom: 2rem;
     padding: 1rem;
-    background: #e2e8f0;
+}
+
+.stroop-instructions {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f7fafc;
     border-radius: 10px;
-}
-
-.switching-shapes {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 2rem 0;
-}
-
-.shape-item {
-    width: 120px;
-    height: 120px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.shape-item:hover {
-    transform: translateY(-5px);
+.stroop-instructions .rule-text {
+    margin: 0;
+    color: #2d3748;
+    font-size: 1.2rem;
 }
 
-.shape-circle {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
+.stroop-instructions .hint {
+    font-size: 1rem;
+    color: #718096;
+    font-weight: normal;
+    margin-top: 0.5rem;
 }
 
-.shape-square {
-    background: linear-gradient(135deg, #48bb78, #38a169);
-    color: white;
-}
-
-.shape-icon {
-    font-size: 3rem;
+.stroop-instructions .timer-display {
+    font-size: 1.1rem;
     font-weight: bold;
+    color: #4a5568;
+    margin-top: 0.5rem;
+}
+
+.stroop-instructions .timer-display .time-warning {
+    color: #f56565;
+    animation: pulse 1s infinite;
+}
+
+.stroop-instructions .timer-display .time-low {
+    color: #ed8936;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.stroop-target {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin: 1.5rem auto;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stroop-word {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-align: center;
+    user-select: none;
+    line-height: 1.2;
+    padding: 1rem;
+}
+
+.stroop-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.stroop-color-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.stroop-btn {
+    width: 130px;
+    height: 65px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stroop-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stroop-btn:active:not(:disabled),
+.stroop-btn.pressed {
+    transform: translateY(1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stroop-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Color buttons - Updated for 6 colors */
+.stroop-red {
+    background: linear-gradient(135deg, #fc8181, #f56565);
+}
+
+.stroop-blue {
+    background: linear-gradient(135deg, #63b3ed, #4299e1);
+}
+
+.stroop-green {
+    background: linear-gradient(135deg, #68d391, #48bb78);
+}
+
+.stroop-yellow {
+    background: linear-gradient(135deg, #f6e05e, #ecc94b);
+}
+
+.stroop-purple {
+    background: linear-gradient(135deg, #9f7aea, #805ad5);
+}
+
+.stroop-orange {
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+}
+
+/* Feedback animations */
+.stroop-word.correct {
+    animation: stroopCorrect 0.5s ease;
+    background: rgba(72, 187, 120, 0.1);
+}
+
+.stroop-word.wrong {
+    animation: stroopWrong 0.5s ease;
+    background: rgba(245, 101, 101, 0.1);
+}
+
+@keyframes stroopCorrect {
+
+    0%,
+    100% {
+        transform: scale(1);
+        color: inherit;
+    }
+
+    50% {
+        transform: scale(1.05);
+        color: #48bb78;
+    }
+}
+
+@keyframes stroopWrong {
+
+    0%,
+    100% {
+        transform: translateX(0);
+        color: inherit;
+    }
+
+    25% {
+        transform: translateX(-5px);
+        color: #f56565;
+    }
+
+    75% {
+        transform: translateX(5px);
+        color: #f56565;
+    }
+}
+
+/* Streak display only */
+.stroop-streak-display {
+    margin-top: 1rem;
+}
+
+.stroop-streak-item {
+    background: #edf2f7;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stroop-streak-label {
+    font-size: 1rem;
+    color: #718096;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stroop-streak-value {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #2d3748;
+}
+
+/* Difficulty indicator */
+.difficulty-indicator {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #718096;
+}
+
+.difficulty-indicator .level {
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stroop-target {
+        padding: 2rem;
+        min-height: 160px;
+        margin: 1rem auto;
+    }
+
+    .stroop-word {
+        font-size: 2.8rem;
+    }
+
+    .stroop-color-buttons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+        max-width: 400px;
+    }
+
+    .stroop-btn {
+        width: 110px;
+        height: 55px;
+        font-size: 1.1rem;
+    }
+
+    .stroop-instructions {
+        font-size: 1.1rem;
+        min-height: 90px;
+    }
+
+    .stroop-instructions .rule-text {
+        font-size: 1rem;
+    }
+
+    .stroop-streak-item {
+        padding: 0.8rem 1.5rem;
+    }
+
+    .stroop-streak-value {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stroop-target {
+        padding: 1.5rem;
+        min-height: 140px;
+    }
+
+    .stroop-word {
+        font-size: 2.2rem;
+        padding: 0.8rem;
+    }
+
+    .stroop-color-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+        max-width: 280px;
+    }
+
+    .stroop-btn {
+        width: 120px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .stroop-instructions {
+        font-size: 1rem;
+        padding: 0.8rem;
+        min-height: 100px;
+    }
+
+    .stroop-instructions .rule-text {
+        font-size: 0.8rem;
+    }
+
+    .stroop-instructions .hint {
+        font-size: 0.9rem;
+    }
+
+    .stroop-instructions .timer-display {
+        font-size: 1rem;
+    }
+
+    .stroop-streak-value {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .stroop-color-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 250px;
+    }
+
+    .stroop-btn {
+        width: 110px;
+        height: 45px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Color-Word Stroop Game - Timer Update */
+.stroop-instructions {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stroop-instructions .hint {
+    font-size: 1rem;
+    color: #718096;
+    font-weight: normal;
+    margin-top: 0.5rem;
+}
+
+.stroop-instructions .timer-display {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #4a5568;
+    text-align: center;
+    width: 100%;
+}
+
+.stroop-instructions .timer-display .time-warning {
+    color: #f56565;
+    animation: pulse 1s infinite;
+}
+
+.stroop-instructions .timer-display .time-low {
+    color: #ed8936;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Responsive updates for timer */
+@media (max-width: 768px) {
+    .stroop-instructions .timer-display {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stroop-instructions .timer-display {
+        font-size: 1.1rem;
+    }
 }
 
 /* Tracking Test Game */

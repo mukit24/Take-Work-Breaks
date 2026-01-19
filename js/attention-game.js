@@ -94,9 +94,9 @@ class AttentionTrainingGame {
                 skill: 'Sustained Attention',
                 instruction: 'Follow the BLUE circle. Click when it turns GREEN!',
                 difficulty: {
-                    easy: { targets: 1, distractors: 5, speed: 1 },
+                    easy: { targets: 1, distractors: 5, speed: 1.5 },
                     medium: { targets: 1, distractors: 10, speed: 2 },
-                    hard: { targets: 1, distractors: 15, speed: 3 }
+                    hard: { targets: 1, distractors: 15, speed: 2.5 }
                 }
             }
         ];
@@ -429,10 +429,22 @@ class AttentionTrainingGame {
         this.averageSequenceTime = 0;
         this.timeLeft = this.totalTime;
 
+        // Reset tracking-specific states
+        if (this.currentGame.id === 'tracking-test') {
+            this.isClickable = false;
+            if (this.autoDisableTimeout) {
+                clearTimeout(this.autoDisableTimeout);
+                this.autoDisableTimeout = null;
+            }
+            if (this.clickableTimeout) {
+                clearTimeout(this.clickableTimeout);
+                this.clickableTimeout = null;
+            }
+        }
+
         this.updateDisplay();
         this.updateTimerDisplay();
     }
-
     // Game 1: Color Reactor
     setupColorReactorElements() {
         const grid = document.createElement('div');
@@ -1531,6 +1543,23 @@ class AttentionTrainingGame {
 
     startTrackingTest() {
         if (!this.isRunning) return;
+
+        // Make sure we're not in paused state when starting
+        if (this.isPaused) {
+            this.isPaused = false;
+        }
+
+        // Clear any existing timeouts/intervals
+        if (this.clickableTimeout) {
+            clearTimeout(this.clickableTimeout);
+            this.clickableTimeout = null;
+        }
+
+        if (this.moveElementsInterval) {
+            clearInterval(this.moveElementsInterval);
+            this.moveElementsInterval = null;
+        }
+
         this.startTracking();
         this.scheduleClickable();
     }
@@ -1618,56 +1647,228 @@ class AttentionTrainingGame {
     }
 
     scheduleClickable() {
-        if (!this.isRunning) return;
+        if (!this.isRunning || this.isPaused) return;
 
         this.isClickable = false;
         if (this.targetElement) {
             this.targetElement.classList.remove('clickable');
+            this.targetElement.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            this.targetElement.style.animation = '';
         }
+
+        // Schedule when ball turns green (1-4 seconds random)
+        const delay = Math.random() * 3000 + 1000; // 1-4 seconds
 
         this.clickableTimeout = setTimeout(() => {
             if (this.isRunning && !this.isPaused) {
                 this.isClickable = true;
                 if (this.targetElement) {
                     this.targetElement.classList.add('clickable');
+                    this.targetElement.style.background = 'linear-gradient(135deg, #10b981, #059669)';
                 }
                 this.startTime = Date.now();
 
                 // Auto-disable after 2 seconds if not clicked
-                setTimeout(() => {
-                    if (this.isClickable && this.isRunning) {
-                        this.isClickable = false;
-                        if (this.targetElement) {
-                            this.targetElement.classList.remove('clickable');
-                        }
-                        this.scheduleClickable();
+                this.autoDisableTimeout = setTimeout(() => {
+                    if (this.isClickable && this.isRunning && !this.isPaused) {
+                        // Timeout - user missed clicking the green ball
+                        this.handleMissedClick();
                     }
                 }, 2000);
+
+                // Store this timeout for cleanup
+                if (this.autoDisableTimeout) {
+                    this.gameTimeouts.push(this.autoDisableTimeout);
+                }
             }
-        }, Math.random() * 3000 + 2000);
+        }, delay);
     }
 
-    handleTrackingClick() {
+    handleMissedClick() {
         if (!this.isRunning || this.isPaused || !this.isClickable) return;
 
         this.totalAnswers++;
-        const reactionTime = Date.now() - this.startTime;
-        this.reactionTimes.push(reactionTime);
+        this.score = Math.max(0, this.score - 150); // More penalty for missing
+        this.currentStreak = 0;
 
-        this.score += 250;
-        this.correctAnswers++;
-        this.currentStreak++;
-        if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
+        // Visual feedback for missed click
+        if (this.targetElement) {
+            this.targetElement.style.animation = 'timeout-warning 0.5s ease 3';
+            this.targetElement.style.background = 'linear-gradient(135deg, #ed8936, #dd6b20)';
+        }
 
-        this.playSound('correct', 1.0);
-        this.updateDisplay();
+        // Play timeout sound
+        this.playSound('wrong', 1.0);
+
+        // Show point feedback
+        this.showPointFeedback(-150, false);
+
+        // Update instructions
+        this.updateInstructions(`<span style="color: #ed8936;">⌛ Missed! -150 points (2s timeout)</span>`);
 
         this.isClickable = false;
         if (this.targetElement) {
             this.targetElement.classList.remove('clickable');
+
+            // Reset to blue after delay
+            setTimeout(() => {
+                if (this.targetElement && !this.isClickable) {
+                    this.targetElement.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    this.targetElement.style.animation = '';
+                }
+            }, 1500);
         }
-        this.scheduleClickable();
+
+        this.updateDisplay();
+
+        // Schedule next clickable state
+        setTimeout(() => {
+            if (this.isRunning && !this.isPaused) {
+                this.scheduleClickable();
+            }
+        }, 2000);
     }
+
+    showPointFeedback(points, isPositive) {
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'point-feedback';
+        feedbackDiv.textContent = isPositive ? `+${points}` : `${points}`;
+        feedbackDiv.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: ${isPositive ? '#10b981' : '#f56565'};
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        z-index: 1000;
+        animation: float-up 1s ease forwards;
+    `;
+
+        // Add CSS for animation
+        const style = document.createElement('style');
+        style.textContent = `
+        @keyframes float-up {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -100%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -150%) scale(1);
+            }
+        }
+    `;
+
+        if (!document.querySelector('#float-up-animation')) {
+            style.id = 'float-up-animation';
+            document.head.appendChild(style);
+        }
+
+        // Add to tracking area
+        const trackingArea = document.getElementById('trackingArea');
+        if (trackingArea) {
+            trackingArea.appendChild(feedbackDiv);
+
+            // Remove after animation
+            setTimeout(() => {
+                if (feedbackDiv.parentNode) {
+                    feedbackDiv.parentNode.removeChild(feedbackDiv);
+                }
+            }, 1000);
+        }
+    }
+
+
+    handleTrackingClick() {
+        if (!this.isRunning || this.isPaused || !this.targetElement) return;
+
+        // Check if target is currently clickable (green)
+        const isCurrentlyClickable = this.isClickable && this.targetElement.classList.contains('clickable');
+
+        if (isCurrentlyClickable) {
+            // CORRECT: Clicked when green
+            this.totalAnswers++;
+            const reactionTime = Date.now() - this.startTime;
+            this.reactionTimes.push(reactionTime);
+
+            this.score += 250;
+            this.correctAnswers++;
+            this.currentStreak++;
+            if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
+
+            // Visual feedback for correct click
+            this.targetElement.style.animation = 'none';
+            this.targetElement.style.transform = 'scale(1.3)';
+            this.targetElement.style.background = 'linear-gradient(135deg, #10b981, #047857)';
+
+            // Play correct sound
+            this.playSound('correct', 1.0);
+
+            // Show point feedback
+            this.showPointFeedback(250, true);
+
+            // Update instructions
+            this.updateInstructions(`<span style="color: #10b981;">✓ Correct! +250 points</span>`);
+
+        } else {
+            // WRONG: Clicked when blue OR missed clicking when green
+            this.totalAnswers++;
+            this.score = Math.max(0, this.score - 100);
+            this.currentStreak = 0;
+
+            // Visual feedback for wrong click
+            if (this.targetElement) {
+                this.targetElement.style.animation = 'shake 0.5s ease';
+                this.targetElement.style.background = 'linear-gradient(135deg, #f56565, #c53030)';
+            }
+
+            // Play wrong sound
+            this.playSound('wrong', 1.0);
+
+            // Show point feedback
+            this.showPointFeedback(-100, false);
+
+            // Update instructions
+            this.updateInstructions(`<span style="color: #f56565;">✗ Wrong timing! -100 points</span>`);
+        }
+
+        // Reset clickable state
+        this.isClickable = false;
+        if (this.targetElement) {
+            this.targetElement.classList.remove('clickable');
+            this.targetElement.style.transform = '';
+
+            // Reset to blue after delay
+            setTimeout(() => {
+                if (this.targetElement && !this.isClickable) {
+                    this.targetElement.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    this.targetElement.style.animation = '';
+                }
+            }, 500);
+        }
+
+        // Clear auto-disable timeout
+        if (this.autoDisableTimeout) {
+            clearTimeout(this.autoDisableTimeout);
+            this.autoDisableTimeout = null;
+        }
+
+        this.updateDisplay();
+
+        // Schedule next clickable state
+        setTimeout(() => {
+            if (this.isRunning && !this.isPaused) {
+                this.scheduleClickable();
+            }
+        }, 1000);
+    }
+
 
     // Common game methods
     startGame() {
@@ -1764,12 +1965,26 @@ class AttentionTrainingGame {
 
         if (this.currentGame.id === 'tracking-test') {
             if (this.isPaused) {
+                // Pause movement
                 if (this.moveElementsInterval) {
                     clearInterval(this.moveElementsInterval);
                     this.moveElementsInterval = null;
                 }
+
+                // Pause the clickable timeout
+                if (this.clickableTimeout) {
+                    clearTimeout(this.clickableTimeout);
+                    this.clickableTimeout = null;
+                }
+
             } else {
+                // Resume movement
                 this.moveElementsInterval = setInterval(() => this.moveElements(), 50);
+
+                // Resume the clickable scheduling if not currently clickable
+                if (!this.isClickable && this.isRunning) {
+                    this.scheduleClickable();
+                }
             }
         }
 
@@ -1889,10 +2104,14 @@ class AttentionTrainingGame {
         this.gameTimeouts.forEach(timeout => clearTimeout(timeout));
         this.gameTimeouts = [];
 
+        // Clear clickable timeout
         if (this.clickableTimeout) {
             clearTimeout(this.clickableTimeout);
             this.clickableTimeout = null;
         }
+
+        // Reset clickable state
+        this.isClickable = false;
 
         // Clear Stroop timers and restore instructions
         if (this.currentGame && this.currentGame.id === 'color-word-stroop') {
@@ -1923,6 +2142,12 @@ class AttentionTrainingGame {
         if (this.clickableTimeout) {
             clearTimeout(this.clickableTimeout);
             this.clickableTimeout = null;
+        }
+
+        // Clear auto-disable timeout
+        if (this.autoDisableTimeout) {
+            clearTimeout(this.autoDisableTimeout);
+            this.autoDisableTimeout = null;
         }
     }
 

@@ -1082,11 +1082,12 @@
 /* Tracking Test Game */
 .tracking-container {
     text-align: center;
+    padding: 10px;
 }
 
 .tracking-area {
-    width: 400px;
-    height: 200px;
+    width: 600px;
+    height: 250px;
     background: #f7fafc;
     border-radius: 16px;
     position: relative;
@@ -1095,10 +1096,11 @@
     border: 3px solid #e2e8f0;
 }
 
+/* Responsive ball sizes */
 .tracking-target {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: linear-gradient(135deg, #667eea, #764ba2);
     border-radius: 50%;
     cursor: pointer;
@@ -1107,13 +1109,90 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: white;
+    font-weight: bold;
 }
 
+/* Make green ball more prominent */
 .tracking-target.clickable {
-    background: linear-gradient(135deg, #48bb78, #38a169);
-    animation: pulse 1s infinite;
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6);
+    animation: pulse 1.5s infinite;
+    border: 3px solid #047857;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .tracking-area {
+        height: 220px;
+        max-width: 400px;
+    }
+
+    .tracking-target {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tracking-area {
+        height: 150px;
+        max-width: 300px;
+    }
+
+    .tracking-target {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+/* Enhanced pulse animation */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(16, 185, 129, 0.8);
+    }
+}
+
+/* Add timeout warning animation */
+@keyframes timeout-warning {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+/* Point feedback animation */
+@keyframes float-up {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -150%) scale(1);
+    }
 }
 
 /* Game Controls */
@@ -1134,6 +1213,7 @@
     font-size: 1.1rem;
     color: #4a5568;
     line-height: 1.5;
+    font-weight: 500;
 }
 
 .control-buttons {
@@ -1484,6 +1564,10 @@
         border-radius: 16px;
     }
 
+    .instructions p {
+        font-size: 1rem;
+    }
+
     .stat-item {
         min-width: 60px;
     }
@@ -1501,11 +1585,6 @@
     .memory-cell {
         width: 50px;
         height: 50px;
-    }
-
-    .tracking-area {
-        width: 300px;
-        height: 150px;
     }
 
     .shape-item {
@@ -1566,6 +1645,10 @@
         padding: 1rem;
     }
 
+    .instructions p {
+        font-size: .9rem;
+    }
+
     .color-circle {
         width: 50px;
         height: 50px;
@@ -1590,11 +1673,6 @@
     .memory-cell {
         width: 40px;
         height: 40px;
-    }
-
-    .tracking-area {
-        width: 250px;
-        height: 120px;
     }
 
     .sound-controls,

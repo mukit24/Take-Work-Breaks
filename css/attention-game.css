@@ -277,79 +277,155 @@
     }
 }
 
-/* Sound Hunter Game */
-.sound-hunter-container {
-    text-align: center;
-}
-
-.sound-visualizer {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 50%;
-    margin: 0 auto 2rem;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-}
-
-.sound-wave {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    animation: soundWave 2s infinite linear;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-@keyframes soundWave {
-    0% {
-        transform: scale(0.5);
-        opacity: 1;
+/* Add these animations to your CSS */
+@keyframes subtle-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    }
+}
 
-    100% {
-        transform: scale(1.5);
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
         opacity: 0;
     }
 }
 
-.sound-controls {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin-top: 2rem;
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.sound-btn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
+/* Update Visual Search CSS for smoother transitions */
+.visual-search-container {
+    text-align: center;
+    padding: 20px;
+    animation: fade-in 0.5s ease;
+}
+
+.visual-search-instructions {
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #f7fafc;
     border-radius: 10px;
-    cursor: pointer;
-    min-width: 120px;
+    border: 2px solid #e2e8f0;
     transition: all 0.3s ease;
 }
 
-.sound-yes {
-    background: #48bb78;
-    color: white;
+.visual-search-grid {
+    display: grid;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+    background: #edf2f7;
+    padding: 20px;
+    border-radius: 16px;
+    border: 3px solid #cbd5e0;
+    transition: opacity 0.3s ease;
 }
 
-.sound-yes:hover {
-    background: #38a169;
-    transform: translateY(-2px);
+.visual-search-cell {
+    aspect-ratio: 1;
+    background: white;
+    border-radius: 10px;
+    border: 2px solid #cbd5e0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-.sound-no {
-    background: #f56565;
-    color: white;
+.visual-search-cell:hover {
+    transform: scale(1.03);
+    border-color: #667eea;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
 }
 
-.sound-no:hover {
-    background: #e53e3e;
-    transform: translateY(-2px);
+.visual-search-cell svg {
+    width: 80%;
+    height: 80%;
+    transition: opacity 0.3s ease;
+}
+
+/* Timer styling */
+.timer-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.time-low {
+    color: #ed8936;
+}
+
+.time-warning {
+    color: #f56565;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Responsive updates */
+@media (max-width: 768px) {
+    .visual-search-grid {
+        max-width: 400px;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .visual-search-cell {
+        border-radius: 8px;
+    }
+    
+    .timer-display {
+        font-size: 1.1rem;
+        min-width: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+    .visual-search-grid {
+        max-width: 320px;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .visual-search-cell {
+        border-radius: 6px;
+    }
+    
+    .timer-display {
+        font-size: 1rem;
+        min-width: 100px;
+    }
+    
+    .visual-search-instructions {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
 }
 
 /* Flanker Game - Updated */

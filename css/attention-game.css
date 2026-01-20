@@ -792,7 +792,6 @@
 
 .stroop-instructions .timer-display .time-warning {
     color: #f56565;
-    animation: pulse 1s infinite;
 }
 
 .stroop-instructions .timer-display .time-low {
@@ -1123,7 +1122,6 @@
 
 .stroop-instructions .timer-display .time-warning {
     color: #f56565;
-    animation: pulse 1s infinite;
 }
 
 .stroop-instructions .timer-display .time-low {

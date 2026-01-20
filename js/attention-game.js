@@ -4,18 +4,6 @@ class AttentionTrainingGame {
         // Game data with orange color added
         this.games = [
             {
-                id: 'memory-grid',
-                name: 'Memory Grid',
-                description: 'Remember and reproduce lit patterns',
-                skill: 'Visual Memory',
-                instruction: 'Memorize the pattern, then click cells in same order.',
-                difficulty: {
-                    easy: { gridSize: 3, sequenceLength: 3 },
-                    medium: { gridSize: 4, sequenceLength: 4 },
-                    hard: { gridSize: 4, sequenceLength: 6 }
-                }
-            },
-            {
                 id: 'color-word-stroop', // Changed from 'switching-task'
                 name: 'Color-Word Stroop',
                 description: 'Identify font color, ignore word meaning',
@@ -40,6 +28,18 @@ class AttentionTrainingGame {
                 }
             },
             {
+                id: 'memory-grid',
+                name: 'Memory Grid',
+                description: 'Remember and reproduce lit patterns',
+                skill: 'Visual Memory',
+                instruction: 'Memorize the pattern, then click cells in same order.',
+                difficulty: {
+                    easy: { gridSize: 3, sequenceLength: 3 },
+                    medium: { gridSize: 4, sequenceLength: 4 },
+                    hard: { gridSize: 4, sequenceLength: 6 }
+                }
+            },
+            {
                 id: 'visual-search',
                 name: 'Visual Search',
                 description: 'Find the odd pattern among distractors',
@@ -49,6 +49,18 @@ class AttentionTrainingGame {
                     easy: { gridSize: 3, patterns: 9, oddPatterns: 1, timeLimit: 4 },
                     medium: { gridSize: 4, patterns: 16, oddPatterns: 1, timeLimit: 3 },
                     hard: { gridSize: 5, patterns: 25, oddPatterns: 1, timeLimit: 2 }
+                }
+            },
+            {
+                id: 'color-reactor',
+                name: 'Color Reactor',
+                description: 'Click only red circles, ignore others',
+                skill: 'Reaction & Inhibition',
+                instruction: 'Click only RED circles. Ignore all other colors.',
+                difficulty: {
+                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
+                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
+                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
                 }
             },
             {
@@ -76,18 +88,6 @@ class AttentionTrainingGame {
                 }
             },
             {
-                id: 'color-reactor',
-                name: 'Color Reactor',
-                description: 'Click only red circles, ignore others',
-                skill: 'Reaction & Inhibition',
-                instruction: 'Click only RED circles. Ignore all other colors.',
-                difficulty: {
-                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
-                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
-                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
-                }
-            },
-            {
                 id: 'tracking-test',
                 name: 'Tracking Test',
                 description: 'Follow moving object among distractors',
@@ -98,7 +98,7 @@ class AttentionTrainingGame {
                     medium: { targets: 1, distractors: 10, speed: 1.5 },
                     hard: { targets: 1, distractors: 15, speed: 2 }
                 }
-            }
+            },
         ];
 
         // Game state
@@ -519,6 +519,9 @@ class AttentionTrainingGame {
             this.currentStreak++;
             if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
 
+            // Show point feedback
+            this.showPointFeedback(100, true, circle);
+
             circle.classList.add('active');
             setTimeout(() => {
                 circle.classList.remove('active');
@@ -529,6 +532,10 @@ class AttentionTrainingGame {
         } else {
             this.score = Math.max(0, this.score - 50);
             this.currentStreak = 0;
+
+            // Show point feedback
+            this.showPointFeedback(-50, false, circle);
+
             circle.style.animation = 'shake 0.5s ease';
             setTimeout(() => {
                 circle.style.animation = '';
@@ -677,6 +684,9 @@ class AttentionTrainingGame {
             // COUNT CORRECT CLICK
             this.correctAnswers++;
 
+            // Show point feedback for correct click
+            this.showPointFeedback(0, true, cell);
+
             this.playSound('correct', 1.0);
 
             if (this.userSequence.length === this.currentSequence.length) {
@@ -691,6 +701,9 @@ class AttentionTrainingGame {
                 this.score += 500;
                 this.currentStreak++;
                 if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
+
+                // Show completion bonus feedback
+                this.showPointFeedback(500, true, cell);
 
                 setTimeout(() => {
                     this.userSequence = [];
@@ -707,6 +720,10 @@ class AttentionTrainingGame {
             }
 
             this.playSound('wrong', 1.0);
+
+            // Show point feedback for wrong answer
+            this.showPointFeedback(-100, false, cell);
+
             cell.classList.add('wrong');
             setTimeout(() => cell.classList.remove('wrong'), 500);
 
@@ -1456,6 +1473,9 @@ class AttentionTrainingGame {
                 this.score += bonus;
             }
 
+            // Show point feedback
+            this.showPointFeedback(200 + bonus, true, cell);
+
             cell.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
             cell.style.border = '3px solid #10b981';
             cell.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.4)';
@@ -1469,6 +1489,9 @@ class AttentionTrainingGame {
             // WRONG
             this.score = Math.max(0, this.score - 100);
             this.currentStreak = 0;
+
+            // Show point feedback
+            this.showPointFeedback(-100, false, cell);
 
             cell.style.backgroundColor = 'rgba(245, 101, 101, 0.15)';
             cell.style.border = '3px solid #f56565';
@@ -1880,6 +1903,9 @@ class AttentionTrainingGame {
             this.currentStreak++;
             if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
 
+            // Show point feedback
+            this.showPointFeedback(150, true, centerArrow);
+
             // Visual feedback - green for correct
             if (centerArrow) {
                 centerArrow.classList.add('correct');
@@ -1888,6 +1914,9 @@ class AttentionTrainingGame {
         } else {
             this.score = Math.max(0, this.score - 75);
             this.currentStreak = 0;
+
+            // Show point feedback
+            this.showPointFeedback(-75, false, centerArrow);
 
             // Visual feedback - red for wrong
             if (centerArrow) {
@@ -2190,6 +2219,9 @@ class AttentionTrainingGame {
         this.currentStreak = 0;
         this.stroopStreak = 0;
 
+        // Show point feedback
+        this.showPointFeedback(-50, false);
+
         // Visual feedback for timeout
         const wordElement = document.getElementById('stroopWord');
         if (wordElement) {
@@ -2257,6 +2289,16 @@ class AttentionTrainingGame {
 
             if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
 
+            // Bonus for fast reaction (under 1 second)
+            let bonus = 0;
+            if (reactionTime < 1000) {
+                bonus = 50; // Speed bonus
+                this.score += bonus;
+            }
+
+            // Show point feedback
+            this.showPointFeedback(150 + bonus, true, wordElement);
+
             // Visual feedback
             if (wordElement) {
                 wordElement.classList.add('correct');
@@ -2264,15 +2306,14 @@ class AttentionTrainingGame {
 
             this.playSound('correct', 1.0);
 
-            // Bonus for fast reaction (under 1 second)
-            if (reactionTime < 1000) {
-                this.score += 50; // Speed bonus
-            }
         } else {
             // WRONG: Clicked based on word meaning or wrong color
             this.score = Math.max(0, this.score - 75);
             this.currentStreak = 0;
             this.stroopStreak = 0;
+
+            // Show point feedback
+            this.showPointFeedback(-75, false, wordElement);
 
             // Visual feedback
             if (wordElement) {
@@ -2508,59 +2549,77 @@ class AttentionTrainingGame {
         }, 2000);
     }
 
-    showPointFeedback(points, isPositive) {
+    showPointFeedback(points, isPositive, element = null) {
         const feedbackDiv = document.createElement('div');
         feedbackDiv.className = 'point-feedback';
         feedbackDiv.textContent = isPositive ? `+${points}` : `${points}`;
-        feedbackDiv.style.cssText = `
-        position: absolute;
-        top: 50%;
-        left: 50%;
+
+        // Default to center of screen if no element provided
+        let positionStyle = `
+        position: fixed;
+        top: 50vh;
+        left: 50vw;
         transform: translate(-50%, -50%);
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         color: ${isPositive ? '#10b981' : '#f56565'};
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        z-index: 1000;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        z-index: 10000;
+        pointer-events: none;
         animation: float-up 1s ease forwards;
     `;
 
-        // Add CSS for animation
-        const style = document.createElement('style');
-        style.textContent = `
-        @keyframes float-up {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -100%) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -150%) scale(1);
-            }
+        // If element is provided, position relative to that element
+        if (element) {
+            const rect = element.getBoundingClientRect();
+            positionStyle = `
+            position: fixed;
+            top: ${rect.top + rect.height / 2}px;
+            left: ${rect.left + rect.width / 2}px;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: ${isPositive ? '#10b981' : '#f56565'};
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            z-index: 10000;
+            pointer-events: none;
+            animation: float-up 1s ease forwards;
+        `;
         }
-    `;
 
+        feedbackDiv.style.cssText = positionStyle;
+
+        // Add CSS for animation if not already added
         if (!document.querySelector('#float-up-animation')) {
+            const style = document.createElement('style');
             style.id = 'float-up-animation';
+            style.textContent = `
+            @keyframes float-up {
+                0% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.5);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translate(-50%, -150%) scale(1.2);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(-50%, -250%) scale(1);
+                }
+            }
+        `;
             document.head.appendChild(style);
         }
 
-        // Add to tracking area
-        const trackingArea = document.getElementById('trackingArea');
-        if (trackingArea) {
-            trackingArea.appendChild(feedbackDiv);
+        document.body.appendChild(feedbackDiv);
 
-            // Remove after animation
-            setTimeout(() => {
-                if (feedbackDiv.parentNode) {
-                    feedbackDiv.parentNode.removeChild(feedbackDiv);
-                }
-            }, 1000);
-        }
+        // Remove after animation
+        setTimeout(() => {
+            if (feedbackDiv.parentNode) {
+                feedbackDiv.parentNode.removeChild(feedbackDiv);
+            }
+        }, 1000);
     }
 
 

@@ -2157,8 +2157,10 @@ class AttentionTrainingGame {
             wordElement.classList.remove('correct', 'wrong');
         }
 
-        // Start timer for this word
+        // Reset time left to full time limit
         this.stroopTimeLeft = this.stroopTimeLimit;
+
+        // Start timer for this word
         this.startStroopTimer();
 
         this.startTime = Date.now();
@@ -2166,6 +2168,10 @@ class AttentionTrainingGame {
 
     startStroopTimer() {
         const timerDisplay = document.getElementById('stroopTimerDisplay');
+        if (!timerDisplay) return;
+
+        // Clear any existing timers first
+        this.clearStroopTimers();
 
         // Update timer immediately
         this.updateStroopTimerDisplay();
@@ -2195,7 +2201,7 @@ class AttentionTrainingGame {
             if (this.isRunning && !this.isPaused) {
                 this.handleTimeOut();
             }
-        }, this.stroopTimeLimit);
+        }, this.stroopTimeLeft);
     }
 
     updateStroopTimerDisplay() {
@@ -2219,6 +2225,17 @@ class AttentionTrainingGame {
         this.currentStreak = 0;
         this.stroopStreak = 0;
 
+        // Disable all color buttons
+        const colorButtons = document.getElementById('stroopColorButtons');
+        if (colorButtons) {
+            const buttons = colorButtons.querySelectorAll('.stroop-btn');
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.style.opacity = '0.6';
+                button.style.cursor = 'not-allowed';
+            });
+        }
+
         // Show point feedback
         this.showPointFeedback(-50, false);
 
@@ -2228,28 +2245,52 @@ class AttentionTrainingGame {
             wordElement.classList.add('wrong');
         }
 
+        // Highlight the correct button
+        if (colorButtons) {
+            const correctButton = colorButtons.querySelector(`.stroop-btn[data-color="${this.correctAnswer}"]`);
+            if (correctButton) {
+                correctButton.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.6)';
+                correctButton.style.border = '2px solid #10b981';
+                correctButton.style.transform = 'scale(1.05)';
+                correctButton.style.transition = 'all 0.3s ease';
+            }
+        }
+
         this.playSound('wrong', 1.0);
 
         // Show timeout message in timer display area
         const timerDisplay = document.getElementById('stroopTimerDisplay');
         if (timerDisplay) {
             timerDisplay.innerHTML = `<span class="time-warning">Too slow! Time's up.</span>`;
-
-            setTimeout(() => {
-                if (this.isRunning && !this.isPaused) {
-                    this.generateStroopWord();
-                }
-            }, 1000);
-        } else {
-            setTimeout(() => {
-                if (this.isRunning && !this.isPaused) {
-                    this.generateStroopWord();
-                }
-            }, 1000);
         }
 
         this.updateDisplay();
         this.updateStroopStreakDisplay();
+
+        // Wait and then reset
+        setTimeout(() => {
+            // Re-enable all buttons
+            if (colorButtons) {
+                const buttons = colorButtons.querySelectorAll('.stroop-btn');
+                buttons.forEach(button => {
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    button.style.cursor = 'pointer';
+                    button.style.boxShadow = '';
+                    button.style.border = '';
+                    button.style.transform = '';
+                });
+            }
+
+            // Remove feedback classes
+            if (wordElement) {
+                wordElement.classList.remove('wrong');
+            }
+
+            if (this.isRunning && !this.isPaused) {
+                this.generateStroopWord();
+            }
+        }, 1000);
     }
 
     getColorValue(colorName) {
@@ -2278,6 +2319,17 @@ class AttentionTrainingGame {
         this.stroopReactionTimes.push(reactionTime);
 
         const wordElement = document.getElementById('stroopWord');
+        const colorButtons = document.getElementById('stroopColorButtons');
+
+        // Disable all color buttons immediately to prevent additional clicks
+        if (colorButtons) {
+            const buttons = colorButtons.querySelectorAll('.stroop-btn');
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.style.opacity = '0.6';
+                button.style.cursor = 'not-allowed';
+            });
+        }
 
         if (userAnswer === this.correctAnswer) {
             // CORRECT: Identified the color correctly
@@ -2321,6 +2373,17 @@ class AttentionTrainingGame {
             }
 
             this.playSound('wrong', 1.0);
+
+            // Highlight the correct button (but don't make it clickable)
+            if (colorButtons) {
+                const correctButton = colorButtons.querySelector(`.stroop-btn[data-color="${this.correctAnswer}"]`);
+                if (correctButton) {
+                    correctButton.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.6)';
+                    correctButton.style.border = '2px solid #10b981';
+                    correctButton.style.transform = 'scale(1.05)';
+                    correctButton.style.transition = 'all 0.3s ease';
+                }
+            }
         }
 
         // Update display
@@ -2329,6 +2392,24 @@ class AttentionTrainingGame {
 
         // Generate new word after delay
         setTimeout(() => {
+            // Re-enable all buttons
+            if (colorButtons) {
+                const buttons = colorButtons.querySelectorAll('.stroop-btn');
+                buttons.forEach(button => {
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    button.style.cursor = 'pointer';
+                    button.style.boxShadow = '';
+                    button.style.border = '';
+                    button.style.transform = '';
+                });
+            }
+
+            // Remove feedback classes
+            if (wordElement) {
+                wordElement.classList.remove('correct', 'wrong');
+            }
+
             if (this.isRunning && !this.isPaused) {
                 this.generateStroopWord();
             }
@@ -2835,6 +2916,17 @@ class AttentionTrainingGame {
                     this.scheduleClickable();
                 }
             }
+        } else if (this.currentGame.id === 'color-word-stroop') {
+            if (this.isPaused) {
+                // Pause Stroop timers
+                this.clearStroopTimers();
+            } else {
+                // Resume Stroop game
+                if (this.isRunning && this.stroopTimeLeft > 0) {
+                    // Restart the timer with remaining time
+                    this.startStroopTimer();
+                }
+            }
         }
 
         this.updateInstructions(this.isPaused ? 'Game Paused' : 'Game Resumed');
@@ -2936,7 +3028,7 @@ class AttentionTrainingGame {
         this.elements.pauseGameBtn.disabled = true;
         this.elements.pauseGameBtn.textContent = 'Pause';
 
-        // Stop timer
+        // Stop main game timer
         if (this.timerInterval) {
             clearInterval(this.timerInterval);
             this.timerInterval = null;
@@ -2981,6 +3073,20 @@ class AttentionTrainingGame {
         if (this.currentGame && this.currentGame.id === 'color-word-stroop') {
             this.clearStroopTimers();
             this.showOriginalInstructions();
+
+            // Re-enable all buttons if they were disabled
+            const colorButtons = document.getElementById('stroopColorButtons');
+            if (colorButtons) {
+                const buttons = colorButtons.querySelectorAll('.stroop-btn');
+                buttons.forEach(button => {
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    button.style.cursor = 'pointer';
+                    button.style.boxShadow = '';
+                    button.style.border = '';
+                    button.style.transform = '';
+                });
+            }
         }
 
         // Reset game-specific states
@@ -2995,7 +3101,14 @@ class AttentionTrainingGame {
         this.currentTones = [];
         this.isClickable = false;
         this.currentArrows = [];
-        this.isShowingFeedback = false; // Add this
+        this.isShowingFeedback = false;
+
+        // Reset Stroop-specific states
+        this.stroopTimeLeft = 0;
+        this.stroopStreak = 0;
+        this.stroopTotalCorrect = 0;
+        this.stroopTotalAttempts = 0;
+        this.stroopReactionTimes = [];
 
         // Clear any animation intervals
         if (this.moveElementsInterval) {
@@ -3014,6 +3127,9 @@ class AttentionTrainingGame {
             clearTimeout(this.autoDisableTimeout);
             this.autoDisableTimeout = null;
         }
+
+        // Clear Stroop timers
+        this.clearStroopTimers();
     }
 
     updateDisplay() {

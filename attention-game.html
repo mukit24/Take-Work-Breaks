@@ -101,7 +101,8 @@
                 <div class="results-stats">
                     <div class="result-item">
                         <div class="result-header">
-                            <span class="result-label">Final Score <span class="tooltip-icon" data-tooltip="score">i</span></span>
+                            <span class="result-label">Final Score <span class="tooltip-icon"
+                                    data-tooltip="score">i</span></span>
                         </div>
                         <span class="result-value" id="finalScore">0</span>
                         <div class="previous-best" id="previousScore">Previous best: --</div>
@@ -109,7 +110,8 @@
 
                     <div class="result-item">
                         <div class="result-header">
-                            <span class="result-label">Accuracy <span class="tooltip-icon" data-tooltip="accuracy">i</span></span>
+                            <span class="result-label">Accuracy <span class="tooltip-icon"
+                                    data-tooltip="accuracy">i</span></span>
                         </div>
                         <span class="result-value" id="finalAccuracy">0%</span>
                         <div class="previous-best" id="previousAccuracy">Previous best: --</div>
@@ -117,7 +119,8 @@
 
                     <div class="result-item">
                         <div class="result-header">
-                            <span class="result-label">Reaction Time <span class="tooltip-icon" data-tooltip="reaction">i</span></span>
+                            <span class="result-label">Reaction Time <span class="tooltip-icon"
+                                    data-tooltip="reaction">i</span></span>
                         </div>
                         <span class="result-value" id="finalReaction">0ms</span>
                         <div class="previous-best" id="previousReaction">Previous best: --</div>
@@ -125,7 +128,8 @@
 
                     <div class="result-item">
                         <div class="result-header">
-                            <span class="result-label">Best Streak <span class="tooltip-icon" data-tooltip="streak">i</span></span>
+                            <span class="result-label">Best Streak <span class="tooltip-icon"
+                                    data-tooltip="streak">i</span></span>
                         </div>
                         <span class="result-value" id="finalStreak">0</span>
                         <div class="previous-best" id="previousStreak">Previous best: --</div>
@@ -137,20 +141,44 @@
 
                 <div class="skill-progress">
                     <h3>Skills Trained:</h3>
-                    <div class="skill-meter">
-                        <span class="skill-name">Reaction</span>
+
+                    <!-- Reaction Skill -->
+                    <div class="skill-meter" id="reactionSkillMeter">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <span class="skill-name">Reaction</span>
+                                <span class="skill-tooltip-icon" data-skill-type="reaction">i</span>
+                            </div>
+                            <span class="skill-percentage" id="reactionPercentage">0%</span>
+                        </div>
                         <div class="skill-bar">
                             <div class="skill-fill" id="reactionSkill"></div>
                         </div>
                     </div>
-                    <div class="skill-meter">
-                        <span class="skill-name">Memory</span>
+
+                    <!-- Memory Skill -->
+                    <div class="skill-meter" id="memorySkillMeter">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <span class="skill-name">Memory</span>
+                                <span class="skill-tooltip-icon" data-skill-type="memory">i</span>
+                            </div>
+                            <span class="skill-percentage" id="memoryPercentage">0%</span>
+                        </div>
                         <div class="skill-bar">
                             <div class="skill-fill" id="memorySkill"></div>
                         </div>
                     </div>
-                    <div class="skill-meter">
-                        <span class="skill-name">Focus</span>
+
+                    <!-- Focus Skill -->
+                    <div class="skill-meter" id="focusSkillMeter">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <span class="skill-name">Focus</span>
+                                <span class="skill-tooltip-icon" data-skill-type="focus">i</span>
+                            </div>
+                            <span class="skill-percentage" id="focusPercentage">0%</span>
+                        </div>
                         <div class="skill-bar">
                             <div class="skill-fill" id="focusSkill"></div>
                         </div>

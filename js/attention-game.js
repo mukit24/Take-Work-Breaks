@@ -52,15 +52,15 @@ class AttentionTrainingGame {
                 }
             },
             {
-                id: 'color-reactor',
-                name: 'Color Reactor',
-                description: 'Click only red circles, ignore others',
-                skill: 'Reaction & Inhibition',
-                instruction: 'Click only RED circles. Ignore all other colors.',
+                id: 'tracking-test',
+                name: 'Tracking Test',
+                description: 'Follow moving object among distractors',
+                skill: 'Sustained Attention',
+                instruction: 'Follow the BLUE circle. Click when it turns GREEN!',
                 difficulty: {
-                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
-                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
-                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
+                    easy: { targets: 1, distractors: 5, speed: 1.2 },
+                    medium: { targets: 1, distractors: 10, speed: 1.5 },
+                    hard: { targets: 1, distractors: 15, speed: 2 }
                 }
             },
             {
@@ -88,17 +88,17 @@ class AttentionTrainingGame {
                 }
             },
             {
-                id: 'tracking-test',
-                name: 'Tracking Test',
-                description: 'Follow moving object among distractors',
-                skill: 'Sustained Attention',
-                instruction: 'Follow the BLUE circle. Click when it turns GREEN!',
+                id: 'color-reactor',
+                name: 'Color Reactor',
+                description: 'Click only red circles, ignore others',
+                skill: 'Reaction & Inhibition',
+                instruction: 'Click only RED circles. Ignore all other colors.',
                 difficulty: {
-                    easy: { targets: 1, distractors: 5, speed: 1 },
-                    medium: { targets: 1, distractors: 10, speed: 1.5 },
-                    hard: { targets: 1, distractors: 15, speed: 2 }
+                    easy: { targetColor: 'red', distractors: ['blue', 'green', 'orange'] },
+                    medium: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'orange'] },
+                    hard: { targetColor: 'red', distractors: ['blue', 'green', 'yellow', 'purple', 'orange'] }
                 }
-            },
+            }
         ];
 
         // Game state
@@ -227,6 +227,29 @@ class AttentionTrainingGame {
             'tracking-test': {
                 reaction: 'Time to click moving target when it becomes clickable.',
                 accuracy: 'Successfully tracking and clicking the target.'
+            }
+        };
+
+        this.skillTooltips = {
+            'reaction': {
+                'color-reactor': 'Speed of identifying red circles. 60% from accuracy + 40% from reaction time (800ms = perfect).',
+                'flanker-focus': 'Speed identifying center arrow direction. 60% accuracy + 40% reaction time (600ms = perfect).',
+                'memory-grid': 'Not applicable for memory games.',
+                'visual-search': 'Speed finding different patterns. 60% accuracy + 40% visual scanning speed.',
+                'color-word-stroop': 'Speed overcoming word-color conflict. 60% accuracy + 40% reaction time (800ms = perfect).',
+                'tracking-test': 'Speed clicking moving target. 60% accuracy + 40% reaction time (700ms = perfect).'
+            },
+            'memory': {
+                'memory-grid': 'Ability to recall visual sequences. 70% accuracy + 30% consistency - time penalty.',
+                'other': 'Not trained in this game.'
+            },
+            'focus': {
+                'color-reactor': 'Consistency in red-only clicks. 50% accuracy + 30% streak + 20% consistency.',
+                'flanker-focus': 'Maintaining attention on center arrow. 60% accuracy + 30% streak.',
+                'memory-grid': 'Concentration during sequence recall.',
+                'visual-search': 'Sustained visual scanning. 60% accuracy + 30% streak.',
+                'color-word-stroop': 'Inhibiting automatic reading. 40% accuracy + 30% streak + 40% interference control.',
+                'tracking-test': 'Tracking moving objects. 60% accuracy + 30% streak.'
             }
         };
 
@@ -610,28 +633,43 @@ class AttentionTrainingGame {
     }
 
     showMemorySequence() {
-        if (!this.isRunning) return;
+        if (!this.isRunning || this.isPaused) return;
+
+        // Clear any existing timeouts
+        this.gameTimeouts.forEach(timeout => clearTimeout(timeout));
+        this.gameTimeouts = [];
 
         const difficulty = this.currentGame.difficulty[this.difficulty];
         const cells = this.elements.gameContainer.querySelectorAll('.memory-cell');
-        this.currentSequence = [];
 
-        // Generate random sequence
+        // Generate new sequence
+        this.currentSequence = [];
         for (let i = 0; i < difficulty.sequenceLength; i++) {
             const randomIndex = Math.floor(Math.random() * cells.length);
             this.currentSequence.push(randomIndex);
         }
+
+        // Clear user sequence
+        this.userSequence = [];
 
         // Show sequence
         this.isShowingSequence = true;
         let index = 0;
 
         const showNext = () => {
-            if (!this.isRunning || !this.isShowingSequence) return;
+            // Check if game is still running and not paused
+            if (!this.isRunning || this.isPaused || !this.isShowingSequence) {
+                // If paused, store the current position
+                if (this.isPaused && this.memoryPauseState) {
+                    this.memoryPauseState.currentSequence = [...this.currentSequence];
+                    this.memoryPauseState.isShowingSequence = true;
+                }
+                return;
+            }
 
             if (index >= this.currentSequence.length) {
                 this.isShowingSequence = false;
-                if (this.isRunning) {
+                if (this.isRunning && !this.isPaused) {
                     this.updateInstructions('Now click cells in the same order!');
                 }
                 return;
@@ -660,6 +698,12 @@ class AttentionTrainingGame {
     handleMemoryGridClick(e) {
         if (!this.isRunning || this.isPaused || this.isShowingSequence) return;
 
+        // If we have a pause state and user is clicking, clear it
+        if (this.memoryPauseState) {
+            this.memoryPauseState = null;
+        }
+
+
         const cell = e.target;
         const cellIndex = parseInt(cell.dataset.index);
 
@@ -684,13 +728,12 @@ class AttentionTrainingGame {
             // COUNT CORRECT CLICK
             this.correctAnswers++;
 
-            // Show point feedback for correct click
-            this.showPointFeedback(0, true, cell);
-
+            // DON'T show point feedback for intermediate clicks
+            // Only show visual feedback
             this.playSound('correct', 1.0);
 
             if (this.userSequence.length === this.currentSequence.length) {
-                // Complete sequence - track time
+                // ✅ FINAL CORRECT CLICK - SHOW POINTS HERE
                 const sequenceTime = Date.now() - this.sequenceStartTime;
                 this.sequenceTimes.push(sequenceTime);
 
@@ -702,7 +745,7 @@ class AttentionTrainingGame {
                 this.currentStreak++;
                 if (this.currentStreak > this.bestStreak) this.bestStreak = this.currentStreak;
 
-                // Show completion bonus feedback
+                // ✅ SHOW FINAL COMPLETION FEEDBACK (500 points)
                 this.showPointFeedback(500, true, cell);
 
                 setTimeout(() => {
@@ -710,7 +753,10 @@ class AttentionTrainingGame {
                     this.showMemorySequence();
                 }, 1000);
 
-                this.updateInstructions('Correct! Remember the next pattern...');
+                this.updateInstructions('Perfect! Remember the next pattern...');
+            } else {
+                // Intermediate correct click - just show visual feedback
+                this.updateInstructions(`Correct! ${this.currentSequence.length - this.userSequence.length} more to go...`);
             }
         } else {
             // Wrong answer - track time for partial attempt
@@ -721,7 +767,7 @@ class AttentionTrainingGame {
 
             this.playSound('wrong', 1.0);
 
-            // Show point feedback for wrong answer
+            // ✅ SHOW WRONG ANSWER FEEDBACK (-100 points)
             this.showPointFeedback(-100, false, cell);
 
             cell.classList.add('wrong');
@@ -924,7 +970,7 @@ class AttentionTrainingGame {
                     if (this.isRunning && !this.isPaused) {
                         this.startVisualSearch();
                     }
-                }, 800);
+                }, 100);
             }
         }, 1500);
     }
@@ -1071,14 +1117,14 @@ class AttentionTrainingGame {
                 properties: ['count', 'angle'],
                 values: {
                     'angle': [150],
-                    'count': [1, 3],
+                    'count': [3],
                 }
             },
             'circles': {
                 properties: ['size', 'count'],
                 values: {
                     'size': ['medium'],
-                    'count': [3, 1],
+                    'count': [3],
                 }
             },
             'squares': {
@@ -1578,7 +1624,7 @@ class AttentionTrainingGame {
                         }
                         this.startVisualSearch();
                     }
-                }, 500);
+                }, 100);
 
                 this.gameTimeouts.push(nextRoundTimeout);
             }
@@ -2855,75 +2901,140 @@ class AttentionTrainingGame {
         setTimeout(() => {
             this.startGameSpecificLogic();
         }, 300);
+
+
     }
 
     startGameSpecificLogic() {
-        // Make sure we're running and have a current game
         if (!this.isRunning || !this.currentGame) return;
 
-        switch (this.currentGame.id) {
-            case 'color-reactor':
-                this.startColorReactor();
-                break;
-            case 'memory-grid':
-                this.startMemoryGrid();
-                break;
-            case 'visual-search': // Changed from 'sound-hunter'
-                this.startVisualSearch();
-                break;
-            case 'flanker-focus':
-                this.startFlankerFocus();
-                break;
-            case 'color-word-stroop': // Changed from 'switching-task'
-                this.startStroopTask();
-                break;
-            case 'tracking-test':
-                this.startTrackingTest();
-                break;
+        // If resuming from pause, skip normal start
+        if (this.memoryPauseState && this.currentGame.id === 'memory-grid') {
+            return; // togglePause() will handle resume
         }
+
+        setTimeout(() => {
+            switch (this.currentGame.id) {
+                case 'color-reactor':
+                    this.startColorReactor();
+                    break;
+                case 'memory-grid':
+                    this.showMemorySequence();
+                    break;
+                case 'visual-search':
+                    this.startVisualSearch();
+                    break;
+                case 'flanker-focus':
+                    this.startFlankerFocus();
+                    break;
+                case 'color-word-stroop':
+                    this.startStroopTask();
+                    break;
+                case 'tracking-test':
+                    this.startTrackingTest();
+                    break;
+            }
+        }, 500);
     }
 
     togglePause() {
-        // Disable pause for visual search to prevent cheating
         if (this.currentGame && this.currentGame.id === 'visual-search') {
             this.updateInstructions('Pause is disabled for Visual Search to prevent cheating');
-            return; // Don't allow pausing
+            return;
         }
 
         this.isPaused = !this.isPaused;
         this.elements.pauseGameBtn.textContent = this.isPaused ? 'Resume' : 'Pause';
 
+        // Handle Memory Grid pause/resume
+        if (this.currentGame && this.currentGame.id === 'memory-grid') {
+            if (this.isPaused) {
+                // PAUSE: Clear all timeouts and store state
+                this.gameTimeouts.forEach(timeout => clearTimeout(timeout));
+                this.gameTimeouts = [];
+
+                // Clear any active cells
+                const cells = this.elements.gameContainer.querySelectorAll('.memory-cell');
+                cells.forEach(cell => {
+                    cell.classList.remove('active', 'wrong');
+                });
+
+                // Store current state
+                this.memoryPauseState = {
+                    userSequence: [...(this.userSequence || [])],
+                    currentSequence: [...(this.currentSequence || [])],
+                    isShowingSequence: this.isShowingSequence || false,
+                    sequenceStartTime: this.sequenceStartTime
+                };
+
+                // Stop any ongoing sequence display
+                this.isShowingSequence = false;
+
+            } else {
+                // RESUME: Restore state
+                if (this.memoryPauseState) {
+                    this.userSequence = [...this.memoryPauseState.userSequence];
+                    this.currentSequence = [...this.memoryPauseState.currentSequence];
+                    this.isShowingSequence = this.memoryPauseState.isShowingSequence;
+                    this.sequenceStartTime = this.memoryPauseState.sequenceStartTime;
+
+                    // Clear any visual feedback
+                    const cells = this.elements.gameContainer.querySelectorAll('.memory-cell');
+                    cells.forEach(cell => {
+                        cell.classList.remove('active', 'wrong');
+                    });
+
+                    // Update instructions based on state
+                    if (this.isShowingSequence) {
+                        this.updateInstructions('Memorize the pattern...');
+                        // Restart sequence display after short delay
+                        setTimeout(() => {
+                            this.showMemorySequence();
+                        }, 500);
+                    } else if (this.userSequence.length === 0) {
+                        // Waiting for sequence to start
+                        this.updateInstructions('Get ready for the next pattern...');
+                        setTimeout(() => {
+                            this.showMemorySequence();
+                        }, 1000);
+                    } else {
+                        // User was in the middle of recalling
+                        this.updateInstructions(`Now click cells in the same order! (${this.currentSequence.length - this.userSequence.length} more)`);
+                    }
+
+                    this.memoryPauseState = null;
+                } else {
+                    // No pause state stored, restart fresh
+                    this.updateInstructions('Memorize the pattern...');
+                    setTimeout(() => {
+                        this.showMemorySequence();
+                    }, 1000);
+                }
+            }
+        }
+
+        // Handle other games' pause/resume...
         if (this.currentGame.id === 'tracking-test') {
             if (this.isPaused) {
-                // Pause movement
                 if (this.moveElementsInterval) {
                     clearInterval(this.moveElementsInterval);
                     this.moveElementsInterval = null;
                 }
-
-                // Pause the clickable timeout
                 if (this.clickableTimeout) {
                     clearTimeout(this.clickableTimeout);
                     this.clickableTimeout = null;
                 }
-
             } else {
-                // Resume movement
                 this.moveElementsInterval = setInterval(() => this.moveElements(), 50);
-
-                // Resume the clickable scheduling if not currently clickable
                 if (!this.isClickable && this.isRunning) {
                     this.scheduleClickable();
                 }
             }
         } else if (this.currentGame.id === 'color-word-stroop') {
             if (this.isPaused) {
-                // Pause Stroop timers
                 this.clearStroopTimers();
             } else {
-                // Resume Stroop game
                 if (this.isRunning && this.stroopTimeLeft > 0) {
-                    // Restart the timer with remaining time
                     this.startStroopTimer();
                 }
             }
@@ -3023,6 +3134,8 @@ class AttentionTrainingGame {
     stopGame() {
         this.isRunning = false;
         this.isPaused = false;
+
+        this.memoryPauseState = null;
 
         this.elements.startGameBtn.disabled = false;
         this.elements.pauseGameBtn.disabled = true;
@@ -3236,6 +3349,8 @@ class AttentionTrainingGame {
 
         // Setup tooltip events
         this.setupTooltipEvents();
+
+        this.setupSkillTooltipEvents();
     }
 
     // Hide irrelevant indicators based on game
@@ -3254,17 +3369,19 @@ class AttentionTrainingGame {
     }
 
     setupTooltipEvents() {
-        const tooltipIcons = document.querySelectorAll('.tooltip-icon');
+        // Handle result tooltips (score, accuracy, etc.)
+        const resultTooltipIcons = document.querySelectorAll('.result-header .tooltip-icon');
         const tooltipContainer = this.elements.tooltipContainer;
 
-        // Add click event to all tooltip icons
-        tooltipIcons.forEach(icon => {
+        resultTooltipIcons.forEach(icon => {
             icon.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const tooltipType = icon.dataset.tooltip;
-                this.showTooltip(tooltipType);
+                this.showResultTooltip(tooltipType);
             });
         });
+
+        // Skill tooltips are handled separately in setupSkillTooltipEvents()
 
         // Close tooltip when clicking outside or on close button
         if (tooltipContainer) {
@@ -3281,6 +3398,31 @@ class AttentionTrainingGame {
                 this.hideTooltip();
             }
         });
+    }
+
+    showResultTooltip(tooltipType) {
+        const tooltipContainer = this.elements.tooltipContainer;
+        const tooltipData = this.tooltips[tooltipType];
+
+        if (!tooltipData || !tooltipContainer) return;
+
+        // Get game-specific content if available
+        let content = tooltipData.content;
+        if (this.gameSpecificTooltips[this.currentGame.id] &&
+            this.gameSpecificTooltips[this.currentGame.id][tooltipType]) {
+            content = this.gameSpecificTooltips[this.currentGame.id][tooltipType];
+        }
+
+        tooltipContainer.innerHTML = `
+        <div class="tooltip-content">
+            <button class="tooltip-close">×</button>
+            <h4>${tooltipData.title}</h4>
+            <p>${content}</p>
+            <p><small>Click outside or press ESC to close</small></p>
+        </div>
+    `;
+
+        tooltipContainer.style.display = 'flex';
     }
 
     showTooltip(tooltipType) {
@@ -3385,47 +3527,122 @@ class AttentionTrainingGame {
                 let reactionSpeedScore = 0;
                 if (avgReaction > 0) {
                     // Convert reaction time to score: 300ms = 40, 1000ms = 0
-                    reactionSpeedScore = Math.max(0, Math.min(40, 40 - (avgReaction - 300) / 17.5));
+                    reactionSpeedScore = Math.max(0, Math.min(40, 40 - (avgReaction - 800) / 30));
                 }
                 reactionSkill = Math.min(100, (accuracy * 0.6) + reactionSpeedScore);
 
                 // Focus skill = 50% accuracy + 30% streak + 20% consistency
+                let colorReactorStreakScore = 0;
+                // Adjust expectations based on game duration
+                if (this.totalTime <= 30) {
+                    // 30-second game - very forgiving
+                    if (this.bestStreak >= 10) colorReactorStreakScore = 30;
+                    else if (this.bestStreak >= 5) colorReactorStreakScore = 20;   // 2 sequences in 30s is excellent!
+                    else if (this.bestStreak >= 1) colorReactorStreakScore = 10; // 1 sequence is good
+                }
+                else if (this.totalTime <= 60) {
+                    // 1-minute game - moderate expectations
+                    if (this.bestStreak >= 15) colorReactorStreakScore = 30;
+                    else if (this.bestStreak >= 12) colorReactorStreakScore = 25;   // Good for 1 minute
+                    else if (this.bestStreak >= 8) colorReactorStreakScore = 20;
+                    else if (this.bestStreak >= 5) colorReactorStreakScore = 15;
+                    else if (this.bestStreak >= 1) colorReactorStreakScore = 10;
+                }
+                else {
+                    // 2+ minute game - higher expectations
+                    if (this.bestStreak >= 20) colorReactorStreakScore = 30;    // Excellent for long game
+                    else if (this.bestStreak >= 15) colorReactorStreakScore = 25;
+                    else if (this.bestStreak >= 10) colorReactorStreakScore = 20;
+                    else if (this.bestStreak >= 5) colorReactorStreakScore = 15;
+                    else if (this.bestStreak >= 1) colorReactorStreakScore = 10;
+                }
+
                 const consistency = this.totalAnswers > 0 ? (this.correctAnswers / this.totalAnswers) * 20 : 0;
-                focusSkill = Math.min(100, (accuracy * 0.5) + Math.min(30, this.bestStreak * 3) + consistency);
+                focusSkill = Math.min(100, (accuracy * 0.5) + colorReactorStreakScore + consistency);
                 break;
             case 'flanker-focus':
                 // Reaction skill considers both speed and accuracy
                 let reactionTimeScore = 0;
                 if (avgReaction > 0) {
-                    // More complex arrows = slower expected reaction time
-                    const baseTime = this.currentGame.difficulty[this.difficulty].directionTypes.length > 2 ? 600 : 400;
-                    const maxTime = baseTime * 2.5;
-                    reactionTimeScore = Math.max(0, Math.min(40, 50 - ((avgReaction - baseTime) / (maxTime - baseTime) * 40)));
+                    // Flanker task: Identify center arrow, ignore distractors
+                    // Range: 800ms = 40 points (perfect), 2000ms = 0 points
+                    const perfectTime = 600;  // Expert performance for Flanker
+                    const maxTime = 2000;     // Very slow reaction cutoff
+
+                    // Every 35ms above 600ms = 1 point lost
+                    // (2000 - 600) / 40 = 1400 / 40 = 35ms per point
+                    reactionTimeScore = Math.max(0, Math.min(40, 40 - (avgReaction - perfectTime) / 35));
                 }
 
-                reactionSkill = Math.min(100, (accuracy * 0.7) + reactionTimeScore);
+                reactionSkill = Math.min(100, (accuracy * 0.6) + reactionTimeScore);
 
-                // Focus skill: penalize errors more heavily in complex versions
-                const errorPenalty = (this.totalAnswers - this.correctAnswers) * (this.difficulty === 'hard' ? 3 : 2);
-                const baseFocus = (accuracy * 0.6) + Math.min(30, this.bestStreak * (this.difficulty === 'hard' ? 2.5 : 3));
-                focusSkill = Math.max(0, Math.min(100, baseFocus - Math.min(25, errorPenalty)));
+                // Focus skill: 
+                let flunkerStreakScore = 0;
+                // Adjust expectations based on game duration
+                if (this.totalTime <= 30) {
+                    // 30-second game - very forgiving
+                    if (this.bestStreak >= 5) flunkerStreakScore = 30;
+                    else if (this.bestStreak >= 3) flunkerStreakScore = 20;   // 2 sequences in 30s is excellent!
+                    else if (this.bestStreak >= 1) flunkerStreakScore = 10; // 1 sequence is good
+                }
+                else if (this.totalTime <= 60) {
+                    // 1-minute game - moderate expectations
+                    if (this.bestStreak >= 8) flunkerStreakScore = 30;
+                    else if (this.bestStreak >= 6) flunkerStreakScore = 25;   // Good for 1 minute
+                    else if (this.bestStreak >= 4) flunkerStreakScore = 20;
+                    else if (this.bestStreak >= 2) flunkerStreakScore = 15;
+                    else if (this.bestStreak >= 1) flunkerStreakScore = 10;
+                }
+                else {
+                    // 2+ minute game - higher expectations
+                    if (this.bestStreak >= 10) flunkerStreakScore = 30;    // Excellent for long game
+                    else if (this.bestStreak >= 7) flunkerStreakScore = 25;
+                    else if (this.bestStreak >= 5) flunkerStreakScore = 20;
+                    else if (this.bestStreak >= 3) flunkerStreakScore = 15;
+                    else if (this.bestStreak >= 1) flunkerStreakScore = 10;
+                }
+
+                focusSkill = Math.max(0, Math.min(100,
+                    (accuracy * 0.6) +
+                    flunkerStreakScore
+                ));
                 break;
 
             case 'memory-grid':
                 // IMPROVED MEMORY GAME CALCULATION
-                const difficulty = this.currentGame.difficulty[this.difficulty];
+                const gameDurationSeconds = this.totalTime;
 
                 // 1. Base memory from accuracy (40% weight)
-                const memoryFromAccuracy = accuracy * 0.4;
+                const memoryFromAccuracy = accuracy * 0.7;
 
-                // 2. Memory from sequence length (30% weight)
-                // Longer sequences = better memory
-                const maxSequenceLength = 6; // Hard difficulty
-                const sequenceLengthBonus = (difficulty.sequenceLength / maxSequenceLength) * 30;
 
                 // 3. Memory from consistency (30% weight)
                 // Streak shows consistency in memory recall
-                const consistencyBonus = Math.min(30, this.bestStreak * 3);
+
+                let consistencyScore = 0;
+
+                // Adjust expectations based on game duration
+                if (gameDurationSeconds <= 30) {
+                    // 30-second game - very forgiving
+                    if (this.bestStreak >= 3) consistencyScore = 30;
+                    else if (this.bestStreak >= 2) consistencyScore = 20;   // 2 sequences in 30s is excellent!
+                    else if (this.bestStreak >= 1) consistencyScore = 10; // 1 sequence is good
+                }
+                else if (gameDurationSeconds <= 60) {
+                    // 1-minute game - moderate expectations
+                    if (this.bestStreak >= 4) consistencyScore = 30;
+                    else if (this.bestStreak >= 3) consistencyScore = 25;    // Good for 1 minute
+                    else if (this.bestStreak >= 2) consistencyScore = 20;
+                    else if (this.bestStreak >= 1) consistencyScore = 10;
+                }
+                else {
+                    // 2+ minute game - higher expectations
+                    if (this.bestStreak >= 5) consistencyScore = 30;    // Excellent for long game
+                    else if (this.bestStreak >= 4) consistencyScore = 25;
+                    else if (this.bestStreak >= 3) consistencyScore = 20;
+                    else if (this.bestStreak >= 2) consistencyScore = 15;
+                    else if (this.bestStreak >= 1) consistencyScore = 10;
+                }
 
                 // 4. Penalty for time (if tracking sequence completion time)
                 let timePenalty = 0;
@@ -3438,30 +3655,11 @@ class AttentionTrainingGame {
                 // Calculate final memory skill
                 memorySkill = Math.min(100,
                     memoryFromAccuracy +
-                    sequenceLengthBonus +
-                    consistencyBonus -
+                    consistencyScore -
                     timePenalty
                 );
 
-                // Focus calculation for memory grid
-                // Focus = ability to maintain attention during memory task
-                // 1. From accuracy (40%)
-                const focusFromAccuracy = accuracy * 0.4;
-
-                // 2. From streak - shows sustained focus (40%)
-                const focusFromStreak = Math.min(40, this.bestStreak * 5);
-
-                // 3. From grid size - larger grid requires more focus (20%)
-                const maxGridSize = 4;
-                const focusFromGridSize = (difficulty.gridSize / maxGridSize) * 20;
-
-                focusSkill = Math.min(100,
-                    focusFromAccuracy +
-                    focusFromStreak +
-                    focusFromGridSize
-                );
-
-                // Hide reaction skill for memory grid
+                focusSkill = 0;
                 reactionSkill = 0;
                 break;
             case 'visual-search': // Changed from 'sound-hunter'
@@ -3469,7 +3667,7 @@ class AttentionTrainingGame {
                 let visualScanningScore = 0;
                 if (avgReaction > 0) {
                     // Good visual search: 1500-2500ms depending on difficulty
-                    const baseTime = this.difficulty === 'easy' ? 2500 :
+                    const baseTime = this.difficulty === 'easy' ? 2200 :
                         this.difficulty === 'medium' ? 2000 : 1500;
                     const maxTime = baseTime * 2;
                     visualScanningScore = Math.max(0, Math.min(40, 40 - (avgReaction - baseTime) / ((maxTime - baseTime) / 40)));
@@ -3478,112 +3676,339 @@ class AttentionTrainingGame {
                 reactionSkill = Math.min(100, (accuracy * 0.6) + visualScanningScore);
 
                 // Focus skill: Sustained visual attention and scanning
-                const visualStreakScore = Math.min(30, this.bestStreak * 3);
-                const visualConsistencyScore = Math.min(40, accuracy * 0.4);
+                let visualStreakScore = 0;
+                // Adjust expectations based on game duration
+                if (this.totalTime <= 30) {
+                    // 30-second game - very forgiving
+                    if (this.bestStreak >= 5) visualStreakScore = 30;
+                    else if (this.bestStreak >= 3) visualStreakScore = 20;   // 2 sequences in 30s is excellent!
+                    else if (this.bestStreak >= 1) visualStreakScore = 10; // 1 sequence is good
+                }
+                else if (this.totalTime <= 60) {
+                    // 1-minute game - moderate expectations
+                    if (this.bestStreak >= 8) visualStreakScore = 30;
+                    else if (this.bestStreak >= 6) visualStreakScore = 25;   // Good for 1 minute
+                    else if (this.bestStreak >= 4) visualStreakScore = 20;
+                    else if (this.bestStreak >= 2) visualStreakScore = 15;
+                    else if (this.bestStreak >= 1) visualStreakScore = 10;
+                }
+                else {
+                    // 2+ minute game - higher expectations
+                    if (this.bestStreak >= 10) visualStreakScore = 30;    // Excellent for long game
+                    else if (this.bestStreak >= 7) visualStreakScore = 25;
+                    else if (this.bestStreak >= 5) visualStreakScore = 20;
+                    else if (this.bestStreak >= 3) visualStreakScore = 15;
+                    else if (this.bestStreak >= 1) visualStreakScore = 10;
+                }
 
                 focusSkill = Math.max(0, Math.min(100,
-                    (accuracy * 0.3) +
-                    visualStreakScore +
-                    visualConsistencyScore
+                    (accuracy * 0.6) +
+                    visualStreakScore
                 ));
                 break;
-            case 'color-word-stroop': // Update game ID in your games array
+            case 'color-word-stroop':
                 // Reaction skill: Very important in Stroop - faster = better
                 let reactionTimeScoreForColorStroop = 0;
                 if (avgReaction > 0) {
-                    // Stroop effect makes reactions slower, so adjust expectations
-                    const baseTime = 800; // Normal Stroop reaction is slower
-                    const maxTime = 2000;
+                    const baseTime = 800;
                     reactionTimeScoreForColorStroop = Math.max(0, Math.min(40, 40 - (avgReaction - baseTime) / 30));
                 }
                 reactionSkill = Math.min(100, (accuracy * 0.6) + reactionTimeScoreForColorStroop);
 
                 // Focus skill: Ability to inhibit automatic reading response
-                // Streak shows consistency in overcoming the Stroop effect
-                const streakScore = Math.min(30, this.stroopStreak * 2);
+                // FIX 1: Use MAIN game variables (not Stroop-specific)
+                const mainStreak = this.bestStreak || 0;
 
-                // Interference effect measurement (how much word meaning affects you)
+                // FIX 2: Use let instead of const for streakScore
+                let streakScore = 0;
+
+                // Tier-based streak scoring - GOOD IDEA!
+                if (mainStreak >= 10) streakScore = 30;      // Excellent
+                else if (mainStreak >= 7) streakScore = 25;  // Very good  
+                else if (mainStreak >= 5) streakScore = 20;  // Good
+                else if (mainStreak >= 3) streakScore = 15;  // Decent
+                else if (mainStreak >= 2) streakScore = 10;  // Okay
+                else if (this.correctAnswers > 0) streakScore = 5;  // Participated
+
+                // FIX 3: Use main game variables for interference
                 let interferenceScore = 0;
-                if (this.stroopTotalAttempts > 10) {
+                if (this.totalAnswers > 0) {  // Use this.totalAnswers, not stroopTotalAttempts
                     // Higher accuracy = better inhibition of automatic reading
-                    interferenceScore = Math.min(40, (this.stroopTotalCorrect / this.stroopTotalAttempts) * 40);
+                    interferenceScore = Math.min(40, accuracy * 0.4);
                 }
 
+                // FIX 4: Adjust weights for removed streak component
                 focusSkill = Math.max(0, Math.min(100,
-                    (accuracy * 0.3) +
+                    (accuracy * 0.4) +       // Increased from 0.3 to 0.4
                     streakScore +
                     interferenceScore
                 ));
+
+                // FIX 5: Ensure minimum for good performance
+                if (accuracy === 100 && this.totalAnswers >= 3) {
+                    focusSkill = Math.max(70, focusSkill); // Minimum 70 for perfect
+                }
+
                 break;
 
             case 'tracking-test':
-                // Get difficulty multiplier
-                const difficultyMultiplier = {
-                    'easy': 1.0,
-                    'medium': 1.2,
-                    'hard': 1.5
-                }[this.difficulty];
 
                 // Reaction skill: Important for tracking - faster = better
                 let reactionTimeScoreForTracking = 0;
                 if (avgReaction > 0) {
                     // Tracking requires visual processing and motor response
-                    const baseTime = 1500; // Good tracking reaction time
-                    const maxTime = 3000;
-                    reactionTimeScoreForTracking = Math.max(0, Math.min(40, 40 - (avgReaction - baseTime) / 37.5));
+                    const baseTime = 700;  // Good tracking reaction time
+                    const maxTime = 2000;  // Very slow reaction cutoff
+
+                    // Every 32.5ms above 700ms = 1 point lost
+                    // (2000 - 700) / 40 = 1300 / 40 = 32.5ms per point
+                    reactionTimeScoreForTracking = Math.max(0, Math.min(40, 40 - (avgReaction - baseTime) / 32.5));
                 }
                 reactionSkill = Math.min(100, (accuracy * 0.6) + reactionTimeScoreForTracking);
 
                 // Focus skill: Ability to sustain attention on moving target
                 // Streak shows consistency in tracking
-                const streakScoreForTrackingTest = Math.min(30, this.bestStreak * 3);
-
-                // Tracking consistency measurement (how well you maintain focus)
-                let trackingConsistencyScore = 0;
-                if (this.totalAnswers > 5) {
-                    // Higher accuracy with more attempts = better sustained attention
-                    trackingConsistencyScore = Math.min(40, (this.correctAnswers / this.totalAnswers) * 40);
+                let trackingStreakScore = 0;
+                // Adjust expectations based on game duration
+                if (this.totalTime <= 30) {
+                    // 30-second game - very forgiving
+                    if (this.bestStreak >= 5) trackingStreakScore = 30;
+                    else if (this.bestStreak >= 3) trackingStreakScore = 20;   // 2 sequences in 30s is excellent!
+                    else if (this.bestStreak >= 1) trackingStreakScore = 10; // 1 sequence is good
+                }
+                else if (this.totalTime <= 60) {
+                    // 1-minute game - moderate expectations
+                    if (this.bestStreak >= 8) trackingStreakScore = 30;
+                    else if (this.bestStreak >= 6) trackingStreakScore = 25;   // Good for 1 minute
+                    else if (this.bestStreak >= 4) trackingStreakScore = 20;
+                    else if (this.bestStreak >= 2) trackingStreakScore = 15;
+                    else if (this.bestStreak >= 1) trackingStreakScore = 10;
+                }
+                else {
+                    // 2+ minute game - higher expectations
+                    if (this.bestStreak >= 10) trackingStreakScore = 30;    // Excellent for long game
+                    else if (this.bestStreak >= 7) trackingStreakScore = 25;
+                    else if (this.bestStreak >= 5) trackingStreakScore = 20;
+                    else if (this.bestStreak >= 3) trackingStreakScore = 15;
+                    else if (this.bestStreak >= 1) trackingStreakScore = 10;
                 }
 
-                // Difficulty bonus for harder tracking
-                const difficultyBonus = (difficultyMultiplier - 1) * 10;
-
                 focusSkill = Math.max(0, Math.min(100,
-                    (accuracy * 0.3) +
-                    streakScoreForTrackingTest +
-                    trackingConsistencyScore +
-                    difficultyBonus
+                    (accuracy * 0.6) +
+                    trackingStreakScore
                 ));
                 break;
         }
 
+        // Update reaction skill
         if (this.elements.reactionSkill) {
             this.elements.reactionSkill.style.width = `${reactionSkill}%`;
 
-            // Hide reaction skill element for memory grid
-            const reactionSkillElement = this.elements.reactionSkill.parentElement.parentElement;
-            if (this.currentGame.id === 'memory-grid') {
-                reactionSkillElement.classList.add('hidden');
-            } else {
-                reactionSkillElement.classList.remove('hidden');
+            // Update percentage text
+            const reactionPercentage = document.getElementById('reactionPercentage');
+            if (reactionPercentage) {
+                reactionPercentage.textContent = `${Math.round(reactionSkill)}%`;
+            }
+
+            // Show/hide based on game
+            const reactionSkillMeter = document.getElementById('reactionSkillMeter');
+            if (reactionSkillMeter) {
+                if (this.currentGame.id === 'memory-grid') {
+                    reactionSkillMeter.style.display = 'none';
+                } else {
+                    reactionSkillMeter.style.display = 'block';
+                }
             }
         }
 
-        // Only update memory skill for memory grid game
+        // Update memory skill
         if (this.elements.memorySkill) {
-            if (this.currentGame.id === 'memory-grid') {
-                this.elements.memorySkill.style.width = `${memorySkill}%`;
-                this.elements.memorySkill.parentElement.parentElement.classList.remove('hidden');
-            } else {
-                this.elements.memorySkill.parentElement.parentElement.classList.add('hidden');
+            this.elements.memorySkill.style.width = `${memorySkill}%`;
+
+            // Update percentage text
+            const memoryPercentage = document.getElementById('memoryPercentage');
+            if (memoryPercentage) {
+                memoryPercentage.textContent = `${Math.round(memorySkill)}%`;
+            }
+
+            // Show/hide based on game
+            const memorySkillMeter = document.getElementById('memorySkillMeter');
+            if (memorySkillMeter) {
+                if (this.currentGame.id === 'memory-grid') {
+                    memorySkillMeter.style.display = 'block';
+                } else {
+                    memorySkillMeter.style.display = 'none';
+                }
             }
         }
 
+        // Update focus skill
         if (this.elements.focusSkill) {
             this.elements.focusSkill.style.width = `${focusSkill}%`;
+
+            // Update percentage text
+            const focusPercentage = document.getElementById('focusPercentage');
+            if (focusPercentage) {
+                focusPercentage.textContent = `${Math.round(focusSkill)}%`;
+            }
+
+            // Show/hide based on game
+            const focusSkillMeter = document.getElementById('focusSkillMeter');
+            if (focusSkillMeter) {
+                if (this.currentGame.id === 'memory-grid') {
+                    // Memory grid has memory skill instead of focus
+                    focusSkillMeter.style.display = 'none';
+                } else {
+                    focusSkillMeter.style.display = 'block';
+                }
+            }
         }
+
+        // Setup skill tooltip events
+        this.setupSkillTooltipEvents();
+    }
+
+    addSkillTooltips() {
+        if (!this.currentGame) return;
+
+        const gameId = this.currentGame.id;
+
+        // Reaction skill tooltip
+        const reactionMeter = document.getElementById('reactionSkillMeter');
+        if (reactionMeter && gameId !== 'memory-grid') {
+            const tooltipIcon = document.createElement('span');
+            tooltipIcon.className = 'tooltip-icon';
+            tooltipIcon.textContent = 'i';
+            tooltipIcon.dataset.skillType = 'reaction';
+            tooltipIcon.dataset.gameId = gameId;
+
+            // Remove existing tooltip if any
+            const existingIcon = reactionMeter.querySelector('.tooltip-icon');
+            if (existingIcon) existingIcon.remove();
+
+            reactionMeter.appendChild(tooltipIcon);
+        }
+
+        // Memory skill tooltip (only for memory-grid)
+        const memoryMeter = document.getElementById('memorySkillMeter');
+        if (memoryMeter && gameId === 'memory-grid') {
+            const tooltipIcon = document.createElement('span');
+            tooltipIcon.className = 'tooltip-icon';
+            tooltipIcon.textContent = 'i';
+            tooltipIcon.dataset.skillType = 'memory';
+            tooltipIcon.dataset.gameId = gameId;
+
+            // Remove existing tooltip if any
+            const existingIcon = memoryMeter.querySelector('.tooltip-icon');
+            if (existingIcon) existingIcon.remove();
+
+            memoryMeter.appendChild(tooltipIcon);
+        }
+
+        // Focus skill tooltip
+        const focusMeter = document.getElementById('focusSkillMeter');
+        if (focusMeter && gameId !== 'memory-grid') {
+            const tooltipIcon = document.createElement('span');
+            tooltipIcon.className = 'tooltip-icon';
+            tooltipIcon.textContent = 'i';
+            tooltipIcon.dataset.skillType = 'focus';
+            tooltipIcon.dataset.gameId = gameId;
+
+            // Remove existing tooltip if any
+            const existingIcon = focusMeter.querySelector('.tooltip-icon');
+            if (existingIcon) existingIcon.remove();
+
+            focusMeter.appendChild(tooltipIcon);
+        }
+
+        // Add click events for skill tooltips
+        this.setupSkillTooltipEvents();
+    }
+
+    setupSkillTooltipEvents() {
+        const skillTooltipIcons = document.querySelectorAll('.skill-tooltip-icon');
+        const tooltipContainer = this.elements.tooltipContainer;
+
+        skillTooltipIcons.forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const skillType = icon.dataset.skillType;
+                this.showSkillTooltip(skillType);
+            });
+        });
+    }
+
+    showSkillTooltip(skillType) {
+        const tooltipContainer = this.elements.tooltipContainer;
+        if (!tooltipContainer || !this.currentGame) return;
+
+        const gameId = this.currentGame.id;
+
+        // Get the appropriate tooltip text
+        let title = '';
+        let content = '';
+
+        switch (skillType) {
+            case 'reaction':
+                title = 'Reaction Skill';
+                if (gameId === 'color-reactor') {
+                    content = 'Speed of identifying red circles. 60% from accuracy + 40% from reaction time (800ms = perfect).';
+                } else if (gameId === 'flanker-focus') {
+                    content = 'Speed identifying center arrow direction. 60% accuracy + 40% reaction time (600ms = perfect).';
+                } else if (gameId === 'visual-search') {
+                    content = 'Speed finding different patterns. 60% accuracy + 40% visual scanning speed.';
+                } else if (gameId === 'color-word-stroop') {
+                    content = 'Speed overcoming word-color conflict. 60% accuracy + 40% reaction time (800ms = perfect).';
+                } else if (gameId === 'tracking-test') {
+                    content = 'Speed clicking moving target. 60% accuracy + 40% reaction time (700ms = perfect).';
+                } else {
+                    content = 'Measures how quickly you respond correctly to game stimuli.';
+                }
+                break;
+
+            case 'memory':
+                title = 'Memory Skill';
+                if (gameId === 'memory-grid') {
+                    content = 'Ability to recall visual sequences. 70% accuracy + 30% consistency - time penalty.';
+                } else {
+                    content = 'Not trained in this game.';
+                }
+                break;
+
+            case 'focus':
+                title = 'Focus Skill';
+                if (gameId === 'color-reactor') {
+                    content = 'Consistency in red-only clicks. 50% accuracy + 30% streak + 20% consistency.';
+                } else if (gameId === 'flanker-focus') {
+                    content = 'Maintaining attention on center arrow. 60% accuracy + 30% streak.';
+                } else if (gameId === 'visual-search') {
+                    content = 'Sustained visual scanning. 60% accuracy + 30% streak.';
+                } else if (gameId === 'color-word-stroop') {
+                    content = 'Inhibiting automatic reading. 40% accuracy + 30% streak + 40% interference control.';
+                } else if (gameId === 'tracking-test') {
+                    content = 'Tracking moving objects. 60% accuracy + 30% streak.';
+                } else if (gameId === 'memory-grid') {
+                    content = 'Concentration during sequence recall.';
+                }
+                break;
+        }
+
+        // Create tooltip content
+        tooltipContainer.innerHTML = `
+        <div class="tooltip-content">
+            <button class="tooltip-close">×</button>
+            <h4>${title}</h4>
+            <p>${content}</p>
+            <p><small>Game: ${this.currentGame.name}</small></p>
+            <p><small>Click outside or press ESC to close</small></p>
+        </div>
+    `;
+
+        tooltipContainer.style.display = 'flex';
     }
 }
+
+
 
 // Initialize the application
 let attentionGame;

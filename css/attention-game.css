@@ -1212,7 +1212,7 @@
 
 @media (max-width: 480px) {
     .tracking-area {
-        height: 150px;
+        height: 200px;
         max-width: 300px;
     }
 
@@ -1786,4 +1786,87 @@
     .game-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+/* Skill Meter Improvements */
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.skill-name-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-name {
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+}
+
+.skill-tooltip-icon {
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.skill-tooltip-icon:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.skill-percentage {
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    min-width: 45px;
+    text-align: center;
+}
+
+.skill-meter {
+    margin: 1.2rem 0;
+}
+
+.skill-bar {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #48bb78, #68d391);
+    border-radius: 6px;
+    transition: width 1s ease;
+    position: relative;
+}
+
+/* Different colors for each skill */
+#reactionSkillMeter .skill-fill {
+    background: linear-gradient(90deg, #4299e1, #63b3ed);
+}
+
+#memorySkillMeter .skill-fill {
+    background: linear-gradient(90deg, #9f7aea, #b794f4);
+}
+
+#focusSkillMeter .skill-fill {
+    background: linear-gradient(90deg, #ed8936, #ed8936);
 }

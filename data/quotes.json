@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs",
+        "category": "focus"
+    },
+    {
+        "id": 2,
+        "quote": "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort.",
+        "author": "Paul J. Meyer",
+        "category": "productivity"
+    },
+    {
+        "id": 3,
+        "quote": "Perseverance is not a long race; it is many short races one after the other.",
+        "author": "Walter Elliot",
+        "category": "perseverance"
+    },
+    {
+        "id": 4,
+        "quote": "The present moment is the only time over which we have dominion.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 5,
+        "quote": "Creativity is intelligence having fun.",
+        "author": "Albert Einstein",
+        "category": "creativity"
+    },
+    {
+        "id": 6,
+        "quote": "Concentrate all your thoughts upon the work at hand. The sun's rays do not burn until brought to a focus.",
+        "author": "Alexander Graham Bell",
+        "category": "focus"
+    },
+    {
+        "id": 7,
+        "quote": "Your time is limited, so don't waste it living someone else's life.",
+        "author": "Steve Jobs",
+        "category": "productivity"
+    },
+    {
+        "id": 8,
+        "quote": "Fall seven times, stand up eight.",
+        "author": "Japanese Proverb",
+        "category": "perseverance"
+    },
+    {
+        "id": 9,
+        "quote": "The best way to capture moments is to pay attention. This is how we cultivate mindfulness.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 10,
+        "quote": "You can't use up creativity. The more you use, the more you have.",
+        "author": "Maya Angelou",
+        "category": "creativity"
+    }
+]

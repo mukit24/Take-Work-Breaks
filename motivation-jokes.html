@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Motivation & Humor | Take Work Breaks</title>
+    <meta name="description"
+        content="Get inspired with motivational quotes and lighten up with funny jokes. Perfect for work breaks and mood boosts.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/motivation-jokes.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main class="motivation-app">
+        <!-- Content Type Selector -->
+        <div class="type-selector">
+            <h2>Choose Your Content</h2>
+            <div class="type-grid">
+                <div class="type-card active" data-type="both">
+                    <div class="type-icon">🎲</div>
+                    <h3 class="type-name">Mixed Random</h3>
+                    <p class="type-desc">Get random quotes and jokes</p>
+                </div>
+                <div class="type-card" data-type="quotes">
+                    <div class="type-icon">💫</div>
+                    <h3 class="type-name">Motivation Only</h3>
+                    <p class="type-desc">Inspirational quotes only</p>
+                </div>
+                <div class="type-card" data-type="jokes">
+                    <div class="type-icon">😂</div>
+                    <h3 class="type-name">Jokes Only</h3>
+                    <p class="type-desc">Funny jokes only</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Selector -->
+        <div class="category-section" hidden>
+            <h2>Choose Category</h2>
+            <div class="category-grid" id="categoryGrid">
+                <!-- Categories will be populated by JS -->
+            </div>
+            <div class="category-option">
+                <button class="btn outline" id="allCategoriesBtn">Show All Categories</button>
+            </div>
+        </div>
+
+        <!-- Content Display -->
+        <div class="content-display" hidden>
+            <div class="content-header">
+                <h2 id="contentTitle">Daily Inspiration</h2>
+                <div class="content-controls">
+                    <button id="refreshBtn" class="btn outline">↻ New One</button>
+                    <button id="backToCategories" class="btn outline">← Back to Categories</button>
+                </div>
+            </div>
+
+            <div class="content-card" id="contentCard">
+                <div class="content-icon" id="contentIcon">💫</div>
+                <h3 class="content-type" id="contentType">Motivational Quote</h3>
+                <div class="content-category" id="contentCategory">Focus & Concentration 🎯</div>
+                <div class="content-text" id="contentText">
+                    Loading your daily inspiration...
+                </div>
+                <div class="content-actions">
+                    <button id="copyBtn" class="btn outline">
+                        📋 Copy to Clipboard
+                    </button>
+                    <button id="shareBtn" class="btn outline">
+                        🔗 Share
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-stats">
+                <span id="contentCounter">Showing: 1/20</span>
+                <button id="prevBtn" class="btn secondary" disabled>← Previous</button>
+                <button id="nextBtn" class="btn secondary">Next →</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/components.js"></script>
+    <script src="js/motivation-jokes.js"></script>
+</body>
+
+</html>

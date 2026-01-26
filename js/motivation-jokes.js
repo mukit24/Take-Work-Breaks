@@ -5,46 +5,41 @@ let contentData = {
 };
 
 // App State
-let currentType = 'both'; // 'both', 'quotes', 'jokes'
-let currentCategory = null; // null for all categories
+let currentType = ''; // 'quotes' or 'jokes'
+let currentCategory = 'all'; // 'all' or specific category
 let currentContent = [];
-let currentIndex = 0;
-let isLoading = false;
+let currentItem = null;
 
 // Categories Data
 const categories = {
     quotes: [
-        { id: 'focus', name: 'Focus & Concentration 🎯', desc: 'Sharpen your mind and attention', icon: '🎯' },
-        { id: 'productivity', name: 'Productivity ⚡', desc: 'Get things done efficiently', icon: '⚡' },
-        { id: 'perseverance', name: 'Perseverance 💪', desc: 'Keep going despite challenges', icon: '💪' },
-        { id: 'mindfulness', name: 'Mindfulness 🧘', desc: 'Stay present and aware', icon: '🧘' },
-        { id: 'creativity', name: 'Creativity 🎨', desc: 'Spark innovation and ideas', icon: '🎨' }
+        { id: 'focus', name: 'Focus & Concentration', desc: 'Sharpen your mind and attention' },
+        { id: 'productivity', name: 'Productivity', desc: 'Get things done efficiently' },
+        { id: 'perseverance', name: 'Perseverance', desc: 'Keep going despite challenges' },
+        { id: 'mindfulness', name: 'Mindfulness', desc: 'Stay present and aware' },
+        { id: 'creativity', name: 'Creativity', desc: 'Spark innovation and ideas' }
     ],
     jokes: [
-        { id: 'tech', name: 'Tech Humor 💻', desc: 'Programming and tech jokes', icon: '💻' },
-        { id: 'worklife', name: 'Work/Life 😄', desc: 'Office and work-related humor', icon: '😄' },
-        { id: 'clean', name: 'Clean Fun 🌟', desc: 'Family-friendly jokes', icon: '🌟' },
-        { id: 'braint', name: 'Brain Teasers 🧩', desc: 'Puzzles and thinking jokes', icon: '🧩' }
+        { id: 'tech', name: 'Tech Humor', desc: 'Programming and tech jokes' },
+        { id: 'worklife', name: 'Work/Life', desc: 'Office and work-related humor' },
+        { id: 'clean', name: 'Clean Fun', desc: 'Family-friendly jokes' },
+        { id: 'braint', name: 'Brain Teasers', desc: 'Puzzles and thinking jokes' }
     ]
 };
 
 // DOM Elements
 const elements = {
+    typeSelector: document.getElementById('typeSelector'),
     typeGrid: document.querySelector('.type-grid'),
-    categorySection: document.querySelector('.category-section'),
-    categoryGrid: document.getElementById('categoryGrid'),
-    allCategoriesBtn: document.getElementById('allCategoriesBtn'),
-    contentDisplay: document.querySelector('.content-display'),
+    contentDisplay: document.getElementById('contentDisplay'),
     contentTitle: document.getElementById('contentTitle'),
     contentIcon: document.getElementById('contentIcon'),
     contentType: document.getElementById('contentType'),
     contentCategory: document.getElementById('contentCategory'),
     contentText: document.getElementById('contentText'),
-    contentCounter: document.getElementById('contentCounter'),
-    refreshBtn: document.getElementById('refreshBtn'),
-    backToCategories: document.getElementById('backToCategories'),
-    prevBtn: document.getElementById('prevBtn'),
-    nextBtn: document.getElementById('nextBtn'),
+    categoryDropdown: document.getElementById('categoryDropdown'),
+    newContentBtn: document.getElementById('newContentBtn'),
+    backToTypes: document.getElementById('backToTypes'),
     copyBtn: document.getElementById('copyBtn'),
     shareBtn: document.getElementById('shareBtn')
 };
@@ -53,14 +48,11 @@ const elements = {
 async function init() {
     setupEventListeners();
     await loadContentData();
-    updateTypeUI();
 }
 
 // Load JSON data with lazy loading
 async function loadContentData() {
     try {
-        isLoading = true;
-
         // Load quotes data
         const quotesResponse = await fetch('data/quotes.json');
         contentData.quotes = await quotesResponse.json();
@@ -75,225 +67,158 @@ async function loadContentData() {
         // Fallback to default data if loading fails
         contentData.quotes = getDefaultQuotes();
         contentData.jokes = getDefaultJokes();
-    } finally {
-        isLoading = false;
     }
 }
 
 // Setup event listeners
 function setupEventListeners() {
-    // Type selection
+    // Type selection (only two cards)
     elements.typeGrid.addEventListener('click', (e) => {
         const card = e.target.closest('.type-card');
         if (card) {
             currentType = card.dataset.type;
-            updateTypeUI();
-            showCategorySection();
-        }
-    });
-
-    // Category selection
-    elements.categoryGrid.addEventListener('click', (e) => {
-        const card = e.target.closest('.category-card');
-        if (card) {
-            currentCategory = card.dataset.categoryId;
-            loadContentForCategory();
+            initializeContentDisplay();
             showContentDisplay();
         }
     });
 
-    // All categories button
-    elements.allCategoriesBtn.addEventListener('click', () => {
-        currentCategory = null;
-        loadContentForCategory();
-        showContentDisplay();
+    // Category dropdown change
+    elements.categoryDropdown.addEventListener('change', (e) => {
+        currentCategory = e.target.value;
+        getRandomContent();
     });
 
-    // Content navigation
-    elements.refreshBtn.addEventListener('click', getRandomContent);
-    elements.backToCategories.addEventListener('click', showCategorySection);
-    elements.prevBtn.addEventListener('click', showPreviousContent);
-    elements.nextBtn.addEventListener('click', showNextContent);
+    // New content button
+    elements.newContentBtn.addEventListener('click', getRandomContent);
+
+    // Back button
+    elements.backToTypes.addEventListener('click', () => {
+        elements.typeSelector.hidden = false;
+        elements.contentDisplay.hidden = true;
+    });
+
+    // Copy button
     elements.copyBtn.addEventListener('click', copyToClipboard);
+
+    // Share button
     elements.shareBtn.addEventListener('click', shareContent);
 }
 
-// Update type selection UI
-function updateTypeUI() {
-    document.querySelectorAll('.type-card').forEach(card => {
-        if (card.dataset.type === currentType) {
-            card.classList.add('active');
-        } else {
-            card.classList.remove('active');
-        }
-    });
-}
-
-// Show category section
-function showCategorySection() {
-    renderCategoryGrid();
-    elements.categorySection.hidden = false;
-    elements.contentDisplay.hidden = true;
-}
-
-// Render category grid based on current type
-function renderCategoryGrid() {
-    let categoriesToShow = [];
-
-    if (currentType === 'both') {
-        categoriesToShow = [...categories.quotes, ...categories.jokes];
-    } else if (currentType === 'quotes') {
-        categoriesToShow = categories.quotes;
-    } else if (currentType === 'jokes') {
-        categoriesToShow = categories.jokes;
-    }
-
-    elements.categoryGrid.innerHTML = categoriesToShow.map(cat => `
-        <div class="category-card" data-category-id="${cat.id}">
-            <div class="cat-icon">${cat.icon}</div>
-            <div class="cat-content">
-                <div class="cat-name">${cat.name}</div>
-                <div class="cat-desc">${cat.desc}</div>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Load content for selected category
-function loadContentForCategory() {
-    currentContent = [];
-    currentIndex = 0;
-
-    if (currentType === 'both') {
-        // Mix quotes and jokes
-        if (currentCategory) {
-            // Filter by specific category
-            const quoteCat = categories.quotes.find(c => c.id === currentCategory);
-            const jokeCat = categories.jokes.find(c => c.id === currentCategory);
-
-            if (quoteCat) {
-                currentContent = contentData.quotes.filter(item => item.category === currentCategory);
-            } else if (jokeCat) {
-                currentContent = contentData.jokes.filter(item => item.category === currentCategory);
-            }
-        } else {
-            // All categories mixed
-            currentContent = [...contentData.quotes, ...contentData.jokes];
-        }
-    } else if (currentType === 'quotes') {
-        currentContent = currentCategory
-            ? contentData.quotes.filter(item => item.category === currentCategory)
-            : contentData.quotes;
-    } else if (currentType === 'jokes') {
-        currentContent = currentCategory
-            ? contentData.jokes.filter(item => item.category === currentCategory)
-            : contentData.jokes;
-    }
-
-    // Shuffle the content
-    shuffleArray(currentContent);
-
-    if (currentContent.length > 0) {
-        displayContent(0);
+// Initialize content display with dropdown and title
+function initializeContentDisplay() {
+    // Update title and icon based on type
+    if (currentType === 'quotes') {
+        elements.contentTitle.textContent = 'Daily Motivation';
+        elements.contentIcon.textContent = '💫';
+        elements.newContentBtn.textContent = '🎲 New Quote';
     } else {
-        elements.contentText.textContent = 'No content found for this selection.';
+        elements.contentTitle.textContent = 'Funny Jokes';
+        elements.contentIcon.textContent = '😂';
+        elements.newContentBtn.textContent = '🎲 New Joke';
     }
+
+    // Populate category dropdown
+    populateCategoryDropdown();
+
+    // Get initial content
+    getRandomContent();
+}
+
+// Populate category dropdown based on current type
+function populateCategoryDropdown() {
+    elements.categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
+
+    const currentCategories = currentType === 'quotes' ? categories.quotes : categories.jokes;
+
+    currentCategories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        elements.categoryDropdown.appendChild(option);
+    });
 }
 
 // Show content display
 function showContentDisplay() {
-    elements.categorySection.hidden = true;
+    elements.typeSelector.hidden = true;
     elements.contentDisplay.hidden = false;
-
-    // Update title based on selection
-    let title = 'Daily Inspiration';
-    if (currentType === 'quotes') title = 'Motivational Quotes';
-    else if (currentType === 'jokes') title = 'Funny Jokes';
-
-    elements.contentTitle.textContent = title;
 }
 
-// Display content at index
-function displayContent(index) {
-    if (currentContent.length === 0) return;
+// Get random content based on current type and category
+function getRandomContent() {
+    // Get the content array for current type
+    let contentArray = currentType === 'quotes' ? contentData.quotes : contentData.jokes;
 
-    const content = currentContent[index];
-    const isQuote = 'quote' in content;
+    // Filter by category if not "all"
+    if (currentCategory !== 'all') {
+        contentArray = contentArray.filter(item => item.category === currentCategory);
+    }
 
-    // Update UI based on content type
-    elements.contentIcon.textContent = isQuote ? '💫' : '😂';
+    if (contentArray.length === 0) {
+        elements.contentText.textContent = 'No content found for this selection.';
+        return;
+    }
+
+    // Get random item
+    const randomIndex = Math.floor(Math.random() * contentArray.length);
+    currentItem = contentArray[randomIndex];
+
+    displayContent(currentItem);
+}
+
+// Display content
+function displayContent(item) {
+    const isQuote = 'quote' in item;
+    
+    // Update content type display
     elements.contentType.textContent = isQuote ? 'Motivational Quote' : 'Funny Joke';
-
+    
     // Find category name
     const allCategories = [...categories.quotes, ...categories.jokes];
-    const category = allCategories.find(cat => cat.id === content.category);
+    const category = allCategories.find(cat => cat.id === item.category);
     elements.contentCategory.textContent = category ? category.name : 'General';
-
-    // Update content text
-    elements.contentText.className = 'content-text';
-    if (isQuote) {
-        elements.contentText.classList.add('quote');
-        elements.contentText.innerHTML = `"${content.quote}"`;
-    } else {
-        elements.contentText.classList.add('joke');
-        elements.contentText.innerHTML = `
-            ${content.setup}
-            <span class="punchline">${content.punchline}</span>
-        `;
-    }
-
-    // Update counter and navigation
-    elements.contentCounter.textContent = `Showing: ${index + 1}/${currentContent.length}`;
-    elements.prevBtn.disabled = index === 0;
-    elements.nextBtn.disabled = index === currentContent.length - 1;
-
-    // Update author if present
-    if (isQuote && content.author) {
-        elements.contentText.innerHTML += `<div class="author">— ${content.author}</div>`;
-    }
-}
-
-// Get random content
-function getRandomContent() {
-    if (currentContent.length === 0) return;
-
-    let newIndex;
-    do {
-        newIndex = Math.floor(Math.random() * currentContent.length);
-    } while (newIndex === currentIndex && currentContent.length > 1);
-
-    currentIndex = newIndex;
-    displayContent(currentIndex);
-}
-
-// Show previous content
-function showPreviousContent() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        displayContent(currentIndex);
-    }
-}
-
-// Show next content
-function showNextContent() {
-    if (currentIndex < currentContent.length - 1) {
-        currentIndex++;
-        displayContent(currentIndex);
-    }
+    
+    // Update content text with animation
+    elements.contentText.style.opacity = '0';
+    
+    setTimeout(() => {
+        elements.contentText.className = 'content-text';
+        let html = '';
+        
+        if (isQuote) {
+            elements.contentText.classList.add('quote');
+            // Quote text with author below
+            html = `
+                <div class="quote-text">"${item.quote}"</div>
+                ${item.author ? `<div class="quote-author">— ${item.author}</div>` : ''}
+            `;
+        } else {
+            elements.contentText.classList.add('joke');
+            // Setup with punchline below
+            html = `
+                <div class="joke-setup">${item.setup}</div>
+                <div class="joke-punchline">${item.punchline}</div>
+            `;
+        }
+        
+        elements.contentText.innerHTML = html;
+        elements.contentText.style.opacity = '1';
+    }, 300);
 }
 
 // Copy to clipboard
 async function copyToClipboard() {
-    const content = currentContent[currentIndex];
+    if (!currentItem) return;
+
     let textToCopy = '';
 
-    if ('quote' in content) {
-        textToCopy = `"${content.quote}"`;
-        if (content.author) {
-            textToCopy += ` — ${content.author}`;
+    if ('quote' in currentItem) {
+        textToCopy = `"${currentItem.quote}"`;
+        if (currentItem.author) {
+            textToCopy += ` — ${currentItem.author}`;
         }
     } else {
-        textToCopy = `${content.setup}\n\n${content.punchline}`;
+        textToCopy = `${currentItem.setup}\n\n${currentItem.punchline}`;
     }
 
     try {
@@ -307,23 +232,27 @@ async function copyToClipboard() {
 
 // Share content
 async function shareContent() {
-    const content = currentContent[currentIndex];
-    let shareText = '';
+    if (!currentItem) return;
 
-    if ('quote' in content) {
-        shareText = `💫 "${content.quote}"`;
-        if (content.author) {
-            shareText += ` — ${content.author}\n\n`;
+    let shareText = '';
+    let shareTitle = '';
+
+    if ('quote' in currentItem) {
+        shareTitle = 'Inspirational Quote';
+        shareText = `💫 "${currentItem.quote}"`;
+        if (currentItem.author) {
+            shareText += ` — ${currentItem.author}\n\n`;
         }
         shareText += `Shared via Take Work Breaks`;
     } else {
-        shareText = `😂 ${content.setup}\n\n${content.punchline}\n\nShared via Take Work Breaks`;
+        shareTitle = 'Funny Joke';
+        shareText = `😂 ${currentItem.setup}\n\n${currentItem.punchline}\n\nShared via Take Work Breaks`;
     }
 
     if (navigator.share) {
         try {
             await navigator.share({
-                title: 'Take Work Breaks',
+                title: shareTitle,
                 text: shareText,
                 url: window.location.href
             });
@@ -348,15 +277,6 @@ function showFeedback(message, isError = false) {
     setTimeout(() => {
         feedback.remove();
     }, 3000);
-}
-
-// Utility function to shuffle array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
 }
 
 // Default quotes data (fallback)

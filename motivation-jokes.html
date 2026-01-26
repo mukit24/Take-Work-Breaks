@@ -17,46 +17,35 @@
     <div id="header-container"></div>
 
     <main class="motivation-app">
-        <!-- Content Type Selector -->
-        <div class="type-selector">
+        <!-- Type Selector -->
+        <div class="type-selector" id="typeSelector">
             <h2>Choose Your Content</h2>
             <div class="type-grid">
-                <div class="type-card active" data-type="both">
-                    <div class="type-icon">🎲</div>
-                    <h3 class="type-name">Mixed Random</h3>
-                    <p class="type-desc">Get random quotes and jokes</p>
-                </div>
                 <div class="type-card" data-type="quotes">
                     <div class="type-icon">💫</div>
-                    <h3 class="type-name">Motivation Only</h3>
-                    <p class="type-desc">Inspirational quotes only</p>
+                    <h3 class="type-name">Daily Motivation</h3>
+                    <p class="type-desc">Boost your focus and productivity with inspirational quotes</p>
                 </div>
                 <div class="type-card" data-type="jokes">
                     <div class="type-icon">😂</div>
-                    <h3 class="type-name">Jokes Only</h3>
-                    <p class="type-desc">Funny jokes only</p>
+                    <h3 class="type-name">Funny Jokes</h3>
+                    <p class="type-desc">Lighten your mood and reduce stress with laughter</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- Category Selector -->
-        <div class="category-section" hidden>
-            <h2>Choose Category</h2>
-            <div class="category-grid" id="categoryGrid">
-                <!-- Categories will be populated by JS -->
-            </div>
-            <div class="category-option">
-                <button class="btn outline" id="allCategoriesBtn">Show All Categories</button>
             </div>
         </div>
 
         <!-- Content Display -->
-        <div class="content-display" hidden>
+        <div class="content-display" id="contentDisplay" hidden>
             <div class="content-header">
-                <h2 id="contentTitle">Daily Inspiration</h2>
+                <h2 id="contentTitle">Daily Motivation</h2>
                 <div class="content-controls">
-                    <button id="refreshBtn" class="btn outline">↻ New One</button>
-                    <button id="backToCategories" class="btn outline">← Back to Categories</button>
+                    <div class="category-dropdown-wrapper">
+                        <select id="categoryDropdown" class="styled-select">
+                            <option value="all">All Categories</option>
+                            <!-- Categories will be populated by JS -->
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
                 </div>
             </div>
 
@@ -68,19 +57,18 @@
                     Loading your daily inspiration...
                 </div>
                 <div class="content-actions">
-                    <button id="copyBtn" class="btn outline">
-                        📋 Copy to Clipboard
+                    <button id="copyBtn" class="btn-sm outline">
+                        📋 Copy
                     </button>
-                    <button id="shareBtn" class="btn outline">
+                    <button id="shareBtn" class="btn-sm outline">
                         🔗 Share
                     </button>
                 </div>
             </div>
 
-            <div class="content-stats">
-                <span id="contentCounter">Showing: 1/20</span>
-                <button id="prevBtn" class="btn secondary" disabled>← Previous</button>
-                <button id="nextBtn" class="btn secondary">Next →</button>
+            <div class="content-footer">
+                <button id="newContentBtn" class="btn primary">🎲 Get New One</button>
+                <button id="backToTypes" class="btn outline">← Back to Selection</button>
             </div>
         </div>
     </main>

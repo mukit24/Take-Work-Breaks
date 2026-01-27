@@ -1,56 +1,56 @@
 [
     {
         "id": 1,
-        "quote": "The only way to do great work is to love what you do.",
-        "author": "Steve Jobs",
+        "quote": "The most important investment you can make is in yourself. The most important asset you'll ever have is your mind and your body.",
+        "author": "Warren Buffett",
         "category": "focus"
     },
     {
         "id": 2,
-        "quote": "Concentrate all your thoughts upon the work at hand. The sun's rays do not burn until brought to a focus.",
-        "author": "Alexander Graham Bell",
+        "quote": "Concentration and mental toughness are the margins of victory.",
+        "author": "Bill Russell",
         "category": "focus"
     },
     {
         "id": 3,
-        "quote": "Deep work is the ability to focus without distraction on a cognitively demanding task.",
-        "author": "Cal Newport",
+        "quote": "The successful man is the average man, focused. The difference between successful people and really successful people is that really successful people say no to almost everything.",
+        "author": "Warren Buffett",
         "category": "focus"
     },
     {
         "id": 4,
-        "quote": "The shorter way to do many things is to do only one thing at a time.",
-        "author": "Wolfgang Amadeus Mozart",
+        "quote": "Focus is a muscle. The more you train it, the stronger it becomes.",
+        "author": "Daniel Goleman",
         "category": "focus"
     },
     {
         "id": 5,
-        "quote": "Focus is saying no to a hundred good ideas.",
-        "author": "Steve Jobs",
+        "quote": "The ability to focus for a few hours on a single task is one of the most powerful skills you can cultivate.",
+        "author": "Cal Newport",
         "category": "focus"
     },
     {
         "id": 6,
-        "quote": "What you stay focused on will grow.",
-        "author": "Roy T. Bennett",
+        "quote": "Your ability to concentrate single-mindedly on your most important task will contribute as much to your success as any other factor.",
+        "author": "Brian Tracy",
         "category": "focus"
     },
     {
         "id": 7,
-        "quote": "The secret of concentration is the secret of self-discovery.",
-        "author": "Arnold Schwarzenegger",
+        "quote": "When you focus on problems, you get more problems. When you focus on possibilities, you get more opportunities.",
+        "author": "Roy T. Bennett",
         "category": "focus"
     },
     {
         "id": 8,
-        "quote": "My goal is no longer to get more done, but rather to have less to do.",
-        "author": "Francine Jay",
+        "quote": "The secret of change is to focus all of your energy, not on fighting the old, but on building the new.",
+        "author": "Socrates",
         "category": "focus"
     },
     {
         "id": 9,
-        "quote": "Concentration is the root of all the higher abilities in man.",
-        "author": "Bruce Lee",
+        "quote": "Focus on where you want to go, not on what you fear.",
+        "author": "Tony Robbins",
         "category": "focus"
     },
     {
@@ -61,2942 +61,2786 @@
     },
     {
         "id": 11,
-        "quote": "Focus on being productive instead of busy.",
-        "author": "Tim Ferriss",
+        "quote": "One reason so few of us achieve what we truly want is that we never direct our focus; we never concentrate our power.",
+        "author": "Tony Robbins",
         "category": "focus"
     },
     {
         "id": 12,
-        "quote": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
-        "author": "Buddha",
+        "quote": "Focus on being productive instead of busy. Being busy is a form of laziness—lazy thinking and indiscriminate action.",
+        "author": "Tim Ferriss",
         "category": "focus"
     },
     {
         "id": 13,
-        "quote": "Flow state occurs when your skill level perfectly matches the challenge at hand.",
-        "author": "Mihaly Csikszentmihalyi",
+        "quote": "The shorter way to do many things is to do only one thing at a time. Single-tasking is the ultimate productivity hack.",
+        "author": "Wolfgang Amadeus Mozart",
         "category": "focus"
     },
     {
         "id": 14,
-        "quote": "The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable.",
-        "author": "Cal Newport",
+        "quote": "What you stay focused on will grow. So focus on what you want, not what you don't want.",
+        "author": "Roy T. Bennett",
         "category": "focus"
     },
     {
         "id": 15,
-        "quote": "Distraction is the enemy of all great work.",
-        "author": "Ryan Holiday",
+        "quote": "The secret of concentration is the secret of self-discovery. You reach inside yourself to discover your personal resources, and what it takes to match them to the challenge.",
+        "author": "Arnold Schwarzenegger",
         "category": "focus"
     },
     {
         "id": 16,
-        "quote": "The more you concentrate the more you can accomplish.",
-        "author": "William Feather",
-        "category": "focus"
-    },
-    {
-        "id": 17,
-        "quote": "Focus on the journey, not the destination.",
+        "quote": "Focus on the journey, not the destination. Joy is found not in finishing an activity but in doing it.",
         "author": "Greg Anderson",
         "category": "focus"
     },
     {
+        "id": 17,
+        "quote": "My goal is no longer to get more done, but rather to have less to do. The ultimate productivity hack is saying no.",
+        "author": "Francine Jay",
+        "category": "focus"
+    },
+    {
         "id": 18,
-        "quote": "The successful man is the average man, focused.",
-        "author": "Unknown",
-        "category": "focus"
-    },
-    {
-        "id": 19,
-        "quote": "Focus on the signal, not the noise.",
-        "author": "Nate Silver",
-        "category": "focus"
-    },
-    {
-        "id": 20,
-        "quote": "The ability to focus is a skill that must be practiced.",
-        "author": "Daniel Goleman",
-        "category": "focus"
-    },
-    {
-        "id": 21,
-        "quote": "Concentrated power is power.",
-        "author": "Gail Sheehy",
-        "category": "focus"
-    },
-    {
-        "id": 22,
-        "quote": "Your mind is for having ideas, not holding them.",
-        "author": "David Allen",
-        "category": "focus"
-    },
-    {
-        "id": 23,
-        "quote": "The ability to focus is a competitive advantage in today's economy.",
-        "author": "Daniel Goleman",
-        "category": "focus"
-    },
-    {
-        "id": 24,
-        "quote": "Multitasking is merely the opportunity to screw up more than one thing at a time.",
-        "author": "Steve Uzzell",
-        "category": "focus"
-    },
-    {
-        "id": 25,
-        "quote": "Where focus goes, energy flows.",
-        "author": "Tony Robbins",
-        "category": "focus"
-    },
-    {
-        "id": 26,
-        "quote": "The sun's rays do not burn until brought to a focus.",
-        "author": "Alexander Graham Bell",
-        "category": "focus"
-    },
-    {
-        "id": 27,
-        "quote": "A focused mind is the most powerful weapon in the world.",
+        "quote": "Concentration is the root of all the higher abilities in man. Without concentration, nothing is possible.",
         "author": "Bruce Lee",
         "category": "focus"
     },
     {
-        "id": 28,
-        "quote": "The shorter way to do many things is to do only one thing at a time.",
-        "author": "Mozart",
+        "id": 19,
+        "quote": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment. That is the only reality.",
+        "author": "Buddha",
         "category": "focus"
     },
     {
-        "id": 29,
-        "quote": "Focus is a matter of deciding what things you're not going to do.",
-        "author": "John Carmack",
+        "id": 20,
+        "quote": "Flow state occurs when your skill level perfectly matches the challenge at hand. In that state, time disappears, and you become one with your work.",
+        "author": "Mihaly Csikszentmihalyi",
         "category": "focus"
     },
     {
-        "id": 30,
-        "quote": "The most important thing about goals is having one.",
-        "author": "Geoffry F. Abert",
-        "category": "focus"
-    },
-    {
-        "id": 31,
-        "quote": "You can do anything, but not everything.",
-        "author": "David Allen",
-        "category": "focus"
-    },
-    {
-        "id": 32,
-        "quote": "The shorter way to do many things is to do only one thing at a time.",
-        "author": "Mozart",
-        "category": "focus"
-    },
-    {
-        "id": 33,
-        "quote": "The successful man is the average man, focused.",
-        "author": "Unknown",
-        "category": "focus"
-    },
-    {
-        "id": 34,
-        "quote": "Concentrate all your thoughts upon the work at hand.",
-        "author": "Alexander Graham Bell",
-        "category": "focus"
-    },
-    {
-        "id": 35,
-        "quote": "The sun's rays do not burn until brought to a focus.",
-        "author": "Alexander Graham Bell",
-        "category": "focus"
-    },
-    {
-        "id": 36,
-        "quote": "Until we can manage time, we can manage nothing else.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 37,
-        "quote": "Don't count the days, make the days count.",
-        "author": "Muhammad Ali",
-        "category": "productivity"
-    },
-    {
-        "id": 38,
-        "quote": "The bad news is time flies. The good news is you're the pilot.",
-        "author": "Michael Altshuler",
-        "category": "productivity"
-    },
-    {
-        "id": 39,
-        "quote": "Better three hours too soon than a minute too late.",
-        "author": "William Shakespeare",
-        "category": "productivity"
-    },
-    {
-        "id": 40,
-        "quote": "The way we spend our time defines who we are.",
-        "author": "Jonathan Estrin",
-        "category": "productivity"
-    },
-    {
-        "id": 41,
-        "quote": "Time is what we want most, but what we use worst.",
-        "author": "William Penn",
-        "category": "productivity"
-    },
-    {
-        "id": 42,
-        "quote": "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort.",
-        "author": "Paul J. Meyer",
-        "category": "productivity"
-    },
-    {
-        "id": 43,
-        "quote": "Your time is limited, so don't waste it living someone else's life.",
+        "id": 21,
+        "quote": "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma—which is living with the results of other people's thinking.",
         "author": "Steve Jobs",
         "category": "productivity"
     },
     {
-        "id": 44,
-        "quote": "The key is not to prioritize what's on your schedule, but to schedule your priorities.",
+        "id": 22,
+        "quote": "The key is not to prioritize what's on your schedule, but to schedule your priorities. Most of us spend too much time on what is urgent and not enough time on what is important.",
         "author": "Stephen Covey",
         "category": "productivity"
     },
     {
-        "id": 45,
-        "quote": "It's not always that we need to do more but rather that we need to focus on less.",
+        "id": 23,
+        "quote": "It's not always that we need to do more but rather that we need to focus on less. The more you subtract, the more you add.",
         "author": "Nathan W. Morris",
         "category": "productivity"
     },
     {
-        "id": 46,
-        "quote": "You may delay, but time will not.",
+        "id": 24,
+        "quote": "You may delay, but time will not. Lost time is never found again.",
         "author": "Benjamin Franklin",
         "category": "productivity"
     },
     {
-        "id": 47,
-        "quote": "Lost time is never found again.",
-        "author": "Benjamin Franklin",
-        "category": "productivity"
-    },
-    {
-        "id": 48,
-        "quote": "The way to get started is to quit talking and begin doing.",
+        "id": 25,
+        "quote": "The way to get started is to quit talking and begin doing. Action is the foundational key to all success.",
         "author": "Walt Disney",
         "category": "productivity"
     },
     {
-        "id": 49,
-        "quote": "Don't watch the clock; do what it does. Keep going.",
+        "id": 26,
+        "quote": "Don't watch the clock; do what it does. Keep going. Persistence is the twin sister of excellence.",
         "author": "Sam Levenson",
         "category": "productivity"
     },
     {
-        "id": 50,
-        "quote": "The secret of getting ahead is getting started.",
+        "id": 27,
+        "quote": "The secret of getting ahead is getting started. The secret of getting started is breaking your complex overwhelming tasks into small manageable tasks.",
         "author": "Mark Twain",
         "category": "productivity"
     },
     {
-        "id": 51,
-        "quote": "Either you run the day, or the day runs you.",
+        "id": 28,
+        "quote": "Either you run the day, or the day runs you. You must take charge of your time if you want to achieve anything worthwhile.",
         "author": "Jim Rohn",
         "category": "productivity"
     },
     {
-        "id": 52,
-        "quote": "Amateurs sit and wait for inspiration, the rest of us just get up and go to work.",
+        "id": 29,
+        "quote": "Amateurs sit and wait for inspiration, the rest of us just get up and go to work. Discipline is the bridge between goals and accomplishment.",
         "author": "Stephen King",
         "category": "productivity"
     },
     {
-        "id": 53,
-        "quote": "The path to success is to take massive, determined action.",
+        "id": 30,
+        "quote": "The path to success is to take massive, determined action. It's not what we do once in a while that shapes our lives, but what we do consistently.",
         "author": "Tony Robbins",
         "category": "productivity"
     },
     {
-        "id": 54,
-        "quote": "Time management is life management.",
+        "id": 31,
+        "quote": "Time management is life management. How you spend your time is how you spend your life.",
         "author": "Robin Sharma",
         "category": "productivity"
     },
     {
-        "id": 55,
-        "quote": "Productivity is being able to do things that you were never able to do before.",
+        "id": 32,
+        "quote": "Productivity is being able to do things that you were never able to do before. It's about expanding your capacity.",
         "author": "Franz Kafka",
         "category": "productivity"
     },
     {
-        "id": 56,
-        "quote": "Efficiency is doing things right; effectiveness is doing the right things.",
+        "id": 33,
+        "quote": "Efficiency is doing things right; effectiveness is doing the right things. First effectiveness, then efficiency.",
         "author": "Peter Drucker",
         "category": "productivity"
     },
     {
-        "id": 57,
-        "quote": "Being busy does not always mean real work.",
+        "id": 34,
+        "quote": "Being busy does not always mean real work. The object of all work is production or accomplishment.",
         "author": "Thomas Edison",
         "category": "productivity"
     },
     {
-        "id": 58,
-        "quote": "You have to decide what your highest priorities are and have the courage to say no to other things.",
+        "id": 35,
+        "quote": "You have to decide what your highest priorities are and have the courage to say no to other things. And the way to do that is by having a bigger 'yes' burning inside.",
         "author": "Stephen Covey",
         "category": "productivity"
     },
     {
-        "id": 59,
-        "quote": "The most valuable of all talents is that of never using two words when one will do.",
+        "id": 36,
+        "quote": "The most valuable of all talents is that of never using two words when one will do. Brevity is the soul of wit and efficiency.",
         "author": "Thomas Jefferson",
         "category": "productivity"
     },
     {
-        "id": 60,
-        "quote": "Work gives you meaning and purpose and life is empty without it.",
+        "id": 37,
+        "quote": "Work gives you meaning and purpose and life is empty without it. Find what you love and let it kill you.",
         "author": "Stephen Hawking",
         "category": "productivity"
     },
     {
-        "id": 61,
-        "quote": "The shorter the deadline, the more you get done.",
-        "author": "Parkinson's Law",
+        "id": 38,
+        "quote": "The shorter the deadline, the more you get done. Work expands so as to fill the time available for its completion.",
+        "author": "Cyril Northcote Parkinson",
         "category": "productivity"
     },
     {
-        "id": 62,
-        "quote": "Productivity is about the systems, not the goals.",
+        "id": 39,
+        "quote": "Productivity is about the systems, not the goals. You do not rise to the level of your goals. You fall to the level of your systems.",
         "author": "James Clear",
         "category": "productivity"
     },
     {
-        "id": 63,
-        "quote": "The key to productivity is to rotate your avoidance techniques.",
+        "id": 40,
+        "quote": "The key to productivity is to rotate your avoidance techniques. When you're procrastinating on one project, work on another.",
         "author": "Scott Adams",
         "category": "productivity"
     },
     {
-        "id": 64,
-        "quote": "The best time to plant a tree was 20 years ago. The second best time is now.",
-        "author": "Chinese Proverb",
-        "category": "productivity"
-    },
-    {
-        "id": 65,
-        "quote": "Time is the scarcest resource and unless it is managed nothing else can be managed.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 66,
-        "quote": "The secret of getting things done is to act.",
-        "author": "Dante Alighieri",
-        "category": "productivity"
-    },
-    {
-        "id": 67,
-        "quote": "Don't wait for the perfect moment. Take the moment and make it perfect.",
-        "author": "Zoey Sayward",
-        "category": "productivity"
-    },
-    {
-        "id": 68,
-        "quote": "The difference between try and triumph is a little umph.",
-        "author": "Marvin Phillips",
-        "category": "productivity"
-    },
-    {
-        "id": 69,
-        "quote": "The best way to get something done is to begin.",
-        "author": "Unknown",
-        "category": "productivity"
-    },
-    {
-        "id": 70,
-        "quote": "Productivity is never an accident.",
-        "author": "Paul J. Meyer",
-        "category": "productivity"
-    },
-    {
-        "id": 71,
-        "quote": "Focus on being productive instead of busy.",
-        "author": "Tim Ferriss",
-        "category": "productivity"
-    },
-    {
-        "id": 72,
-        "quote": "The shorter way to do many things is to do only one thing at a time.",
-        "author": "Mozart",
-        "category": "productivity"
-    },
-    {
-        "id": 73,
-        "quote": "Your mind is for having ideas, not holding them.",
-        "author": "David Allen",
-        "category": "productivity"
-    },
-    {
-        "id": 74,
-        "quote": "The ability to focus is a competitive advantage in today's economy.",
-        "author": "Daniel Goleman",
-        "category": "productivity"
-    },
-    {
-        "id": 75,
-        "quote": "Concentrate all your thoughts upon the work at hand.",
-        "author": "Alexander Graham Bell",
-        "category": "productivity"
-    },
-    {
-        "id": 76,
-        "quote": "The sun's rays do not burn until brought to a focus.",
-        "author": "Alexander Graham Bell",
-        "category": "productivity"
-    },
-    {
-        "id": 77,
-        "quote": "Until we can manage time, we can manage nothing else.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 78,
-        "quote": "Don't count the days, make the days count.",
-        "author": "Muhammad Ali",
-        "category": "productivity"
-    },
-    {
-        "id": 79,
-        "quote": "The bad news is time flies. The good news is you're the pilot.",
-        "author": "Michael Altshuler",
-        "category": "productivity"
-    },
-    {
-        "id": 80,
-        "quote": "Better three hours too soon than a minute too late.",
-        "author": "William Shakespeare",
-        "category": "productivity"
-    },
-    {
-        "id": 81,
-        "quote": "The way we spend our time defines who we are.",
-        "author": "Jonathan Estrin",
-        "category": "productivity"
-    },
-    {
-        "id": 82,
-        "quote": "Time is what we want most, but what we use worst.",
-        "author": "William Penn",
-        "category": "productivity"
-    },
-    {
-        "id": 83,
-        "quote": "Never give up on something that you can't go a day without thinking about.",
+        "id": 41,
+        "quote": "Never give up on something that you can't go a day without thinking about. If it's important to you, you'll find a way.",
         "author": "Winston Churchill",
         "category": "perseverance"
     },
     {
-        "id": 84,
-        "quote": "It always seems impossible until it's done.",
+        "id": 42,
+        "quote": "It always seems impossible until it's done. The greatest glory in living lies not in never falling, but in rising every time we fall.",
         "author": "Nelson Mandela",
         "category": "perseverance"
     },
     {
-        "id": 85,
-        "quote": "The man who moves a mountain begins by carrying away small stones.",
+        "id": 43,
+        "quote": "The man who moves a mountain begins by carrying away small stones. Great things are done by a series of small things brought together.",
         "author": "Confucius",
         "category": "perseverance"
     },
     {
-        "id": 86,
-        "quote": "Perseverance is the hard work you do after you get tired of doing the hard work you already did.",
+        "id": 44,
+        "quote": "Perseverance is the hard work you do after you get tired of doing the hard work you already did. It's continuing when others have given up.",
         "author": "Newt Gingrich",
         "category": "perseverance"
     },
     {
-        "id": 87,
-        "quote": "A river cuts through rock, not because of its power, but because of its persistence.",
+        "id": 45,
+        "quote": "A river cuts through rock, not because of its power, but because of its persistence. Water is soft, but it wears away stone.",
         "author": "Jim Watkins",
         "category": "perseverance"
     },
     {
-        "id": 88,
+        "id": 46,
         "quote": "Strength doesn't come from what you can do. It comes from overcoming the things you once thought you couldn't.",
         "author": "Rikki Rogers",
         "category": "perseverance"
     },
     {
-        "id": 89,
-        "quote": "The moment you give up is the moment you let someone else win.",
+        "id": 47,
+        "quote": "The moment you give up is the moment you let someone else win. Winners never quit, and quitters never win.",
         "author": "Kobe Bryant",
         "category": "perseverance"
     },
     {
-        "id": 90,
-        "quote": "Perseverance is not a long race; it is many short races one after the other.",
+        "id": 48,
+        "quote": "Perseverance is not a long race; it is many short races one after the other. It's about getting up one more time than you fall.",
         "author": "Walter Elliot",
         "category": "perseverance"
     },
     {
-        "id": 91,
-        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        "id": 49,
+        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts. The only real failure is the failure to try.",
         "author": "Winston Churchill",
         "category": "perseverance"
     },
     {
-        "id": 92,
-        "quote": "Our greatest glory is not in never falling, but in rising every time we fall.",
+        "id": 50,
+        "quote": "Our greatest glory is not in never falling, but in rising every time we fall. The gem cannot be polished without friction.",
         "author": "Confucius",
         "category": "perseverance"
     },
     {
-        "id": 93,
+        "id": 51,
         "quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.",
         "author": "Vince Lombardi",
         "category": "perseverance"
     },
     {
-        "id": 94,
-        "quote": "It does not matter how slowly you go as long as you do not stop.",
+        "id": 52,
+        "quote": "It does not matter how slowly you go as long as you do not stop. The journey of a thousand miles begins with a single step.",
         "author": "Confucius",
         "category": "perseverance"
     },
     {
-        "id": 95,
-        "quote": "When you come to the end of your rope, tie a knot and hang on.",
+        "id": 53,
+        "quote": "When you come to the end of your rope, tie a knot and hang on. The only way out is through.",
         "author": "Franklin D. Roosevelt",
         "category": "perseverance"
     },
     {
-        "id": 96,
-        "quote": "The best way out is always through.",
+        "id": 54,
+        "quote": "The best way out is always through. You must go through the darkness to reach the light.",
         "author": "Robert Frost",
         "category": "perseverance"
     },
     {
-        "id": 97,
-        "quote": "Strength does not come from winning. Your struggles develop your strengths.",
+        "id": 55,
+        "quote": "Strength does not come from winning. Your struggles develop your strengths. When you go through hardships and decide not to surrender, that is strength.",
         "author": "Arnold Schwarzenegger",
         "category": "perseverance"
     },
     {
-        "id": 98,
-        "quote": "The oak fought the wind and was broken, the willow bent when it must and survived.",
+        "id": 56,
+        "quote": "The oak fought the wind and was broken, the willow bent when it must and survived. Flexibility is the key to resilience.",
         "author": "Robert Jordan",
         "category": "perseverance"
     },
     {
-        "id": 99,
-        "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
+        "id": 57,
+        "quote": "Keep your face always toward the sunshine—and shadows will fall behind you. Where focus goes, energy flows.",
         "author": "Walt Whitman",
         "category": "perseverance"
     },
     {
-        "id": 100,
-        "quote": "Perseverance is failing 19 times and succeeding the 20th.",
+        "id": 58,
+        "quote": "Perseverance is failing 19 times and succeeding the 20th. Success is stumbling from failure to failure with no loss of enthusiasm.",
         "author": "Julie Andrews",
         "category": "perseverance"
     },
     {
-        "id": 101,
-        "quote": "It's not that I'm so smart, it's just that I stay with problems longer.",
+        "id": 59,
+        "quote": "It's not that I'm so smart, it's just that I stay with problems longer. Genius is 1% inspiration and 99% perspiration.",
         "author": "Albert Einstein",
         "category": "perseverance"
     },
     {
-        "id": 102,
-        "quote": "Energy and persistence conquer all things.",
+        "id": 60,
+        "quote": "Energy and persistence conquer all things. The difference between the impossible and the possible lies in a person's determination.",
         "author": "Benjamin Franklin",
         "category": "perseverance"
     },
     {
-        "id": 103,
-        "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        "author": "Nelson Mandela",
-        "category": "perseverance"
-    },
-    {
-        "id": 104,
-        "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up.",
-        "author": "Thomas Edison",
-        "category": "perseverance"
-    },
-    {
-        "id": 105,
-        "quote": "Perseverance is not a long race; it is many short races one after the other.",
-        "author": "Walter Elliot",
-        "category": "perseverance"
-    },
-    {
-        "id": 106,
-        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-        "author": "Winston Churchill",
-        "category": "perseverance"
-    },
-    {
-        "id": 107,
-        "quote": "Our greatest glory is not in never falling, but in rising every time we fall.",
-        "author": "Confucius",
-        "category": "perseverance"
-    },
-    {
-        "id": 108,
-        "quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.",
-        "author": "Vince Lombardi",
-        "category": "perseverance"
-    },
-    {
-        "id": 109,
-        "quote": "It does not matter how slowly you go as long as you do not stop.",
-        "author": "Confucius",
-        "category": "perseverance"
-    },
-    {
-        "id": 110,
-        "quote": "When you come to the end of your rope, tie a knot and hang on.",
-        "author": "Franklin D. Roosevelt",
-        "category": "perseverance"
-    },
-    {
-        "id": 111,
-        "quote": "The best way out is always through.",
-        "author": "Robert Frost",
-        "category": "perseverance"
-    },
-    {
-        "id": 112,
-        "quote": "Strength does not come from winning. Your struggles develop your strengths.",
-        "author": "Arnold Schwarzenegger",
-        "category": "perseverance"
-    },
-    {
-        "id": 113,
-        "quote": "The oak fought the wind and was broken, the willow bent when it must and survived.",
-        "author": "Robert Jordan",
-        "category": "perseverance"
-    },
-    {
-        "id": 114,
-        "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
-        "author": "Walt Whitman",
-        "category": "perseverance"
-    },
-    {
-        "id": 115,
-        "quote": "Perseverance is failing 19 times and succeeding the 20th.",
-        "author": "Julie Andrews",
-        "category": "perseverance"
-    },
-    {
-        "id": 116,
-        "quote": "It's not that I'm so smart, it's just that I stay with problems longer.",
-        "author": "Albert Einstein",
-        "category": "perseverance"
-    },
-    {
-        "id": 117,
-        "quote": "Energy and persistence conquer all things.",
-        "author": "Benjamin Franklin",
-        "category": "perseverance"
-    },
-    {
-        "id": 118,
-        "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        "author": "Nelson Mandela",
-        "category": "perseverance"
-    },
-    {
-        "id": 119,
-        "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up.",
-        "author": "Thomas Edison",
-        "category": "perseverance"
-    },
-    {
-        "id": 120,
-        "quote": "Perseverance is not a long race; it is many short races one after the other.",
-        "author": "Walter Elliot",
-        "category": "perseverance"
-    },
-    {
-        "id": 121,
-        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-        "author": "Winston Churchill",
-        "category": "perseverance"
-    },
-    {
-        "id": 122,
-        "quote": "Our greatest glory is not in never falling, but in rising every time we fall.",
-        "author": "Confucius",
-        "category": "perseverance"
-    },
-    {
-        "id": 123,
-        "quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.",
-        "author": "Vince Lombardi",
-        "category": "perseverance"
-    },
-    {
-        "id": 124,
-        "quote": "It does not matter how slowly you go as long as you do not stop.",
-        "author": "Confucius",
-        "category": "perseverance"
-    },
-    {
-        "id": 125,
-        "quote": "When you come to the end of your rope, tie a knot and hang on.",
-        "author": "Franklin D. Roosevelt",
-        "category": "perseverance"
-    },
-    {
-        "id": 126,
-        "quote": "The best way out is always through.",
-        "author": "Robert Frost",
-        "category": "perseverance"
-    },
-    {
-        "id": 127,
-        "quote": "Strength does not come from winning. Your struggles develop your strengths.",
-        "author": "Arnold Schwarzenegger",
-        "category": "perseverance"
-    },
-    {
-        "id": 128,
-        "quote": "The oak fought the wind and was broken, the willow bent when it must and survived.",
-        "author": "Robert Jordan",
-        "category": "perseverance"
-    },
-    {
-        "id": 129,
-        "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
-        "author": "Walt Whitman",
-        "category": "perseverance"
-    },
-    {
-        "id": 130,
-        "quote": "Perseverance is failing 19 times and succeeding the 20th.",
-        "author": "Julie Andrews",
-        "category": "perseverance"
-    },
-    {
-        "id": 131,
-        "quote": "It's not that I'm so smart, it's just that I stay with problems longer.",
-        "author": "Albert Einstein",
-        "category": "perseverance"
-    },
-    {
-        "id": 132,
-        "quote": "Energy and persistence conquer all things.",
-        "author": "Benjamin Franklin",
-        "category": "perseverance"
-    },
-    {
-        "id": 133,
-        "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        "author": "Nelson Mandela",
-        "category": "perseverance"
-    },
-    {
-        "id": 134,
-        "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up.",
-        "author": "Thomas Edison",
-        "category": "perseverance"
-    },
-    {
-        "id": 135,
-        "quote": "Fall seven times, stand up eight.",
-        "author": "Japanese Proverb",
-        "category": "perseverance"
-    },
-    {
-        "id": 136,
-        "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-        "author": "Winston Churchill",
-        "category": "perseverance"
-    },
-    {
-        "id": 137,
-        "quote": "Our greatest glory is not in never falling, but in rising every time we fall.",
-        "author": "Confucius",
-        "category": "perseverance"
-    },
-    {
-        "id": 138,
-        "quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.",
-        "author": "Vince Lombardi",
-        "category": "perseverance"
-    },
-    {
-        "id": 139,
-        "quote": "It does not matter how slowly you go as long as you do not stop.",
-        "author": "Confucius",
-        "category": "perseverance"
-    },
-    {
-        "id": 140,
-        "quote": "When you come to the end of your rope, tie a knot and hang on.",
-        "author": "Franklin D. Roosevelt",
-        "category": "perseverance"
-    },
-    {
-        "id": 141,
-        "quote": "The best way out is always through.",
-        "author": "Robert Frost",
-        "category": "perseverance"
-    },
-    {
-        "id": 142,
-        "quote": "Strength does not come from winning. Your struggles develop your strengths.",
-        "author": "Arnold Schwarzenegger",
-        "category": "perseverance"
-    },
-    {
-        "id": 143,
-        "quote": "The oak fought the wind and was broken, the willow bent when it must and survived.",
-        "author": "Robert Jordan",
-        "category": "perseverance"
-    },
-    {
-        "id": 144,
-        "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
-        "author": "Walt Whitman",
-        "category": "perseverance"
-    },
-    {
-        "id": 145,
-        "quote": "Perseverance is failing 19 times and succeeding the 20th.",
-        "author": "Julie Andrews",
-        "category": "perseverance"
-    },
-    {
-        "id": 146,
-        "quote": "It's not that I'm so smart, it's just that I stay with problems longer.",
-        "author": "Albert Einstein",
-        "category": "perseverance"
-    },
-    {
-        "id": 147,
-        "quote": "Energy and persistence conquer all things.",
-        "author": "Benjamin Franklin",
-        "category": "perseverance"
-    },
-    {
-        "id": 148,
-        "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        "author": "Nelson Mandela",
-        "category": "perseverance"
-    },
-    {
-        "id": 149,
-        "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up.",
-        "author": "Thomas Edison",
-        "category": "perseverance"
-    },
-    {
-        "id": 150,
-        "quote": "The moment you give up is the moment you let someone else win.",
-        "author": "Kobe Bryant",
-        "category": "perseverance"
-    },
-    {
-        "id": 151,
-        "quote": "The present moment is the only time over which we have dominion.",
+        "id": 61,
+        "quote": "The present moment is the only time over which we have dominion. The past is gone, the future is not yet here.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 152,
-        "quote": "The mind is everything. What you think you become.",
+        "id": 62,
+        "quote": "The mind is everything. What you think you become. What you feel you attract. What you imagine you create.",
         "author": "Buddha",
         "category": "mindfulness"
     },
     {
-        "id": 153,
+        "id": 63,
         "quote": "The best way to capture moments is to pay attention. This is how we cultivate mindfulness.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 154,
-        "quote": "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor.",
+        "id": 64,
+        "quote": "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor. In the midst of movement and chaos, keep stillness inside of you.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 155,
-        "quote": "Be where you are; otherwise you will miss your life.",
+        "id": 65,
+        "quote": "Be where you are; otherwise you will miss your life. The secret of health for both mind and body is not to mourn for the past.",
         "author": "Buddha",
         "category": "mindfulness"
     },
     {
-        "id": 156,
+        "id": 66,
         "quote": "In today's rush, we all think too much—seek too much—want too much—and forget about the joy of just being.",
         "author": "Eckhart Tolle",
         "category": "mindfulness"
     },
     {
-        "id": 157,
-        "quote": "Mindfulness isn't difficult, we just need to remember to do it.",
+        "id": 67,
+        "quote": "Mindfulness isn't difficult, we just need to remember to do it. The little things? The little moments? They aren't little.",
         "author": "Sharon Salzberg",
         "category": "mindfulness"
     },
     {
-        "id": 158,
-        "quote": "The little things? The little moments? They aren't little.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 159,
-        "quote": "Drink your tea slowly and reverently, as if it is the axis on which the world earth revolves.",
+        "id": 68,
+        "quote": "Drink your tea slowly and reverently, as if it is the axis on which the world earth revolves. Live the actual moment.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 160,
-        "quote": "You can't stop the waves, but you can learn to surf.",
+        "id": 69,
+        "quote": "You can't stop the waves, but you can learn to surf. Peace comes from within. Do not seek it without.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 161,
-        "quote": "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
+        "id": 70,
+        "quote": "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart. Listen to your own voice, your own soul.",
         "author": "Roy T. Bennett",
         "category": "mindfulness"
     },
     {
-        "id": 162,
-        "quote": "Be happy in the moment, that's enough. Each moment is all we need, not more.",
+        "id": 71,
+        "quote": "Be happy in the moment, that's enough. Each moment is all we need, not more. The present moment is filled with joy and happiness.",
         "author": "Mother Teresa",
         "category": "mindfulness"
     },
     {
-        "id": 163,
-        "quote": "The only way to live is by accepting each minute as an unrepeatable miracle.",
+        "id": 72,
+        "quote": "The only way to live is by accepting each minute as an unrepeatable miracle. Treasure every moment you have.",
         "author": "Tara Brach",
         "category": "mindfulness"
     },
     {
-        "id": 164,
+        "id": 73,
         "quote": "Mindfulness is simply being aware of what is happening right now without wishing it were different.",
         "author": "James Baraz",
         "category": "mindfulness"
     },
     {
-        "id": 165,
-        "quote": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
+        "id": 74,
+        "quote": "Mindfulness helps you go home to the present. And every time you go there and recognize a condition of happiness that you have, happiness comes.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 166,
-        "quote": "Mindfulness helps you go home to the present.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 167,
-        "quote": "Every moment is a fresh beginning.",
+        "id": 75,
+        "quote": "Every moment is a fresh beginning. The art of life is to live in the present moment.",
         "author": "T.S. Eliot",
         "category": "mindfulness"
     },
     {
-        "id": 168,
-        "quote": "The only Zen you find on the tops of mountains is the Zen you bring up there.",
+        "id": 76,
+        "quote": "The only Zen you find on the tops of mountains is the Zen you bring up there. What we are looking for is what is looking.",
         "author": "Robert M. Pirsig",
         "category": "mindfulness"
     },
     {
-        "id": 169,
-        "quote": "Mindfulness means being awake. It means knowing what you are doing.",
+        "id": 77,
+        "quote": "Mindfulness means being awake. It means knowing what you are doing. The quality of your life depends on the quality of your attention.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 170,
-        "quote": "The art of being wise is the art of knowing what to overlook.",
+        "id": 78,
+        "quote": "The art of being wise is the art of knowing what to overlook. Wherever you are, be there totally.",
         "author": "William James",
         "category": "mindfulness"
     },
     {
-        "id": 171,
-        "quote": "Wherever you are, be there totally.",
-        "author": "Eckhart Tolle",
-        "category": "mindfulness"
-    },
-    {
-        "id": 172,
-        "quote": "The quieter you become, the more you can hear.",
+        "id": 79,
+        "quote": "The quieter you become, the more you can hear. In silence, we hear truth; in solitude, we find ourselves.",
         "author": "Ram Dass",
         "category": "mindfulness"
     },
     {
-        "id": 173,
-        "quote": "Mindfulness isn't difficult, we just need to remember to do it.",
-        "author": "Sharon Salzberg",
-        "category": "mindfulness"
-    },
-    {
-        "id": 174,
-        "quote": "The little things? The little moments? They aren't little.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 175,
-        "quote": "Drink your tea slowly and reverently, as if it is the axis on which the world earth revolves.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 176,
-        "quote": "You can't stop the waves, but you can learn to surf.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 177,
-        "quote": "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
-        "author": "Roy T. Bennett",
-        "category": "mindfulness"
-    },
-    {
-        "id": 178,
-        "quote": "Be happy in the moment, that's enough. Each moment is all we need, not more.",
-        "author": "Mother Teresa",
-        "category": "mindfulness"
-    },
-    {
-        "id": 179,
-        "quote": "The only way to live is by accepting each minute as an unrepeatable miracle.",
-        "author": "Tara Brach",
-        "category": "mindfulness"
-    },
-    {
-        "id": 180,
-        "quote": "Mindfulness is simply being aware of what is happening right now without wishing it were different.",
-        "author": "James Baraz",
-        "category": "mindfulness"
-    },
-    {
-        "id": 181,
-        "quote": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 182,
-        "quote": "Mindfulness helps you go home to the present.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 183,
-        "quote": "Every moment is a fresh beginning.",
-        "author": "T.S. Eliot",
-        "category": "mindfulness"
-    },
-    {
-        "id": 184,
-        "quote": "The only Zen you find on the tops of mountains is the Zen you bring up there.",
-        "author": "Robert M. Pirsig",
-        "category": "mindfulness"
-    },
-    {
-        "id": 185,
-        "quote": "Mindfulness means being awake. It means knowing what you are doing.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 186,
-        "quote": "The art of being wise is the art of knowing what to overlook.",
-        "author": "William James",
-        "category": "mindfulness"
-    },
-    {
-        "id": 187,
-        "quote": "Wherever you are, be there totally.",
+        "id": 80,
+        "quote": "Wherever you are, be there totally. If you are washing dishes, wash dishes. If you are here now, you'll never need to search for fulfillment.",
         "author": "Eckhart Tolle",
         "category": "mindfulness"
     },
     {
-        "id": 188,
-        "quote": "The quieter you become, the more you can hear.",
-        "author": "Ram Dass",
-        "category": "mindfulness"
-    },
-    {
-        "id": 189,
-        "quote": "Mindfulness isn't difficult, we just need to remember to do it.",
-        "author": "Sharon Salzberg",
-        "category": "mindfulness"
-    },
-    {
-        "id": 190,
-        "quote": "The little things? The little moments? They aren't little.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 191,
-        "quote": "Drink your tea slowly and reverently, as if it is the axis on which the world earth revolves.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 192,
-        "quote": "You can't stop the waves, but you can learn to surf.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 193,
-        "quote": "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
-        "author": "Roy T. Bennett",
-        "category": "mindfulness"
-    },
-    {
-        "id": 194,
-        "quote": "Be happy in the moment, that's enough. Each moment is all we need, not more.",
-        "author": "Mother Teresa",
-        "category": "mindfulness"
-    },
-    {
-        "id": 195,
-        "quote": "The only way to live is by accepting each minute as an unrepeatable miracle.",
-        "author": "Tara Brach",
-        "category": "mindfulness"
-    },
-    {
-        "id": 196,
-        "quote": "Mindfulness is simply being aware of what is happening right now without wishing it were different.",
-        "author": "James Baraz",
-        "category": "mindfulness"
-    },
-    {
-        "id": 197,
-        "quote": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 198,
-        "quote": "Mindfulness helps you go home to the present.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 199,
-        "quote": "Every moment is a fresh beginning.",
-        "author": "T.S. Eliot",
-        "category": "mindfulness"
-    },
-    {
-        "id": 200,
-        "quote": "The only Zen you find on the tops of mountains is the Zen you bring up there.",
-        "author": "Robert M. Pirsig",
-        "category": "mindfulness"
-    },
-    {
-        "id": 201,
-        "quote": "Creativity is intelligence having fun.",
+        "id": 81,
+        "quote": "Creativity is intelligence having fun. Imagination is more important than knowledge.",
         "author": "Albert Einstein",
         "category": "creativity"
     },
     {
-        "id": 202,
-        "quote": "You can't use up creativity. The more you use, the more you have.",
+        "id": 82,
+        "quote": "You can't use up creativity. The more you use, the more you have. Creativity is a renewable resource.",
         "author": "Maya Angelou",
         "category": "creativity"
     },
     {
-        "id": 203,
-        "quote": "Every child is an artist. The problem is how to remain an artist once we grow up.",
+        "id": 83,
+        "quote": "Every child is an artist. The problem is how to remain an artist once we grow up. The creative adult is the child who survived.",
         "author": "Pablo Picasso",
         "category": "creativity"
     },
     {
-        "id": 204,
-        "quote": "Creativity takes courage.",
+        "id": 84,
+        "quote": "Creativity takes courage. To be creative means to be in love with life.",
         "author": "Henri Matisse",
         "category": "creativity"
     },
     {
-        "id": 205,
-        "quote": "The chief enemy of creativity is 'good' sense.",
+        "id": 85,
+        "quote": "The chief enemy of creativity is 'good' sense. The worse thing you write is better than the best thing you didn't write.",
         "author": "Pablo Picasso",
         "category": "creativity"
     },
     {
-        "id": 206,
-        "quote": "Creativity is allowing yourself to make mistakes. Art is knowing which ones to keep.",
+        "id": 86,
+        "quote": "Creativity is allowing yourself to make mistakes. Art is knowing which ones to keep. Perfection is the enemy of progress.",
         "author": "Scott Adams",
         "category": "creativity"
     },
     {
-        "id": 207,
-        "quote": "Imagination is more important than knowledge.",
-        "author": "Albert Einstein",
-        "category": "creativity"
-    },
-    {
-        "id": 208,
-        "quote": "An idea that is not dangerous is unworthy of being called an idea at all.",
+        "id": 87,
+        "quote": "An idea that is not dangerous is unworthy of being called an idea at all. All great ideas are dangerous at first.",
         "author": "Oscar Wilde",
         "category": "creativity"
     },
     {
-        "id": 209,
+        "id": 88,
         "quote": "The creative process is not controlled by a switch you can simply turn on or off; it's with you all the time.",
         "author": "Alvin Ailey",
         "category": "creativity"
     },
     {
-        "id": 210,
-        "quote": "To live a creative life, we must lose our fear of being wrong.",
+        "id": 89,
+        "quote": "To live a creative life, we must lose our fear of being wrong. The worst enemy to creativity is self-doubt.",
         "author": "Joseph Chilton Pearce",
         "category": "creativity"
     },
     {
-        "id": 211,
-        "quote": "The worst enemy to creativity is self-doubt.",
-        "author": "Sylvia Plath",
-        "category": "creativity"
-    },
-    {
-        "id": 212,
-        "quote": "A creative man is motivated by the desire to achieve, not by the desire to beat others.",
+        "id": 90,
+        "quote": "A creative man is motivated by the desire to achieve, not by the desire to beat others. Creation is its own reward.",
         "author": "Ayn Rand",
         "category": "creativity"
     },
     {
-        "id": 213,
-        "quote": "Creativity is piercing the mundane to find the marvelous.",
+        "id": 91,
+        "quote": "Creativity is piercing the mundane to find the marvelous. It's seeing what everyone else has seen and thinking what no one else has thought.",
         "author": "Bill Moyers",
         "category": "creativity"
     },
     {
-        "id": 214,
-        "quote": "Innovation distinguishes between a leader and a follower.",
+        "id": 92,
+        "quote": "Innovation distinguishes between a leader and a follower. Creativity is just connecting things.",
         "author": "Steve Jobs",
         "category": "creativity"
     },
     {
-        "id": 215,
-        "quote": "The creative adult is the child who survived.",
-        "author": "Ursula K. Le Guin",
-        "category": "creativity"
-    },
-    {
-        "id": 216,
-        "quote": "Art is the elimination of the unnecessary.",
+        "id": 93,
+        "quote": "Art is the elimination of the unnecessary. Simplicity is the ultimate sophistication.",
         "author": "Pablo Picasso",
         "category": "creativity"
     },
     {
-        "id": 217,
-        "quote": "Creativity is just connecting things.",
-        "author": "Steve Jobs",
-        "category": "creativity"
-    },
-    {
-        "id": 218,
-        "quote": "The creative process is a process of surrender, not control.",
+        "id": 94,
+        "quote": "The creative process is a process of surrender, not control. You can't control creativity, you can only prepare for it.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 219,
-        "quote": "The worst thing you write is better than the best thing you didn't write.",
-        "author": "Unknown",
-        "category": "creativity"
-    },
-    {
-        "id": 220,
-        "quote": "You can't wait for inspiration. You have to go after it with a club.",
+        "id": 95,
+        "quote": "You can't wait for inspiration. You have to go after it with a club. Inspiration exists, but it has to find you working.",
         "author": "Jack London",
         "category": "creativity"
     },
     {
-        "id": 221,
-        "quote": "The desire to create is one of the deepest yearnings of the human soul.",
+        "id": 96,
+        "quote": "The desire to create is one of the deepest yearnings of the human soul. We are created in the image of a Creator.",
         "author": "Dieter F. Uchtdorf",
         "category": "creativity"
     },
     {
-        "id": 222,
-        "quote": "Creativity is intelligence having fun.",
-        "author": "Albert Einstein",
-        "category": "creativity"
-    },
-    {
-        "id": 223,
-        "quote": "An essential aspect of creativity is not being afraid to fail.",
+        "id": 97,
+        "quote": "An essential aspect of creativity is not being afraid to fail. Failure is simply the opportunity to begin again, this time more intelligently.",
         "author": "Edwin Land",
         "category": "creativity"
     },
     {
-        "id": 224,
-        "quote": "The function of genius is to furnish cretins with ideas twenty years later.",
+        "id": 98,
+        "quote": "The function of genius is to furnish cretins with ideas twenty years later. All truly great thoughts are conceived by walking.",
         "author": "Louis Aragon",
         "category": "creativity"
     },
     {
-        "id": 225,
-        "quote": "Creativity is just connecting things.",
-        "author": "Steve Jobs",
+        "id": 99,
+        "quote": "Creativity is a habit, and the best creativity is the result of good work habits. Show up every day, and the muse will show up too.",
+        "author": "Twyla Tharp",
         "category": "creativity"
     },
     {
-        "id": 226,
-        "quote": "The creative process is a process of surrender, not control.",
-        "author": "Julia Cameron",
+        "id": 100,
+        "quote": "The creative mind plays with the objects it loves. The world is but a canvas to the imagination.",
+        "author": "Carl Jung",
         "category": "creativity"
     },
     {
-        "id": 227,
-        "quote": "The worst thing you write is better than the best thing you didn't write.",
-        "author": "Unknown",
-        "category": "creativity"
-    },
-    {
-        "id": 228,
-        "quote": "You can't wait for inspiration. You have to go after it with a club.",
-        "author": "Jack London",
-        "category": "creativity"
-    },
-    {
-        "id": 229,
-        "quote": "The desire to create is one of the deepest yearnings of the human soul.",
-        "author": "Dieter F. Uchtdorf",
-        "category": "creativity"
-    },
-    {
-        "id": 230,
-        "quote": "Creativity is intelligence having fun.",
-        "author": "Albert Einstein",
-        "category": "creativity"
-    },
-    {
-        "id": 231,
-        "quote": "An essential aspect of creativity is not being afraid to fail.",
-        "author": "Edwin Land",
-        "category": "creativity"
-    },
-    {
-        "id": 232,
-        "quote": "The function of genius is to furnish cretins with ideas twenty years later.",
-        "author": "Louis Aragon",
-        "category": "creativity"
-    },
-    {
-        "id": 233,
-        "quote": "Creativity is just connecting things.",
-        "author": "Steve Jobs",
-        "category": "creativity"
-    },
-    {
-        "id": 234,
-        "quote": "The creative process is a process of surrender, not control.",
-        "author": "Julia Cameron",
-        "category": "creativity"
-    },
-    {
-        "id": 235,
-        "quote": "The worst thing you write is better than the best thing you didn't write.",
-        "author": "Unknown",
-        "category": "creativity"
-    },
-    {
-        "id": 236,
-        "quote": "You can't wait for inspiration. You have to go after it with a club.",
-        "author": "Jack London",
-        "category": "creativity"
-    },
-    {
-        "id": 237,
-        "quote": "The desire to create is one of the deepest yearnings of the human soul.",
-        "author": "Dieter F. Uchtdorf",
-        "category": "creativity"
-    },
-    {
-        "id": 238,
-        "quote": "Creativity is intelligence having fun.",
-        "author": "Albert Einstein",
-        "category": "creativity"
-    },
-    {
-        "id": 239,
-        "quote": "An essential aspect of creativity is not being afraid to fail.",
-        "author": "Edwin Land",
-        "category": "creativity"
-    },
-    {
-        "id": 240,
-        "quote": "The function of genius is to furnish cretins with ideas twenty years later.",
-        "author": "Louis Aragon",
-        "category": "creativity"
-    },
-    {
-        "id": 241,
-        "quote": "Creativity is just connecting things.",
-        "author": "Steve Jobs",
-        "category": "creativity"
-    },
-    {
-        "id": 242,
-        "quote": "The creative process is a process of surrender, not control.",
-        "author": "Julia Cameron",
-        "category": "creativity"
-    },
-    {
-        "id": 243,
-        "quote": "The worst thing you write is better than the best thing you didn't write.",
-        "author": "Unknown",
-        "category": "creativity"
-    },
-    {
-        "id": 244,
-        "quote": "You can't wait for inspiration. You have to go after it with a club.",
-        "author": "Jack London",
-        "category": "creativity"
-    },
-    {
-        "id": 245,
-        "quote": "The desire to create is one of the deepest yearnings of the human soul.",
-        "author": "Dieter F. Uchtdorf",
-        "category": "creativity"
-    },
-    {
-        "id": 246,
-        "quote": "Creativity is intelligence having fun.",
-        "author": "Albert Einstein",
-        "category": "creativity"
-    },
-    {
-        "id": 247,
-        "quote": "An essential aspect of creativity is not being afraid to fail.",
-        "author": "Edwin Land",
-        "category": "creativity"
-    },
-    {
-        "id": 248,
-        "quote": "The function of genius is to furnish cretins with ideas twenty years later.",
-        "author": "Louis Aragon",
-        "category": "creativity"
-    },
-    {
-        "id": 249,
-        "quote": "Creativity is just connecting things.",
-        "author": "Steve Jobs",
-        "category": "creativity"
-    },
-    {
-        "id": 250,
-        "quote": "The creative process is a process of surrender, not control.",
-        "author": "Julia Cameron",
-        "category": "creativity"
-    },
-    {
-        "id": 251,
-        "quote": "A focused mind is the gateway to all achievement.",
-        "author": "Robin Sharma",
+        "id": 101,
+        "quote": "The ability to concentrate for a long period of time is like a superpower in the modern world.",
+        "author": "Cal Newport",
         "category": "focus"
     },
     {
-        "id": 252,
-        "quote": "The depth of your focus determines the height of your success.",
-        "author": "Unknown",
+        "id": 102,
+        "quote": "What we focus on expands. When we focus on our blessings, the universe multiplies them.",
+        "author": "Oprah Winfrey",
         "category": "focus"
     },
     {
-        "id": 253,
-        "quote": "Concentration is the secret of strength in all endeavors.",
-        "author": "Ralph Waldo Emerson",
+        "id": 103,
+        "quote": "Concentrated power is power. The narrower your focus, the broader your impact.",
+        "author": "Peter Drucker",
         "category": "focus"
     },
     {
-        "id": 254,
-        "quote": "Single-tasking is the ultimate productivity hack.",
-        "author": "Leo Babauta",
-        "category": "focus"
-    },
-    {
-        "id": 255,
-        "quote": "When you focus on one thing, you become a master at it.",
-        "author": "Naval Ravikant",
-        "category": "focus"
-    },
-    {
-        "id": 256,
-        "quote": "The power of attention is the power of creation.",
-        "author": "Deepak Chopra",
-        "category": "focus"
-    },
-    {
-        "id": 257,
-        "quote": "Eliminate distractions to amplify focus.",
-        "author": "James Clear",
-        "category": "focus"
-    },
-    {
-        "id": 258,
-        "quote": "Your focus determines your reality.",
+        "id": 104,
+        "quote": "Your focus determines your reality. Where you direct your attention shapes your entire experience of life.",
         "author": "George Lucas",
         "category": "focus"
     },
     {
-        "id": 259,
-        "quote": "The narrower the focus, the broader the impact.",
-        "author": "Peter Drucker",
-        "category": "focus"
-    },
-    {
-        "id": 260,
-        "quote": "Attention is the rarest and purest form of generosity.",
-        "author": "Simone Weil",
-        "category": "focus"
-    },
-    {
-        "id": 261,
-        "quote": "Laser-like focus is the difference between good and great.",
-        "author": "Gary Keller",
-        "category": "focus"
-    },
-    {
-        "id": 262,
-        "quote": "One focused hour is worth ten distracted ones.",
-        "author": "David Allen",
-        "category": "focus"
-    },
-    {
-        "id": 263,
-        "quote": "The ability to concentrate is a skill that builds with practice.",
-        "author": "Cal Newport",
-        "category": "focus"
-    },
-    {
-        "id": 264,
-        "quote": "Focus is the bridge between goals and accomplishments.",
-        "author": "Brian Tracy",
-        "category": "focus"
-    },
-    {
-        "id": 265,
-        "quote": "Deep focus creates deep results.",
-        "author": "Robin Sharma",
-        "category": "focus"
-    },
-    {
-        "id": 266,
-        "quote": "Attention is the most basic form of love.",
-        "author": "John Tarrant",
-        "category": "focus"
-    },
-    {
-        "id": 267,
-        "quote": "The focused mind can penetrate any stone.",
-        "author": "Chinese Proverb",
-        "category": "focus"
-    },
-    {
-        "id": 268,
-        "quote": "Quality attention creates quality work.",
-        "author": "Unknown",
-        "category": "focus"
-    },
-    {
-        "id": 269,
-        "quote": "Concentration is the root of genius.",
-        "author": "Carl Jung",
-        "category": "focus"
-    },
-    {
-        "id": 270,
-        "quote": "The art of focus is the art of elimination.",
-        "author": "Tim Ferriss",
-        "category": "focus"
-    },
-    {
-        "id": 271,
-        "quote": "A wandering mind builds nothing, a focused mind builds everything.",
-        "author": "Unknown",
-        "category": "focus"
-    },
-    {
-        "id": 272,
-        "quote": "Attention is the currency of achievement.",
-        "author": "Seth Godin",
-        "category": "focus"
-    },
-    {
-        "id": 273,
-        "quote": "One pointed attention creates extraordinary results.",
-        "author": "Eckhart Tolle",
-        "category": "focus"
-    },
-    {
-        "id": 274,
-        "quote": "The focused eye sees what the wandering eye misses.",
-        "author": "Japanese Proverb",
-        "category": "focus"
-    },
-    {
-        "id": 275,
-        "quote": "Concentration is the secret weapon of the successful.",
-        "author": "Brian Tracy",
-        "category": "focus"
-    },
-    {
-        "id": 276,
-        "quote": "When you focus on excellence, distractions fade away.",
-        "author": "Robin Sharma",
-        "category": "focus"
-    },
-    {
-        "id": 277,
-        "quote": "The depth of your focus determines the quality of your work.",
-        "author": "Cal Newport",
-        "category": "focus"
-    },
-    {
-        "id": 278,
-        "quote": "Attention is the foundation of all mastery.",
-        "author": "Josh Waitzkin",
-        "category": "focus"
-    },
-    {
-        "id": 279,
-        "quote": "Focused energy creates exponential results.",
-        "author": "Tony Robbins",
-        "category": "focus"
-    },
-    {
-        "id": 280,
-        "quote": "The concentrated mind is an unstoppable force.",
-        "author": "Bruce Lee",
-        "category": "focus"
-    },
-    {
-        "id": 281,
-        "quote": "Attention is the most valuable resource you possess.",
-        "author": "James Clear",
-        "category": "focus"
-    },
-    {
-        "id": 282,
-        "quote": "One task at a time, with full attention, is the ultimate productivity.",
-        "author": "Leo Babauta",
-        "category": "focus"
-    },
-    {
-        "id": 283,
-        "quote": "The focused mind sees opportunities where others see obstacles.",
-        "author": "Robin Sharma",
-        "category": "focus"
-    },
-    {
-        "id": 284,
-        "quote": "Concentration turns ability into achievement.",
-        "author": "Brian Tracy",
-        "category": "focus"
-    },
-    {
-        "id": 285,
-        "quote": "Your focus is your superpower in a distracted world.",
-        "author": "Cal Newport",
-        "category": "focus"
-    },
-    {
-        "id": 286,
-        "quote": "The art of focus is knowing what to ignore.",
-        "author": "Steve Jobs",
-        "category": "focus"
-    },
-    {
-        "id": 287,
-        "quote": "Attention multiplies the value of time.",
-        "author": "Unknown",
-        "category": "focus"
-    },
-    {
-        "id": 288,
-        "quote": "A focused hour is more valuable than a distracted day.",
-        "author": "David Allen",
-        "category": "focus"
-    },
-    {
-        "id": 289,
-        "quote": "Concentration is the mother of all skills.",
-        "author": "Naval Ravikant",
-        "category": "focus"
-    },
-    {
-        "id": 290,
-        "quote": "The disciplined mind achieves what the wandering mind only dreams of.",
-        "author": "Robin Sharma",
-        "category": "focus"
-    },
-    {
-        "id": 291,
-        "quote": "Focus is the engine of execution.",
-        "author": "Gary Keller",
-        "category": "focus"
-    },
-    {
-        "id": 292,
-        "quote": "Attention is the birthplace of innovation.",
-        "author": "Seth Godin",
-        "category": "focus"
-    },
-    {
-        "id": 293,
-        "quote": "The concentrated will can move mountains.",
-        "author": "Chinese Proverb",
-        "category": "focus"
-    },
-    {
-        "id": 294,
-        "quote": "One pointed mind, infinite possibilities.",
-        "author": "Buddhist Saying",
-        "category": "focus"
-    },
-    {
-        "id": 295,
-        "quote": "Focus is not about seeing more, but seeing better.",
-        "author": "Unknown",
-        "category": "focus"
-    },
-    {
-        "id": 296,
-        "quote": "The art of concentration is the art of living deeply.",
-        "author": "Thich Nhat Hanh",
-        "category": "focus"
-    },
-    {
-        "id": 297,
-        "quote": "Attention creates connection, distraction creates separation.",
+        "id": 105,
+        "quote": "The power of attention is the power of creation. Whatever you pay attention to grows stronger in your life.",
         "author": "Deepak Chopra",
         "category": "focus"
     },
     {
-        "id": 298,
-        "quote": "A focused mind is a creative mind.",
-        "author": "Julia Cameron",
-        "category": "focus"
-    },
-    {
-        "id": 299,
-        "quote": "Concentration is the pathway to flow.",
-        "author": "Mihaly Csikszentmihalyi",
-        "category": "focus"
-    },
-    {
-        "id": 300,
-        "quote": "The focused life is the meaningful life.",
-        "author": "Cal Newport",
-        "category": "focus"
-    },
-    {
-        "id": 301,
-        "quote": "Productivity is about systems, not willpower.",
+        "id": 106,
+        "quote": "Eliminate distractions to amplify focus. Every time you resist an interruption, you strengthen your concentration muscle.",
         "author": "James Clear",
-        "category": "productivity"
+        "category": "focus"
     },
     {
-        "id": 302,
-        "quote": "The most productive people are the most organized.",
-        "author": "Marie Kondo",
-        "category": "productivity"
+        "id": 107,
+        "quote": "The narrower the focus, the broader the impact. Specialization is the key to mastery.",
+        "author": "Gary Keller",
+        "category": "focus"
     },
     {
-        "id": 303,
-        "quote": "Efficiency is doing better what is already being done.",
-        "author": "Peter Drucker",
-        "category": "productivity"
+        "id": 108,
+        "quote": "Attention is the rarest and purest form of generosity. Giving someone your full attention is a gift beyond measure.",
+        "author": "Simone Weil",
+        "category": "focus"
     },
     {
-        "id": 304,
-        "quote": "Productivity is never an end in itself, only a means.",
-        "author": "Tim Ferriss",
-        "category": "productivity"
+        "id": 109,
+        "quote": "Laser-like focus is the difference between good and great. Mediocrity comes from divided attention.",
+        "author": "Robin Sharma",
+        "category": "focus"
     },
     {
-        "id": 305,
-        "quote": "The effective executive focuses on contribution.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 306,
-        "quote": "Work expands to fill the time available.",
-        "author": "Cyril Northcote Parkinson",
-        "category": "productivity"
-    },
-    {
-        "id": 307,
-        "quote": "Productivity is about working on the right things.",
-        "author": "Brian Tracy",
-        "category": "productivity"
-    },
-    {
-        "id": 308,
-        "quote": "The key to productivity is energy management.",
-        "author": "Tony Schwartz",
-        "category": "productivity"
-    },
-    {
-        "id": 309,
-        "quote": "Done is better than perfect.",
-        "author": "Sheryl Sandberg",
-        "category": "productivity"
-    },
-    {
-        "id": 310,
-        "quote": "Productivity is about creating more value with less effort.",
-        "author": "Tim Ferriss",
-        "category": "productivity"
-    },
-    {
-        "id": 311,
-        "quote": "The most productive tool is a prioritized to-do list.",
-        "author": "Brian Tracy",
-        "category": "productivity"
-    },
-    {
-        "id": 312,
-        "quote": "Productivity is not about being busy, but about being effective.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 313,
-        "quote": "The unexamined workflow is not worth following.",
+        "id": 110,
+        "quote": "One focused hour is worth ten distracted ones. Quality of attention determines quality of results.",
         "author": "David Allen",
+        "category": "focus"
+    },
+    {
+        "id": 111,
+        "quote": "The ability to concentrate is a skill that builds with practice. Start with 25 minutes and build from there.",
+        "author": "Francesco Cirillo",
+        "category": "focus"
+    },
+    {
+        "id": 112,
+        "quote": "Focus is the bridge between goals and accomplishments. Without it, dreams remain fantasies.",
+        "author": "Brian Tracy",
+        "category": "focus"
+    },
+    {
+        "id": 113,
+        "quote": "Deep focus creates deep results. Shallow work produces shallow outcomes.",
+        "author": "Alex Soojung-Kim Pang",
+        "category": "focus"
+    },
+    {
+        "id": 114,
+        "quote": "Attention is the most basic form of love. Through attention, we make others and ourselves real.",
+        "author": "John Tarrant",
+        "category": "focus"
+    },
+    {
+        "id": 115,
+        "quote": "The focused mind can penetrate any stone. Concentration turns ability into achievement.",
+        "author": "Chinese Proverb",
+        "category": "focus"
+    },
+    {
+        "id": 116,
+        "quote": "Quality attention creates quality work. What you attend to, you become.",
+        "author": "Robert Greene",
+        "category": "focus"
+    },
+    {
+        "id": 117,
+        "quote": "Concentration is the root of genius. The ability to focus is the hallmark of excellence.",
+        "author": "Carl Jung",
+        "category": "focus"
+    },
+    {
+        "id": 118,
+        "quote": "The art of focus is the art of elimination. Less but better.",
+        "author": "Greg McKeown",
+        "category": "focus"
+    },
+    {
+        "id": 119,
+        "quote": "A wandering mind builds nothing, a focused mind builds everything. Choose your mental state wisely.",
+        "author": "Marcus Aurelius",
+        "category": "focus"
+    },
+    {
+        "id": 120,
+        "quote": "Attention is the currency of achievement. Spend it wisely on what truly matters.",
+        "author": "Seth Godin",
+        "category": "focus"
+    },
+    {
+        "id": 121,
+        "quote": "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort.",
+        "author": "Paul J. Meyer",
         "category": "productivity"
     },
     {
-        "id": 314,
-        "quote": "Productivity is the art of making time work for you.",
+        "id": 122,
+        "quote": "The best time to plant a tree was 20 years ago. The second best time is now. Stop waiting for perfect conditions.",
+        "author": "Chinese Proverb",
+        "category": "productivity"
+    },
+    {
+        "id": 123,
+        "quote": "Time is the scarcest resource and unless it is managed nothing else can be managed. Master your minutes to master your life.",
+        "author": "Peter Drucker",
+        "category": "productivity"
+    },
+    {
+        "id": 124,
+        "quote": "The secret of getting things done is to act. Action breeds clarity and momentum.",
+        "author": "Dante Alighieri",
+        "category": "productivity"
+    },
+    {
+        "id": 125,
+        "quote": "Don't wait for the perfect moment. Take the moment and make it perfect. Progress beats perfection every time.",
+        "author": "Zoey Sayward",
+        "category": "productivity"
+    },
+    {
+        "id": 126,
+        "quote": "The difference between try and triumph is a little umph. That extra effort makes all the difference.",
+        "author": "Marvin Phillips",
+        "category": "productivity"
+    },
+    {
+        "id": 127,
+        "quote": "The best way to get something done is to begin. Starting is half the battle.",
         "author": "Unknown",
         "category": "productivity"
     },
     {
-        "id": 315,
-        "quote": "The best productivity system is the one you actually use.",
-        "author": "James Clear",
+        "id": 128,
+        "quote": "Done is better than perfect. Shipping beats theorizing.",
+        "author": "Reid Hoffman",
         "category": "productivity"
     },
     {
-        "id": 316,
-        "quote": "Productivity is about momentum, not motivation.",
-        "author": "James Clear",
+        "id": 129,
+        "quote": "Don't count the days, make the days count. Every day is an opportunity to create value.",
+        "author": "Muhammad Ali",
         "category": "productivity"
     },
     {
-        "id": 317,
-        "quote": "The productive mind is an organized mind.",
+        "id": 130,
+        "quote": "The bad news is time flies. The good news is you're the pilot. You control how you spend your time.",
+        "author": "Michael Altshuler",
+        "category": "productivity"
+    },
+    {
+        "id": 131,
+        "quote": "Better three hours too soon than a minute too late. Punctuality is the politeness of kings.",
+        "author": "William Shakespeare",
+        "category": "productivity"
+    },
+    {
+        "id": 132,
+        "quote": "The way we spend our time defines who we are. Your calendar reflects your priorities.",
+        "author": "Arianna Huffington",
+        "category": "productivity"
+    },
+    {
+        "id": 133,
+        "quote": "Time is what we want most, but what we use worst. Treat time as your most valuable asset.",
+        "author": "William Penn",
+        "category": "productivity"
+    },
+    {
+        "id": 134,
+        "quote": "Productivity is about working smarter, not harder. Leverage systems and tools to amplify your efforts.",
+        "author": "Adam Grant",
+        "category": "productivity"
+    },
+    {
+        "id": 135,
+        "quote": "The organized workspace is the productive workspace. Clutter distracts, order focuses.",
         "author": "Marie Kondo",
         "category": "productivity"
     },
     {
-        "id": 318,
-        "quote": "Effectiveness is about doing the right things, efficiency is about doing things right.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 319,
-        "quote": "Productivity is the bridge between dreams and reality.",
-        "author": "Brian Tracy",
-        "category": "productivity"
-    },
-    {
-        "id": 320,
-        "quote": "The most productive hours are the focused hours.",
-        "author": "Cal Newport",
-        "category": "productivity"
-    },
-    {
-        "id": 321,
-        "quote": "Productivity is about leverage, not effort.",
-        "author": "Tim Ferriss",
-        "category": "productivity"
-    },
-    {
-        "id": 322,
-        "quote": "The organized workspace is the productive workspace.",
-        "author": "Marie Kondo",
-        "category": "productivity"
-    },
-    {
-        "id": 323,
-        "quote": "Productivity is the art of eliminating the unnecessary.",
+        "id": 136,
+        "quote": "Productivity is the art of eliminating the unnecessary. Simplify to amplify.",
         "author": "Leo Babauta",
         "category": "productivity"
     },
     {
-        "id": 324,
-        "quote": "The productive person works smarter, not just harder.",
-        "author": "Brian Tracy",
+        "id": 137,
+        "quote": "The productive person works smarter, not just harder. Intelligence applied beats brute force.",
+        "author": "Malcolm Gladwell",
         "category": "productivity"
     },
     {
-        "id": 325,
-        "quote": "Productivity is about progress, not perfection.",
-        "author": "James Clear",
+        "id": 138,
+        "quote": "Productivity is about progress, not perfection. Consistent small wins create big results.",
+        "author": "Angela Duckworth",
         "category": "productivity"
     },
     {
-        "id": 326,
-        "quote": "The most productive tool is a deadline.",
-        "author": "Douglas Adams",
+        "id": 139,
+        "quote": "The most productive tool is a deadline. Constraints drive creativity and action.",
+        "author": "Chris Bailey",
         "category": "productivity"
     },
     {
-        "id": 327,
-        "quote": "Productivity is about creating value, not just activity.",
-        "author": "Peter Drucker",
+        "id": 140,
+        "quote": "Productivity is about creating value, not just activity. Impact matters more than busyness.",
+        "author": "Simon Sinek",
         "category": "productivity"
     },
     {
-        "id": 328,
-        "quote": "The productive life is the intentional life.",
-        "author": "Cal Newport",
-        "category": "productivity"
+        "id": 141,
+        "quote": "Fall seven times, stand up eight. Resilience is getting up one more time than you fall.",
+        "author": "Japanese Proverb",
+        "category": "perseverance"
     },
     {
-        "id": 329,
-        "quote": "Productivity is the result of good habits, not good intentions.",
-        "author": "James Clear",
-        "category": "productivity"
+        "id": 142,
+        "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up.",
+        "author": "Thomas Edison",
+        "category": "perseverance"
     },
     {
-        "id": 330,
-        "quote": "The organized mind achieves more with less stress.",
-        "author": "David Allen",
-        "category": "productivity"
+        "id": 144,
+        "quote": "Success is stumbling from failure to failure with no loss of enthusiasm. Enthusiasm fuels perseverance.",
+        "author": "Winston Churchill",
+        "category": "perseverance"
     },
     {
-        "id": 331,
-        "quote": "Productivity is about working when you work, and resting when you rest.",
-        "author": "Alex Soojung-Kim Pang",
-        "category": "productivity"
-    },
-    {
-        "id": 332,
-        "quote": "The productive person knows when to stop.",
-        "author": "Cal Newport",
-        "category": "productivity"
-    },
-    {
-        "id": 333,
-        "quote": "Productivity is about quality time, not quantity time.",
-        "author": "Tony Schwartz",
-        "category": "productivity"
-    },
-    {
-        "id": 334,
-        "quote": "The most productive decisions are made in advance.",
-        "author": "James Clear",
-        "category": "productivity"
-    },
-    {
-        "id": 335,
-        "quote": "Productivity is the art of making important things easy.",
-        "author": "BJ Fogg",
-        "category": "productivity"
-    },
-    {
-        "id": 336,
-        "quote": "The productive workflow is the automated workflow.",
-        "author": "Tim Ferriss",
-        "category": "productivity"
-    },
-    {
-        "id": 337,
-        "quote": "Productivity is about reducing friction, not increasing effort.",
-        "author": "James Clear",
-        "category": "productivity"
-    },
-    {
-        "id": 338,
-        "quote": "The organized day is the productive day.",
-        "author": "Brian Tracy",
-        "category": "productivity"
-    },
-    {
-        "id": 339,
-        "quote": "Productivity is about systems that work when you don't.",
-        "author": "Scott Adams",
-        "category": "productivity"
-    },
-    {
-        "id": 340,
-        "quote": "The productive mind is a present mind.",
-        "author": "Cal Newport",
-        "category": "productivity"
-    },
-    {
-        "id": 341,
-        "quote": "Productivity is about working with your energy, not against it.",
-        "author": "Tony Schwartz",
-        "category": "productivity"
-    },
-    {
-        "id": 342,
-        "quote": "The most productive tool is a clear mind.",
-        "author": "David Allen",
-        "category": "productivity"
-    },
-    {
-        "id": 343,
-        "quote": "Productivity is about doing less, but better.",
-        "author": "Greg McKeown",
-        "category": "productivity"
-    },
-    {
-        "id": 344,
-        "quote": "The productive person knows what not to do.",
-        "author": "Peter Drucker",
-        "category": "productivity"
-    },
-    {
-        "id": 345,
-        "quote": "Productivity is the result of focused attention.",
-        "author": "Cal Newport",
-        "category": "productivity"
-    },
-    {
-        "id": 346,
-        "quote": "The organized life is the efficient life.",
-        "author": "Marie Kondo",
-        "category": "productivity"
-    },
-    {
-        "id": 347,
-        "quote": "Productivity is about creating habits that create results.",
-        "author": "James Clear",
-        "category": "productivity"
-    },
-    {
-        "id": 348,
-        "quote": "The productive workflow eliminates decision fatigue.",
-        "author": "Roy F. Baumeister",
-        "category": "productivity"
-    },
-    {
-        "id": 349,
-        "quote": "Productivity is about working from your calendar, not your to-do list.",
-        "author": "Cal Newport",
-        "category": "productivity"
-    },
-    {
-        "id": 350,
-        "quote": "The most productive hours are protected hours.",
-        "author": "Cal Newport",
-        "category": "productivity"
-    },
-    {
-        "id": 351,
-        "quote": "Perseverance is the stubborn refusal to quit.",
+        "id": 145,
+        "quote": "The only guarantee for failure is to stop trying. As long as you're trying, you're still in the game.",
         "author": "John C. Maxwell",
         "category": "perseverance"
     },
     {
-        "id": 352,
-        "quote": "The difference between ordinary and extraordinary is that little extra.",
-        "author": "Jimmy Johnson",
-        "category": "perseverance"
-    },
-    {
-        "id": 353,
-        "quote": "Perseverance is not a passive waiting, but an active endurance.",
-        "author": "Orison Swett Marden",
-        "category": "perseverance"
-    },
-    {
-        "id": 354,
-        "quote": "The oak sleeps in the acorn, persistence awakens it.",
-        "author": "James Allen",
-        "category": "perseverance"
-    },
-    {
-        "id": 355,
-        "quote": "Perseverance is the hard work you do after you get tired of doing the hard work you already did.",
-        "author": "Newt Gingrich",
-        "category": "perseverance"
-    },
-    {
-        "id": 356,
-        "quote": "The difference between try and triumph is a little umph.",
-        "author": "Marvin Phillips",
-        "category": "perseverance"
-    },
-    {
-        "id": 357,
-        "quote": "Perseverance is the mother of all good fortune.",
-        "author": "Miguel de Cervantes",
-        "category": "perseverance"
-    },
-    {
-        "id": 358,
-        "quote": "The key to perseverance is to see failure as a stepping stone, not a stopping place.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 359,
-        "quote": "Perseverance is the secret of all triumphs.",
-        "author": "Victor Hugo",
-        "category": "perseverance"
-    },
-    {
-        "id": 360,
-        "quote": "The difference between stumbling blocks and stepping stones is how you use them.",
-        "author": "Unknown",
-        "category": "perseverance"
-    },
-    {
-        "id": 361,
-        "quote": "Perseverance is not a long race; it is many short races one after the other.",
-        "author": "Walter Elliott",
-        "category": "perseverance"
-    },
-    {
-        "id": 362,
-        "quote": "The road to success is dotted with many tempting parking spaces.",
+        "id": 147,
+        "quote": "The road to success is dotted with many tempting parking spaces. Keep driving toward your destination.",
         "author": "Will Rogers",
         "category": "perseverance"
     },
     {
-        "id": 363,
-        "quote": "Perseverance is failing 19 times and succeeding the 20th.",
-        "author": "Julie Andrews",
-        "category": "perseverance"
-    },
-    {
-        "id": 364,
-        "quote": "The harder the conflict, the more glorious the triumph.",
+        "id": 148,
+        "quote": "The harder the conflict, the more glorious the triumph. Difficulty strengthens resolve.",
         "author": "Thomas Paine",
         "category": "perseverance"
     },
     {
-        "id": 365,
-        "quote": "Perseverance is the courage to ignore the voice that says quit.",
+        "id": 149,
+        "quote": "Perseverance is the courage to ignore the voice that says quit. Listen to the voice that says continue.",
         "author": "John C. Maxwell",
         "category": "perseverance"
     },
     {
-        "id": 366,
-        "quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.",
-        "author": "Vince Lombardi",
-        "category": "perseverance"
-    },
-    {
-        "id": 367,
-        "quote": "Perseverance is the power to begin again when you feel like giving up.",
+        "id": 150,
+        "quote": "Perseverance is the power to begin again when you feel like giving up. Every morning is a new beginning.",
         "author": "John C. Maxwell",
         "category": "perseverance"
     },
     {
-        "id": 368,
-        "quote": "The only guarantee for failure is to stop trying.",
+        "id": 154,
+        "quote": "Perseverance is the key that unlocks the door to success. Patience and persistence are powerful combination.",
         "author": "John C. Maxwell",
         "category": "perseverance"
     },
     {
-        "id": 369,
-        "quote": "Perseverance is the ability to keep going when everything says stop.",
-        "author": "John C. Maxwell",
+        "id": 156,
+        "quote": "Perseverance is the ability to keep going when the going gets tough. Tough times don't last, tough people do.",
+        "author": "Robert H. Schuller",
         "category": "perseverance"
     },
     {
-        "id": 370,
-        "quote": "The difference between the impossible and the possible lies in a person's determination.",
-        "author": "Tommy Lasorda",
+        "id": 157,
+        "quote": "The only way to fail is to quit. Every attempt is a learning opportunity.",
+        "author": "Elon Musk",
         "category": "perseverance"
     },
     {
-        "id": 371,
-        "quote": "Perseverance is the determination to keep moving forward.",
-        "author": "John C. Maxwell",
+        "id": 158,
+        "quote": "Perseverance is the ability to endure temporary defeat on the way to ultimate victory. Delay is not denial.",
+        "author": "Napoleon Hill",
         "category": "perseverance"
     },
     {
-        "id": 372,
-        "quote": "The only way to do great work is to love what you do.",
-        "author": "Steve Jobs",
-        "category": "perseverance"
-    },
-    {
-        "id": 373,
-        "quote": "Perseverance is the ability to suffer through a difficult process without giving up.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 374,
-        "quote": "The difference between a mountain and a molehill is your perspective.",
-        "author": "Unknown",
-        "category": "perseverance"
-    },
-    {
-        "id": 375,
-        "quote": "Perseverance is the bridge between failure and success.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 376,
-        "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
-        "author": "Franklin D. Roosevelt",
-        "category": "perseverance"
-    },
-    {
-        "id": 377,
-        "quote": "Perseverance is the stubborn refusal to be discouraged.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 378,
-        "quote": "The difference between a winner and a loser is a winner gets up one more time.",
-        "author": "Sylvester Stallone",
-        "category": "perseverance"
-    },
-    {
-        "id": 379,
-        "quote": "Perseverance is the ability to keep trying when others have given up.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 380,
-        "quote": "The only way to achieve the impossible is to believe it is possible.",
-        "author": "Charles Kingsleigh",
-        "category": "perseverance"
-    },
-    {
-        "id": 381,
-        "quote": "Perseverance is the key that unlocks the door to success.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 382,
-        "quote": "The difference between a dream and a goal is a plan and action.",
-        "author": "Unknown",
-        "category": "perseverance"
-    },
-    {
-        "id": 383,
-        "quote": "Perseverance is the ability to keep going when the going gets tough.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 384,
-        "quote": "The only way to fail is to quit.",
-        "author": "Unknown",
-        "category": "perseverance"
-    },
-    {
-        "id": 385,
-        "quote": "Perseverance is the ability to endure temporary defeat on the way to ultimate victory.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 386,
-        "quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.",
-        "author": "Vince Lombardi",
-        "category": "perseverance"
-    },
-    {
-        "id": 387,
-        "quote": "Perseverance is the ability to keep your eyes on the prize.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 388,
-        "quote": "The only way to discover the limits of the possible is to go beyond them into the impossible.",
-        "author": "Arthur C. Clarke",
-        "category": "perseverance"
-    },
-    {
-        "id": 389,
-        "quote": "Perseverance is the ability to keep trying when everything seems hopeless.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 390,
-        "quote": "The difference between a stumbling block and a stepping stone is how high you raise your foot.",
-        "author": "Unknown",
-        "category": "perseverance"
-    },
-    {
-        "id": 391,
-        "quote": "Perseverance is the ability to keep moving forward when you feel like going back.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 392,
-        "quote": "The only way to do great work is to love what you do.",
-        "author": "Steve Jobs",
-        "category": "perseverance"
-    },
-    {
-        "id": 393,
-        "quote": "Perseverance is the ability to keep trying when you feel like quitting.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 394,
-        "quote": "The difference between the impossible and the possible lies in a person's determination.",
-        "author": "Tommy Lasorda",
-        "category": "perseverance"
-    },
-    {
-        "id": 395,
-        "quote": "Perseverance is the ability to keep going when the road gets rough.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 396,
-        "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
-        "author": "Franklin D. Roosevelt",
-        "category": "perseverance"
-    },
-    {
-        "id": 397,
-        "quote": "Perseverance is the ability to keep trying when success seems far away.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 398,
-        "quote": "The difference between a winner and a loser is a winner gets up one more time.",
-        "author": "Sylvester Stallone",
-        "category": "perseverance"
-    },
-    {
-        "id": 399,
-        "quote": "Perseverance is the ability to keep moving forward when you feel like giving up.",
-        "author": "John C. Maxwell",
-        "category": "perseverance"
-    },
-    {
-        "id": 400,
-        "quote": "The only way to achieve the impossible is to believe it is possible.",
-        "author": "Charles Kingsleigh",
-        "category": "perseverance"
-    },
-    {
-        "id": 401,
-        "quote": "Mindfulness is the gentle effort to be continuously present with experience.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 402,
-        "quote": "The present moment is a gift, that's why it's called the present.",
-        "author": "Unknown",
-        "category": "mindfulness"
-    },
-    {
-        "id": 403,
-        "quote": "Mindfulness means paying attention in a particular way: on purpose, in the present moment.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 404,
-        "quote": "Peace comes from within. Do not seek it without.",
-        "author": "Buddha",
-        "category": "mindfulness"
-    },
-    {
-        "id": 405,
-        "quote": "Mindfulness is about love and loving life. When you cultivate this love, it gives you clarity.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 406,
-        "quote": "The now is all there is, and the future is just another present moment to live when it arrives.",
-        "author": "Eckhart Tolle",
-        "category": "mindfulness"
-    },
-    {
-        "id": 407,
-        "quote": "Mindfulness is the aware, balanced acceptance of the present experience.",
+        "id": 161,
+        "quote": "Mindfulness is the aware, balanced acceptance of the present experience. It isn't more complicated than that.",
         "author": "Sylvia Boorstein",
         "category": "mindfulness"
     },
     {
-        "id": 408,
-        "quote": "To be mindful is to be truly alive, present and at one with those around you.",
+        "id": 162,
+        "quote": "To be mindful is to be truly alive, present and at one with those around you and with what you are doing.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 409,
-        "quote": "Mindfulness helps us freeze the frame so that we can become aware of our sensations and experiences.",
+        "id": 163,
+        "quote": "Mindfulness helps us freeze the frame so that we can become aware of our sensations and experiences as they are.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 410,
-        "quote": "Realize deeply that the present moment is all you ever have.",
+        "id": 164,
+        "quote": "Realize deeply that the present moment is all you ever have. Make the Now the primary focus of your life.",
         "author": "Eckhart Tolle",
         "category": "mindfulness"
     },
     {
-        "id": 411,
-        "quote": "Mindfulness is the energy of being aware and awake to the present moment.",
+        "id": 165,
+        "quote": "Mindfulness is the energy of being aware and awake to the present moment. It is the continuous practice of touching life deeply.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 412,
-        "quote": "Be where you are, not where you think you should be.",
+        "id": 166,
+        "quote": "Be where you are, not where you think you should be. The present is the only place life exists.",
         "author": "Unknown",
         "category": "mindfulness"
     },
     {
-        "id": 413,
-        "quote": "Mindfulness is a way of befriending ourselves and our experience.",
+        "id": 167,
+        "quote": "Mindfulness is a way of befriending ourselves and our experience. It's about kindness and curiosity.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 414,
-        "quote": "The things that matter most in life are not things, but moments.",
-        "author": "Unknown",
+        "id": 168,
+        "quote": "The things that matter most in life are not things, but moments. Collect moments, not things.",
+        "author": "Anthony Robbins",
         "category": "mindfulness"
     },
     {
-        "id": 415,
-        "quote": "Mindfulness is the basic human ability to be fully present.",
+        "id": 169,
+        "quote": "Mindfulness is the basic human ability to be fully present, aware of where we are and what we're doing.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 416,
-        "quote": "Happiness is not something ready-made. It comes from your own actions.",
+        "id": 170,
+        "quote": "Happiness is not something ready-made. It comes from your own actions. Cultivate it moment by moment.",
         "author": "Dalai Lama",
         "category": "mindfulness"
     },
     {
-        "id": 417,
-        "quote": "Mindfulness is the practice of returning to the present moment again and again.",
+        "id": 171,
+        "quote": "Mindfulness is the practice of returning to the present moment again and again. It's coming home to yourself.",
         "author": "Sharon Salzberg",
         "category": "mindfulness"
     },
     {
-        "id": 418,
-        "quote": "The more you are focused on time—past and future—the more you miss the Now.",
+        "id": 172,
+        "quote": "The more you are focused on time—past and future—the more you miss the Now. The Now is all there ever is.",
         "author": "Eckhart Tolle",
         "category": "mindfulness"
     },
     {
-        "id": 419,
-        "quote": "Mindfulness is the art of observing your thoughts and feelings without judgment.",
+        "id": 173,
+        "quote": "Mindfulness is the art of observing your thoughts and feelings without judgment. Witness without commentary.",
         "author": "Jon Kabat-Zinn",
         "category": "mindfulness"
     },
     {
-        "id": 420,
-        "quote": "Life is available only in the present moment.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 421,
-        "quote": "Mindfulness is the doorway to the full experience of life.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 422,
-        "quote": "When you realize nothing is lacking, the whole world belongs to you.",
+        "id": 174,
+        "quote": "When you realize nothing is lacking, the whole world belongs to you. Contentment is natural wealth.",
         "author": "Lao Tzu",
         "category": "mindfulness"
     },
     {
-        "id": 423,
-        "quote": "Mindfulness is simply being aware of what is happening right now without wishing it were different.",
-        "author": "James Baraz",
-        "category": "mindfulness"
-    },
-    {
-        "id": 424,
+        "id": 175,
         "quote": "The past is gone, the future is not yet here, and if we do not go back to ourselves in the present moment, we cannot be in touch with life.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 425,
-        "quote": "Mindfulness is the heart of Buddhist meditation.",
-        "author": "Nhat Hanh",
+        "id": 176,
+        "quote": "Mindfulness is the heart of Buddhist meditation. It is the miracle which can call back in a flash our dispersed mind.",
+        "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 426,
-        "quote": "What day is it? It's today, squeaked Piglet. My favorite day, said Pooh.",
+        "id": 177,
+        "quote": "What day is it? It's today, squeaked Piglet. My favorite day, said Pooh. Today is a gift; that's why it's called the present.",
         "author": "A.A. Milne",
         "category": "mindfulness"
     },
     {
-        "id": 427,
-        "quote": "Mindfulness is the miracle by which we master and restore ourselves.",
+        "id": 178,
+        "quote": "Mindfulness is the miracle by which we master and restore ourselves. Consider: can you get hold of your mind when you want to?",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 428,
-        "quote": "The best way to take care of the future is to take care of the present moment.",
+        "id": 179,
+        "quote": "The best way to take care of the future is to take care of the present moment. Now is the time for the work.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 429,
-        "quote": "Mindfulness is the aware, balanced acceptance of the present experience.",
-        "author": "Sylvia Boorstein",
-        "category": "mindfulness"
-    },
-    {
-        "id": 430,
-        "quote": "Walk as if you are kissing the Earth with your feet.",
+        "id": 180,
+        "quote": "Walk as if you are kissing the Earth with your feet. Every step should be peace, every step should be joy.",
         "author": "Thich Nhat Hanh",
         "category": "mindfulness"
     },
     {
-        "id": 431,
-        "quote": "Mindfulness is the practice of paying attention to the present moment with intention.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 432,
-        "quote": "Smile, breathe and go slowly.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 433,
-        "quote": "Mindfulness is the energy that helps us recognize the conditions of happiness that are already present in our lives.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 434,
-        "quote": "The present moment is the only time over which we have dominion.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 435,
-        "quote": "Mindfulness is the path to the deathless; unmindfulness is the path to death.",
-        "author": "Buddha",
-        "category": "mindfulness"
-    },
-    {
-        "id": 436,
-        "quote": "Breathing in, I calm body and mind. Breathing out, I smile.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 437,
-        "quote": "Mindfulness is the quality of being present and fully engaged with whatever we're doing.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 438,
-        "quote": "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 439,
-        "quote": "Mindfulness is the practice of being awake and aware in each moment.",
-        "author": "Jon Kabat-Zinn",
-        "category": "mindfulness"
-    },
-    {
-        "id": 440,
-        "quote": "The most precious gift we can offer others is our presence.",
-        "author": "Thich Nhat Hanh",
-        "category": "mindfulness"
-    },
-    {
-        "id": 441,
-        "quote": "Creativity is seeing what others see and thinking what no one else ever thought.",
-        "author": "Albert Einstein",
+        "id": 181,
+        "quote": "Creativity is seeing what others see and thinking what no one else ever thought. It's connecting the unconnected.",
+        "author": "Albert Szent-Gyorgyi",
         "category": "creativity"
     },
     {
-        "id": 442,
-        "quote": "The creative process is a process of surrender, not control.",
+        "id": 182,
+        "quote": "The creative process is a process of surrender, not control. You must let go to let creativity flow.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 443,
-        "quote": "Creativity is allowing yourself to make mistakes. Art is knowing which ones to keep.",
-        "author": "Scott Adams",
-        "category": "creativity"
-    },
-    {
-        "id": 444,
-        "quote": "The worst enemy to creativity is self-doubt.",
-        "author": "Sylvia Plath",
-        "category": "creativity"
-    },
-    {
-        "id": 445,
-        "quote": "Creativity takes courage.",
-        "author": "Henri Matisse",
-        "category": "creativity"
-    },
-    {
-        "id": 446,
-        "quote": "You can't use up creativity. The more you use, the more you have.",
-        "author": "Maya Angelou",
-        "category": "creativity"
-    },
-    {
-        "id": 447,
-        "quote": "Creativity is intelligence having fun.",
-        "author": "Albert Einstein",
-        "category": "creativity"
-    },
-    {
-        "id": 448,
-        "quote": "The creative adult is the child who survived.",
-        "author": "Ursula K. Le Guin",
-        "category": "creativity"
-    },
-    {
-        "id": 449,
-        "quote": "Creativity is piercing the mundane to find the marvelous.",
-        "author": "Bill Moyers",
-        "category": "creativity"
-    },
-    {
-        "id": 450,
-        "quote": "An idea that is not dangerous is unworthy of being called an idea at all.",
-        "author": "Oscar Wilde",
-        "category": "creativity"
-    },
-    {
-        "id": 451,
-        "quote": "Creativity is just connecting things.",
-        "author": "Steve Jobs",
-        "category": "creativity"
-    },
-    {
-        "id": 452,
-        "quote": "The chief enemy of creativity is 'good' sense.",
-        "author": "Pablo Picasso",
-        "category": "creativity"
-    },
-    {
-        "id": 453,
-        "quote": "Creativity is a wild mind and a disciplined eye.",
+        "id": 183,
+        "quote": "Creativity is a wild mind and a disciplined eye. Freedom within structure produces the best art.",
         "author": "Dorothy Parker",
         "category": "creativity"
     },
     {
-        "id": 454,
-        "quote": "The creative process is not controlled by a switch you can simply turn on or off.",
+        "id": 184,
+        "quote": "The creative process is not controlled by a switch you can simply turn on or off; it's with you all the time.",
         "author": "Alvin Ailey",
         "category": "creativity"
     },
     {
-        "id": 455,
-        "quote": "Creativity is the power to connect the seemingly unconnected.",
+        "id": 185,
+        "quote": "Creativity is the power to connect the seemingly unconnected. It's making new combinations of old elements.",
         "author": "William Plomer",
         "category": "creativity"
     },
     {
-        "id": 456,
-        "quote": "The desire to create is one of the deepest yearnings of the human soul.",
+        "id": 186,
+        "quote": "The desire to create is one of the deepest yearnings of the human soul. We are co-creators with the universe.",
         "author": "Dieter F. Uchtdorf",
         "category": "creativity"
     },
     {
-        "id": 457,
-        "quote": "Creativity is a habit, and the best creativity is the result of good work habits.",
+        "id": 187,
+        "quote": "Creativity is a habit, and the best creativity is the result of good work habits. Ritualize your creative practice.",
         "author": "Twyla Tharp",
         "category": "creativity"
     },
     {
-        "id": 458,
-        "quote": "The creative mind plays with the objects it loves.",
-        "author": "Carl Jung",
+        "id": 188,
+        "quote": "The creative mind plays with the objects it loves. Play is the highest form of research.",
+        "author": "Albert Einstein",
         "category": "creativity"
     },
     {
-        "id": 459,
-        "quote": "Creativity is the ability to introduce order into the randomness of nature.",
+        "id": 189,
+        "quote": "Creativity is the ability to introduce order into the randomness of nature. We bring form to chaos.",
         "author": "Eric Hoffer",
         "category": "creativity"
     },
     {
-        "id": 460,
-        "quote": "The function of creativity is to ask questions, not answer them.",
+        "id": 190,
+        "quote": "The function of creativity is to ask questions, not answer them. Curiosity fuels creation.",
         "author": "Anton Chekhov",
         "category": "creativity"
     },
     {
-        "id": 461,
-        "quote": "Creativity is the quality that you bring to the activity that you are doing.",
+        "id": 191,
+        "quote": "Creativity is the quality that you bring to the activity that you are doing. It's about presence and passion.",
         "author": "Jiddu Krishnamurti",
         "category": "creativity"
     },
     {
-        "id": 462,
-        "quote": "The creative process is a process of discovery.",
-        "author": "Julia Cameron",
+        "id": 192,
+        "quote": "Creativity is the way I share my soul with the world. Vulnerability is the birthplace of innovation.",
+        "author": "Brené Brown",
         "category": "creativity"
     },
     {
-        "id": 463,
-        "quote": "Creativity is the way I share my soul with the world.",
-        "author": "Brene Brown",
-        "category": "creativity"
-    },
-    {
-        "id": 464,
-        "quote": "The creative individual has the capacity to free himself from the web of social pressures.",
+        "id": 193,
+        "quote": "The creative individual has the capacity to free himself from the web of social pressures. Be weird, be different.",
         "author": "Abraham Maslow",
         "category": "creativity"
     },
     {
-        "id": 465,
+        "id": 194,
         "quote": "Creativity is a type of learning process where the teacher and pupil are located in the same individual.",
         "author": "Arthur Koestler",
         "category": "creativity"
     },
     {
-        "id": 466,
-        "quote": "The world is but a canvas to the imagination.",
+        "id": 195,
+        "quote": "The world is but a canvas to the imagination. We paint reality with our thoughts.",
         "author": "Henry David Thoreau",
         "category": "creativity"
     },
     {
-        "id": 467,
-        "quote": "Creativity is the natural order of life. Life is energy: pure creative energy.",
+        "id": 196,
+        "quote": "Creativity is the natural order of life. Life is energy: pure creative energy. We are creation in motion.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 468,
-        "quote": "The creative process is a process of transformation.",
-        "author": "Julia Cameron",
-        "category": "creativity"
-    },
-    {
-        "id": 469,
-        "quote": "Creativity is the power to act in uncertainty.",
+        "id": 197,
+        "quote": "Creativity is the power to act in uncertainty. Comfort zones are where dreams go to die.",
         "author": "Roll May",
         "category": "creativity"
     },
     {
-        "id": 470,
-        "quote": "The creative process is a process of becoming.",
-        "author": "Julia Cameron",
-        "category": "creativity"
-    },
-    {
-        "id": 471,
+        "id": 198,
         "quote": "Creativity is a great motivator because it makes people interested in what they are doing.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
-        "id": 472,
+        "id": 199,
         "quote": "The creative individual is capable of coping with the uncertainties and ambiguities of life.",
         "author": "Frank Barron",
         "category": "creativity"
     },
     {
-        "id": 473,
-        "quote": "Creativity is the ability to see things from a new perspective.",
+        "id": 200,
+        "quote": "Creativity is the ability to see things from a new perspective. Change your angle, change your world.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
-        "id": 474,
-        "quote": "The creative mind is a playful mind.",
+        "id": 201,
+        "quote": "One pointed attention creates extraordinary results. When you give something your undivided focus, miracles happen.",
+        "author": "Eckhart Tolle",
+        "category": "focus"
+    },
+    {
+        "id": 202,
+        "quote": "The focused eye sees what the wandering eye misses. Attention to detail separates the master from the amateur.",
+        "author": "Japanese Proverb",
+        "category": "focus"
+    },
+    {
+        "id": 203,
+        "quote": "Concentration is the secret weapon of the successful. It's not about working harder, but working with deeper attention.",
+        "author": "Brian Tracy",
+        "category": "focus"
+    },
+    {
+        "id": 204,
+        "quote": "When you focus on excellence, distractions fade away. Excellence becomes its own magnet.",
+        "author": "Robin Sharma",
+        "category": "focus"
+    },
+    {
+        "id": 205,
+        "quote": "The depth of your focus determines the quality of your work. Shallow attention produces shallow results.",
+        "author": "Cal Newport",
+        "category": "focus"
+    },
+    {
+        "id": 206,
+        "quote": "Attention is the foundation of all mastery. Before skill comes the ability to pay attention.",
+        "author": "Josh Waitzkin",
+        "category": "focus"
+    },
+    {
+        "id": 207,
+        "quote": "Focused energy creates exponential results. Scattered energy creates scattered results.",
+        "author": "Tony Robbins",
+        "category": "focus"
+    },
+    {
+        "id": 208,
+        "quote": "The concentrated mind is an unstoppable force. Like sunlight through a magnifying glass, focused attention ignites.",
+        "author": "Bruce Lee",
+        "category": "focus"
+    },
+    {
+        "id": 209,
+        "quote": "Attention is the most valuable resource you possess. Guard it as you would your most precious treasure.",
+        "author": "James Clear",
+        "category": "focus"
+    },
+    {
+        "id": 210,
+        "quote": "One task at a time, with full attention, is the ultimate productivity. Multitasking is a myth that costs us our focus.",
+        "author": "Leo Babauta",
+        "category": "focus"
+    },
+    {
+        "id": 211,
+        "quote": "The focused mind sees opportunities where others see obstacles. Perspective changes with focus.",
+        "author": "Robin Sharma",
+        "category": "focus"
+    },
+    {
+        "id": 212,
+        "quote": "Concentration turns ability into achievement. Raw talent is useless without the ability to focus it.",
+        "author": "Brian Tracy",
+        "category": "focus"
+    },
+    {
+        "id": 213,
+        "quote": "Your focus is your superpower in a distracted world. While others are scattered, you are concentrated.",
+        "author": "Cal Newport",
+        "category": "focus"
+    },
+    {
+        "id": 214,
+        "quote": "The art of focus is knowing what to ignore. Success comes from what you say no to.",
+        "author": "Steve Jobs",
+        "category": "focus"
+    },
+    {
+        "id": 215,
+        "quote": "Attention multiplies the value of time. An hour of deep focus is worth a day of distraction.",
+        "author": "Unknown",
+        "category": "focus"
+    },
+    {
+        "id": 216,
+        "quote": "A focused hour is more valuable than a distracted day. Quality trumps quantity every time.",
+        "author": "David Allen",
+        "category": "focus"
+    },
+    {
+        "id": 217,
+        "quote": "Concentration is the mother of all skills. It births mastery in every field.",
+        "author": "Naval Ravikant",
+        "category": "focus"
+    },
+    {
+        "id": 218,
+        "quote": "The disciplined mind achieves what the wandering mind only dreams of. Discipline is focus in action.",
+        "author": "Robin Sharma",
+        "category": "focus"
+    },
+    {
+        "id": 219,
+        "quote": "Focus is the engine of execution. Without it, plans remain on paper.",
+        "author": "Gary Keller",
+        "category": "focus"
+    },
+    {
+        "id": 220,
+        "quote": "Attention is the birthplace of innovation. New ideas come from deep engagement.",
+        "author": "Seth Godin",
+        "category": "focus"
+    },
+    {
+        "id": 221,
+        "quote": "Productivity is the intentional use of time, energy, and attention to create meaningful results.",
+        "author": "Chris Bailey",
+        "category": "productivity"
+    },
+    {
+        "id": 222,
+        "quote": "The productive life is the intentional life. Every action should align with your deepest values.",
+        "author": "Greg McKeown",
+        "category": "productivity"
+    },
+    {
+        "id": 223,
+        "quote": "Productivity is the result of good habits, not good intentions. Systems beat goals.",
+        "author": "James Clear",
+        "category": "productivity"
+    },
+    {
+        "id": 224,
+        "quote": "The organized mind achieves more with less stress. Clarity reduces cognitive load.",
+        "author": "David Allen",
+        "category": "productivity"
+    },
+    {
+        "id": 225,
+        "quote": "Productivity is about working when you work, and resting when you rest. Balance creates sustainability.",
+        "author": "Alex Soojung-Kim Pang",
+        "category": "productivity"
+    },
+    {
+        "id": 226,
+        "quote": "The productive person knows when to stop. Rest is part of the work cycle.",
+        "author": "Cal Newport",
+        "category": "productivity"
+    },
+    {
+        "id": 227,
+        "quote": "Productivity is about quality time, not quantity time. Intensity beats duration.",
+        "author": "Tony Schwartz",
+        "category": "productivity"
+    },
+    {
+        "id": 228,
+        "quote": "The most productive decisions are made in advance. Automation beats willpower.",
+        "author": "James Clear",
+        "category": "productivity"
+    },
+    {
+        "id": 229,
+        "quote": "Productivity is the art of making important things easy. Reduce friction for what matters.",
+        "author": "BJ Fogg",
+        "category": "productivity"
+    },
+    {
+        "id": 230,
+        "quote": "The productive workflow is the automated workflow. Systematize what you can.",
+        "author": "Tim Ferriss",
+        "category": "productivity"
+    },
+    {
+        "id": 231,
+        "quote": "Productivity is about reducing friction, not increasing effort. Easy does it better.",
+        "author": "James Clear",
+        "category": "productivity"
+    },
+    {
+        "id": 232,
+        "quote": "The organized day is the productive day. Structure sets you free.",
+        "author": "Brian Tracy",
+        "category": "productivity"
+    },
+    {
+        "id": 233,
+        "quote": "Productivity is about systems that work when you don't. Good systems don't rely on motivation.",
+        "author": "Scott Adams",
+        "category": "productivity"
+    },
+    {
+        "id": 234,
+        "quote": "The productive mind is a present mind. Be here now, doing this thing.",
+        "author": "Cal Newport",
+        "category": "productivity"
+    },
+    {
+        "id": 235,
+        "quote": "Productivity is about working with your energy, not against it. Honor your natural rhythms.",
+        "author": "Tony Schwartz",
+        "category": "productivity"
+    },
+    {
+        "id": 236,
+        "quote": "The most productive tool is a clear mind. Mental clutter slows everything down.",
+        "author": "David Allen",
+        "category": "productivity"
+    },
+    {
+        "id": 237,
+        "quote": "Productivity is about doing less, but better. Essentialism is the way.",
+        "author": "Greg McKeown",
+        "category": "productivity"
+    },
+    {
+        "id": 238,
+        "quote": "The productive person knows what not to do. Elimination is the ultimate optimization.",
+        "author": "Peter Drucker",
+        "category": "productivity"
+    },
+    {
+        "id": 239,
+        "quote": "Productivity is the result of focused attention. Where attention goes, energy flows.",
+        "author": "Cal Newport",
+        "category": "productivity"
+    },
+    {
+        "id": 240,
+        "quote": "The organized life is the efficient life. Order creates space for what matters.",
+        "author": "Marie Kondo",
+        "category": "productivity"
+    },
+    {
+        "id": 241,
+        "quote": "The concentrated will can move mountains. When determination meets action, miracles happen.",
+        "author": "Chinese Proverb",
+        "category": "perseverance"
+    },
+    {
+        "id": 242,
+        "quote": "One pointed mind, infinite possibilities. Singular focus creates extraordinary outcomes.",
+        "author": "Buddhist Saying",
+        "category": "perseverance"
+    },
+    {
+        "id": 243,
+        "quote": "Focus is not about seeing more, but seeing better. Clarity comes from eliminating noise.",
+        "author": "Unknown",
+        "category": "perseverance"
+    },
+    {
+        "id": 244,
+        "quote": "The art of concentration is the art of living deeply. Surface living yields surface results.",
+        "author": "Thich Nhat Hanh",
+        "category": "perseverance"
+    },
+    {
+        "id": 245,
+        "quote": "Attention creates connection, distraction creates separation. Be present to be powerful.",
+        "author": "Deepak Chopra",
+        "category": "perseverance"
+    },
+    {
+        "id": 246,
+        "quote": "A focused mind is a creative mind. Concentration fuels innovation.",
+        "author": "Julia Cameron",
+        "category": "perseverance"
+    },
+    {
+        "id": 247,
+        "quote": "Concentration is the pathway to flow. Deep focus leads to optimal experience.",
+        "author": "Mihaly Csikszentmihalyi",
+        "category": "perseverance"
+    },
+    {
+        "id": 248,
+        "quote": "The focused life is the meaningful life. Purpose requires undivided attention.",
+        "author": "Cal Newport",
+        "category": "perseverance"
+    },
+    {
+        "id": 249,
+        "quote": "Perseverance is the stubborn refusal to quit. Tenacity outlasts talent.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 250,
+        "quote": "The difference between ordinary and extraordinary is that little extra. Go the extra mile.",
+        "author": "Jimmy Johnson",
+        "category": "perseverance"
+    },
+    {
+        "id": 251,
+        "quote": "Perseverance is not a passive waiting, but an active endurance. Keep moving forward.",
+        "author": "Orison Swett Marden",
+        "category": "perseverance"
+    },
+    {
+        "id": 252,
+        "quote": "The oak sleeps in the acorn, persistence awakens it. Potential requires patience.",
+        "author": "James Allen",
+        "category": "perseverance"
+    },
+    {
+        "id": 253,
+        "quote": "The difference between try and triumph is a little umph. That extra push makes champions.",
+        "author": "Marvin Phillips",
+        "category": "perseverance"
+    },
+    {
+        "id": 254,
+        "quote": "Perseverance is the mother of all good fortune. Luck favors the persistent.",
+        "author": "Miguel de Cervantes",
+        "category": "perseverance"
+    },
+    {
+        "id": 255,
+        "quote": "The key to perseverance is to see failure as a stepping stone, not a stopping place.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 256,
+        "quote": "Perseverance is the secret of all triumphs. Endurance writes the final chapter.",
+        "author": "Victor Hugo",
+        "category": "perseverance"
+    },
+    {
+        "id": 257,
+        "quote": "The difference between stumbling blocks and stepping stones is how you use them.",
+        "author": "Unknown",
+        "category": "perseverance"
+    },
+    {
+        "id": 260,
+        "quote": "Perseverance is the courage to ignore the voice that says quit. Listen to your purpose.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 261,
+        "quote": "Smile, breathe and go slowly. In hurry, we miss the beauty of the journey.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 262,
+        "quote": "Mindfulness is the energy that helps us recognize the conditions of happiness that are already present in our lives.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 263,
+        "quote": "Mindfulness is the path to the deathless; unmindfulness is the path to death. Wake up to live fully.",
+        "author": "Buddha",
+        "category": "mindfulness"
+    },
+    {
+        "id": 264,
+        "quote": "Breathing in, I calm body and mind. Breathing out, I smile. This simple practice transforms everything.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 265,
+        "quote": "Mindfulness is the quality of being present and fully engaged with whatever we're doing. Be here now.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 266,
+        "quote": "The most precious gift we can offer others is our presence. When mindfulness embraces those we love, they bloom like flowers.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 267,
+        "quote": "Mindfulness is the practice of being awake and aware in each moment. Wakefulness is the foundation of wisdom.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 268,
+        "quote": "Mindfulness is the practice of paying attention to the present moment with intention. Deliberate attention creates deliberate living.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 269,
+        "quote": "Mindfulness isn't about getting anywhere else—it's about being where you are. The present is perfect as it is.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 270,
+        "quote": "The art of mindfulness is the art of living in the present moment. Life is available only in the present.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 271,
+        "quote": "Mindfulness is the awareness that arises through paying attention. Attention is the gateway to awareness.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 272,
+        "quote": "The present moment is the only moment that is real. Past and future are mental constructs.",
+        "author": "Eckhart Tolle",
+        "category": "mindfulness"
+    },
+    {
+        "id": 273,
+        "quote": "Mindfulness is the practice of being present in the moment. Presence is the antidote to suffering.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 274,
+        "quote": "The quality of your attention determines the quality of your experience. Attention shapes reality.",
+        "author": "Deepak Chopra",
+        "category": "mindfulness"
+    },
+    {
+        "id": 275,
+        "quote": "Mindfulness is the art of being fully present in the here and now. Now is where life happens.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 276,
+        "quote": "The present moment is the only moment that matters. Everything else is memory or imagination.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 277,
+        "quote": "Mindfulness is the practice of paying attention to the present moment. This moment is all we have.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 278,
+        "quote": "The art of mindfulness is the art of living in the present moment. Live now, fully and completely.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 279,
+        "quote": "Mindfulness is the awareness that arises through paying attention. Awareness transforms experience.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 280,
+        "quote": "The present moment is the only moment that is real. Reality exists only in the eternal now.",
+        "author": "Eckhart Tolle",
+        "category": "mindfulness"
+    },
+    {
+        "id": 281,
+        "quote": "Creativity is the ability to see things from a new perspective. Shift your view, shift your world.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
-        "id": 475,
-        "quote": "Creativity is the ability to generate new ideas.",
+        "id": 282,
+        "quote": "The creative mind is a playful mind. Play is the gateway to innovation.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
-        "id": 476,
-        "quote": "The creative process is a process of exploration.",
+        "id": 283,
+        "quote": "Creativity is the ability to generate new ideas. Ideas are the currency of the future.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 284,
+        "quote": "The creative process is a process of exploration. Discovery requires curiosity and courage.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 477,
-        "quote": "Creativity is the power to bring something new into existence.",
+        "id": 285,
+        "quote": "Creativity is the power to bring something new into existence. We are all creators at heart.",
         "author": "Roll May",
         "category": "creativity"
     },
     {
-        "id": 478,
-        "quote": "The creative individual is willing to take risks.",
+        "id": 286,
+        "quote": "The creative individual is willing to take risks. Safety is the enemy of innovation.",
         "author": "Frank Barron",
         "category": "creativity"
     },
     {
-        "id": 479,
-        "quote": "Creativity is the ability to see relationships where none exist.",
+        "id": 287,
+        "quote": "Creativity is the ability to see relationships where none exist. Connection is creation.",
         "author": "Thomas Disch",
         "category": "creativity"
     },
     {
-        "id": 480,
-        "quote": "The creative process is a process of healing.",
+        "id": 288,
+        "quote": "The creative process is a process of healing. Creation repairs the soul.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 481,
-        "quote": "Creativity is the ability to find new solutions to old problems.",
+        "id": 289,
+        "quote": "Creativity is the ability to find new solutions to old problems. Innovation solves what convention cannot.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
-        "id": 482,
-        "quote": "The creative mind is a curious mind.",
+        "id": 290,
+        "quote": "The creative mind is a curious mind. Wonder is the beginning of wisdom and creation.",
         "author": "Albert Einstein",
         "category": "creativity"
     },
     {
-        "id": 483,
-        "quote": "Creativity is the power to connect the seemingly unconnected.",
+        "id": 291,
+        "quote": "Creativity is the power to connect the seemingly unconnected. Synthesis creates novelty.",
         "author": "William Plomer",
         "category": "creativity"
     },
     {
-        "id": 484,
-        "quote": "The creative process is a process of self-discovery.",
+        "id": 292,
+        "quote": "The creative process is a process of self-discovery. In creating, we discover ourselves.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 485,
-        "quote": "Creativity is the ability to make the ordinary extraordinary.",
+        "id": 293,
+        "quote": "Creativity is the ability to make the ordinary extraordinary. Transformation is the artist's gift.",
         "author": "Paul Rand",
         "category": "creativity"
     },
     {
-        "id": 486,
-        "quote": "The creative individual has the courage to be different.",
+        "id": 294,
+        "quote": "The creative individual has the courage to be different. Conformity kills creativity.",
         "author": "Frank Barron",
         "category": "creativity"
     },
     {
-        "id": 487,
-        "quote": "Creativity is the power to transform reality.",
+        "id": 295,
+        "quote": "Creativity is the power to transform reality. We remake the world through imagination.",
         "author": "Roll May",
         "category": "creativity"
     },
     {
-        "id": 488,
-        "quote": "The creative process is a process of liberation.",
+        "id": 296,
+        "quote": "The creative process is a process of liberation. Creation sets us free.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 489,
+        "id": 297,
         "quote": "Creativity is the ability to see what everyone else has seen and think what no one else has thought.",
         "author": "Albert Szent-Gyorgyi",
         "category": "creativity"
     },
     {
-        "id": 490,
-        "quote": "The creative mind is a flexible mind.",
+        "id": 298,
+        "quote": "The creative mind is a flexible mind. Rigidity breaks; flexibility creates.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
-        "id": 491,
-        "quote": "Creativity is the power to imagine the impossible.",
+        "id": 299,
+        "quote": "Creativity is the power to imagine the impossible. Imagination precedes manifestation.",
         "author": "Roll May",
         "category": "creativity"
     },
     {
-        "id": 492,
-        "quote": "The creative process is a process of growth.",
+        "id": 300,
+        "quote": "The creative process is a process of growth. We expand as we create.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
-        "id": 493,
-        "quote": "Creativity is the ability to find order in chaos.",
+        "id": 301,
+        "quote": "The depth of your focus determines the height of your success. Surface attention yields surface results.",
+        "author": "Robin Sharma",
+        "category": "focus"
+    },
+    {
+        "id": 302,
+        "quote": "Concentration is the secret of strength in all endeavors. Where mind goes, energy flows.",
+        "author": "Ralph Waldo Emerson",
+        "category": "focus"
+    },
+    {
+        "id": 303,
+        "quote": "Single-tasking is the ultimate productivity hack. Doing one thing at a time is doing things right.",
+        "author": "Leo Babauta",
+        "category": "focus"
+    },
+    {
+        "id": 304,
+        "quote": "When you focus on one thing, you become a master at it. Specialization breeds excellence.",
+        "author": "Naval Ravikant",
+        "category": "focus"
+    },
+    {
+        "id": 305,
+        "quote": "A focused mind is the gateway to all achievement. Clear mind, clear results.",
+        "author": "Brian Tracy",
+        "category": "focus"
+    },
+    {
+        "id": 306,
+        "quote": "The disciplined mind achieves what the wandering mind only dreams of. Discipline is focus made visible.",
+        "author": "James Clear",
+        "category": "focus"
+    },
+    {
+        "id": 307,
+        "quote": "Focus is the engine of execution. Without it, ideas remain mere possibilities.",
+        "author": "Gary Keller",
+        "category": "focus"
+    },
+    {
+        "id": 308,
+        "quote": "Attention is the birthplace of innovation. New ideas emerge from deep engagement.",
+        "author": "Seth Godin",
+        "category": "focus"
+    },
+    {
+        "id": 309,
+        "quote": "The concentrated will can move mountains. When will is focused, miracles happen.",
+        "author": "Marcus Aurelius",
+        "category": "focus"
+    },
+    {
+        "id": 310,
+        "quote": "One pointed mind, infinite possibilities. Singular focus creates extraordinary outcomes.",
+        "author": "Deepak Chopra",
+        "category": "focus"
+    },
+    {
+        "id": 311,
+        "quote": "Focus is not about seeing more, but seeing better. Clarity comes from eliminating noise.",
+        "author": "Ryan Holiday",
+        "category": "focus"
+    },
+    {
+        "id": 312,
+        "quote": "The art of concentration is the art of living deeply. Surface living yields surface fulfillment.",
+        "author": "Thich Nhat Hanh",
+        "category": "focus"
+    },
+    {
+        "id": 313,
+        "quote": "Attention creates connection, distraction creates separation. Presence is power.",
+        "author": "Eckhart Tolle",
+        "category": "focus"
+    },
+    {
+        "id": 314,
+        "quote": "A focused mind is a creative mind. Concentration fuels imagination.",
+        "author": "Julia Cameron",
+        "category": "focus"
+    },
+    {
+        "id": 315,
+        "quote": "Concentration is the pathway to flow. Deep focus leads to peak performance.",
+        "author": "Mihaly Csikszentmihalyi",
+        "category": "focus"
+    },
+    {
+        "id": 316,
+        "quote": "The focused life is the meaningful life. Purpose requires undivided attention.",
+        "author": "Cal Newport",
+        "category": "focus"
+    },
+    {
+        "id": 317,
+        "quote": "Productivity is the result of focused attention. Where attention goes, results follow.",
+        "author": "James Clear",
+        "category": "focus"
+    },
+    {
+        "id": 318,
+        "quote": "The organized life is the efficient life. Structure creates space for focus.",
+        "author": "Marie Kondo",
+        "category": "focus"
+    },
+    {
+        "id": 319,
+        "quote": "Productivity is about creating habits that create results. Focused habits create focused results.",
+        "author": "Atomic Habits",
+        "category": "focus"
+    },
+    {
+        "id": 320,
+        "quote": "The productive workflow eliminates decision fatigue. Automation preserves mental energy for focus.",
+        "author": "Roy F. Baumeister",
+        "category": "focus"
+    },
+    {
+        "id": 321,
+        "quote": "Productivity is about working from your calendar, not your to-do list. Schedule what matters.",
+        "author": "Cal Newport",
+        "category": "productivity"
+    },
+    {
+        "id": 322,
+        "quote": "The most productive hours are protected hours. Guard your prime time fiercely.",
+        "author": "Daniel Pink",
+        "category": "productivity"
+    },
+    {
+        "id": 323,
+        "quote": "Productivity is about energy management, not time management. Energy is the currency of achievement.",
+        "author": "Jim Loehr",
+        "category": "productivity"
+    },
+    {
+        "id": 324,
+        "quote": "The productive person works in sprints, not marathons. Intensity beats endurance.",
+        "author": "Tony Schwartz",
+        "category": "productivity"
+    },
+    {
+        "id": 325,
+        "quote": "Productivity is about leverage, not effort. Work smarter by finding leverage points.",
+        "author": "Tim Ferriss",
+        "category": "productivity"
+    },
+    {
+        "id": 326,
+        "quote": "The organized workspace is the productive workspace. Your environment shapes your productivity.",
+        "author": "Gretchen Rubin",
+        "category": "productivity"
+    },
+    {
+        "id": 327,
+        "quote": "Productivity is about momentum, not motivation. Small wins create big momentum.",
+        "author": "James Clear",
+        "category": "productivity"
+    },
+    {
+        "id": 328,
+        "quote": "The productive mind is an organized mind. Clarity in mind creates clarity in action.",
+        "author": "David Allen",
+        "category": "productivity"
+    },
+    {
+        "id": 329,
+        "quote": "Productivity is about systems, not goals. Systems work when motivation fails.",
+        "author": "Scott Adams",
+        "category": "productivity"
+    },
+    {
+        "id": 330,
+        "quote": "The productive person knows when to delegate. Leverage others' strengths.",
+        "author": "Andrew Carnegie",
+        "category": "productivity"
+    },
+    {
+        "id": 331,
+        "quote": "Productivity is about prioritization, not perfection. Done beats perfect.",
+        "author": "Reid Hoffman",
+        "category": "productivity"
+    },
+    {
+        "id": 332,
+        "quote": "The organized day is the productive day. Planning prevents poor performance.",
+        "author": "Brian Tracy",
+        "category": "productivity"
+    },
+    {
+        "id": 333,
+        "quote": "Productivity is about working with your natural rhythms. Honor your body's clock.",
+        "author": "Michael Breus",
+        "category": "productivity"
+    },
+    {
+        "id": 334,
+        "quote": "The productive person eliminates unnecessary decisions. Reserve mental energy for what matters.",
+        "author": "Barack Obama",
+        "category": "productivity"
+    },
+    {
+        "id": 335,
+        "quote": "Productivity is about batching similar tasks. Grouping creates efficiency.",
+        "author": "Chris Bailey",
+        "category": "productivity"
+    },
+    {
+        "id": 336,
+        "quote": "The productive workflow minimizes context switching. Stay in the zone longer.",
+        "author": "Cal Newport",
+        "category": "productivity"
+    },
+    {
+        "id": 337,
+        "quote": "Productivity is about measuring what matters. What gets measured gets managed.",
+        "author": "Peter Drucker",
+        "category": "productivity"
+    },
+    {
+        "id": 338,
+        "quote": "The productive person reviews and adjusts regularly. Continuous improvement beats occasional perfection.",
+        "author": "W. Edwards Deming",
+        "category": "productivity"
+    },
+    {
+        "id": 339,
+        "quote": "Productivity is about working on the right things at the right time. Timing is everything.",
+        "author": "Daniel H. Pink",
+        "category": "productivity"
+    },
+    {
+        "id": 340,
+        "quote": "The productive life is the intentional life. Every action should have purpose.",
+        "author": "Stephen R. Covey",
+        "category": "productivity"
+    },
+    {
+        "id": 341,
+        "quote": "Perseverance is the ability to keep trying when others have given up. The race goes to the persistent.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 342,
+        "quote": "The only way to achieve the impossible is to believe it is possible. Faith fuels persistence.",
+        "author": "Charles Kingsleigh",
+        "category": "perseverance"
+    },
+    {
+        "id": 344,
+        "quote": "The difference between a dream and a goal is a plan and action. Dreams require execution to become reality.",
+        "author": "Tony Robbins",
+        "category": "perseverance"
+    },
+    {
+        "id": 345,
+        "quote": "Perseverance is the ability to keep going when the going gets tough. Tough times create tough people.",
+        "author": "Vince Lombardi",
+        "category": "perseverance"
+    },
+    {
+        "id": 349,
+        "quote": "Perseverance is the ability to keep trying when everything seems hopeless. Hope is the last to die.",
+        "author": "Latin Proverb",
+        "category": "perseverance"
+    },
+    {
+        "id": 351,
+        "quote": "Perseverance is the ability to keep moving forward when you feel like going back. Progress requires forward motion.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 352,
+        "quote": "The only way to do great work is to love what you do. Passion fuels perseverance.",
+        "author": "Steve Jobs",
+        "category": "perseverance"
+    },
+    {
+        "id": 353,
+        "quote": "Perseverance is the ability to keep trying when you feel like quitting. The breakthrough is often just around the corner.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 354,
+        "quote": "The difference between the impossible and the possible lies in a person's determination.",
+        "author": "Tommy Lasorda",
+        "category": "perseverance"
+    },
+    {
+        "id": 355,
+        "quote": "Perseverance is the ability to keep going when the road gets rough. Smooth seas don't make skilled sailors.",
+        "author": "John F. Kennedy",
+        "category": "perseverance"
+    },
+    {
+        "id": 356,
+        "quote": "The only limit to our realization of tomorrow will be our doubts of today. Faith removes limits.",
+        "author": "Franklin D. Roosevelt",
+        "category": "perseverance"
+    },
+    {
+        "id": 357,
+        "quote": "Perseverance is the ability to keep trying when success seems far away. Distance makes the victory sweeter.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 358,
+        "quote": "The difference between a winner and a loser is a winner gets up one more time. Resilience defines success.",
+        "author": "Vince Lombardi",
+        "category": "perseverance"
+    },
+    {
+        "id": 359,
+        "quote": "Perseverance is the ability to keep moving forward when you feel like giving up. Motion creates momentum.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 360,
+        "quote": "The only way to achieve the impossible is to believe it is possible. Belief makes the impossible possible.",
+        "author": "Roger Bannister",
+        "category": "perseverance"
+    },
+    {
+        "id": 361,
+        "quote": "Mindfulness is the practice of returning to the present moment again and again. Each return is a victory.",
+        "author": "Sharon Salzberg",
+        "category": "mindfulness"
+    },
+    {
+        "id": 362,
+        "quote": "The more you are focused on time—past and future—the more you miss the Now. Presence is everything.",
+        "author": "Eckhart Tolle",
+        "category": "mindfulness"
+    },
+    {
+        "id": 363,
+        "quote": "Mindfulness is the art of observing your thoughts and feelings without judgment. Witness without attachment.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 364,
+        "quote": "When you realize nothing is lacking, the whole world belongs to you. Abundance is a state of mind.",
+        "author": "Lao Tzu",
+        "category": "mindfulness"
+    },
+    {
+        "id": 365,
+        "quote": "The past is gone, the future is not yet here, and if we do not go back to ourselves in the present moment, we cannot be in touch with life.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 366,
+        "quote": "Mindfulness is the heart of Buddhist meditation. It is the miracle which can call back in a flash our dispersed mind.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 367,
+        "quote": "What day is it? It's today, squeaked Piglet. My favorite day, said Pooh. Today is always the best day.",
+        "author": "A.A. Milne",
+        "category": "mindfulness"
+    },
+    {
+        "id": 368,
+        "quote": "Mindfulness is the miracle by which we master and restore ourselves. Consider: can you get hold of your mind when you want to?",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 369,
+        "quote": "The best way to take care of the future is to take care of the present moment. Now is the time for the work.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 370,
+        "quote": "Walk as if you are kissing the Earth with your feet. Every step should be peace, every step should be joy.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 371,
+        "quote": "Mindfulness is the practice of paying attention to the present moment with intention. Deliberate attention creates deliberate living.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 372,
+        "quote": "Smile, breathe and go slowly. In hurry, we miss the beauty of the journey.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 373,
+        "quote": "Mindfulness is the energy that helps us recognize the conditions of happiness that are already present in our lives.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 374,
+        "quote": "Mindfulness is the path to the deathless; unmindfulness is the path to death. Wake up to live fully.",
+        "author": "Buddha",
+        "category": "mindfulness"
+    },
+    {
+        "id": 375,
+        "quote": "Breathing in, I calm body and mind. Breathing out, I smile. This simple practice transforms everything.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 376,
+        "quote": "Mindfulness is the quality of being present and fully engaged with whatever we're doing. Be here now.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 377,
+        "quote": "The most precious gift we can offer others is our presence. When mindfulness embraces those we love, they bloom like flowers.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 378,
+        "quote": "Mindfulness is the practice of being awake and aware in each moment. Wakefulness is the foundation of wisdom.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 379,
+        "quote": "Mindfulness isn't about getting anywhere else—it's about being where you are. The present is perfect as it is.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 380,
+        "quote": "The art of mindfulness is the art of living in the present moment. Life is available only in the present.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 381,
+        "quote": "Creativity is the ability to find order in chaos. Artists bring harmony to dissonance.",
         "author": "Eric Hoffer",
         "category": "creativity"
     },
     {
-        "id": 494,
-        "quote": "The creative individual is open to experience.",
+        "id": 382,
+        "quote": "The creative individual is open to experience. Receptivity precedes creation.",
         "author": "Frank Barron",
         "category": "creativity"
     },
     {
-        "id": 495,
-        "quote": "Creativity is the power to bring beauty into the world.",
+        "id": 383,
+        "quote": "Creativity is the power to bring beauty into the world. Beauty heals and transforms.",
         "author": "Roll May",
         "category": "creativity"
     },
     {
+        "id": 384,
+        "quote": "The creative process is a process of expression. We express to understand and to be understood.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 385,
+        "quote": "Creativity is the ability to make something out of nothing. Ex nihilo creation is divine.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 386,
+        "quote": "The creative mind is an original mind. Originality is the hallmark of true creativity.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 387,
+        "quote": "Creativity is the power to change the world. Every great change begins with a creative thought.",
+        "author": "Roll May",
+        "category": "creativity"
+    },
+    {
+        "id": 388,
+        "quote": "The creative process is the process of life itself. We are creating our lives every moment.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 389,
+        "quote": "Creativity is the natural order of life. Life is energy: pure creative energy. We are creation in motion.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 390,
+        "quote": "The creative process is a process of transformation. We transform materials and ourselves.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 391,
+        "quote": "Creativity is the power to act in uncertainty. Creation requires courage in the face of the unknown.",
+        "author": "Roll May",
+        "category": "creativity"
+    },
+    {
+        "id": 392,
+        "quote": "The creative process is a process of becoming. We become more through creating.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 393,
+        "quote": "Creativity is a great motivator because it makes people interested in what they are doing. Engagement fuels creation.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 394,
+        "quote": "The creative individual is capable of coping with the uncertainties and ambiguities of life. Creativity thrives in ambiguity.",
+        "author": "Frank Barron",
+        "category": "creativity"
+    },
+    {
+        "id": 395,
+        "quote": "Creativity is the ability to see things from a new perspective. Shift your view, shift your world.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 396,
+        "quote": "The creative mind is a playful mind. Play is the gateway to innovation.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 397,
+        "quote": "Creativity is the ability to generate new ideas. Ideas are the currency of the future.",
+        "author": "Edward de Bono",
+        "category": "creativity"
+    },
+    {
+        "id": 398,
+        "quote": "The creative process is a process of exploration. Discovery requires curiosity and courage.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 399,
+        "quote": "Creativity is the power to bring something new into existence. We are all creators at heart.",
+        "author": "Roll May",
+        "category": "creativity"
+    },
+    {
+        "id": 400,
+        "quote": "The creative individual is willing to take risks. Safety is the enemy of innovation.",
+        "author": "Frank Barron",
+        "category": "creativity"
+    },
+    {
+        "id": 401,
+        "quote": "The mind is like water. When it's turbulent, it's difficult to see. When it's calm, everything becomes clear.",
+        "author": "Prasad Mahes",
+        "category": "focus"
+    },
+    {
+        "id": 405,
+        "quote": "Focus on where you want to go, not on what you fear. Your focus determines your direction.",
+        "author": "Anthony Robbins",
+        "category": "focus"
+    },
+    {
+        "id": 407,
+        "quote": "Focus is a matter of deciding what things you're not going to do. Strategy is about choice and sacrifice.",
+        "author": "John Carmack",
+        "category": "focus"
+    },
+    {
+        "id": 408,
+        "quote": "The most important thing about goals is having one. Without a target, all directions are equal.",
+        "author": "Geoffry F. Abert",
+        "category": "focus"
+    },
+    {
+        "id": 409,
+        "quote": "You can do anything, but not everything. Recognize your limits to maximize your impact.",
+        "author": "David Allen",
+        "category": "focus"
+    },
+    {
+        "id": 410,
+        "quote": "Multitasking is merely the opportunity to screw up more than one thing at a time. Single-tasking is supreme.",
+        "author": "Steve Uzzell",
+        "category": "focus"
+    },
+    {
+        "id": 411,
+        "quote": "Where focus goes, energy flows. Direct your mental energy like a laser beam.",
+        "author": "Tony Robbins",
+        "category": "focus"
+    },
+    {
+        "id": 412,
+        "quote": "A focused mind is the most powerful weapon in the world. Sharpen it daily.",
+        "author": "Bruce Lee",
+        "category": "focus"
+    },
+    {
+        "id": 413,
+        "quote": "The successful man is the average man, focused. Excellence is ordinary people doing ordinary things extraordinarily well.",
+        "author": "John Gardner",
+        "category": "focus"
+    },
+    {
+        "id": 414,
+        "quote": "Focus on the signal, not the noise. In a world of distraction, discernment is power.",
+        "author": "Nate Silver",
+        "category": "focus"
+    },
+    {
+        "id": 415,
+        "quote": "The ability to focus is a skill that must be practiced. Like a muscle, it grows with use.",
+        "author": "Daniel Goleman",
+        "category": "focus"
+    },
+    {
+        "id": 416,
+        "quote": "Concentrated power is power. Intensity beats extensity every time.",
+        "author": "Gail Sheehy",
+        "category": "focus"
+    },
+    {
+        "id": 417,
+        "quote": "The ability to focus is a competitive advantage in today's economy. While others are distracted, you are producing.",
+        "author": "Daniel Goleman",
+        "category": "focus"
+    },
+    {
+        "id": 418,
+        "quote": "Distraction is the enemy of all great work. Protect your attention as you would your most valuable asset.",
+        "author": "Ryan Holiday",
+        "category": "focus"
+    },
+    {
+        "id": 419,
+        "quote": "Flow state occurs when your skill level perfectly matches the challenge at hand. Seek this sweet spot daily.",
+        "author": "Mihaly Csikszentmihalyi",
+        "category": "focus"
+    },
+    {
+        "id": 420,
+        "quote": "The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable.",
+        "author": "Cal Newport",
+        "category": "focus"
+    },
+    {
+        "id": 421,
+        "quote": "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort.",
+        "author": "Paul J. Meyer",
+        "category": "productivity"
+    },
+    {
+        "id": 422,
+        "quote": "The best time to plant a tree was 20 years ago. The second best time is now. Act today for tomorrow's harvest.",
+        "author": "Chinese Proverb",
+        "category": "productivity"
+    },
+    {
+        "id": 423,
+        "quote": "Time is the scarcest resource and unless it is managed nothing else can be managed. Master your minutes.",
+        "author": "Peter Drucker",
+        "category": "productivity"
+    },
+    {
+        "id": 424,
+        "quote": "The secret of getting things done is to act. Motion creates momentum.",
+        "author": "Dante Alighieri",
+        "category": "productivity"
+    },
+    {
+        "id": 425,
+        "quote": "Don't wait for the perfect moment. Take the moment and make it perfect. Progress beats perfection.",
+        "author": "Zoey Sayward",
+        "category": "productivity"
+    },
+    {
+        "id": 426,
+        "quote": "The difference between try and triumph is a little umph. That extra effort separates winners from also-rans.",
+        "author": "Marvin Phillips",
+        "category": "productivity"
+    },
+    {
+        "id": 427,
+        "quote": "The best way to get something done is to begin. Starting is often the hardest part.",
+        "author": "Unknown",
+        "category": "productivity"
+    },
+    {
+        "id": 428,
+        "quote": "Lost time is never found again. Use each moment as if it were your last opportunity.",
+        "author": "Benjamin Franklin",
+        "category": "productivity"
+    },
+    {
+        "id": 429,
+        "quote": "You may delay, but time will not. Procrastination is the thief of time.",
+        "author": "Benjamin Franklin",
+        "category": "productivity"
+    },
+    {
+        "id": 430,
+        "quote": "The way to get started is to quit talking and begin doing. Action speaks louder than words.",
+        "author": "Walt Disney",
+        "category": "productivity"
+    },
+    {
+        "id": 431,
+        "quote": "Don't watch the clock; do what it does. Keep going. Persistence pays.",
+        "author": "Sam Levenson",
+        "category": "productivity"
+    },
+    {
+        "id": 432,
+        "quote": "The secret of getting ahead is getting started. The first step is always the most important.",
+        "author": "Mark Twain",
+        "category": "productivity"
+    },
+    {
+        "id": 433,
+        "quote": "Either you run the day, or the day runs you. Take control of your time.",
+        "author": "Jim Rohn",
+        "category": "productivity"
+    },
+    {
+        "id": 434,
+        "quote": "Amateurs sit and wait for inspiration, the rest of us just get up and go to work. Discipline beats inspiration.",
+        "author": "Stephen King",
+        "category": "productivity"
+    },
+    {
+        "id": 435,
+        "quote": "The path to success is to take massive, determined action. Dreams require execution.",
+        "author": "Tony Robbins",
+        "category": "productivity"
+    },
+    {
+        "id": 436,
+        "quote": "Time management is life management. How you spend your hours is how you spend your life.",
+        "author": "Robin Sharma",
+        "category": "productivity"
+    },
+    {
+        "id": 437,
+        "quote": "Productivity is being able to do things that you were never able to do before. Growth expands capacity.",
+        "author": "Franz Kafka",
+        "category": "productivity"
+    },
+    {
+        "id": 438,
+        "quote": "Efficiency is doing things right; effectiveness is doing the right things. First effectiveness, then efficiency.",
+        "author": "Peter Drucker",
+        "category": "productivity"
+    },
+    {
+        "id": 439,
+        "quote": "Being busy does not always mean real work. Activity is not necessarily accomplishment.",
+        "author": "Thomas Edison",
+        "category": "productivity"
+    },
+    {
+        "id": 440,
+        "quote": "You have to decide what your highest priorities are and have the courage to say no to other things.",
+        "author": "Stephen Covey",
+        "category": "productivity"
+    },
+    {
+        "id": 442,
+        "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up. Persist a little longer.",
+        "author": "Thomas Edison",
+        "category": "perseverance"
+    },
+    {
+        "id": 444,
+        "quote": "The only guarantee for failure is to stop trying. As long as you're trying, hope remains.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 445,
+        "quote": "The difference between the impossible and the possible lies in a person's determination. Willpower moves mountains.",
+        "author": "Tommy Lasorda",
+        "category": "perseverance"
+    },
+    {
+        "id": 447,
+        "quote": "The harder the conflict, the more glorious the triumph. Struggle strengthens character.",
+        "author": "Thomas Paine",
+        "category": "perseverance"
+    },
+    {
+        "id": 449,
+        "quote": "Perseverance is the power to begin again when you feel like giving up. Each morning offers renewal.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 450,
+        "quote": "Perseverance is the ability to keep going when everything says stop. The obstacle is the way forward.",
+        "author": "Ryan Holiday",
+        "category": "perseverance"
+    },
+    {
+        "id": 451,
+        "quote": "The difference between a winner and a loser is a winner gets up one more time. Resilience defines champions.",
+        "author": "Sylvester Stallone",
+        "category": "perseverance"
+    },
+    {
+        "id": 452,
+        "quote": "The only way to achieve the impossible is to believe it is possible. Faith fuels achievement.",
+        "author": "Charles Kingsleigh",
+        "category": "perseverance"
+    },
+    {
+        "id": 453,
+        "quote": "Perseverance is the key that unlocks the door to success. Patience and persistence open all doors.",
+        "author": "John C. Maxwell",
+        "category": "perseverance"
+    },
+    {
+        "id": 454,
+        "quote": "The difference between a dream and a goal is a plan and action. Execution transforms vision into reality.",
+        "author": "Les Brown",
+        "category": "perseverance"
+    },
+    {
+        "id": 456,
+        "quote": "The only way to fail is to quit. Every attempt teaches something valuable.",
+        "author": "Elon Musk",
+        "category": "perseverance"
+    },
+    {
+        "id": 457,
+        "quote": "Perseverance is the ability to endure temporary defeat on the way to ultimate victory. Setbacks are setups for comebacks.",
+        "author": "Napoleon Hill",
+        "category": "perseverance"
+    },
+    {
+        "id": 458,
+        "quote": "The only way to discover the limits of the possible is to go beyond them into the impossible.",
+        "author": "Arthur C. Clarke",
+        "category": "perseverance"
+    },
+    {
+        "id": 461,
+        "quote": "Mindfulness is the aware, balanced acceptance of the present experience. It isn't more complicated than that.",
+        "author": "Sylvia Boorstein",
+        "category": "mindfulness"
+    },
+    {
+        "id": 462,
+        "quote": "To be mindful is to be truly alive, present and at one with those around you and with what you are doing.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 463,
+        "quote": "Mindfulness helps us freeze the frame so that we can become aware of our sensations and experiences as they are.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 464,
+        "quote": "Realize deeply that the present moment is all you ever have. Make the Now the primary focus of your life.",
+        "author": "Eckhart Tolle",
+        "category": "mindfulness"
+    },
+    {
+        "id": 465,
+        "quote": "Mindfulness is the energy of being aware and awake to the present moment. It is the continuous practice of touching life deeply.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 466,
+        "quote": "Be where you are, not where you think you should be. The present is the only place life exists.",
+        "author": "Unknown",
+        "category": "mindfulness"
+    },
+    {
+        "id": 467,
+        "quote": "Mindfulness is a way of befriending ourselves and our experience. It's about kindness and curiosity.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 468,
+        "quote": "The things that matter most in life are not things, but moments. Collect moments, not possessions.",
+        "author": "Anthony Robbins",
+        "category": "mindfulness"
+    },
+    {
+        "id": 469,
+        "quote": "Mindfulness is the basic human ability to be fully present, aware of where we are and what we're doing.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 470,
+        "quote": "Happiness is not something ready-made. It comes from your own actions. Cultivate it moment by moment.",
+        "author": "Dalai Lama",
+        "category": "mindfulness"
+    },
+    {
+        "id": 471,
+        "quote": "Mindfulness is the practice of returning to the present moment again and again. It's coming home to yourself.",
+        "author": "Sharon Salzberg",
+        "category": "mindfulness"
+    },
+    {
+        "id": 472,
+        "quote": "The more you are focused on time—past and future—the more you miss the Now. The Now is all there ever is.",
+        "author": "Eckhart Tolle",
+        "category": "mindfulness"
+    },
+    {
+        "id": 473,
+        "quote": "Mindfulness is the art of observing your thoughts and feelings without judgment. Witness without commentary.",
+        "author": "Jon Kabat-Zinn",
+        "category": "mindfulness"
+    },
+    {
+        "id": 474,
+        "quote": "When you realize nothing is lacking, the whole world belongs to you. Contentment is natural wealth.",
+        "author": "Lao Tzu",
+        "category": "mindfulness"
+    },
+    {
+        "id": 475,
+        "quote": "The past is gone, the future is not yet here, and if we do not go back to ourselves in the present moment, we cannot be in touch with life.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 476,
+        "quote": "Mindfulness is the heart of Buddhist meditation. It is the miracle which can call back in a flash our dispersed mind.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 477,
+        "quote": "What day is it? It's today, squeaked Piglet. My favorite day, said Pooh. Today is a gift; that's why it's called the present.",
+        "author": "A.A. Milne",
+        "category": "mindfulness"
+    },
+    {
+        "id": 478,
+        "quote": "Mindfulness is the miracle by which we master and restore ourselves. Consider: can you get hold of your mind when you want to?",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 479,
+        "quote": "The best way to take care of the future is to take care of the present moment. Now is the time for the work.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 480,
+        "quote": "Walk as if you are kissing the Earth with your feet. Every step should be peace, every step should be joy.",
+        "author": "Thich Nhat Hanh",
+        "category": "mindfulness"
+    },
+    {
+        "id": 481,
+        "quote": "Creativity is seeing what others see and thinking what no one else ever thought. It's connecting the unconnected.",
+        "author": "Albert Szent-Gyorgyi",
+        "category": "creativity"
+    },
+    {
+        "id": 482,
+        "quote": "The creative process is a process of surrender, not control. You must let go to let creativity flow.",
+        "author": "Julia Cameron",
+        "category": "creativity"
+    },
+    {
+        "id": 483,
+        "quote": "Creativity is a wild mind and a disciplined eye. Freedom within structure produces the best art.",
+        "author": "Dorothy Parker",
+        "category": "creativity"
+    },
+    {
+        "id": 484,
+        "quote": "The creative process is not controlled by a switch you can simply turn on or off; it's with you all the time.",
+        "author": "Alvin Ailey",
+        "category": "creativity"
+    },
+    {
+        "id": 485,
+        "quote": "Creativity is the power to connect the seemingly unconnected. It's making new combinations of old elements.",
+        "author": "William Plomer",
+        "category": "creativity"
+    },
+    {
+        "id": 486,
+        "quote": "The desire to create is one of the deepest yearnings of the human soul. We are co-creators with the universe.",
+        "author": "Dieter F. Uchtdorf",
+        "category": "creativity"
+    },
+    {
+        "id": 487,
+        "quote": "Creativity is a habit, and the best creativity is the result of good work habits. Ritualize your creative practice.",
+        "author": "Twyla Tharp",
+        "category": "creativity"
+    },
+    {
+        "id": 488,
+        "quote": "The creative mind plays with the objects it loves. Play is the highest form of research.",
+        "author": "Albert Einstein",
+        "category": "creativity"
+    },
+    {
+        "id": 489,
+        "quote": "Creativity is the ability to introduce order into the randomness of nature. We bring form to chaos.",
+        "author": "Eric Hoffer",
+        "category": "creativity"
+    },
+    {
+        "id": 490,
+        "quote": "The function of creativity is to ask questions, not answer them. Curiosity fuels creation.",
+        "author": "Anton Chekhov",
+        "category": "creativity"
+    },
+    {
+        "id": 491,
+        "quote": "Creativity is the quality that you bring to the activity that you are doing. It's about presence and passion.",
+        "author": "Jiddu Krishnamurti",
+        "category": "creativity"
+    },
+    {
+        "id": 492,
+        "quote": "Creativity is the way I share my soul with the world. Vulnerability is the birthplace of innovation.",
+        "author": "Brené Brown",
+        "category": "creativity"
+    },
+    {
+        "id": 493,
+        "quote": "The creative individual has the capacity to free himself from the web of social pressures. Be weird, be different.",
+        "author": "Abraham Maslow",
+        "category": "creativity"
+    },
+    {
+        "id": 494,
+        "quote": "Creativity is a type of learning process where the teacher and pupil are located in the same individual.",
+        "author": "Arthur Koestler",
+        "category": "creativity"
+    },
+    {
+        "id": 495,
+        "quote": "The world is but a canvas to the imagination. We paint reality with our thoughts.",
+        "author": "Henry David Thoreau",
+        "category": "creativity"
+    },
+    {
         "id": 496,
-        "quote": "The creative process is a process of expression.",
+        "quote": "Creativity is the natural order of life. Life is energy: pure creative energy. We are creation in motion.",
         "author": "Julia Cameron",
         "category": "creativity"
     },
     {
         "id": 497,
-        "quote": "Creativity is the ability to make something out of nothing.",
-        "author": "Edward de Bono",
+        "quote": "Creativity is the power to act in uncertainty. Comfort zones are where dreams go to die.",
+        "author": "Roll May",
         "category": "creativity"
     },
     {
         "id": 498,
-        "quote": "The creative mind is an original mind.",
+        "quote": "Creativity is a great motivator because it makes people interested in what they are doing.",
         "author": "Edward de Bono",
         "category": "creativity"
     },
     {
         "id": 499,
-        "quote": "Creativity is the power to change the world.",
-        "author": "Roll May",
+        "quote": "The creative individual is capable of coping with the uncertainties and ambiguities of life.",
+        "author": "Frank Barron",
         "category": "creativity"
     },
     {
         "id": 500,
-        "quote": "The creative process is the process of life itself.",
-        "author": "Julia Cameron",
+        "quote": "Creativity is the ability to see things from a new perspective. Change your angle, change your world.",
+        "author": "Edward de Bono",
         "category": "creativity"
     }
 ]

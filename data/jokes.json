@@ -30,21 +30,9 @@
         "category": "clean"
     },
     {
-        "id": 6,
-        "setup": "What do you call a bear with no teeth?",
-        "punchline": "A gummy bear!",
-        "category": "clean"
-    },
-    {
         "id": 7,
         "setup": "I'm reading a book on anti-gravity.",
         "punchline": "It's impossible to put down!",
-        "category": "braint"
-    },
-    {
-        "id": 8,
-        "setup": "Why did the scarecrow win an award?",
-        "punchline": "Because he was outstanding in his field!",
         "category": "braint"
     },
     {
@@ -58,5 +46,2645 @@
         "setup": "How many programmers does it take to change a light bulb?",
         "punchline": "None, that's a hardware problem!",
         "category": "tech"
+    },
+    {
+        "id": 12,
+        "setup": "Why did the math book look so sad?",
+        "punchline": "Because it had too many problems!",
+        "category": "braint"
+    },
+    {
+        "id": 13,
+        "setup": "What do you call a can opener that doesn't work?",
+        "punchline": "A can't opener!",
+        "category": "clean"
+    },
+    {
+        "id": 14,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "clean"
+    },
+    {
+        "id": 15,
+        "setup": "What do you get when you cross a snowman and a vampire?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 16,
+        "setup": "Why did the cookie go to the doctor?",
+        "punchline": "Because it felt crumby!",
+        "category": "clean"
+    },
+    {
+        "id": 17,
+        "setup": "What do you call a sleeping dinosaur?",
+        "punchline": "A dino-snore!",
+        "category": "clean"
+    },
+    {
+        "id": 18,
+        "setup": "Why don't eggs tell jokes?",
+        "punchline": "They'd crack each other up!",
+        "category": "clean"
+    },
+    {
+        "id": 19,
+        "setup": "What do you call a belt made of watches?",
+        "punchline": "A waist of time!",
+        "category": "braint"
+    },
+    {
+        "id": 20,
+        "setup": "Why did the tomato turn red?",
+        "punchline": "Because it saw the salad dressing!",
+        "category": "clean"
+    },
+    {
+        "id": 22,
+        "setup": "Why did the bicycle fall over?",
+        "punchline": "It was two-tired!",
+        "category": "clean"
+    },
+    {
+        "id": 25,
+        "setup": "What do you call a bear with no socks on?",
+        "punchline": "Bare-foot!",
+        "category": "clean"
+    },
+    {
+        "id": 26,
+        "setup": "Why did the coffee file a police report?",
+        "punchline": "It got mugged!",
+        "category": "clean"
+    },
+    {
+        "id": 27,
+        "setup": "What do you call a dinosaur with an extensive vocabulary?",
+        "punchline": "A thesaurus!",
+        "category": "braint"
+    },
+    {
+        "id": 29,
+        "setup": "What do you call a cow with no legs?",
+        "punchline": "Ground beef!",
+        "category": "clean"
+    },
+    {
+        "id": 30,
+        "setup": "Why did the golfer bring two pairs of pants?",
+        "punchline": "In case he got a hole in one!",
+        "category": "clean"
+    },
+    {
+        "id": 31,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 32,
+        "setup": "Why did the picture go to jail?",
+        "punchline": "Because it was framed!",
+        "category": "clean"
+    },
+    {
+        "id": 33,
+        "setup": "What do you call a factory that makes okay products?",
+        "punchline": "A satisfactory!",
+        "category": "braint"
+    },
+    {
+        "id": 34,
+        "setup": "Why did the cookie go to the nurse?",
+        "punchline": "Because it felt crummy!",
+        "category": "clean"
+    },
+    {
+        "id": 35,
+        "setup": "What do you call a bear in the rain?",
+        "punchline": "A drizzly bear!",
+        "category": "clean"
+    },
+    {
+        "id": 37,
+        "setup": "What do you call a fake stone?",
+        "punchline": "A sham-rock!",
+        "category": "clean"
+    },
+    {
+        "id": 38,
+        "setup": "Why don't oysters share their pearls?",
+        "punchline": "Because they're shellfish!",
+        "category": "clean"
+    },
+    {
+        "id": 39,
+        "setup": "What do you get when you cross a vampire and a snowman?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 40,
+        "setup": "Why did the computer go to the doctor?",
+        "punchline": "It had a virus!",
+        "category": "tech"
+    },
+    {
+        "id": 41,
+        "setup": "What's a computer's favorite snack?",
+        "punchline": "Microchips!",
+        "category": "tech"
+    },
+    {
+        "id": 42,
+        "setup": "Why did the smartphone go to therapy?",
+        "punchline": "It had too many issues!",
+        "category": "tech"
+    },
+    {
+        "id": 44,
+        "setup": "Why was the computer cold?",
+        "punchline": "It left its Windows open!",
+        "category": "tech"
+    },
+    {
+        "id": 45,
+        "setup": "What's a robot's favorite type of music?",
+        "punchline": "Heavy metal!",
+        "category": "tech"
+    },
+    {
+        "id": 46,
+        "setup": "Why did the Wi-Fi break up with the Internet?",
+        "punchline": "There was no connection!",
+        "category": "tech"
+    },
+    {
+        "id": 47,
+        "setup": "What do you call a sleeping computer?",
+        "punchline": "A laptop!",
+        "category": "tech"
+    },
+    {
+        "id": 48,
+        "setup": "Why did the computer go to art school?",
+        "punchline": "It wanted to learn how to draw!",
+        "category": "tech"
+    },
+    {
+        "id": 49,
+        "setup": "What's a computer's favorite dance?",
+        "punchline": "The robot!",
+        "category": "tech"
+    },
+    {
+        "id": 50,
+        "setup": "Why did the smartphone go on a diet?",
+        "punchline": "It had too many apps!",
+        "category": "tech"
+    },
+    {
+        "id": 51,
+        "setup": "What do you call a computer superhero?",
+        "punchline": "A screen saver!",
+        "category": "tech"
+    },
+    {
+        "id": 52,
+        "setup": "Why did the tablet go to school?",
+        "punchline": "To get smarter!",
+        "category": "tech"
+    },
+    {
+        "id": 53,
+        "setup": "What's a computer's favorite game?",
+        "punchline": "Hide and seek - it loves to cache!",
+        "category": "tech"
+    },
+    {
+        "id": 54,
+        "setup": "Why did the computer get a ticket?",
+        "punchline": "It was caught speeding on the information highway!",
+        "category": "tech"
+    },
+    {
+        "id": 55,
+        "setup": "What do you call an iPhone that's not yours?",
+        "punchline": "An iFraud!",
+        "category": "tech"
+    },
+    {
+        "id": 56,
+        "setup": "Why did the robot go on vacation?",
+        "punchline": "It needed to recharge!",
+        "category": "tech"
+    },
+    {
+        "id": 57,
+        "setup": "What's a computer's favorite drink?",
+        "punchline": "Java!",
+        "category": "tech"
+    },
+    {
+        "id": 58,
+        "setup": "Why did the laptop go to the beach?",
+        "punchline": "It wanted to surf the web!",
+        "category": "tech"
+    },
+    {
+        "id": 59,
+        "setup": "What do you call a computer that can sing?",
+        "punchline": "A Dell!",
+        "category": "tech"
+    },
+    {
+        "id": 60,
+        "setup": "Why did the smartphone break up with the tablet?",
+        "punchline": "It couldn't handle the size difference!",
+        "category": "tech"
+    },
+    {
+        "id": 61,
+        "setup": "What's a computer's favorite movie?",
+        "punchline": "The Social Network!",
+        "category": "tech"
+    },
+    {
+        "id": 62,
+        "setup": "Why did the computer go to the party?",
+        "punchline": "To network!",
+        "category": "tech"
+    },
+    {
+        "id": 63,
+        "setup": "What do you call a computer that tells jokes?",
+        "punchline": "A Dell-ightful machine!",
+        "category": "tech"
+    },
+    {
+        "id": 64,
+        "setup": "Why did the robot cross the road?",
+        "punchline": "To get to the other circuit!",
+        "category": "tech"
+    },
+    {
+        "id": 65,
+        "setup": "What's a computer's favorite exercise?",
+        "punchline": "Disk-covery!",
+        "category": "tech"
+    },
+    {
+        "id": 66,
+        "setup": "Why did the computer go to sleep?",
+        "punchline": "It had too many running processes!",
+        "category": "tech"
+    },
+    {
+        "id": 67,
+        "setup": "What do you call a happy computer?",
+        "punchline": "A Joy-stick!",
+        "category": "tech"
+    },
+    {
+        "id": 68,
+        "setup": "Why did the smartphone get a job?",
+        "punchline": "To pay its bills!",
+        "category": "tech"
+    },
+    {
+        "id": 69,
+        "setup": "What's a computer's favorite sport?",
+        "punchline": "Tennis - it loves the net!",
+        "category": "tech"
+    },
+    {
+        "id": 70,
+        "setup": "Why did the computer go to the doctor?",
+        "punchline": "It had a byte!",
+        "category": "tech"
+    },
+    {
+        "id": 71,
+        "setup": "What do you call a computer that can cook?",
+        "punchline": "A micro-wave!",
+        "category": "tech"
+    },
+    {
+        "id": 72,
+        "setup": "Why did the robot get a ticket?",
+        "punchline": "It was caught speeding!",
+        "category": "tech"
+    },
+    {
+        "id": 73,
+        "setup": "What's a computer's favorite place in the house?",
+        "punchline": "The living room - it's where the router is!",
+        "category": "tech"
+    },
+    {
+        "id": 74,
+        "setup": "Why did the computer go to school?",
+        "punchline": "To get smarter!",
+        "category": "tech"
+    },
+    {
+        "id": 75,
+        "setup": "What do you call a computer that's always late?",
+        "punchline": "A slow-poke!",
+        "category": "tech"
+    },
+    {
+        "id": 76,
+        "setup": "Why did the smartphone go to the gym?",
+        "punchline": "To get fit!",
+        "category": "tech"
+    },
+    {
+        "id": 77,
+        "setup": "What's a computer's favorite type of music?",
+        "punchline": "Hard drive!",
+        "category": "tech"
+    },
+    {
+        "id": 78,
+        "setup": "Why did the computer get a divorce?",
+        "punchline": "It had too many incompatible issues!",
+        "category": "tech"
+    },
+    {
+        "id": 79,
+        "setup": "What do you call a computer that's always happy?",
+        "punchline": "A Joy-stick!",
+        "category": "tech"
+    },
+    {
+        "id": 80,
+        "setup": "Why did the robot go to the party?",
+        "punchline": "To get wound up!",
+        "category": "tech"
+    },
+    {
+        "id": 81,
+        "setup": "What's a computer's favorite game show?",
+        "punchline": "Wheel of Fortune - it loves spinning disks!",
+        "category": "tech"
+    },
+    {
+        "id": 82,
+        "setup": "Why did the computer go to the beach?",
+        "punchline": "To catch some waves!",
+        "category": "tech"
+    },
+    {
+        "id": 83,
+        "setup": "What do you call a computer that can dance?",
+        "punchline": "A Dell-lightful mover!",
+        "category": "tech"
+    },
+    {
+        "id": 84,
+        "setup": "Why did the smartphone get a haircut?",
+        "punchline": "It needed a new look!",
+        "category": "tech"
+    },
+    {
+        "id": 85,
+        "setup": "What's a computer's favorite type of weather?",
+        "punchline": "Cloudy with a chance of servers!",
+        "category": "tech"
+    },
+    {
+        "id": 86,
+        "setup": "Why did the computer go to the bank?",
+        "punchline": "To check its balance!",
+        "category": "tech"
+    },
+    {
+        "id": 87,
+        "setup": "What do you call a computer that's always cold?",
+        "punchline": "A chill-pad!",
+        "category": "tech"
+    },
+    {
+        "id": 88,
+        "setup": "Why did the robot go to school?",
+        "punchline": "To learn its ABCs - Always Be Charging!",
+        "category": "tech"
+    },
+    {
+        "id": 89,
+        "setup": "What's a computer's favorite holiday?",
+        "punchline": "Byte-mas!",
+        "category": "tech"
+    },
+    {
+        "id": 90,
+        "setup": "Why did the computer go to the movies?",
+        "punchline": "To watch a byte-sized film!",
+        "category": "tech"
+    },
+    {
+        "id": 91,
+        "setup": "What do you call a computer that's always tired?",
+        "punchline": "A sleepy-pad!",
+        "category": "tech"
+    },
+    {
+        "id": 92,
+        "setup": "Why did the smartphone go to the doctor?",
+        "punchline": "It had a virus!",
+        "category": "tech"
+    },
+    {
+        "id": 93,
+        "setup": "What's a computer's favorite type of food?",
+        "punchline": "Chips!",
+        "category": "tech"
+    },
+    {
+        "id": 94,
+        "setup": "Why did the computer go to the gym?",
+        "punchline": "To get ripped!",
+        "category": "tech"
+    },
+    {
+        "id": 95,
+        "setup": "What do you call a computer that's always hungry?",
+        "punchline": "A byte-eater!",
+        "category": "tech"
+    },
+    {
+        "id": 96,
+        "setup": "Why did the robot get a job?",
+        "punchline": "To earn its keep!",
+        "category": "tech"
+    },
+    {
+        "id": 97,
+        "setup": "What's a computer's favorite type of candy?",
+        "punchline": "Microchips!",
+        "category": "tech"
+    },
+    {
+        "id": 98,
+        "setup": "Why did the computer go to the party?",
+        "punchline": "To have a byte of fun!",
+        "category": "tech"
+    },
+    {
+        "id": 99,
+        "setup": "What do you call a computer that's always sad?",
+        "punchline": "A blue-screen!",
+        "category": "tech"
+    },
+    {
+        "id": 100,
+        "setup": "Why did the smartphone go to school?",
+        "punchline": "To get smarter apps!",
+        "category": "tech"
+    },
+    {
+        "id": 101,
+        "setup": "Why did the employee bring a ladder to work?",
+        "punchline": "He wanted to climb the corporate ladder!",
+        "category": "worklife"
+    },
+    {
+        "id": 102,
+        "setup": "What do you call a meeting that could have been an email?",
+        "punchline": "A waste of time!",
+        "category": "worklife"
+    },
+    {
+        "id": 103,
+        "setup": "Why did the coffee file a police report?",
+        "punchline": "It got mugged at the office!",
+        "category": "worklife"
+    },
+    {
+        "id": 104,
+        "setup": "What's the best thing about Switzerland?",
+        "punchline": "I don't know, but the flag is a big plus!",
+        "category": "worklife"
+    },
+    {
+        "id": 105,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts for office politics!",
+        "category": "worklife"
+    },
+    {
+        "id": 106,
+        "setup": "What do you call a fake noodle?",
+        "punchline": "An impasta! Just like some coworkers!",
+        "category": "worklife"
+    },
+    {
+        "id": 107,
+        "setup": "Why did the scarecrow get promoted?",
+        "punchline": "Because he was outstanding in his field!",
+        "category": "worklife"
+    },
+    {
+        "id": 108,
+        "setup": "What do you call a belt made of watches?",
+        "punchline": "A waist of time, like most meetings!",
+        "category": "worklife"
+    },
+    {
+        "id": 109,
+        "setup": "Why did the math book look so sad?",
+        "punchline": "Because it had too many problems, just like my workload!",
+        "category": "worklife"
+    },
+    {
+        "id": 110,
+        "setup": "What do you call cheese that isn't yours?",
+        "punchline": "Nacho cheese - just like the office fridge!",
+        "category": "worklife"
+    },
+    {
+        "id": 111,
+        "setup": "Why did the bicycle fall over?",
+        "punchline": "It was two-tired from working overtime!",
+        "category": "worklife"
+    },
+    {
+        "id": 112,
+        "setup": "What do you call a dinosaur with an extensive vocabulary?",
+        "punchline": "A thesaurus - the office know-it-all!",
+        "category": "worklife"
+    },
+    {
+        "id": 113,
+        "setup": "Why don't eggs tell jokes at work?",
+        "punchline": "They'd crack each other up during meetings!",
+        "category": "worklife"
+    },
+    {
+        "id": 114,
+        "setup": "What do you call a sleeping bull?",
+        "punchline": "A bulldozer - just like my boss after lunch!",
+        "category": "worklife"
+    },
+    {
+        "id": 115,
+        "setup": "Why did the tomato turn red?",
+        "punchline": "Because it saw the salad dressing - and the quarterly report!",
+        "category": "worklife"
+    },
+    {
+        "id": 116,
+        "setup": "What do you call a fish with no eyes?",
+        "punchline": "Fsh - just like my coworker who never sees my emails!",
+        "category": "worklife"
+    },
+    {
+        "id": 117,
+        "setup": "Why did the golfer bring two pairs of pants?",
+        "punchline": "In case he got a hole in one - just like my presentation!",
+        "category": "worklife"
+    },
+    {
+        "id": 118,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite - just like the office AC!",
+        "category": "worklife"
+    },
+    {
+        "id": 119,
+        "setup": "Why did the picture go to jail?",
+        "punchline": "Because it was framed - just like my last project!",
+        "category": "worklife"
+    },
+    {
+        "id": 120,
+        "setup": "What do you call a factory that makes okay products?",
+        "punchline": "A satisfactory - just like our performance reviews!",
+        "category": "worklife"
+    },
+    {
+        "id": 121,
+        "setup": "Why did the cookie go to the nurse?",
+        "punchline": "Because it felt crummy - just like Monday mornings!",
+        "category": "worklife"
+    },
+    {
+        "id": 122,
+        "setup": "What do you call a bear in the rain?",
+        "punchline": "A drizzly bear - just like my commute!",
+        "category": "worklife"
+    },
+    {
+        "id": 123,
+        "setup": "Why did the math book look so sad?",
+        "punchline": "Because it had too many problems - just like my inbox!",
+        "category": "worklife"
+    },
+    {
+        "id": 124,
+        "setup": "What do you call a fake stone?",
+        "punchline": "A sham-rock - just like our team-building exercises!",
+        "category": "worklife"
+    },
+    {
+        "id": 125,
+        "setup": "Why don't oysters share their pearls?",
+        "punchline": "Because they're shellfish - just like the guy who takes all the credit!",
+        "category": "worklife"
+    },
+    {
+        "id": 126,
+        "setup": "What do you get when you cross a vampire and a snowman?",
+        "punchline": "Frostbite - just like the office in January!",
+        "category": "worklife"
+    },
+    {
+        "id": 127,
+        "setup": "Why did the coffee file a police report?",
+        "punchline": "It got mugged - right from my desk!",
+        "category": "worklife"
+    },
+    {
+        "id": 128,
+        "setup": "What's the best thing about working from home?",
+        "punchline": "You can attend meetings in your pajamas!",
+        "category": "worklife"
+    },
+    {
+        "id": 129,
+        "setup": "Why did the employee bring a string to work?",
+        "punchline": "To tie up loose ends!",
+        "category": "worklife"
+    },
+    {
+        "id": 130,
+        "setup": "What's a programmer's favorite place in the office?",
+        "punchline": "The Foo Bar!",
+        "category": "worklife"
+    },
+    {
+        "id": 131,
+        "setup": "Why did the spreadsheet go to therapy?",
+        "punchline": "It had too many issues!",
+        "category": "worklife"
+    },
+    {
+        "id": 132,
+        "setup": "What's the difference between a bad golfer and a bad skydiver?",
+        "punchline": "A bad golfer goes 'whack, dang!' A bad skydiver goes 'dang, whack!'",
+        "category": "worklife"
+    },
+    {
+        "id": 133,
+        "setup": "Why did the employee get a degree in gardening?",
+        "punchline": "He wanted to learn about root access to the server!",
+        "category": "worklife"
+    },
+    {
+        "id": 134,
+        "setup": "What's a computer's favorite place in the office?",
+        "punchline": "The server room - it's always cool there!",
+        "category": "worklife"
+    },
+    {
+        "id": 135,
+        "setup": "Why did the employee bring a pencil to a knife fight?",
+        "punchline": "He wanted to draw first blood in the presentation!",
+        "category": "worklife"
+    },
+    {
+        "id": 136,
+        "setup": "What's a musician's favorite place in the office?",
+        "punchline": "The bandwidth!",
+        "category": "worklife"
+    },
+    {
+        "id": 137,
+        "setup": "Why did the cookie go to the doctor?",
+        "punchline": "Because it felt crumby about the deadline!",
+        "category": "worklife"
+    },
+    {
+        "id": 138,
+        "setup": "What do you call cheese that isn't yours at work?",
+        "punchline": "Nacho cheese - it's in the community fridge!",
+        "category": "worklife"
+    },
+    {
+        "id": 139,
+        "setup": "Why did the employee bring a ladder to the bar?",
+        "punchline": "He heard the drinks were on the house after work!",
+        "category": "worklife"
+    },
+    {
+        "id": 140,
+        "setup": "What's a gardener's favorite tool at work?",
+        "punchline": "His keyboard - for planting ideas!",
+        "category": "worklife"
+    },
+    {
+        "id": 141,
+        "setup": "Why did the clock go to therapy at work?",
+        "punchline": "It had too many ticks from stress!",
+        "category": "worklife"
+    },
+    {
+        "id": 142,
+        "setup": "What do you call a dinosaur with an extensive vocabulary at work?",
+        "punchline": "A thesaurus - the office grammar police!",
+        "category": "worklife"
+    },
+    {
+        "id": 143,
+        "setup": "Why did the employee get fired from the orange juice factory?",
+        "punchline": "He couldn't concentrate on the job!",
+        "category": "worklife"
+    },
+    {
+        "id": 144,
+        "setup": "What's a scientist's favorite type of dog at work?",
+        "punchline": "A lab - for experiments!",
+        "category": "worklife"
+    },
+    {
+        "id": 145,
+        "setup": "Why did the employee bring a blanket to work?",
+        "punchline": "In case he got cold from the office AC!",
+        "category": "worklife"
+    },
+    {
+        "id": 146,
+        "setup": "What do you call a belt made of watches at work?",
+        "punchline": "A waist of time - like that 3-hour meeting!",
+        "category": "worklife"
+    },
+    {
+        "id": 147,
+        "setup": "Why did the employee get promoted at the bakery?",
+        "punchline": "He was on a roll with his projects!",
+        "category": "worklife"
+    },
+    {
+        "id": 148,
+        "setup": "What's a carpenter's favorite type of music at work?",
+        "punchline": "Saw-dust - it helps him focus!",
+        "category": "worklife"
+    },
+    {
+        "id": 149,
+        "setup": "Why did the employee bring a pencil to a gunfight?",
+        "punchline": "He wanted to draw up a business plan!",
+        "category": "worklife"
+    },
+    {
+        "id": 150,
+        "setup": "What do you call a sleeping bull at work?",
+        "punchline": "A bull-dozer - the snoring coworker!",
+        "category": "worklife"
+    },
+    {
+        "id": 151,
+        "setup": "Why did the employee get fired from the keyboard factory?",
+        "punchline": "He wasn't putting in enough shifts or letters!",
+        "category": "worklife"
+    },
+    {
+        "id": 152,
+        "setup": "What's a plumber's favorite game at work?",
+        "punchline": "Leak and seek - finding those bugs!",
+        "category": "worklife"
+    },
+    {
+        "id": 153,
+        "setup": "Why did the employee bring a ladder to the library?",
+        "punchline": "To reach the high-level documentation!",
+        "category": "worklife"
+    },
+    {
+        "id": 154,
+        "setup": "What do you call a fish with no eyes at work?",
+        "punchline": "Fsh - the blind copy recipient!",
+        "category": "worklife"
+    },
+    {
+        "id": 155,
+        "setup": "Why did the employee get fired from the banana stand?",
+        "punchline": "He kept slipping up on deadlines!",
+        "category": "worklife"
+    },
+    {
+        "id": 156,
+        "setup": "What's a barber's favorite type of math at work?",
+        "punchline": "Hair-brained calculations!",
+        "category": "worklife"
+    },
+    {
+        "id": 157,
+        "setup": "Why did the employee bring a map to work?",
+        "punchline": "He kept getting lost in the corporate structure!",
+        "category": "worklife"
+    },
+    {
+        "id": 158,
+        "setup": "What do you call a cow with no legs at work?",
+        "punchline": "Ground beef - from all the overtime!",
+        "category": "worklife"
+    },
+    {
+        "id": 159,
+        "setup": "Why did the employee get promoted at the coffee shop?",
+        "punchline": "He was always percolating with ideas!",
+        "category": "worklife"
+    },
+    {
+        "id": 160,
+        "setup": "What's a photographer's favorite type of music at work?",
+        "punchline": "Snap tunes - for product photos!",
+        "category": "worklife"
+    },
+    {
+        "id": 161,
+        "setup": "Why did the employee bring a pencil to a sword fight?",
+        "punchline": "He wanted to draw the battle plans!",
+        "category": "worklife"
+    },
+    {
+        "id": 162,
+        "setup": "What do you call a bear with no teeth at work?",
+        "punchline": "A gummy bear - the harmless coworker!",
+        "category": "worklife"
+    },
+    {
+        "id": 163,
+        "setup": "Why did the employee get fired from the clock factory?",
+        "punchline": "He was always watching the clock for quitting time!",
+        "category": "worklife"
+    },
+    {
+        "id": 164,
+        "setup": "What's a firefighter's favorite game at work?",
+        "punchline": "Hide and go seek shelter from the boss!",
+        "category": "worklife"
+    },
+    {
+        "id": 165,
+        "setup": "Why did the employee bring a ladder to the kitchen?",
+        "punchline": "To reach the high cabinets where the good snacks are!",
+        "category": "worklife"
+    },
+    {
+        "id": 166,
+        "setup": "What do you call a fish wearing a suit at work?",
+        "punchline": "Sofishticated - the well-dressed manager!",
+        "category": "worklife"
+    },
+    {
+        "id": 167,
+        "setup": "Why did the employee get fired from the pencil factory?",
+        "punchline": "He couldn't draw enough attention to his work!",
+        "category": "worklife"
+    },
+    {
+        "id": 168,
+        "setup": "What's a pilot's favorite type of music at work?",
+        "punchline": "Fly tunes - for those high-flying presentations!",
+        "category": "worklife"
+    },
+    {
+        "id": 169,
+        "setup": "Why did the employee bring a map to the office?",
+        "punchline": "He kept getting lost in the new software!",
+        "category": "worklife"
+    },
+    {
+        "id": 170,
+        "setup": "What do you call a cow with no legs at the office?",
+        "punchline": "Ground beef - from all the pressure!",
+        "category": "worklife"
+    },
+    {
+        "id": 171,
+        "setup": "Why did the employee get promoted at the bakery?",
+        "punchline": "He was on a roll with his sales numbers!",
+        "category": "worklife"
+    },
+    {
+        "id": 172,
+        "setup": "What's a carpenter's favorite type of music during overtime?",
+        "punchline": "Saw-dust - it matches the tired eyes!",
+        "category": "worklife"
+    },
+    {
+        "id": 173,
+        "setup": "Why did the employee bring a pencil to a gunfight meeting?",
+        "punchline": "He wanted to draw up a ceasefire agreement!",
+        "category": "worklife"
+    },
+    {
+        "id": 174,
+        "setup": "What do you call a sleeping bull in the conference room?",
+        "punchline": "A bull-dozer - snoring through the presentation!",
+        "category": "worklife"
+    },
+    {
+        "id": 175,
+        "setup": "Why did the employee get fired from the keyboard factory job?",
+        "punchline": "He wasn't putting in enough letters or effort!",
+        "category": "worklife"
+    },
+    {
+        "id": 176,
+        "setup": "What's a plumber's favorite game during breaks?",
+        "punchline": "Leak and seek - finding the coffee machine!",
+        "category": "worklife"
+    },
+    {
+        "id": 177,
+        "setup": "Why did the employee bring a ladder to the company library?",
+        "punchline": "To reach the high-level strategy documents!",
+        "category": "worklife"
+    },
+    {
+        "id": 178,
+        "setup": "What do you call a fish with no eyes in accounting?",
+        "punchline": "Fsh - can't see the numbers!",
+        "category": "worklife"
+    },
+    {
+        "id": 179,
+        "setup": "Why did the employee get fired from the banana stand job?",
+        "punchline": "He kept slipping up on the quarterly reports!",
+        "category": "worklife"
+    },
+    {
+        "id": 180,
+        "setup": "What's a barber's favorite type of math in HR?",
+        "punchline": "Hair-brained policies!",
+        "category": "worklife"
+    },
+    {
+        "id": 182,
+        "setup": "Why did the chicken cross the playground?",
+        "punchline": "To get to the other slide!",
+        "category": "clean"
+    },
+    {
+        "id": 186,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "clean"
+    },
+    {
+        "id": 187,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 188,
+        "setup": "Why did the math book look so sad?",
+        "punchline": "Because it had too many problems!",
+        "category": "clean"
+    },
+    {
+        "id": 192,
+        "setup": "Why don't eggs tell jokes?",
+        "punchline": "They'd crack each other up!",
+        "category": "clean"
+    },
+    {
+        "id": 193,
+        "setup": "What do you call a sleeping bull?",
+        "punchline": "A bulldozer!",
+        "category": "clean"
+    },
+    {
+        "id": 194,
+        "setup": "Why did the tomato turn red?",
+        "punchline": "Because it saw the salad dressing!",
+        "category": "clean"
+    },
+    {
+        "id": 196,
+        "setup": "Why did the golfer bring two pairs of pants?",
+        "punchline": "In case he got a hole in one!",
+        "category": "clean"
+    },
+    {
+        "id": 197,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 198,
+        "setup": "Why did the picture go to jail?",
+        "punchline": "Because it was framed!",
+        "category": "clean"
+    },
+    {
+        "id": 199,
+        "setup": "What do you call a factory that makes okay products?",
+        "punchline": "A satisfactory!",
+        "category": "clean"
+    },
+    {
+        "id": 200,
+        "setup": "Why did the cookie go to the nurse?",
+        "punchline": "Because it felt crummy!",
+        "category": "clean"
+    },
+    {
+        "id": 201,
+        "setup": "What do you call a bear in the rain?",
+        "punchline": "A drizzly bear!",
+        "category": "clean"
+    },
+    {
+        "id": 203,
+        "setup": "What do you call a fake stone?",
+        "punchline": "A sham-rock!",
+        "category": "clean"
+    },
+    {
+        "id": 204,
+        "setup": "Why don't oysters share their pearls?",
+        "punchline": "Because they're shellfish!",
+        "category": "clean"
+    },
+    {
+        "id": 205,
+        "setup": "What do you get when you cross a vampire and a snowman?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 206,
+        "setup": "Why did the coffee file a police report?",
+        "punchline": "It got mugged!",
+        "category": "clean"
+    },
+    {
+        "id": 207,
+        "setup": "What's the best thing about Switzerland?",
+        "punchline": "I don't know, but the flag is a big plus!",
+        "category": "clean"
+    },
+    {
+        "id": 208,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "clean"
+    },
+    {
+        "id": 210,
+        "setup": "Why did the scarecrow get promoted?",
+        "punchline": "Because he was outstanding in his field!",
+        "category": "clean"
+    },
+    {
+        "id": 216,
+        "setup": "Why don't eggs tell jokes?",
+        "punchline": "They'd crack each other up!",
+        "category": "clean"
+    },
+    {
+        "id": 218,
+        "setup": "Why did the tomato turn red?",
+        "punchline": "Because it saw the salad dressing!",
+        "category": "clean"
+    },
+    {
+        "id": 220,
+        "setup": "Why did the golfer bring two pairs of pants?",
+        "punchline": "In case he got a hole in one!",
+        "category": "clean"
+    },
+    {
+        "id": 221,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 222,
+        "setup": "Why did the picture go to jail?",
+        "punchline": "Because it was framed!",
+        "category": "clean"
+    },
+    {
+        "id": 223,
+        "setup": "What do you call a factory that makes okay products?",
+        "punchline": "A satisfactory!",
+        "category": "clean"
+    },
+    {
+        "id": 224,
+        "setup": "Why did the cookie go to the nurse?",
+        "punchline": "Because it felt crummy!",
+        "category": "clean"
+    },
+    {
+        "id": 225,
+        "setup": "What do you call a bear in the rain?",
+        "punchline": "A drizzly bear!",
+        "category": "clean"
+    },
+    {
+        "id": 226,
+        "setup": "What has ears but cannot hear?",
+        "punchline": "A cornfield!",
+        "category": "braint"
+    },
+    {
+        "id": 227,
+        "setup": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+        "punchline": "An echo!",
+        "category": "braint"
+    },
+    {
+        "id": 228,
+        "setup": "The more you take, the more you leave behind. What am I?",
+        "punchline": "Footsteps!",
+        "category": "braint"
+    },
+    {
+        "id": 229,
+        "setup": "What has keys but can't open locks?",
+        "punchline": "A piano!",
+        "category": "braint"
+    },
+    {
+        "id": 230,
+        "setup": "What has a head, a tail, is brown, and has no legs?",
+        "punchline": "A penny!",
+        "category": "braint"
+    },
+    {
+        "id": 232,
+        "setup": "What has one eye but can't see?",
+        "punchline": "A needle!",
+        "category": "braint"
+    },
+    {
+        "id": 233,
+        "setup": "What gets wet while drying?",
+        "punchline": "A towel!",
+        "category": "braint"
+    },
+    {
+        "id": 234,
+        "setup": "What has a thumb and four fingers but is not alive?",
+        "punchline": "A glove!",
+        "category": "braint"
+    },
+    {
+        "id": 235,
+        "setup": "What has a face and two hands but no arms or legs?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 236,
+        "setup": "What can travel around the world while staying in a corner?",
+        "punchline": "A stamp!",
+        "category": "braint"
+    },
+    {
+        "id": 237,
+        "setup": "What has a heart that doesn't beat?",
+        "punchline": "An artichoke!",
+        "category": "braint"
+    },
+    {
+        "id": 238,
+        "setup": "What has legs but doesn't walk?",
+        "punchline": "A table!",
+        "category": "braint"
+    },
+    {
+        "id": 239,
+        "setup": "What has a bottom at the top?",
+        "punchline": "Your legs!",
+        "category": "braint"
+    },
+    {
+        "id": 240,
+        "setup": "What has words but never speaks?",
+        "punchline": "A book!",
+        "category": "braint"
+    },
+    {
+        "id": 241,
+        "setup": "What has a ring but no finger?",
+        "punchline": "A telephone!",
+        "category": "braint"
+    },
+    {
+        "id": 242,
+        "setup": "What has to be broken before you can use it?",
+        "punchline": "An egg!",
+        "category": "braint"
+    },
+    {
+        "id": 243,
+        "setup": "What goes up but never comes down?",
+        "punchline": "Your age!",
+        "category": "braint"
+    },
+    {
+        "id": 244,
+        "setup": "What is full of holes but still holds water?",
+        "punchline": "A sponge!",
+        "category": "braint"
+    },
+    {
+        "id": 245,
+        "setup": "What can you catch but not throw?",
+        "punchline": "A cold!",
+        "category": "braint"
+    },
+    {
+        "id": 246,
+        "setup": "What has many teeth but can't bite?",
+        "punchline": "A comb!",
+        "category": "braint"
+    },
+    {
+        "id": 247,
+        "setup": "What begins with T, ends with T, and has T in it?",
+        "punchline": "A teapot!",
+        "category": "braint"
+    },
+    {
+        "id": 248,
+        "setup": "What has cities but no houses, forests but no trees, and rivers but no water?",
+        "punchline": "A map!",
+        "category": "braint"
+    },
+    {
+        "id": 249,
+        "setup": "What can run but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",
+        "punchline": "A river!",
+        "category": "braint"
+    },
+    {
+        "id": 250,
+        "setup": "What has hands but can't clap?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 251,
+        "setup": "What month has 28 days?",
+        "punchline": "All of them!",
+        "category": "braint"
+    },
+    {
+        "id": 252,
+        "setup": "What comes once in a minute, twice in a moment, but never in a thousand years?",
+        "punchline": "The letter 'M'!",
+        "category": "braint"
+    },
+    {
+        "id": 253,
+        "setup": "What has a head and a tail but no body?",
+        "punchline": "A coin!",
+        "category": "braint"
+    },
+    {
+        "id": 254,
+        "setup": "What gets bigger the more you take away?",
+        "punchline": "A hole!",
+        "category": "braint"
+    },
+    {
+        "id": 255,
+        "setup": "What has a bank but no money?",
+        "punchline": "A river bank!",
+        "category": "braint"
+    },
+    {
+        "id": 256,
+        "setup": "What has a neck but no head, two arms but no hands?",
+        "punchline": "A shirt!",
+        "category": "braint"
+    },
+    {
+        "id": 257,
+        "setup": "What has a face that doesn't frown, hands that don't wave, but tells time all day?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 258,
+        "setup": "What can you break without touching it?",
+        "punchline": "A promise!",
+        "category": "braint"
+    },
+    {
+        "id": 259,
+        "setup": "What goes through towns and over hills but never moves?",
+        "punchline": "A road!",
+        "category": "braint"
+    },
+    {
+        "id": 260,
+        "setup": "What has a single eye but cannot see?",
+        "punchline": "A needle!",
+        "category": "braint"
+    },
+    {
+        "id": 261,
+        "setup": "What is so fragile that saying its name breaks it?",
+        "punchline": "Silence!",
+        "category": "braint"
+    },
+    {
+        "id": 262,
+        "setup": "What has many keys but can't open a single lock?",
+        "punchline": "A piano!",
+        "category": "braint"
+    },
+    {
+        "id": 263,
+        "setup": "What can fill a room but takes up no space?",
+        "punchline": "Light!",
+        "category": "braint"
+    },
+    {
+        "id": 264,
+        "setup": "What has teeth but cannot eat?",
+        "punchline": "A comb!",
+        "category": "braint"
+    },
+    {
+        "id": 265,
+        "setup": "What has a bottom at the top?",
+        "punchline": "Your legs!",
+        "category": "braint"
+    },
+    {
+        "id": 266,
+        "setup": "What has a head and a tail but no body?",
+        "punchline": "A coin!",
+        "category": "braint"
+    },
+    {
+        "id": 267,
+        "setup": "What gets wetter as it dries?",
+        "punchline": "A towel!",
+        "category": "braint"
+    },
+    {
+        "id": 269,
+        "setup": "What has a thumb and four fingers but is not alive?",
+        "punchline": "A glove!",
+        "category": "braint"
+    },
+    {
+        "id": 270,
+        "setup": "What has a face and two hands but no arms or legs?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 271,
+        "setup": "What can travel around the world while staying in a corner?",
+        "punchline": "A stamp!",
+        "category": "braint"
+    },
+    {
+        "id": 272,
+        "setup": "What has a heart that doesn't beat?",
+        "punchline": "An artichoke!",
+        "category": "braint"
+    },
+    {
+        "id": 273,
+        "setup": "What has legs but doesn't walk?",
+        "punchline": "A table!",
+        "category": "braint"
+    },
+    {
+        "id": 274,
+        "setup": "What has a ring but no finger?",
+        "punchline": "A telephone!",
+        "category": "braint"
+    },
+    {
+        "id": 275,
+        "setup": "What has to be broken before you can use it?",
+        "punchline": "An egg!",
+        "category": "braint"
+    },
+    {
+        "id": 276,
+        "setup": "What goes up but never comes down?",
+        "punchline": "Your age!",
+        "category": "braint"
+    },
+    {
+        "id": 277,
+        "setup": "What is full of holes but still holds water?",
+        "punchline": "A sponge!",
+        "category": "braint"
+    },
+    {
+        "id": 278,
+        "setup": "What can you catch but not throw?",
+        "punchline": "A cold!",
+        "category": "braint"
+    },
+    {
+        "id": 279,
+        "setup": "What has many teeth but can't bite?",
+        "punchline": "A comb!",
+        "category": "braint"
+    },
+    {
+        "id": 280,
+        "setup": "What begins with T, ends with T, and has T in it?",
+        "punchline": "A teapot!",
+        "category": "braint"
+    },
+    {
+        "id": 281,
+        "setup": "What has cities but no houses, forests but no trees, and rivers but no water?",
+        "punchline": "A map!",
+        "category": "braint"
+    },
+    {
+        "id": 282,
+        "setup": "What can run but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",
+        "punchline": "A river!",
+        "category": "braint"
+    },
+    {
+        "id": 283,
+        "setup": "What has hands but can't clap?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 284,
+        "setup": "What has a bed but never sleeps, can run but never walks?",
+        "punchline": "A river!",
+        "category": "braint"
+    },
+    {
+        "id": 285,
+        "setup": "What has a tongue but cannot talk?",
+        "punchline": "A shoe!",
+        "category": "braint"
+    },
+    {
+        "id": 286,
+        "setup": "What has a single eye but cannot see?",
+        "punchline": "A needle!",
+        "category": "braint"
+    },
+    {
+        "id": 287,
+        "setup": "What has a head and a tail but no body?",
+        "punchline": "A coin!",
+        "category": "braint"
+    },
+    {
+        "id": 288,
+        "setup": "What has a bank but no money?",
+        "punchline": "A river bank!",
+        "category": "braint"
+    },
+    {
+        "id": 289,
+        "setup": "What has a neck but no head, two arms but no hands?",
+        "punchline": "A shirt!",
+        "category": "braint"
+    },
+    {
+        "id": 290,
+        "setup": "What has a face that doesn't frown, hands that don't wave, but tells time all day?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 291,
+        "setup": "Why did the smartphone need glasses?",
+        "punchline": "Because it lost its contacts!",
+        "category": "tech"
+    },
+    {
+        "id": 293,
+        "setup": "Why did the robot go on a diet?",
+        "punchline": "It had too many megabytes!",
+        "category": "tech"
+    },
+    {
+        "id": 294,
+        "setup": "What's a computer's favorite type of exercise?",
+        "punchline": "Disk-covery!",
+        "category": "tech"
+    },
+    {
+        "id": 295,
+        "setup": "Why did the tablet go to school?",
+        "punchline": "To get smarter apps!",
+        "category": "tech"
+    },
+    {
+        "id": 296,
+        "setup": "What's a robot's favorite type of music?",
+        "punchline": "Heavy metal!",
+        "category": "tech"
+    },
+    {
+        "id": 297,
+        "setup": "Why did the computer go to the party?",
+        "punchline": "To network with other devices!",
+        "category": "tech"
+    },
+    {
+        "id": 298,
+        "setup": "What's a smartphone's favorite game?",
+        "punchline": "App-etite for destruction!",
+        "category": "tech"
+    },
+    {
+        "id": 299,
+        "setup": "Why did the laptop go to the beach?",
+        "punchline": "To catch some Wi-Fi waves!",
+        "category": "tech"
+    },
+    {
+        "id": 300,
+        "setup": "What's a computer's favorite snack?",
+        "punchline": "Microchips with dip!",
+        "category": "tech"
+    },
+    {
+        "id": 301,
+        "setup": "Why did the smartphone break up with the tablet?",
+        "punchline": "It couldn't handle the bigger screen!",
+        "category": "tech"
+    },
+    {
+        "id": 302,
+        "setup": "What's a robot's favorite dance?",
+        "punchline": "The robot!",
+        "category": "tech"
+    },
+    {
+        "id": 303,
+        "setup": "Why did the computer go to therapy?",
+        "punchline": "It had too many bytes of emotional baggage!",
+        "category": "tech"
+    },
+    {
+        "id": 304,
+        "setup": "What's a tablet's favorite subject?",
+        "punchline": "History - it loves scrolling through time!",
+        "category": "tech"
+    },
+    {
+        "id": 305,
+        "setup": "Why did the smartphone get a job?",
+        "punchline": "To pay its cellular bills!",
+        "category": "tech"
+    },
+    {
+        "id": 306,
+        "setup": "What's a computer's favorite movie genre?",
+        "punchline": "Romantic comedies - they love love bytes!",
+        "category": "tech"
+    },
+    {
+        "id": 307,
+        "setup": "Why did the robot cross the road?",
+        "punchline": "To get to the charging station!",
+        "category": "tech"
+    },
+    {
+        "id": 308,
+        "setup": "What's a smartphone's favorite holiday?",
+        "punchline": "Charge-giving!",
+        "category": "tech"
+    },
+    {
+        "id": 309,
+        "setup": "Why did the computer go to the doctor?",
+        "punchline": "It had a bad case of the glitches!",
+        "category": "tech"
+    },
+    {
+        "id": 310,
+        "setup": "What's a robot's favorite type of book?",
+        "punchline": "Science fiction - it's about family!",
+        "category": "tech"
+    },
+    {
+        "id": 311,
+        "setup": "Why did the employee get a degree in gardening?",
+        "punchline": "To learn how to grow the business!",
+        "category": "worklife"
+    },
+    {
+        "id": 312,
+        "setup": "What's a computer's favorite place in the office?",
+        "punchline": "The server room - it's always cool there!",
+        "category": "worklife"
+    },
+    {
+        "id": 313,
+        "setup": "Why did the employee bring a pencil to a knife fight?",
+        "punchline": "He wanted to draw first blood in negotiations!",
+        "category": "worklife"
+    },
+    {
+        "id": 314,
+        "setup": "What's a musician's favorite place in the office?",
+        "punchline": "The bandwidth for streaming music!",
+        "category": "worklife"
+    },
+    {
+        "id": 315,
+        "setup": "Why did the cookie go to the doctor at work?",
+        "punchline": "Because it felt crummy about missing the deadline!",
+        "category": "worklife"
+    },
+    {
+        "id": 316,
+        "setup": "What do you call cheese that isn't yours at the office?",
+        "punchline": "Nacho cheese - it's communal property!",
+        "category": "worklife"
+    },
+    {
+        "id": 317,
+        "setup": "Why did the employee bring a ladder to the bar after work?",
+        "punchline": "He heard the drinks were on the house!",
+        "category": "worklife"
+    },
+    {
+        "id": 318,
+        "setup": "What's a gardener's favorite tool at the office?",
+        "punchline": "His mouse - for planting seeds of ideas!",
+        "category": "worklife"
+    },
+    {
+        "id": 319,
+        "setup": "Why did the clock go to therapy during work hours?",
+        "punchline": "It had too many ticks from stress!",
+        "category": "worklife"
+    },
+    {
+        "id": 320,
+        "setup": "What do you call a dinosaur with an extensive vocabulary at work?",
+        "punchline": "A thesaurus - the office wordsmith!",
+        "category": "worklife"
+    },
+    {
+        "id": 321,
+        "setup": "Why did the employee get fired from the orange juice factory job?",
+        "punchline": "He couldn't concentrate on the task!",
+        "category": "worklife"
+    },
+    {
+        "id": 322,
+        "setup": "What's a scientist's favorite type of dog at the lab?",
+        "punchline": "A lab - for testing hypotheses!",
+        "category": "worklife"
+    },
+    {
+        "id": 323,
+        "setup": "Why did the employee bring a blanket to the office?",
+        "punchline": "In case the AC was too cold during meetings!",
+        "category": "worklife"
+    },
+    {
+        "id": 324,
+        "setup": "What do you call a belt made of watches at work?",
+        "punchline": "A waist of time - like that unnecessary conference call!",
+        "category": "worklife"
+    },
+    {
+        "id": 325,
+        "setup": "Why did the employee get promoted at the bakery job?",
+        "punchline": "He was on a roll with his sales figures!",
+        "category": "worklife"
+    },
+    {
+        "id": 326,
+        "setup": "What's a carpenter's favorite type of music during work?",
+        "punchline": "Saw-dust - it gets him in the zone!",
+        "category": "worklife"
+    },
+    {
+        "id": 327,
+        "setup": "Why did the employee bring a pencil to a gunfight meeting?",
+        "punchline": "He wanted to draw up a peace treaty!",
+        "category": "worklife"
+    },
+    {
+        "id": 328,
+        "setup": "What do you call a sleeping bull in the boardroom?",
+        "punchline": "A bull-dozer - sleeping through the presentation!",
+        "category": "worklife"
+    },
+    {
+        "id": 329,
+        "setup": "Why did the employee get fired from the keyboard factory position?",
+        "punchline": "He wasn't putting in enough letters or effort!",
+        "category": "worklife"
+    },
+    {
+        "id": 330,
+        "setup": "What's a plumber's favorite game during lunch break?",
+        "punchline": "Leak and seek - finding the best lunch spot!",
+        "category": "worklife"
+    },
+    {
+        "id": 332,
+        "setup": "Why did the chicken cross the playground?",
+        "punchline": "To get to the other slide!",
+        "category": "clean"
+    },
+    {
+        "id": 336,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "clean"
+    },
+    {
+        "id": 337,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 342,
+        "setup": "Why don't eggs tell jokes?",
+        "punchline": "They'd crack each other up!",
+        "category": "clean"
+    },
+    {
+        "id": 344,
+        "setup": "Why did the tomato turn red?",
+        "punchline": "Because it saw the salad dressing!",
+        "category": "clean"
+    },
+    {
+        "id": 346,
+        "setup": "Why did the golfer bring two pairs of pants?",
+        "punchline": "In case he got a hole in one!",
+        "category": "clean"
+    },
+    {
+        "id": 347,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 348,
+        "setup": "Why did the picture go to jail?",
+        "punchline": "Because it was framed!",
+        "category": "clean"
+    },
+    {
+        "id": 349,
+        "setup": "What do you call a factory that makes okay products?",
+        "punchline": "A satisfactory!",
+        "category": "clean"
+    },
+    {
+        "id": 350,
+        "setup": "Why did the cookie go to the nurse?",
+        "punchline": "Because it felt crummy!",
+        "category": "clean"
+    },
+    {
+        "id": 351,
+        "setup": "What do you call a bear in the rain?",
+        "punchline": "A drizzly bear!",
+        "category": "clean"
+    },
+    {
+        "id": 353,
+        "setup": "What do you call a fake stone?",
+        "punchline": "A sham-rock!",
+        "category": "clean"
+    },
+    {
+        "id": 354,
+        "setup": "Why don't oysters share their pearls?",
+        "punchline": "Because they're shellfish!",
+        "category": "clean"
+    },
+    {
+        "id": 355,
+        "setup": "What do you get when you cross a vampire and a snowman?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 356,
+        "setup": "Why did the coffee file a police report?",
+        "punchline": "It got mugged!",
+        "category": "clean"
+    },
+    {
+        "id": 357,
+        "setup": "What's the best thing about Switzerland?",
+        "punchline": "I don't know, but the flag is a big plus!",
+        "category": "clean"
+    },
+    {
+        "id": 358,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "clean"
+    },
+    {
+        "id": 360,
+        "setup": "Why did the scarecrow get promoted?",
+        "punchline": "Because he was outstanding in his field!",
+        "category": "clean"
+    },
+    {
+        "id": 363,
+        "setup": "What has one eye but can't see?",
+        "punchline": "A needle!",
+        "category": "braint"
+    },
+    {
+        "id": 364,
+        "setup": "What gets wet while drying?",
+        "punchline": "A towel!",
+        "category": "braint"
+    },
+    {
+        "id": 365,
+        "setup": "What has a thumb and four fingers but is not alive?",
+        "punchline": "A glove!",
+        "category": "braint"
+    },
+    {
+        "id": 366,
+        "setup": "What has a face and two hands but no arms or legs?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 367,
+        "setup": "What can travel around the world while staying in a corner?",
+        "punchline": "A stamp!",
+        "category": "braint"
+    },
+    {
+        "id": 368,
+        "setup": "What has a heart that doesn't beat?",
+        "punchline": "An artichoke!",
+        "category": "braint"
+    },
+    {
+        "id": 369,
+        "setup": "What has legs but doesn't walk?",
+        "punchline": "A table!",
+        "category": "braint"
+    },
+    {
+        "id": 370,
+        "setup": "What has a bottom at the top?",
+        "punchline": "Your legs!",
+        "category": "braint"
+    },
+    {
+        "id": 371,
+        "setup": "What has words but never speaks?",
+        "punchline": "A book!",
+        "category": "braint"
+    },
+    {
+        "id": 372,
+        "setup": "What has a ring but no finger?",
+        "punchline": "A telephone!",
+        "category": "braint"
+    },
+    {
+        "id": 373,
+        "setup": "What has to be broken before you can use it?",
+        "punchline": "An egg!",
+        "category": "braint"
+    },
+    {
+        "id": 374,
+        "setup": "What goes up but never comes down?",
+        "punchline": "Your age!",
+        "category": "braint"
+    },
+    {
+        "id": 375,
+        "setup": "What is full of holes but still holds water?",
+        "punchline": "A sponge!",
+        "category": "braint"
+    },
+    {
+        "id": 376,
+        "setup": "What can you catch but not throw?",
+        "punchline": "A cold!",
+        "category": "braint"
+    },
+    {
+        "id": 377,
+        "setup": "What has many teeth but can't bite?",
+        "punchline": "A comb!",
+        "category": "braint"
+    },
+    {
+        "id": 378,
+        "setup": "What begins with T, ends with T, and has T in it?",
+        "punchline": "A teapot!",
+        "category": "braint"
+    },
+    {
+        "id": 379,
+        "setup": "What has cities but no houses, forests but no trees, and rivers but no water?",
+        "punchline": "A map!",
+        "category": "braint"
+    },
+    {
+        "id": 380,
+        "setup": "What can run but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",
+        "punchline": "A river!",
+        "category": "braint"
+    },
+    {
+        "id": 381,
+        "setup": "What has hands but can't clap?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 382,
+        "setup": "What has a bed but never sleeps, can run but never walks?",
+        "punchline": "A river!",
+        "category": "braint"
+    },
+    {
+        "id": 383,
+        "setup": "What has a tongue but cannot talk?",
+        "punchline": "A shoe!",
+        "category": "braint"
+    },
+    {
+        "id": 384,
+        "setup": "What has a single eye but cannot see?",
+        "punchline": "A needle!",
+        "category": "braint"
+    },
+    {
+        "id": 385,
+        "setup": "What has a head and a tail but no body?",
+        "punchline": "A coin!",
+        "category": "braint"
+    },
+    {
+        "id": 386,
+        "setup": "What has a bank but no money?",
+        "punchline": "A river bank!",
+        "category": "braint"
+    },
+    {
+        "id": 387,
+        "setup": "What has a neck but no head, two arms but no hands?",
+        "punchline": "A shirt!",
+        "category": "braint"
+    },
+    {
+        "id": 388,
+        "setup": "What has a face that doesn't frown, hands that don't wave, but tells time all day?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 389,
+        "setup": "What can you break without touching it?",
+        "punchline": "A promise!",
+        "category": "braint"
+    },
+    {
+        "id": 390,
+        "setup": "What goes through towns and over hills but never moves?",
+        "punchline": "A road!",
+        "category": "braint"
+    },
+    {
+        "id": 391,
+        "setup": "Why did the smartphone go to the gym?",
+        "punchline": "To get fit for new apps!",
+        "category": "tech"
+    },
+    {
+        "id": 392,
+        "setup": "What's a computer's favorite type of music?",
+        "punchline": "Hard drive!",
+        "category": "tech"
+    },
+    {
+        "id": 393,
+        "setup": "Why did the computer get a divorce?",
+        "punchline": "It had too many incompatible issues!",
+        "category": "tech"
+    },
+    {
+        "id": 394,
+        "setup": "What do you call a computer that's always happy?",
+        "punchline": "A Joy-stick!",
+        "category": "tech"
+    },
+    {
+        "id": 395,
+        "setup": "Why did the robot go to the party?",
+        "punchline": "To get wound up with fun!",
+        "category": "tech"
+    },
+    {
+        "id": 396,
+        "setup": "What's a computer's favorite game show?",
+        "punchline": "Wheel of Fortune - it loves spinning disks!",
+        "category": "tech"
+    },
+    {
+        "id": 397,
+        "setup": "Why did the computer go to the beach?",
+        "punchline": "To catch some digital waves!",
+        "category": "tech"
+    },
+    {
+        "id": 398,
+        "setup": "What do you call a computer that can dance?",
+        "punchline": "A Dell-lightful mover!",
+        "category": "tech"
+    },
+    {
+        "id": 399,
+        "setup": "Why did the smartphone get a haircut?",
+        "punchline": "It needed a new interface!",
+        "category": "tech"
+    },
+    {
+        "id": 400,
+        "setup": "What's a computer's favorite type of weather?",
+        "punchline": "Cloudy with a chance of servers!",
+        "category": "tech"
+    },
+    {
+        "id": 401,
+        "setup": "Why did the computer go to the bank?",
+        "punchline": "To check its byte balance!",
+        "category": "tech"
+    },
+    {
+        "id": 402,
+        "setup": "What do you call a computer that's always cold?",
+        "punchline": "A chill-pad!",
+        "category": "tech"
+    },
+    {
+        "id": 403,
+        "setup": "Why did the robot go to school?",
+        "punchline": "To learn its ABCs - Always Be Charging!",
+        "category": "tech"
+    },
+    {
+        "id": 404,
+        "setup": "What's a computer's favorite holiday?",
+        "punchline": "Byte-mas!",
+        "category": "tech"
+    },
+    {
+        "id": 405,
+        "setup": "Why did the computer go to the movies?",
+        "punchline": "To watch a byte-sized film!",
+        "category": "tech"
+    },
+    {
+        "id": 406,
+        "setup": "What do you call a computer that's always tired?",
+        "punchline": "A sleepy-pad!",
+        "category": "tech"
+    },
+    {
+        "id": 407,
+        "setup": "Why did the smartphone go to the doctor?",
+        "punchline": "It had a bad case of app-itis!",
+        "category": "tech"
+    },
+    {
+        "id": 408,
+        "setup": "What's a computer's favorite type of food?",
+        "punchline": "Chips with digital dip!",
+        "category": "tech"
+    },
+    {
+        "id": 409,
+        "setup": "Why did the computer go to the gym?",
+        "punchline": "To get ripped with new processors!",
+        "category": "tech"
+    },
+    {
+        "id": 410,
+        "setup": "What do you call a computer that's always hungry?",
+        "punchline": "A byte-eater!",
+        "category": "tech"
+    },
+    {
+        "id": 411,
+        "setup": "Why did the robot get a job?",
+        "punchline": "To earn its circuit keep!",
+        "category": "tech"
+    },
+    {
+        "id": 412,
+        "setup": "What's a computer's favorite type of candy?",
+        "punchline": "Microchips with chocolate coating!",
+        "category": "tech"
+    },
+    {
+        "id": 413,
+        "setup": "Why did the computer go to the party?",
+        "punchline": "To have a byte of digital fun!",
+        "category": "tech"
+    },
+    {
+        "id": 414,
+        "setup": "What do you call a computer that's always sad?",
+        "punchline": "A blue-screen of sadness!",
+        "category": "tech"
+    },
+    {
+        "id": 415,
+        "setup": "Why did the smartphone go to school?",
+        "punchline": "To get smarter with new updates!",
+        "category": "tech"
+    },
+    {
+        "id": 416,
+        "setup": "Why did the employee bring a map to the corporate retreat?",
+        "punchline": "He kept getting lost in team-building exercises!",
+        "category": "worklife"
+    },
+    {
+        "id": 417,
+        "setup": "What do you call a cow with no legs at the company picnic?",
+        "punchline": "Ground beef - from all the networking!",
+        "category": "worklife"
+    },
+    {
+        "id": 418,
+        "setup": "Why did the employee get promoted at the coffee shop meeting?",
+        "punchline": "He was always brewing new ideas!",
+        "category": "worklife"
+    },
+    {
+        "id": 419,
+        "setup": "What's a photographer's favorite type of music at the office party?",
+        "punchline": "Snap tunes - for capturing moments!",
+        "category": "worklife"
+    },
+    {
+        "id": 420,
+        "setup": "Why did the employee bring a pencil to a sword fight negotiation?",
+        "punchline": "He wanted to draw up a contract!",
+        "category": "worklife"
+    },
+    {
+        "id": 421,
+        "setup": "What do you call a bear with no teeth in the break room?",
+        "punchline": "A gummy bear - harmless snacker!",
+        "category": "worklife"
+    },
+    {
+        "id": 422,
+        "setup": "Why did the employee get fired from the clock factory job?",
+        "punchline": "He was always watching the clock for lunch!",
+        "category": "worklife"
+    },
+    {
+        "id": 423,
+        "setup": "What's a firefighter's favorite game during fire drills?",
+        "punchline": "Hide and go seek shelter from the alarm!",
+        "category": "worklife"
+    },
+    {
+        "id": 424,
+        "setup": "Why did the employee bring a ladder to the office kitchen?",
+        "punchline": "To reach the high cabinets with the good coffee!",
+        "category": "worklife"
+    },
+    {
+        "id": 425,
+        "setup": "What do you call a fish wearing a suit in the boardroom?",
+        "punchline": "Sofishticated - the well-dressed executive!",
+        "category": "worklife"
+    },
+    {
+        "id": 426,
+        "setup": "Why did the employee get fired from the pencil factory position?",
+        "punchline": "He couldn't draw enough attention to his reports!",
+        "category": "worklife"
+    },
+    {
+        "id": 427,
+        "setup": "What's a pilot's favorite type of music during flights?",
+        "punchline": "Fly tunes - for smooth sailing!",
+        "category": "worklife"
+    },
+    {
+        "id": 428,
+        "setup": "Why did the employee bring a map to the new software training?",
+        "punchline": "He kept getting lost in the interface!",
+        "category": "worklife"
+    },
+    {
+        "id": 429,
+        "setup": "What do you call a cow with no legs during crunch time?",
+        "punchline": "Ground beef - from all the pressure!",
+        "category": "worklife"
+    },
+    {
+        "id": 430,
+        "setup": "Why did the employee get promoted at the bakery sales meeting?",
+        "punchline": "He was on a roll with his presentation!",
+        "category": "worklife"
+    },
+    {
+        "id": 431,
+        "setup": "What's a carpenter's favorite type of music during construction?",
+        "punchline": "Saw-dust - it matches the sawdust!",
+        "category": "worklife"
+    },
+    {
+        "id": 432,
+        "setup": "Why did the employee bring a pencil to a gunfight budget meeting?",
+        "punchline": "He wanted to draw up a financial plan!",
+        "category": "worklife"
+    },
+    {
+        "id": 433,
+        "setup": "What do you call a sleeping bull in the auditorium?",
+        "punchline": "A bull-dozer - snoring through the seminar!",
+        "category": "worklife"
+    },
+    {
+        "id": 434,
+        "setup": "Why did the employee get fired from the keyboard factory shift?",
+        "punchline": "He wasn't putting in enough letters or hours!",
+        "category": "worklife"
+    },
+    {
+        "id": 435,
+        "setup": "What's a plumber's favorite game during coffee breaks?",
+        "punchline": "Leak and seek - finding the best brew!",
+        "category": "worklife"
+    },
+    {
+        "id": 437,
+        "setup": "Why did the chicken cross the playground?",
+        "punchline": "To get to the other slide!",
+        "category": "clean"
+    },
+    {
+        "id": 438,
+        "setup": "What do you call a bear with no teeth?",
+        "punchline": "A gummy bear!",
+        "category": "clean"
+    },
+    {
+        "id": 440,
+        "setup": "What do you call a fake noodle?",
+        "punchline": "An impasta!",
+        "category": "clean"
+    },
+    {
+        "id": 441,
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "clean"
+    },
+    {
+        "id": 442,
+        "setup": "What do you get when you cross a snowman and a dog?",
+        "punchline": "Frostbite!",
+        "category": "clean"
+    },
+    {
+        "id": 447,
+        "setup": "Why don't eggs tell jokes?",
+        "punchline": "They'd crack each other up!",
+        "category": "clean"
+    },
+    {
+        "id": 449,
+        "setup": "Why did the tomato turn red?",
+        "punchline": "Because it saw the salad dressing!",
+        "category": "clean"
+    },
+    {
+        "id": 451,
+        "setup": "What has ears but cannot hear?",
+        "punchline": "A cornfield!",
+        "category": "braint"
+    },
+    {
+        "id": 452,
+        "setup": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+        "punchline": "An echo!",
+        "category": "braint"
+    },
+    {
+        "id": 453,
+        "setup": "The more you take, the more you leave behind. What am I?",
+        "punchline": "Footsteps!",
+        "category": "braint"
+    },
+    {
+        "id": 454,
+        "setup": "What has keys but can't open locks?",
+        "punchline": "A piano!",
+        "category": "braint"
+    },
+    {
+        "id": 456,
+        "setup": "What has a neck but no head?",
+        "punchline": "A bottle!",
+        "category": "braint"
+    },
+    {
+        "id": 457,
+        "setup": "What has one eye but can't see?",
+        "punchline": "A needle!",
+        "category": "braint"
+    },
+    {
+        "id": 458,
+        "setup": "What gets wet while drying?",
+        "punchline": "A towel!",
+        "category": "braint"
+    },
+    {
+        "id": 459,
+        "setup": "What has a thumb and four fingers but is not alive?",
+        "punchline": "A glove!",
+        "category": "braint"
+    },
+    {
+        "id": 460,
+        "setup": "What has a face and two hands but no arms or legs?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 461,
+        "setup": "What can travel around the world while staying in a corner?",
+        "punchline": "A stamp!",
+        "category": "braint"
+    },
+    {
+        "id": 462,
+        "setup": "What has a heart that doesn't beat?",
+        "punchline": "An artichoke!",
+        "category": "braint"
+    },
+    {
+        "id": 463,
+        "setup": "What has legs but doesn't walk?",
+        "punchline": "A table!",
+        "category": "braint"
+    },
+    {
+        "id": 464,
+        "setup": "What has a bottom at the top?",
+        "punchline": "Your legs!",
+        "category": "braint"
+    },
+    {
+        "id": 465,
+        "setup": "What has words but never speaks?",
+        "punchline": "A book!",
+        "category": "braint"
+    },
+    {
+        "id": 466,
+        "setup": "What has a ring but no finger?",
+        "punchline": "A telephone!",
+        "category": "braint"
+    },
+    {
+        "id": 467,
+        "setup": "What has to be broken before you can use it?",
+        "punchline": "An egg!",
+        "category": "braint"
+    },
+    {
+        "id": 468,
+        "setup": "What goes up but never comes down?",
+        "punchline": "Your age!",
+        "category": "braint"
+    },
+    {
+        "id": 469,
+        "setup": "What is full of holes but still holds water?",
+        "punchline": "A sponge!",
+        "category": "braint"
+    },
+    {
+        "id": 470,
+        "setup": "What can you catch but not throw?",
+        "punchline": "A cold!",
+        "category": "braint"
+    },
+    {
+        "id": 471,
+        "setup": "What has many teeth but can't bite?",
+        "punchline": "A comb!",
+        "category": "braint"
+    },
+    {
+        "id": 472,
+        "setup": "What begins with T, ends with T, and has T in it?",
+        "punchline": "A teapot!",
+        "category": "braint"
+    },
+    {
+        "id": 473,
+        "setup": "What has cities but no houses, forests but no trees, and rivers but no water?",
+        "punchline": "A map!",
+        "category": "braint"
+    },
+    {
+        "id": 474,
+        "setup": "What can run but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",
+        "punchline": "A river!",
+        "category": "braint"
+    },
+    {
+        "id": 475,
+        "setup": "What has hands but can't clap?",
+        "punchline": "A clock!",
+        "category": "braint"
+    },
+    {
+        "id": 476,
+        "setup": "What month has 28 days?",
+        "punchline": "All of them!",
+        "category": "braint"
+    },
+    {
+        "id": 477,
+        "setup": "What comes once in a minute, twice in a moment, but never in a thousand years?",
+        "punchline": "The letter 'M'!",
+        "category": "braint"
+    },
+    {
+        "id": 478,
+        "setup": "What has a head and a tail but no body?",
+        "punchline": "A coin!",
+        "category": "braint"
+    },
+    {
+        "id": 479,
+        "setup": "What gets bigger the more you take away?",
+        "punchline": "A hole!",
+        "category": "braint"
+    },
+    {
+        "id": 480,
+        "setup": "What has a bank but no money?",
+        "punchline": "A river bank!",
+        "category": "braint"
+    },
+    {
+        "id": 481,
+        "setup": "Why did the smartphone need glasses?",
+        "punchline": "Because it lost its contacts!",
+        "category": "tech"
+    },
+    {
+        "id": 482,
+        "setup": "What do you call a computer that sings?",
+        "punchline": "A Dell!",
+        "category": "tech"
+    },
+    {
+        "id": 483,
+        "setup": "Why did the robot go on a diet?",
+        "punchline": "It had too many megabytes!",
+        "category": "tech"
+    },
+    {
+        "id": 484,
+        "setup": "What's a computer's favorite type of exercise?",
+        "punchline": "Disk-covery!",
+        "category": "tech"
+    },
+    {
+        "id": 485,
+        "setup": "Why did the tablet go to school?",
+        "punchline": "To get smarter apps!",
+        "category": "tech"
+    },
+    {
+        "id": 486,
+        "setup": "What's a robot's favorite type of music?",
+        "punchline": "Heavy metal!",
+        "category": "tech"
+    },
+    {
+        "id": 487,
+        "setup": "Why did the computer go to the party?",
+        "punchline": "To network with other devices!",
+        "category": "tech"
+    },
+    {
+        "id": 488,
+        "setup": "What's a smartphone's favorite game?",
+        "punchline": "App-etite for destruction!",
+        "category": "tech"
+    },
+    {
+        "id": 489,
+        "setup": "Why did the laptop go to the beach?",
+        "punchline": "To catch some Wi-Fi waves!",
+        "category": "tech"
+    },
+    {
+        "id": 490,
+        "setup": "What's a computer's favorite snack?",
+        "punchline": "Microchips with dip!",
+        "category": "tech"
+    },
+    {
+        "id": 491,
+        "setup": "Why did the employee bring a ladder to the team building?",
+        "punchline": "He wanted to climb to new heights in teamwork!",
+        "category": "worklife"
+    },
+    {
+        "id": 492,
+        "setup": "What do you call a meeting that could have been an email?",
+        "punchline": "A productivity killer!",
+        "category": "worklife"
+    },
+    {
+        "id": 493,
+        "setup": "Why did the coffee file a police report at work?",
+        "punchline": "It got mugged right from the break room!",
+        "category": "worklife"
+    },
+    {
+        "id": 494,
+        "setup": "What's the best thing about remote work?",
+        "punchline": "The commute from bed to desk is short!",
+        "category": "worklife"
+    },
+    {
+        "id": 495,
+        "setup": "Why don't skeletons fight in office politics?",
+        "punchline": "They don't have the guts for confrontation!",
+        "category": "worklife"
+    },
+    {
+        "id": 496,
+        "setup": "What do you call a fake noodle in the cafeteria?",
+        "punchline": "An impasta - just like some lunch options!",
+        "category": "worklife"
+    },
+    {
+        "id": 497,
+        "setup": "Why did the scarecrow get promoted in sales?",
+        "punchline": "Because he was outstanding in his field calls!",
+        "category": "worklife"
+    },
+    {
+        "id": 498,
+        "setup": "What do you call a belt made of watches during overtime?",
+        "punchline": "A waist of time - like unpaid extra hours!",
+        "category": "worklife"
+    },
+    {
+        "id": 499,
+        "setup": "Why did the math book look so sad at the office?",
+        "punchline": "Because it had too many problems to solve!",
+        "category": "worklife"
+    },
+    {
+        "id": 500,
+        "setup": "What do you call cheese that isn't yours in the office fridge?",
+        "punchline": "Nacho cheese - but someone ate it anyway!",
+        "category": "worklife"
     }
 ]

@@ -21,7 +21,7 @@ const categories = {
     ],
     jokes: [
         { id: 'tech', name: 'Tech Humor', desc: 'Programming and tech jokes' },
-        { id: 'worklife', name: 'Work/Life', desc: 'Office and work-related humor' },
+        { id: 'worklife', name: 'Work Life', desc: 'Office and work-related humor' },
         { id: 'clean', name: 'Clean Fun', desc: 'Family-friendly jokes' },
         { id: 'braint', name: 'Brain Teasers', desc: 'Puzzles and thinking jokes' }
     ]
@@ -106,6 +106,9 @@ function setupEventListeners() {
 
 // Initialize content display with dropdown and title
 function initializeContentDisplay() {
+    // Reset category to "all" when switching types
+    currentCategory = 'all';
+
     // Update title and icon based on type
     if (currentType === 'quotes') {
         elements.contentTitle.textContent = 'Daily Motivation';
@@ -119,6 +122,9 @@ function initializeContentDisplay() {
 
     // Populate category dropdown
     populateCategoryDropdown();
+
+    // Reset dropdown to "all"
+    elements.categoryDropdown.value = 'all';
 
     // Get initial content
     getRandomContent();
@@ -134,6 +140,10 @@ function populateCategoryDropdown() {
         const option = document.createElement('option');
         option.value = category.id;
         option.textContent = category.name;
+        // Optional: mark as selected if matches currentCategory
+        if (category.id === currentCategory) {
+            option.selected = true;
+        }
         elements.categoryDropdown.appendChild(option);
     });
 }
@@ -169,22 +179,22 @@ function getRandomContent() {
 // Display content
 function displayContent(item) {
     const isQuote = 'quote' in item;
-    
+
     // Update content type display
     elements.contentType.textContent = isQuote ? 'Motivational Quote' : 'Funny Joke';
-    
+
     // Find category name
     const allCategories = [...categories.quotes, ...categories.jokes];
     const category = allCategories.find(cat => cat.id === item.category);
     elements.contentCategory.textContent = category ? category.name : 'General';
-    
+
     // Update content text with animation
     elements.contentText.style.opacity = '0';
-    
+
     setTimeout(() => {
         elements.contentText.className = 'content-text';
         let html = '';
-        
+
         if (isQuote) {
             elements.contentText.classList.add('quote');
             // Quote text with author below
@@ -200,7 +210,7 @@ function displayContent(item) {
                 <div class="joke-punchline">${item.punchline}</div>
             `;
         }
-        
+
         elements.contentText.innerHTML = html;
         elements.contentText.style.opacity = '1';
     }, 300);

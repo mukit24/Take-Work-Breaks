@@ -73,7 +73,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -137,15 +137,10 @@
 
 /* Content Card */
 .content-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2.5rem;
+    padding: 1.5rem;
     margin: 0 auto 2rem;
     max-width: 600px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
     text-align: center;
-    border: 1px solid #e2e8f0;
-    animation: slideUp 0.5s ease;
 }
 
 @keyframes slideUp {
@@ -388,7 +383,7 @@
     }
 
     .content-card {
-        padding: 1.5rem;
+        padding: .7rem;
     }
 
     .content-text {

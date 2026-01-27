@@ -248,7 +248,7 @@ class AttentionTrainingGame {
                 'flanker-focus': 'Maintaining attention on center arrow. 60% accuracy + 30% streak.',
                 'memory-grid': 'Concentration during sequence recall.',
                 'visual-search': 'Sustained visual scanning. 60% accuracy + 30% streak.',
-                'color-word-stroop': 'Inhibiting automatic reading. 40% accuracy + 30% streak + 40% interference control.',
+                'color-word-stroop': 'Inhibiting automatic reading. 40% accuracy + 30% streak + 30% interference control.',
                 'tracking-test': 'Tracking moving objects. 60% accuracy + 30% streak.'
             }
         };
@@ -3734,7 +3734,7 @@ class AttentionTrainingGame {
                 let interferenceScore = 0;
                 if (this.totalAnswers > 0) {  // Use this.totalAnswers, not stroopTotalAttempts
                     // Higher accuracy = better inhibition of automatic reading
-                    interferenceScore = Math.min(40, accuracy * 0.4);
+                    interferenceScore = Math.min(30, accuracy * 0.3);
                 }
 
                 // FIX 4: Adjust weights for removed streak component
@@ -3984,7 +3984,7 @@ class AttentionTrainingGame {
                 } else if (gameId === 'visual-search') {
                     content = 'Sustained visual scanning. 60% accuracy + 30% streak.';
                 } else if (gameId === 'color-word-stroop') {
-                    content = 'Inhibiting automatic reading. 40% accuracy + 30% streak + 40% interference control.';
+                    content = 'Inhibiting automatic reading. 40% accuracy + 30% streak + 30% interference control.';
                 } else if (gameId === 'tracking-test') {
                     content = 'Tracking moving objects. 60% accuracy + 30% streak.';
                 } else if (gameId === 'memory-grid') {

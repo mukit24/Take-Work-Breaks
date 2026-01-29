@@ -4,78 +4,85 @@ const gratitudeCategories = {
         icon: "🏆",
         title: "Professional Milestones",
         description: "Work achievements and career progress",
-        meta: "5 questions • Work-focused",
+        meta: "7 questions • Work-focused",
         questions: [
-            "What work accomplishment are you most proud of this month?",
-            "What positive feedback or recognition have you received?",
-            "What project did you complete successfully?",
-            "What professional goal did you reach recently?",
-            "What work challenge did you overcome with skill?"
+            "What is one small 'micro-win' you had today that moved a project forward?",
+            "What task did you handle with more ease or confidence today than you did a month ago?",
+            "Who is a colleague you were grateful to work with or learn from today?",
+            "What feedback (even small) made you feel valued or seen recently?",
+            "What problem did you solve today, no matter how small, that made your workflow smoother?",
+            "What is one thing you learned today that will help you in your career?",
+            "How did you demonstrate resilience or a positive attitude during a difficult work moment?"
         ]
     },
     team: {
         icon: "👥",
         title: "Team & Colleagues",
         description: "Workplace relationships and support systems",
-        meta: "5 questions • People-focused",
+        meta: "6 questions • People-focused",
         questions: [
-            "Which coworker made your day better recently?",
-            "What teamwork moment was particularly effective?",
-            "Who provided valuable mentorship or guidance?",
-            "What positive team culture moment stood out?",
-            "How did a colleague help you solve a difficult problem?"
+            "Who is a colleague that made you smile or laugh during a busy moment today?",
+            "What is one small way a teammate made your job easier or saved you time today?",
+            "Which coworker did you see doing something impressive or helpful for the team?",
+            "Whose unique perspective or specific skill did you appreciate in a discussion today?",
+            "Did anyone offer you a word of encouragement or a simple 'thank you' that felt good?",
+            "Who is someone you feel safe asking for help from when you're feeling overwhelmed?"
         ]
     },
     workTools: {
         icon: "🖥️",
         title: "Work Tools & Environment",
         description: "Resources that enable your best work",
-        meta: "5 questions • Resource-focused",
+        meta: "6 questions • Resource-focused",
         questions: [
-            "What software or tool saves you significant time daily?",
-            "What about your workspace makes you feel productive?",
-            "What company benefit are you especially grateful for?",
-            "What work-related resource helped you recently?",
-            "What aspect of your work setup reduces stress?"
+            "What piece of technology or software worked flawlessly today and made your tasks smoother?",
+            "What is one item in your workspace (a plant, a photo, or a specific object) that brings you a sense of calm when you look at it?",
+            "What part of your physical setup—like your chair, lighting, or desk height—are you most grateful for today?",
+            "What aspect of your work environment (like a quiet room, a window view, or flexible hours) helped you focus best today?",
+            "What organizational tool or resource helped you feel more in control and less overwhelmed today?",
+            "What 'small luxury' in your workday (like high-quality headphones, a favorite pen, or fast Wi-Fi) do you appreciate right now?"
         ]
     },
     skillGrowth: {
         icon: "📚",
         title: "Skill Development",
         description: "Learning and growth at work",
-        meta: "5 questions • Growth-focused",
+        meta: "6 questions • Growth-focused",
         questions: [
-            "What new work skill have you developed recently?",
-            "What training or learning opportunity helped you grow?",
-            "What mistake became a valuable lesson?",
-            "What feedback significantly improved your work?",
-            "What complex task expanded your capabilities?"
+            "What is one small thing you learned today—even a tiny shortcut or a new term—that you didn't know yesterday?",
+            "What is a skill you’ve been practicing that is finally starting to feel more natural or easier for you?",
+            "How did a recent challenge or mistake provide you with a valuable lesson that will help you grow?",
+            "What feedback or advice have you received that helped you see your work from a better perspective?",
+            "What specific strength of yours (like patience, logic, or creativity) are you proud of using today?",
+            "What learning resource, mentor, or piece of documentation are you grateful for right now?"
         ]
     },
     familyRelationships: {
         icon: "❤️",
         title: "Family & Relationships",
         description: "Personal connections outside work",
-        meta: "5 questions • Personal-focused",
+        meta: "6 questions • Personal-focused",
         questions: [
-            "Which family member supported you recently?",
-            "What friend made a positive difference in your life?",
-            "What meaningful conversation did you have?",
-            "What relationship brings you consistent joy?",
-            "Who showed you unexpected kindness?"
+            "Who is someone you are looking forward to seeing or talking to once your workday is over today?",
+            "What is a small, kind gesture from a loved one—like a text, a smile, or a shared meal—that made you feel cared for recently?",
+            "Who has shown you extra patience or understanding lately while you’ve been busy or focused on your work?",
+            "What is a funny or happy memory with a friend or family member that still makes you smile when it crosses your mind?",
+            "Who is the first person you thought of today when you needed a moment of comfort or a quick laugh?",
+            "What is one thing about your home life or a specific relationship that provides a 'safe harbor' from the stresses of work?"
         ]
     },
     healthWellness: {
         icon: "🌿",
         title: "Health & Wellness",
         description: "Physical and mental well-being",
-        meta: "5 questions • Self-care focused",
+        meta: "6 questions • Self-care focused",
         questions: [
-            "What about your health are you grateful for today?",
-            "What self-care practice helped you recently?",
-            "What physical ability do you appreciate?",
-            "What healthy habit are you maintaining?",
-            "What brought you peace or calm recently?"
+            "What is one thing your body did for you today—like breathing effortlessly or staying focused—that you are grateful for?",
+            "What small, healthy choice did you make today (like drinking water, stretching, or choosing a nourishing snack) that your body is thanking you for?",
+            "What physical sensation are you enjoying right now, such as the feeling of a deep breath, a warm drink, or a moment of stillness?",
+            "What healthy boundary did you set today—like stepping away from your screen or protecting your lunch hour—to preserve your energy?",
+            "What sign of progress have you noticed in your physical or mental well-being lately, no matter how small?",
+            "What 'micro-moment' of self-care (like a 1-minute meditation or a quick walk) are you most proud of prioritizing today?"
         ]
     },
     simplePleasures: {
@@ -84,11 +91,11 @@ const gratitudeCategories = {
         description: "Everyday joys and small comforts",
         meta: "5 questions • Mindfulness focused",
         questions: [
-            "What small moment brought you happiness today?",
-            "What comfort (food, drink, cozy spot) are you thankful for?",
-            "What made you smile or laugh recently?",
-            "What beauty did you notice in your day?",
-            "What sensory pleasure delighted you?"
+            "What small, ordinary moment—like the first sip of a warm drink or a ray of sunlight—brought you unexpected joy today?",
+            "What simple physical comfort, such as a favorite song or a comfortable chair, are you most grateful for right now?",
+            "What is one beautiful or interesting detail in your surroundings that you noticed for the first time today?",
+            "What was a brief 'micromoment' of peace or quiet that you truly appreciated during your busy day?",
+            "What made you smile, laugh, or feel a sense of lightness in the middle of your work tasks?"
         ]
     },
     homeCommunity: {
@@ -97,24 +104,26 @@ const gratitudeCategories = {
         description: "Your living environment and local support",
         meta: "5 questions • Environment focused",
         questions: [
-            "What about your home brings you comfort?",
-            "What community resource do you appreciate?",
-            "What neighborhood convenience makes life easier?",
-            "What local business or service are you thankful for?",
-            "What aspect of your living space supports your well-being?"
+            "What is your favorite 'nook' or spot in your home that immediately helps you relax after a long day?",
+            "What is one thing about your neighborhood—like a nearby park, a quiet street, or a nice view—that you are grateful for?",
+            "Which local business or person in your community (like a favorite barista, librarian, or neighbor) makes you feel welcome?",
+            "What 'home comfort'—like a soft blanket, the smell of coffee, or a clean kitchen—did you most appreciate today?",
+            "What is a convenience in your local area that saves you time or makes your daily routine feel less stressful?"
         ]
     },
     personalGrowth: {
         icon: "🌱",
         title: "Personal Growth",
         description: "Development outside professional life",
-        meta: "5 questions • Reflection focused",
+        meta: "7 questions • Reflection focused",
         questions: [
-            "What personal insight have you gained recently?",
-            "What hobby or interest enriches your life?",
-            "What personal boundary are you maintaining well?",
-            "What life lesson are you grateful to have learned?",
-            "What personal value are you living authentically?"
+            "What is a personal strength you’ve noticed in yourself recently, like patience, curiosity, or resilience?",
+            "What is one hobby or creative outlet—completely unrelated to work—that made you feel energized this week?",
+            "How have you honored a personal boundary lately that protected your time, energy, or peace of mind?",
+            "What is an 'aha!' moment or a new perspective you've gained recently that has changed how you see things?",
+            "What is one thing you’ve forgiven yourself for recently, allowing you to move forward with a lighter heart?",
+            "In what way did you act in true alignment with your personal values today, even in a small situation?",
+            "What is a skill or habit you are developing for yourself (not for your resume) that brings you a sense of pride?"
         ]
     }
 };
@@ -333,7 +342,7 @@ function showPreviousQuestion() {
 function showNextQuestion() {
     // Save current answer
     answers[currentQuestionIndex] = elements.answerInput.value.trim() || '[Skipped]';
-    
+
     if (currentQuestionIndex < totalQuestions - 1) {
         currentQuestionIndex++;
         updateQuestionDisplay();
@@ -352,10 +361,10 @@ function areAllQuestionsAnswered() {
 function updateExportButton() {
     // Always enable the export button
     elements.exportBtn.disabled = false;
-    
+
     // Show progress but don't disable
     const answeredCount = Object.values(answers).filter(a => a && a !== '[Skipped]' && a.trim().length > 0).length;
-    
+
     if (answeredCount === totalQuestions) {
         elements.exportBtn.innerHTML = '<span class="btn-icon">📄</span> Review & Export Complete Journal';
         elements.exportBtn.classList.add('ready');
@@ -435,59 +444,97 @@ async function downloadPdf() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Set document properties
-        doc.setProperties({
-            title: 'Gratitude Journal - Take Work Breaks',
-            subject: 'Gratitude Practice',
-            author: 'Take Work Breaks'
-        });
+        // Page setup
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const margin = 20;
+        const contentWidth = pageWidth - (margin * 2);
+        let y = 30;
 
-        // Add header
-        doc.setFontSize(20);
+        // Title
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
         doc.setTextColor(90, 103, 216);
-        doc.text('Gratitude Journal', 105, 20, { align: 'center' });
+        doc.text('Gratitude Journal', pageWidth / 2, 20, { align: 'center' });
 
-        // Add category and date
-        doc.setFontSize(12);
-        doc.setTextColor(100, 100, 100);
-        doc.text(`Category: ${gratitudeCategories[currentCategory].title}`, 20, 35);
-        doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 42);
+        // Metadata
+        const category = gratitudeCategories[currentCategory];
+        const now = new Date();
+
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(74, 85, 104);
+
+        doc.text(`Category: ${category.title}`, margin, y);
+        doc.text(`Date: ${now.toLocaleDateString()}`, margin, y + 7);
+        y += 25;
+
+        // Text wrapping helper using jsPDF's built-in method
+        const wrapText = (text, width) => {
+            return doc.splitTextToSize(text, width);
+        };
 
         // Add content
-        let yPosition = 60;
-        const category = gratitudeCategories[currentCategory];
-
-        doc.setFontSize(14);
-        doc.setTextColor(45, 55, 72);
+        doc.setFontSize(12);
 
         category.questions.forEach((question, index) => {
-            const answer = answers[index] || '[Not answered]';
-
-            // Add question
-            doc.setFont(undefined, 'bold');
-            doc.text(`${index + 1}. ${question}`, 20, yPosition);
-            yPosition += 10;
-
-            // Add answer
-            doc.setFont(undefined, 'normal');
-            const answerLines = doc.splitTextToSize(`Answer: ${answer}`, 170);
-            doc.text(answerLines, 25, yPosition);
-            yPosition += (answerLines.length * 7) + 15;
-
-            // Add page break if needed
-            if (yPosition > 270 && index < category.questions.length - 1) {
+            // Check page break
+            if (y > 250) {
                 doc.addPage();
-                yPosition = 20;
+                y = 30;
             }
+
+            // Question
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(102, 126, 234);
+            const questionLines = wrapText(`${index + 1}. ${question}`, contentWidth);
+
+            questionLines.forEach(line => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 30;
+                }
+                doc.text(line, margin, y);
+                y += 7;
+            });
+
+            y += 5;
+
+            // Answer
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(45, 55, 72);
+            const answer = answers[index] || '[Skipped]';
+            const answerLines = wrapText(`Answer: ${answer}`, contentWidth - 5);
+
+            answerLines.forEach(line => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 30;
+                }
+                doc.text(line, margin + 5, y);
+                y += 6;
+            });
+
+            y += 12;
         });
 
-        // Add footer
-        doc.setFontSize(10);
-        doc.setTextColor(150, 150, 150);
-        doc.text('Created with Take Work Breaks - takeworkbreaks.com', 105, 285, { align: 'center' });
+        // Footer
+        const pageCount = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFontSize(9);
+            doc.setTextColor(160, 174, 192);
+            doc.text(
+                `Page ${i} of ${pageCount} • takeworkbreaks.com`,
+                pageWidth / 2,
+                doc.internal.pageSize.getHeight() - 10,
+                { align: 'center' }
+            );
+        }
 
-        // Save PDF
-        doc.save(`gratitude-journal-${new Date().toISOString().slice(0, 10)}.pdf`);
+        // Save
+        const fileName = `gratitude-${category.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}.pdf`;
+        doc.save(fileName);
+
         showToast("PDF downloaded successfully!");
 
     } catch (error) {
@@ -520,18 +567,151 @@ async function copyText() {
     }
 }
 
-// Save as image
+// Save as image (with header)
 async function saveAsImage() {
     showToast("Generating image...");
 
     try {
-        const content = document.getElementById('answersContainer');
+        // Create a temporary container for the image
+        const tempContainer = document.createElement('div');
+        tempContainer.style.cssText = `
+            position: fixed;
+            top: -10000px;
+            left: -10000px;
+            width: 800px;
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            z-index: 10000;
+        `;
 
-        const canvas = await html2canvas(content, {
+        // Add header
+        const header = document.createElement('div');
+        header.style.cssText = `
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        `;
+
+        const title = document.createElement('h2');
+        title.textContent = 'Gratitude Journal';
+        title.style.cssText = `
+            color: #2d3748;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-family: sans-serif;
+        `;
+
+        const metaContainer = document.createElement('div');
+        metaContainer.style.cssText = `
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #718096;
+            font-weight: 500;
+            font-family: sans-serif;
+        `;
+
+        const categorySpan = document.createElement('span');
+        categorySpan.id = 'tempCategory';
+        categorySpan.textContent = `Category: ${gratitudeCategories[currentCategory].title}`;
+
+        const dateSpan = document.createElement('span');
+        dateSpan.id = 'tempDate';
+        const now = new Date();
+        dateSpan.textContent = `Date: ${now.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })}`;
+
+        metaContainer.appendChild(categorySpan);
+        metaContainer.appendChild(dateSpan);
+
+        header.appendChild(title);
+        header.appendChild(metaContainer);
+        tempContainer.appendChild(header);
+
+        // Add answers content
+        const answersDiv = document.createElement('div');
+        answersDiv.id = 'tempAnswers';
+        answersDiv.style.cssText = `
+            margin-bottom: 3rem;
+        `;
+
+        const category = gratitudeCategories[currentCategory];
+        category.questions.forEach((question, index) => {
+            const answerReview = document.createElement('div');
+            answerReview.style.cssText = `
+                background: white;
+                padding: 1.5rem;
+                border-radius: 12px;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+                border-left: 4px solid #667eea;
+                font-family: sans-serif;
+            `;
+
+            const questionH4 = document.createElement('h4');
+            questionH4.textContent = `${index + 1}. ${question}`;
+            questionH4.style.cssText = `
+                color: #4a5568;
+                font-size: 1.1rem;
+                margin-bottom: 0.75rem;
+                font-weight: 600;
+            `;
+
+            const answerContent = document.createElement('div');
+            answerContent.textContent = answers[index] || '[Skipped]';
+            answerContent.style.cssText = `
+                color: #2d3748;
+                line-height: 1.6;
+                white-space: pre-wrap;
+                padding: 1rem;
+                background: #f7fafc;
+                border-radius: 8px;
+                font-size: 1rem;
+            `;
+
+            answerReview.appendChild(questionH4);
+            answerReview.appendChild(answerContent);
+            answersDiv.appendChild(answerReview);
+        });
+
+        tempContainer.appendChild(answersDiv);
+
+        // Add footer
+        const footer = document.createElement('div');
+        footer.style.cssText = `
+            text-align: center;
+            color: #a0aec0;
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            font-family: sans-serif;
+        `;
+        footer.textContent = 'Created with Take Work Breaks • takeworkbreaks.com';
+
+        tempContainer.appendChild(footer);
+
+        // Add to document
+        document.body.appendChild(tempContainer);
+
+        // Generate image
+        const canvas = await html2canvas(tempContainer, {
             scale: 2,
             backgroundColor: '#f8fafc',
-            logging: false
+            logging: false,
+            useCORS: true,
+            allowTaint: true
         });
+
+        // Remove temporary container
+        document.body.removeChild(tempContainer);
 
         // Convert canvas to image
         const image = canvas.toDataURL('image/png');
@@ -539,7 +719,8 @@ async function saveAsImage() {
         // Create download link
         const link = document.createElement('a');
         link.href = image;
-        link.download = `gratitude-journal-${new Date().toISOString().slice(0, 10)}.png`;
+        const fileName = `gratitude-journal-${gratitudeCategories[currentCategory].title.toLowerCase().replace(/\s+/g, '-')}-${now.toISOString().slice(0, 10)}.png`;
+        link.download = fileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -562,7 +743,7 @@ style.textContent = `
         background: linear-gradient(135deg, #48bb78, #38a169);
     }
     .btn.finish:hover {
-        background: linear-gradient(135deg, #38a169, #2f855a);
+        background: linear-gradient(135deg, #38a169, #2f855a) !important;
     }
     .btn.export.ready {
         animation: pulse 2s infinite;

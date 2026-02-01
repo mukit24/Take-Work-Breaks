@@ -4,157 +4,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productivity Timer - Focus Sessions & Smart Breaks | Take Work Breaks</title>
+    <title>Productivity Timer - Focus Sessions & Reports | Take Work Breaks</title>
     <meta name="description"
-        content="Boost productivity with customizable focus timers. Pomodoro technique, deep work sessions, quick sprints, and smart break suggestions.">
+        content="Boost productivity with Pomodoro, Deep Work, and custom timers. Track tasks, get daily reports, and take mindful breaks.">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/productivity-timer.css">
+
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
     <div id="header-container"></div>
 
-    <main class="pomodoro-app">
-        <!-- Step 1: Timer Preset Selection -->
-        <div class="preset-selector" id="presetSelector">
-            <h2>Choose Your Focus Timer</h2>
-            <div class="preset-grid" id="presetGrid">
-                <!-- Presets will be populated by JS -->
+    <main class="productivity-app">
+        <!-- Today's Overview Card (shown first if data exists) -->
+        <div class="overview-card" id="overviewCard" hidden>
+            <div class="overview-header">
+                <h2>📊 Today's Productivity</h2>
+                <button id="clearTodayBtn" class="btn outline small">Clear Today's Data</button>
+            </div>
+
+            <div class="overview-stats" id="overviewStats">
+                <!-- Stats will be populated by JS -->
+            </div>
+
+            <div class="overview-actions">
+                <button id="generateReportBtn" class="btn primary">
+                    <span class="btn-icon">📄</span> Generate Today's Report
+                </button>
+                <button id="continueTimerBtn" class="btn outline">
+                    <span class="btn-icon">⏱️</span> Start New Timer Session
+                </button>
+            </div>
+
+            <p class="overview-note">Start a new timer session or generate a report of today's work.</p>
+        </div>
+
+        <!-- Step 1: Timer Type Selection -->
+        <div class="timer-selector" id="timerSelector">
+            <h2>Choose Your Timer Type</h2>
+            <div class="timer-grid" id="timerGrid">
+                <!-- Timer cards will be populated by JS -->
             </div>
         </div>
 
-        <!-- Step 2: Timer Interface -->
-        <div class="timer-interface" id="timerInterface" hidden>
-            <div class="timer-visual">
-                <div class="timer-circle" id="timerCircle">
-                    <div class="timer-phase" id="timerPhase">Work Session</div>
-                    <div class="timer-display" id="timerDisplay">25:00</div>
-                    <div class="session-info" id="sessionInfo">Session 1 of 4</div>
+        <!-- Step 2: Timer Setup -->
+        <div class="setup-interface" id="setupInterface" hidden>
+            <div class="setup-header">
+                <h2 id="setupTitle">Setup Your Timer</h2>
+            </div>
+
+            <div class="setup-form">
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="sessionCount">
+                            <span class="label-icon">📊</span>
+                            Number of Sessions:
+                        </label>
+                        <div class="input-with-info">
+                            <input type="number" id="sessionCount" min="1" max="10" value="4">
+                            <span class="input-info">How many work sessions? (1-10)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="autoCycle">
+                            <span class="label-icon">🔄</span>
+                            Auto-cycle Sessions:
+                        </label>
+                        <div class="toggle-with-info">
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="autoCycle">
+                                <span class="toggle-slider"></span>
+                            </div>
+                            <span class="toggle-info">Automatically start next session after break</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group custom-times" id="customTimesGroup" hidden>
+                    <div class="time-inputs">
+                        <div class="time-input">
+                            <label for="workTime">
+                                <span class="label-icon">🎯</span>
+                                Work Time (minutes):
+                            </label>
+                            <input type="number" id="workTime" min="5" max="120" value="25">
+                        </div>
+                        <div class="time-input">
+                            <label for="breakTime">
+                                <span class="label-icon">☕</span>
+                                Break Time (minutes):
+                            </label>
+                            <input type="number" id="breakTime" min="1" max="30" value="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sounds-section">
+                    <h3>Sound Settings</h3>
+                    <div class="sound-controls">
+                        <div class="sound-control">
+                            <label for="soundToggle">
+                                <span class="label-icon">🔊</span>
+                                Enable Sounds:
+                            </label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="soundToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+
+                        <div class="volume-control" id="volumeControl">
+                            <label for="volumeSlider">Volume:</label>
+                            <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                            <span id="volumeValue">50%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="task-section">
-                <input type="text" id="taskInput" placeholder="What are you working on? (Optional)" maxlength="100">
-                <div class="task-stats">
-                    <span class="task-counter" id="taskCounter">Tasks: 0</span>
-                    <span class="focus-streak" id="focusStreak">🔥 0-day streak</span>
+            <div class="setup-actions">
+                <button id="startSessionBtn" class="btn primary">
+                    <span class="btn-icon">🚀</span>
+                    Start Timer Session
+                </button>
+                <button id="backToSelection" class="btn outline">← Back to Selection</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Timer Running Interface -->
+        <div class="running-interface" id="runningInterface" hidden>
+            <div class="timer-header">
+                <div class="session-info">
+                    <span class="session-counter" id="sessionCounter">Session 1 of 4</span>
+                    <span class="timer-type-badge" id="runningTimerType">🍅 Pomodoro</span>
+                </div>
+
+                <div class="phase-indicator">
+                    <span class="phase-icon" id="phaseIcon">🎯</span>
+                    <span class="phase-text" id="phaseText">WORK TIME</span>
+                </div>
+            </div>
+
+            <div class="timer-display-section">
+                <div class="timer-circle" id="timerCircle">
+                    <div class="timer-time" id="timerTime">25:00</div>
+                    <div class="timer-label" id="timerLabel">Focus Time</div>
+                </div>
+
+                <div class="current-task-section">
+                    <input type="text" id="currentTaskInput"
+                        placeholder="What are you working on this session? (Optional)" maxlength="100">
+                    <button id="saveTaskBtn" class="btn small">Save Task</button>
                 </div>
             </div>
 
             <div class="timer-controls">
                 <div class="control-buttons">
-                    <button id="startBtn" class="btn primary">Start Timer</button>
-                    <button id="pauseBtn" class="btn secondary" disabled>Pause</button>
-                    <button id="resetBtn" class="btn outline">Reset</button>
+                    <button id="startPauseBtn" class="btn primary">
+                        <span class="btn-icon" id="startPauseIcon">▶️</span>
+                        <span id="startPauseText">Start</span>
+                    </button>
+                    <button id="resetTimerBtn" class="btn outline">Reset</button>
+                    <button id="skipPhaseBtn" class="btn secondary" disabled>Skip</button>
                 </div>
 
-                <div class="session-controls-group">
-                    <div class="control-row">
-                        <div class="control-item">
-                            <label for="autoBreak">Auto-start breaks:</label>
-                            <div class="toggle-switch">
-                                <input type="checkbox" id="autoBreak" checked>
-                                <span class="toggle-slider"></span>
-                            </div>
-                        </div>
-
-                        <div class="control-item">
-                            <label for="soundMode">Sound Alerts:</label>
-                            <div class="select-wrapper">
-                                <select id="soundMode" class="styled-select">
-                                    <option value="none">No Sound</option>
-                                    <option value="tones">Tone Alerts</option>
-                                    <option value="voice">Voice Alerts</option>
-                                </select>
-                                <span class="select-arrow">▼</span>
-                            </div>
-                        </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
                     </div>
-
-                    <div class="volume-control hidden" id="volumeControl">
-                        <label for="volumeSlider">Volume:</label>
-                        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
-                        <span id="volumeValue">50%</span>
+                    <div class="progress-labels">
+                        <span id="completedSessions">0 sessions done</span>
+                        <span id="totalTimeToday">0 min today</span>
                     </div>
                 </div>
             </div>
 
-            <button id="backToPresets" class="btn outline">← Back to All Timers</button>
-        </div>
-
-        <!-- Step 3: Break Interface (Shows during breaks) -->
-        <div class="break-interface" id="breakInterface" hidden>
-            <div class="break-header">
-                <h2>☕ Time for a Break!</h2>
-                <p class="break-subtitle">You've earned <span id="breakDuration">5</span> minutes of rest</p>
-            </div>
-
-            <div class="timer-visual">
-                <div class="break-circle" id="breakCircle">
-                    <div class="timer-phase">Break Time</div>
-                    <div class="timer-display" id="breakTimer">5:00</div>
-                    <div class="break-suggestion" id="breakSuggestion">Stretch & Refresh</div>
-                </div>
-            </div>
-
-            <div class="break-suggestions">
-                <h3>Mindful Break Activities</h3>
+            <!-- Break Suggestions (optional) -->
+            <div class="break-suggestions" id="breakSuggestions" hidden>
+                <h3>💡 Break Activity Suggestions</h3>
                 <div class="suggestions-grid" id="suggestionsGrid">
-                    <!-- Break suggestions will be populated by JS -->
+                    <!-- Suggestions will be populated by JS -->
                 </div>
+                <p class="suggestions-note">Take a mindful break to recharge. These activities are optional.</p>
             </div>
 
-            <div class="break-controls">
-                <button id="skipBreakBtn" class="btn outline">Skip to Next Focus</button>
-                <button id="startBreakBtn" class="btn primary">Start Break Timer</button>
-            </div>
-
-            <div class="break-note">
-                <p>💡 Regular breaks improve focus and prevent burnout. Try different activities each time!</p>
+            <div class="running-actions">
+                <button id="endSessionBtn" class="btn outline">End Timer Session</button>
+                <button id="backToSetup" class="btn back-link">← Back to Setup</button>
             </div>
         </div>
 
         <!-- Step 4: Session Complete -->
         <div class="complete-interface" id="completeInterface" hidden>
             <div class="complete-header">
-                <div class="complete-icon">🎯</div>
-                <h2>Work Session Complete!</h2>
-                <p class="complete-subtitle">Productive work deserves a mindful break</p>
+                <div class="complete-icon" id="completeIcon">🎯</div>
+                <h2 id="completeTitle">Session Complete!</h2>
+                <p class="complete-subtitle" id="completeSubtitle">Great focus session completed</p>
             </div>
 
-            <div class="session-stats">
-                <div class="stat-card">
-                    <div class="stat-value" id="completedSessions">1</div>
-                    <div class="stat-label">Sessions Today</div>
+            <div class="session-summary">
+                <div class="summary-card">
+                    <h3>📋 Session Summary</h3>
+                    <div class="summary-content" id="sessionSummary">
+                        <!-- Summary will be populated by JS -->
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="totalFocusTime">25</div>
-                    <div class="stat-label">Minutes Worked</div>
+
+                <div class="next-action">
+                    <h3>⏭️ What's Next?</h3>
+                    <div class="action-buttons">
+                        <button id="startNextSessionBtn" class="btn primary">
+                            <span class="btn-icon">🚀</span>
+                            Start Next Session
+                        </button>
+                        <button id="takeBreakBtn" class="btn outline">
+                            <span class="btn-icon">☕</span>
+                            Start Break Now
+                        </button>
+                        <button id="endAllSessionsBtn" class="btn secondary">
+                            <span class="btn-icon">🏁</span>
+                            End All Sessions
+                        </button>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="streakDays">0</div>
-                    <div class="stat-label">Day Streak</div>
+            </div>
+
+            <div class="report-section">
+                <h3>📊 Generate Report</h3>
+                <p>Create a report of today's productivity sessions.</p>
+                <div class="report-actions">
+                    <button id="generatePdfBtn" class="btn primary">
+                        <span class="btn-icon">📄</span>
+                        Download PDF Report
+                    </button>
+                    <button id="generateImageBtn" class="btn outline">
+                        <span class="btn-icon">🖼️</span>
+                        Save as Image
+                    </button>
+                    <button id="copyReportBtn" class="btn secondary">
+                        <span class="btn-icon">📋</span>
+                        Copy to Clipboard
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <div class="accomplishment-section">
-                <h3>What did you accomplish?</h3>
-                <textarea id="accomplishmentInput" placeholder="Optional: Note what you completed..." rows="3"
-                    maxlength="200"></textarea>
-                <button id="saveAccomplishment" class="btn secondary">Save Note</button>
-            </div>
-
-            <div class="completion-actions">
-                <button id="startNextBtn" class="btn primary">Start Next Work Session</button>
-                <button id="takeBreakBtn" class="btn outline">Take a Longer Break</button>
-                <button id="endSessionBtn" class="btn back-link">End Session</button>
-            </div>
-
-            <div class="encouragement">
-                <p>🌟 "Productivity is never an accident. It is always the result of commitment to excellence,
-                    intelligent planning, and focused effort."</p>
+        <!-- Report Generation Modal -->
+        <div class="report-modal" id="reportModal" hidden>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📄 Today's Productivity Report</h3>
+                    <button id="closeModalBtn" class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body" id="modalReportContent">
+                    <!-- Report content will be populated by JS -->
+                </div>
+                <div class="modal-footer">
+                    <p>Report will be generated based on this preview.</p>
+                </div>
             </div>
         </div>
     </main>

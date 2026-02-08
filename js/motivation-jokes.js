@@ -95,6 +95,9 @@ function setupEventListeners() {
     elements.backToTypes.addEventListener('click', () => {
         elements.typeSelector.hidden = false;
         elements.contentDisplay.hidden = true;
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Copy button

@@ -250,6 +250,9 @@ function showCategorySelector() {
     elements.questionInterface.hidden = true;
     elements.reviewInterface.hidden = true;
     currentCategory = null;
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Show review interface

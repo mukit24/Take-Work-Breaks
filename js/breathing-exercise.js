@@ -228,6 +228,9 @@ function showTechniqueSelector() {
     elements.breathingInterface.hidden = true;
     elements.customBreath.hidden = true;
     stopBreathing();
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Save current pattern to localStorage

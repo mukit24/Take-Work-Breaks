@@ -512,10 +512,6 @@
 }
 
 @media (max-width: 480px) {
-    .stretches-app {
-        padding: 0.5rem;
-    }
-
     .stretch-interface,
     .exercise-interface {
         padding: 1rem;

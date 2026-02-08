@@ -133,7 +133,6 @@
     padding: 1rem;
     gap: 1rem;
     background: rgba(247, 250, 252, 0.9);
-    border-top: 2px solid var(--border-color);
 }
 
 .exercise-instruction {

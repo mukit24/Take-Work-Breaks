@@ -343,6 +343,9 @@ function showExerciseSelector() {
     // Reset session duration to 1 minute when leaving exercise
     sessionDuration = 60;
     elements.sessionLength.value = "60";
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Start exercise

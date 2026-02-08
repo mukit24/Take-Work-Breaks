@@ -1,4 +1,7 @@
  /* Hero Section */
+ html {
+     scroll-behavior: smooth;
+ }
 
  .hero {
      padding: 1rem 1rem;
@@ -11,7 +14,7 @@
  }
 
  .hero p {
-     font-size: .9rem;
+     font-size: 1rem;
      color: #444;
      max-width: 90%;
      margin: 0 auto 2rem;
@@ -175,7 +178,7 @@
 
  /* Tablet and larger */
  @media (min-width: 600px) {
-    
+
      .features h2 {
          font-size: 2rem;
          margin-bottom: 1.5rem;

@@ -21,6 +21,10 @@
     gap: 1.5rem;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 .technique-card {
     background: #f7fafc;
     padding: 1.5rem;
@@ -178,8 +182,12 @@
 
 /* Custom Breathing */
 .custom-breath {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 0rem 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .custom-breath h2 {
@@ -221,6 +229,7 @@
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
 /* Button Styles */

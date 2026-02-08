@@ -74,6 +74,10 @@
     margin: 1rem 0;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 .stretch-main {
     display: grid;
     grid-template-columns: 1fr;

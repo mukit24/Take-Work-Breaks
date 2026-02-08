@@ -2,7 +2,7 @@
 const eyeExercises = {
     palming: {
         name: "Palming Relaxation",
-        description: "Relieve eye strain and reduce fatigue by warming and relaxing your eye muscles",
+        description: "Relieve eye strain and soothe tired eyes instantly",
         type: "Instruction-based",
         instructionType: "two-steps",
         steps: [
@@ -20,12 +20,12 @@ const eyeExercises = {
     },
     figureEight: {
         name: "Figure Eight Tracing",
-        description: "Improve eye coordination and flexibility while reducing digital screen fatigue",
+        description: "Improve eye coordination and flexibility",
         type: "Screen-based",
     },
     focusSwitching: {
         name: "Near-Far Focus",
-        description: "Prevent eye strain from prolonged screen use by exercising your focusing ability",
+        description: "Prevent eye fatigue and improve focus ability",
         type: "Instruction-based",
         instructionType: "two-steps",
         steps: [
@@ -43,12 +43,12 @@ const eyeExercises = {
     },
     directional: {
         name: "Directional Movements",
-        description: "Strengthen eye muscles and increase blood circulation to reduce tension",
+        description: "Strengthen eye muscles and reduce tension",
         type: "Screen-based",
     },
     blinking: {
         name: "Blinking Exercise",
-        description: "Refresh tear film and prevent dry eyes caused by reduced blinking at screens",
+        description: "Moisturize dry eyes and refresh vision",
         type: "Instruction-based",
         instructionType: "two-steps",
         steps: [
@@ -66,7 +66,7 @@ const eyeExercises = {
     },
     zooming: {
         name: "Zooming Exercise",
-        description: "Enhance visual flexibility and prevent accommodative spasms from screen work",
+        description: "Enhance visual flexibility and clarity",
         type: "Screen-based",
     },
 };
@@ -117,6 +117,7 @@ function renderExerciseGrid() {
     elements.exerciseGrid.innerHTML = Object.entries(eyeExercises).map(([key, exercise]) => `
         <div class="exercise-card" data-exercise="${key}">
             <h3 class="exercise-name">${exercise.name}</h3>
+            <div class="exercise-type">${exercise.type}</div>
             <p class="exercise-desc">${exercise.description}</p>
         </div>
     `).join('');
@@ -177,11 +178,11 @@ function showExerciseInterface() {
 function setupInitialDisplay() {
     clearAnimationContainer();
     const exercise = eyeExercises[currentExercise];
-    
+
     if (exercise.type === "Instruction-based") {
         // Create instruction layout
         let layoutHTML = '';
-        
+
         if (currentExercise === 'palming') {
             layoutHTML = `
                 <div class="instruction-layout">
@@ -276,15 +277,15 @@ function setupInitialDisplay() {
                 </div>
             `;
         }
-        
+
         elements.animationContainer.innerHTML = layoutHTML;
-        
+
         // Set voice toggle event listener
         const voiceToggle = document.getElementById('voiceToggle');
         const volumeControl = document.getElementById('volumeControl');
         const volumeSlider = document.getElementById('volumeSlider');
         const volumeValue = document.getElementById('volumeValue');
-        
+
         if (voiceToggle) {
             voiceToggle.addEventListener('change', (e) => {
                 useVoice = e.target.checked;
@@ -297,18 +298,18 @@ function setupInitialDisplay() {
                 }
             });
         }
-        
+
         if (volumeSlider && volumeValue) {
             volumeSlider.addEventListener('input', (e) => {
                 volume = parseInt(e.target.value) / 100;
                 volumeValue.textContent = `${e.target.value}%`;
             });
         }
-        
+
         // Set initial display text
         elements.exerciseInstruction.textContent = "";
         elements.exerciseTimer.textContent = formatTime(sessionDuration);
-        
+
     } else {
         // For screen-based exercises
         setupExerciseDisplay();
@@ -338,7 +339,7 @@ function showExerciseSelector() {
     elements.exerciseInterface.hidden = true;
     stopExercise();
     hideCompletionDisplay();
-    
+
     // Reset session duration to 1 minute when leaving exercise
     sessionDuration = 60;
     elements.sessionLength.value = "60";
@@ -352,22 +353,22 @@ function startExercise() {
     isPaused = false;
     elements.startBtn.disabled = true;
     elements.pauseBtn.disabled = false;
-    
+
     // Hide session controls when exercise is running
     document.querySelector('.session-controls-group').classList.add('running');
 
     const exercise = eyeExercises[currentExercise];
     timeLeft = sessionDuration;
-    
+
     if (exercise.type === "Instruction-based") {
         // For instruction-based exercises, hide animation container
         clearAnimationContainer();
         elements.animationContainer.style.display = "none";
-        
+
         // Start with first step
         currentStepIndex = 0;
         updateInstructionStep();
-        
+
         // Play first voice if enabled
         if (useVoice && exercise.steps[currentStepIndex].voice) {
             playVoice(exercise.steps[currentStepIndex].voice);
@@ -379,16 +380,16 @@ function startExercise() {
         updateTimerDisplay();
         setupScreenBasedExercise();
     }
-    
+
     updateTimerDisplay();
-    
+
     // Start the timer
     exerciseInterval = setInterval(() => {
         if (!isRunning || isPaused) return;
 
         timeLeft--;
         updateTimerDisplay();
-        
+
         // Handle instruction step changes for instruction-based exercises
         if (eyeExercises[currentExercise].type === "Instruction-based") {
             handleInstructionStepChange();
@@ -404,22 +405,22 @@ function startExercise() {
 function handleInstructionStepChange() {
     const exercise = eyeExercises[currentExercise];
     const timeElapsed = sessionDuration - timeLeft;
-    
+
     if (exercise.instructionType === "two-steps") {
         const totalStepDuration = exercise.steps[0].duration + exercise.steps[1].duration;
         const timeInCurrentCycle = timeElapsed % totalStepDuration;
-        
+
         let newStepIndex;
         if (timeInCurrentCycle < exercise.steps[0].duration) {
             newStepIndex = 0;
         } else {
             newStepIndex = 1;
         }
-        
+
         if (newStepIndex !== currentStepIndex) {
             currentStepIndex = newStepIndex;
             updateInstructionStep();
-            
+
             if (useVoice && exercise.steps[currentStepIndex].voice) {
                 playVoice(exercise.steps[currentStepIndex].voice);
             }
@@ -453,26 +454,26 @@ function togglePause() {
 // Reset exercise
 function resetExercise() {
     stopExercise();
-    
+
     // Reset session duration to 1 minute
     sessionDuration = 60;
     elements.sessionLength.value = "60";
-    
+
     timeLeft = sessionDuration;
     currentStepIndex = 0;
     useVoice = false;
     stopVoice();
     hideCompletionDisplay();
-    
+
     // Reset to initial display
     setupInitialDisplay();
-    
+
     // Reset animation container display
     elements.animationContainer.style.display = "flex";
-    
+
     // Show session controls again
     document.querySelector('.session-controls-group').classList.remove('running');
-    
+
     // Reset voice toggle if exists
     const voiceToggle = document.getElementById('voiceToggle');
     if (voiceToggle) {
@@ -482,7 +483,7 @@ function resetExercise() {
             volumeControl.classList.remove('visible');
         }
     }
-    
+
     updateTimerDisplay();
 }
 
@@ -504,7 +505,7 @@ function stopExercise() {
 // Play voice audio with volume control
 function playVoice(audioPath) {
     if (!useVoice || !audioPath) return;
-    
+
     // Stop any current audio first
     if (voiceAudio) {
         voiceAudio.pause();
@@ -513,10 +514,10 @@ function playVoice(audioPath) {
 
     voiceAudio = new Audio(audioPath);
     voiceAudio.volume = volume; // Use volume setting
-    
+
     // Use a promise chain to handle playback
     const playPromise = voiceAudio.play();
-    
+
     if (playPromise !== undefined) {
         playPromise.catch(error => {
             // Only log errors that aren't aborts
@@ -545,17 +546,17 @@ function updateTimerDisplay() {
 // Complete exercise - Updated to show completion in interface
 function completeExercise() {
     stopExercise();
-    
+
     // Play completion voice only if voice guidance was enabled
     setTimeout(() => {
         if (useVoice) {
             playVoice(completionVoice);
         }
     }, 100);
-    
+
     // Show completion message in interface (hide timer, show completion text)
     showCompletionDisplay();
-    
+
     // Wait 3 seconds then reset to initial phase
     setTimeout(() => {
         hideCompletionDisplay();
@@ -576,13 +577,13 @@ function showCompletionDisplay() {
     // Hide timer and instruction
     elements.exerciseTimer.style.display = 'none';
     elements.exerciseInstruction.style.display = 'none';
-    
+
     // Create completion message
     const completionHTML = `
         <div class="completion-message">✓ Exercise Complete!</div>
         <div class="completion-subtitle">Great job taking care of your eyes</div>
     `;
-    
+
     // Insert completion message
     const instructionArea = document.querySelector('.instruction-timer-area');
     if (instructionArea) {
@@ -600,10 +601,10 @@ function hideCompletionDisplay() {
     // Show timer and instruction again
     elements.exerciseTimer.style.display = 'block';
     elements.exerciseInstruction.style.display = 'block';
-    
+
     // Restore original instruction/timer area
     const instructionArea = document.querySelector('.instruction-timer-area');
-    
+
     if (instructionArea) {
         instructionArea.innerHTML = `
             <div class="exercise-instruction" id="exerciseInstruction"></div>
@@ -642,70 +643,70 @@ function setupScreenBasedExercise() {
 
 function createFigureEightAnimation() {
     const container = elements.animationContainer;
-    
+
     // Clear container
     container.innerHTML = '';
-    
+
     // Create the figure-eight path visualization
     const path = document.createElement('div');
     path.className = 'figure-eight-path';
     container.appendChild(path);
-    
+
     // Create the main dot
     const dot = document.createElement('div');
     dot.className = 'figure-eight-dot';
     container.appendChild(dot);
-    
+
     // Animation variables
     let progress = 0;
     let animationId = null;
     let lastTimestamp = 0;
-    
+
     // Calculate position on figure-eight path
     function calculatePosition(t) {
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
-        
+
         // Use container dimensions for responsive sizing
         const amplitudeX = containerWidth * 0.42;
         const amplitudeY = containerHeight * 0.6;
         const centerX = containerWidth / 2;
         const centerY = containerHeight / 2;
-        
+
         // Figure-eight (lemniscate) parametric equations
         const x = centerX + amplitudeX * Math.sin(t * Math.PI * 2);
         const y = centerY + amplitudeY * Math.sin(t * Math.PI * 2) * Math.cos(t * Math.PI * 2);
-        
+
         return { x, y };
     }
-    
+
     // Main animation function
     function animate(timestamp) {
         if (!lastTimestamp) lastTimestamp = timestamp;
-        
+
         // Calculate time-based progress (slower movement)
         const deltaTime = timestamp - lastTimestamp;
         const speed = 0.00012; // Adjust for speed (lower = slower)
         progress = (progress + (deltaTime * speed)) % 1;
         lastTimestamp = timestamp;
-        
+
         // Calculate new position
         const { x, y } = calculatePosition(progress);
-        
+
         // Update dot position with smooth transition
         dot.style.left = `${x}px`;
         dot.style.top = `${y}px`;
-        
+
         // Add subtle pulsing effect
         const pulseScale = 1 + 0.05 * Math.sin(progress * Math.PI * 8);
         dot.style.transform = `translate(-50%, -50%) scale(${pulseScale})`;
-        
+
         // Continue animation only if exercise is running and not paused
         if (isRunning && !isPaused) {
             animationId = requestAnimationFrame(animate);
         }
     }
-    
+
     // Start the animation
     function startAnimation() {
         if (!animationId) {
@@ -713,13 +714,13 @@ function createFigureEightAnimation() {
             const initialPos = calculatePosition(0);
             dot.style.left = `${initialPos.x}px`;
             dot.style.top = `${initialPos.y}px`;
-            
+
             // Start animation loop
             lastTimestamp = 0;
             animationId = requestAnimationFrame(animate);
         }
     }
-    
+
     // Stop the animation
     function stopAnimation() {
         if (animationId) {
@@ -727,10 +728,10 @@ function createFigureEightAnimation() {
             animationId = null;
         }
     }
-    
+
     // Store cleanup reference
     let cleanupFunction = null;
-    
+
     // Listen for exercise state changes
     const checkAnimationState = () => {
         if (isRunning && !isPaused && !animationId) {
@@ -739,52 +740,52 @@ function createFigureEightAnimation() {
             stopAnimation();
         }
     };
-    
+
     // Set up state monitoring
     const stateCheckInterval = setInterval(checkAnimationState, 100);
-    
+
     // Initial check
     checkAnimationState();
-    
+
     // Cleanup function
     cleanupFunction = () => {
         stopAnimation();
         clearInterval(stateCheckInterval);
     };
-    
+
     return cleanupFunction;
 }
 
 function createDirectionalAnimation() {
     const container = elements.animationContainer;
-    
+
     // Clear container
     container.innerHTML = '';
-    
+
     // Create a single dot
     const dot = document.createElement('div');
     dot.className = 'directional-dot';
     container.appendChild(dot);
-    
+
     // Animation variables
     let currentCorner = 0;
     let animationId = null;
     let startTime = null;
-    
+
     // Calculate rectangle corners (full width movement)
     function calculateCorners() {
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
-        
+
         // Use 85% of container size to keep dot fully visible
         const marginX = containerWidth * 0.075; // 7.5% margin
         const marginY = containerHeight * 0.085; // 7.5% margin
-        
+
         const top = marginY;
         const bottom = containerHeight - marginY;
         const left = marginX;
         const right = containerWidth - marginX;
-        
+
         return [
             { x: left, y: top },      // Top-left corner
             { x: right, y: top },     // Top-right corner
@@ -792,14 +793,14 @@ function createDirectionalAnimation() {
             { x: left, y: bottom }    // Bottom-left corner
         ];
     }
-    
+
     // Calculate position between two corners (for smooth movement)
     function interpolatePosition(startCorner, endCorner, progress) {
         const x = startCorner.x + (endCorner.x - startCorner.x) * progress;
         const y = startCorner.y + (endCorner.y - startCorner.y) * progress;
         return { x, y };
     }
-    
+
     // Main animation function
     function animate(timestamp) {
         if (!startTime) startTime = timestamp;
@@ -807,24 +808,24 @@ function createDirectionalAnimation() {
             animationId = null;
             return;
         }
-        
+
         const corners = calculateCorners();
-        
+
         // ===== ADJUST THESE VALUES FOR SLOWER MOVEMENT =====
         const HOLD_TIME = 1200;        // Time holding at corner (ms) - was 1500
         const MOVE_TIME = 1000;        // Time moving between corners (ms) - was 500
         // ===================================================
-        
+
         const cornerTime = HOLD_TIME + MOVE_TIME; // Total time per corner
         const totalCycleTime = cornerTime * 4;    // Total for all 4 corners
-        
+
         // Calculate timing
         const elapsed = (timestamp - startTime) % totalCycleTime;
         const cornerIndex = Math.floor(elapsed / cornerTime);
         const timeInCorner = elapsed % cornerTime;
-        
+
         let currentPos;
-        
+
         if (timeInCorner < HOLD_TIME) {
             // Hold at current corner
             currentPos = corners[cornerIndex];
@@ -838,35 +839,35 @@ function createDirectionalAnimation() {
             dot.style.transition = `all ${MOVE_TIME / 1000}s cubic-bezier(0.4, 0, 0.2, 1)`; // Dynamic timing
             dot.style.transform = `translate(-50%, -50%) scale(1)`;
         }
-        
+
         // Update dot position
         dot.style.left = `${currentPos.x}px`;
         dot.style.top = `${currentPos.y}px`;
-        
+
         // Update current corner
         currentCorner = cornerIndex;
-        
+
         // Continue animation
         if (isRunning && !isPaused) {
             animationId = requestAnimationFrame(animate);
         }
     }
-    
+
     // Start the animation
     function startAnimation() {
         if (!animationId) {
             const corners = calculateCorners();
-            
+
             // Set initial position to first corner
             dot.style.left = `${corners[0].x}px`;
             dot.style.top = `${corners[0].y}px`;
-            
+
             startTime = null;
             currentCorner = 0;
             animationId = requestAnimationFrame(animate);
         }
     }
-    
+
     // Stop the animation
     function stopAnimation() {
         if (animationId) {
@@ -874,7 +875,7 @@ function createDirectionalAnimation() {
             animationId = null;
         }
     }
-    
+
     // State monitoring
     const checkAnimationState = () => {
         if (isRunning && !isPaused && !animationId) {
@@ -883,24 +884,24 @@ function createDirectionalAnimation() {
             stopAnimation();
         }
     };
-    
+
     // Set up state monitoring
     const stateCheckInterval = setInterval(checkAnimationState, 100);
-    
+
     // Initial setup
     const initialCorners = calculateCorners();
     dot.style.left = `${initialCorners[0].x}px`;
     dot.style.top = `${initialCorners[0].y}px`;
-    
+
     // Start if exercise is already running
     if (isRunning && !isPaused) {
         setTimeout(startAnimation, 100);
     }
-    
+
     // Handle window resize
     const handleResize = () => {
         const corners = calculateCorners();
-        
+
         // Update dot position if animation is running
         if (animationId) {
             const currentCornerObj = corners[currentCorner];
@@ -908,9 +909,9 @@ function createDirectionalAnimation() {
             dot.style.top = `${currentCornerObj.y}px`;
         }
     };
-    
+
     window.addEventListener('resize', handleResize);
-    
+
     // Cleanup function
     return () => {
         stopAnimation();
@@ -921,28 +922,28 @@ function createDirectionalAnimation() {
 
 function createZoomingAnimation() {
     const container = elements.animationContainer;
-    
+
     // Clear container
     container.innerHTML = '';
-    
+
     // Create the zooming circle with CSS animation
     const circle = document.createElement('div');
     circle.className = 'zooming-circle-css';
-    
+
     container.appendChild(circle);
-    
+
     // Add CSS animation via style tag
     const style = document.createElement('style');
     document.head.appendChild(style);
-    
+
     // Create center dot
     const centerDot = document.createElement('div');
     centerDot.className = 'center-dot';
     container.appendChild(centerDot);
-    
+
     // Set instruction
     elements.exerciseInstruction.textContent = "Follow the expanding and contracting circle";
-    
+
     // Control animation based on exercise state
     const checkAnimationState = () => {
         if (isRunning && !isPaused) {
@@ -951,13 +952,13 @@ function createZoomingAnimation() {
             circle.style.animationPlayState = 'paused';
         }
     };
-    
+
     // Start monitoring
     const stateCheckInterval = setInterval(checkAnimationState, 100);
-    
+
     // Initial check
     checkAnimationState();
-    
+
     // Cleanup
     return () => {
         clearInterval(stateCheckInterval);

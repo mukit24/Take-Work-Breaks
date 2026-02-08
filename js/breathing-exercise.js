@@ -312,6 +312,13 @@ function startCustomBreathing() {
 
 // Start breathing exercise
 function startBreathing() {
+    setTimeout(() => {
+        elements.breathingInterface.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }, 100);
+
     if (isRunning) return;
 
     isRunning = true;

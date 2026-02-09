@@ -589,3 +589,148 @@
     border-color: #e53e3e;
     background-color: #fff5f5;
 }
+
+/* Voice Controls */
+.voice-controls-section {
+    margin: 1.5rem 0;
+}
+
+.voice-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.voice-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #4a5568;
+    user-select: none;
+    font-weight: 500;
+}
+
+.voice-toggle input {
+    display: none;
+}
+
+.checkmark {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #cbd5e0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.voice-toggle input:checked + .checkmark {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.checkmark:after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.voice-toggle input:checked + .checkmark:after {
+    opacity: 1;
+}
+
+.voice-toggle:hover .checkmark {
+    border-color: #667eea;
+}
+
+.volume-control {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding-left: 1rem;
+    border-left: 2px solid #e2e8f0;
+    width: 100%;
+    max-width: 300px;
+}
+
+.volume-control.visible {
+    display: flex;
+}
+
+.volume-control label {
+    font-size: 0.95rem;
+    color: #4a5568;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.volume-slider {
+    width: 120px;
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#volumeValue {
+    font-size: 0.9rem;
+    color: #718096;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Responsive voice controls */
+@media (max-width: 768px) {
+    .voice-controls-section {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .voice-control {
+        flex-direction: column;
+    }
+
+    .volume-control {
+        border: none;
+    }
+    
+    .volume-slider {
+        width: 150px;
+    }
+
+    .voice-toggle {
+        font-size: 0.95rem;
+    }
+}

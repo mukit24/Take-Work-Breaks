@@ -22,13 +22,13 @@ class DeskStretches {
             {
                 id: 'shoulder-roll',
                 name: 'Shoulder Roll',
-                baseTime: 25,
+                baseTime: 30,
                 steps: [
-                    { instruction: 'Sit or stand with your arms relaxed', time: 3 },
-                    { instruction: 'Slowly roll your shoulders up toward your ears', time: 2 },
+                    { instruction: 'Sit or stand with your arms relaxed', time: 4 },
+                    { instruction: 'Slowly roll your shoulders up toward your ears', time: 4 },
                     { instruction: 'Complete 5 forward rotations', time: 7 },
                     { instruction: 'Pause', time: 2 },
-                    { instruction: 'Start backward rotations', time: 2 },
+                    { instruction: 'Start backward rotations', time: 4 },
                     { instruction: 'Complete 5 backward rotations', time: 7 },
                     { instruction: 'Keep your arms relaxed', time: 2 }
                 ],
@@ -38,19 +38,19 @@ class DeskStretches {
             {
                 id: 'side-stretch',
                 name: 'Side Stretch',
-                baseTime: 50,
+                baseTime: 45,
                 steps: [
                     { instruction: 'Sit tall with your feet flat on the floor', time: 3 },
-                    { instruction: 'Place your right hand on your right hip', time: 2 },
-                    { instruction: 'Raise your left arm straight overhead', time: 2 },
+                    { instruction: 'Place your right hand on your right hip', time: 4 },
+                    { instruction: 'Raise your left arm straight overhead', time: 3 },
                     { instruction: 'Gently lean to the right side', time: 2 },
                     { instruction: 'Hold for 10 seconds while breathing deeply', time: 10 },
                     { instruction: 'Return to center position slowly', time: 2 },
-                    { instruction: 'Lower your left arm and place on your left hip', time: 2 },
-                    { instruction: 'Raise your right arm overhead', time: 2 },
+                    { instruction: 'Lower your left arm and place on your left hip', time: 4 },
+                    { instruction: 'Raise your right arm overhead', time: 3 },
                     { instruction: 'Lean to the left side', time: 2 },
                     { instruction: 'Hold for 10 seconds', time: 10 },
-                    { instruction: 'Return to center and relax', time: 3 }
+                    { instruction: 'Return to center and relax', time: 2 }
                 ],
                 image: 'assets/stretches/side-stretch.jpg',
                 benefit: 'Stretches side muscles and improves posture'
@@ -58,17 +58,17 @@ class DeskStretches {
             {
                 id: 'wrist-flex',
                 name: 'Wrist Flex',
-                baseTime: 50,
+                baseTime: 55,
                 steps: [
                     { instruction: 'Extend your right arm straight forward', time: 3 },
-                    { instruction: 'Palm facing down, use left hand to pull fingers back', time: 3 },
+                    { instruction: 'Palm facing down, use left hand to pull fingers back', time: 5 },
                     { instruction: 'Hold for 5 seconds', time: 5 },
-                    { instruction: 'Release and turn your right palm facing up', time: 3 },
+                    { instruction: 'Release and turn your right palm facing up', time: 4 },
                     { instruction: 'Gently pull fingers downward', time: 3 },
                     { instruction: 'Hold for 5 seconds', time: 5 },
                     { instruction: 'Release and shake out your right hand', time: 3 },
                     { instruction: 'Now, extend your left arm straight forward', time: 3 },
-                    { instruction: 'Palm facing down, use right hand to pull fingers back', time: 3 },
+                    { instruction: 'Palm facing down, use right hand to pull fingers back', time: 5 },
                     { instruction: 'Hold for 5 seconds', time: 5 },
                     { instruction: 'Release and turn your left palm facing up', time: 3 },
                     { instruction: 'Gently pull fingers downward', time: 3 },
@@ -81,18 +81,18 @@ class DeskStretches {
             {
                 id: 'spinal-twist',
                 name: 'Spinal Twist',
-                baseTime: 40,
+                baseTime: 50,
                 steps: [
-                    { instruction: 'Sit tall with both feet flat on the floor', time: 2 },
-                    { instruction: 'Place your right hand on your left knee', time: 2 },
-                    { instruction: 'Place your left hand on the chair back for support', time: 2 },
-                    { instruction: 'Gently twist your upper body to the left', time: 2 },
+                    { instruction: 'Sit tall with both feet flat on the floor', time: 3 },
+                    { instruction: 'Place your right hand on your left knee', time: 3 },
+                    { instruction: 'Place your left hand on the chair back for support', time: 4 },
+                    { instruction: 'Gently twist your upper body to the left', time: 3 },
                     { instruction: 'Hold for 10 seconds while breathing deeply', time: 10 },
                     { instruction: 'Return to center slowly', time: 2 },
-                    { instruction: 'Now pause and prepare for opposite side', time: 2 },
-                    { instruction: 'Place your left hand on your right knee', time: 2 },
-                    { instruction: 'Place your right hand on the chair back for support', time: 2 },
-                    { instruction: 'Gently twist your upper body to the right', time: 2 },
+                    { instruction: 'Now pause and prepare for opposite side', time: 3 },
+                    { instruction: 'Place your left hand on your right knee', time: 3 },
+                    { instruction: 'Place your right hand on the chair back for support', time: 4 },
+                    { instruction: 'Gently twist your upper body to the right', time: 3 },
                     { instruction: 'Hold for 10 seconds while breathing deeply', time: 10 },
                     { instruction: 'Return to center slowly', time: 2 },
                 ],
@@ -102,19 +102,19 @@ class DeskStretches {
             {
                 id: 'leg-extensions',
                 name: 'Leg Extensions',
-                baseTime: 30,
+                baseTime: 35,
                 steps: [
-                    { instruction: 'Sit tall with your back against the chair', time: 3 },
-                    { instruction: 'Extend your right leg straight out', time: 2 },
-                    { instruction: 'Parallel to the floor, flex your foot', time: 2 },
+                    { instruction: 'Sit tall with your back against the chair', time: 4 },
+                    { instruction: 'Extend your right leg straight out', time: 3 },
+                    { instruction: 'Parallel to the floor, flex your foot', time: 3 },
                     { instruction: 'Hold for 5 seconds while squeezing thigh muscle', time: 5 },
                     { instruction: 'Slowly lower your leg back to the floor', time: 3 },
                     { instruction: 'Pause and prepare for left leg', time: 3 },
-                    { instruction: 'Extend your left leg straight out', time: 2 },
-                    { instruction: 'Parallel to the floor, flex your foot', time: 2 },
+                    { instruction: 'Extend your left leg straight out', time: 3 },
+                    { instruction: 'Parallel to the floor, flex your foot', time: 3 },
                     { instruction: 'Hold for 5 seconds while squeezing thigh muscle', time: 5 },
                     { instruction: 'Slowly lower your leg back to the floor', time: 3 },
-                    
+
                 ],
                 image: 'assets/stretches/leg-extensions.jpg',
                 benefit: 'Improves leg circulation and prevents stiffness'
@@ -133,6 +133,14 @@ class DeskStretches {
         this.timerInterval = null;
         this.stepInterval = null;
         this.completionBell = null;
+
+        this.useVoice = false;
+        this.voiceAudio = null;
+        this.volume = 0.5; // Default volume 50%
+        this.voiceFiles = {}; // Cache for loaded audio file paths
+        this.stepStartTime = 0; // When the current step started
+        this.currentStepDuration = 0; // Duration of current step in milliseconds
+        this.voicePlayedForCurrentStep = false;
 
         // DOM Elements
         this.elements = {
@@ -183,6 +191,11 @@ class DeskStretches {
         this.renderStretchGrid();
         this.setupEventListeners();
         this.preloadCompletionBell();
+        this.initializeVoiceControls();
+    }
+
+    initializeVoiceControls() {
+        // This will be called when showing stretch interface
     }
 
     preloadCompletionBell() {
@@ -211,7 +224,6 @@ class DeskStretches {
             }
         });
 
-        // Navigation buttons
         this.elements.backToStretches.addEventListener('click', () => this.showStretchGrid());
         this.elements.startBtn.addEventListener('click', () => this.startExercise());
         this.elements.exercisePauseBtn.addEventListener('click', () => this.togglePause());
@@ -236,12 +248,120 @@ class DeskStretches {
         });
     }
 
+    setupVoiceControlListeners() {
+        const voiceToggle = document.getElementById('voiceToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        const volumeControl = document.getElementById('volumeControl');
+
+        if (voiceToggle) {
+            voiceToggle.addEventListener('change', (e) => {
+                this.useVoice = e.target.checked;
+                if (volumeControl) {
+                    if (this.useVoice) {
+                        volumeControl.classList.add('visible');
+                    } else {
+                        volumeControl.classList.remove('visible');
+                    }
+                }
+
+                // If turning off voice while exercise is running, stop current voice
+                if (!this.useVoice && this.isRunning) {
+                    this.stopVoice();
+                }
+            });
+
+            // Set initial state
+            voiceToggle.checked = this.useVoice;
+        }
+
+        if (volumeSlider && volumeValue) {
+            volumeSlider.addEventListener('input', (e) => {
+                this.volume = parseInt(e.target.value) / 100;
+                volumeValue.textContent = `${e.target.value}%`;
+
+                // Update current voice volume if playing
+                if (this.voiceAudio) {
+                    this.voiceAudio.volume = this.volume;
+                }
+            });
+
+            // Set initial values
+            volumeSlider.value = this.volume * 100;
+            volumeValue.textContent = `${this.volume * 100}%`;
+        }
+    }
+
     selectStretch(stretchId) {
         this.currentStretch = this.stretches.find(s => s.id === stretchId);
         if (!this.currentStretch) return;
 
         this.showStretchInterface();
         this.updateEstimatedTime();
+        this.prepareVoiceFiles();
+    }
+
+    prepareVoiceFiles() {
+        if (!this.currentStretch) return;
+
+        // Clear previous voice files
+        this.voiceFiles = {};
+
+        const volumeControl = document.getElementById('volumeControl');
+        volumeControl.classList.remove('visible');
+
+        // Generate voice file paths based on stretch ID and step numbers
+        this.currentStretch.steps.forEach((step, index) => {
+            // Convert stretch ID to filename format (e.g., "neck-tilt" -> "neck_tilt")
+            const stretchName = this.currentStretch.id.replace(/-/g, '_');
+            const fileName = `${stretchName}_instruction_${index + 1}.mp3`;
+            this.voiceFiles[index] = `assets/stretches/${fileName}`;
+        });
+    }
+
+    // Play voice for current step
+    playCurrentStepVoice() {
+        if (!this.useVoice || !this.isRunning || this.isPaused) return;
+
+        // Get voice file for current step (within current rep)
+        const stepIndex = this.currentStep;
+        const voiceFile = this.voiceFiles[stepIndex];
+
+        if (!voiceFile) return;
+
+        // Stop any current voice
+        this.stopVoice();
+
+        // Play the voice
+        this.playVoice(voiceFile);
+    }
+
+    // Play voice audio
+    playVoice(audioPath) {
+        if (!audioPath) return;
+
+        this.voiceAudio = new Audio(audioPath);
+        this.voiceAudio.volume = this.volume;
+
+        // Handle playback errors silently
+        const playPromise = this.voiceAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                // Only log errors that aren't aborts
+                if (error.name !== 'AbortError') {
+                    console.log("Voice playback failed:", error);
+                }
+            });
+        }
+    }
+
+    // Stop voice audio
+    stopVoice() {
+        if (this.voiceAudio) {
+            this.voiceAudio.pause();
+            this.voiceAudio.currentTime = 0;
+            this.voiceAudio = null;
+        }
     }
 
     showStretchInterface() {
@@ -257,6 +377,9 @@ class DeskStretches {
         // Convert steps to bullet points
         this.updateInstructions();
 
+        // Add voice controls HTML
+        this.addVoiceControls();
+
         // Scroll to interface
         setTimeout(() => {
             this.elements.stretchInterface.scrollIntoView({
@@ -264,6 +387,10 @@ class DeskStretches {
                 block: 'start'
             });
         }, 100);
+    }
+
+    addVoiceControls() {
+        this.setupVoiceControlListeners();
     }
 
     updateInstructions() {
@@ -337,7 +464,6 @@ class DeskStretches {
 
         const steps = this.currentStretch.steps;
 
-        // Remove the multiplication by totalReps
         // Check if we've completed all steps for current rep
         if (this.currentStep >= steps.length) {
             // Move to next rep
@@ -363,6 +489,19 @@ class DeskStretches {
         this.elements.totalSteps.textContent = steps.length;
         this.elements.currentInstruction.textContent = currentStepData.instruction;
 
+        // Track step timing for pause/resume
+        this.stepStartTime = Date.now();
+        this.currentStepDuration = currentStepData.time * 1000;
+
+        // Reset voice played flag for new step
+        this.voicePlayedForCurrentStep = false;
+
+        // Play voice for this step if enabled AND not already played
+        if (this.useVoice && !this.voicePlayedForCurrentStep) {
+            this.playCurrentStepVoice();
+            this.voicePlayedForCurrentStep = true;
+        }
+
         // Schedule next step
         clearTimeout(this.stepInterval);
         this.stepInterval = setTimeout(() => {
@@ -373,6 +512,7 @@ class DeskStretches {
 
     startTimer() {
         clearInterval(this.timerInterval);
+        this.elements.exerciseTimer.textContent = this.formatTime(this.totalDuration);
 
         this.timerInterval = setInterval(() => {
             if (!this.isPaused && this.isRunning) {
@@ -396,9 +536,29 @@ class DeskStretches {
         if (this.isPaused) {
             clearInterval(this.timerInterval);
             clearTimeout(this.stepInterval);
+            this.stopVoice(); // Stop voice when paused
+
+            // Calculate how much time has passed in current step
+            if (this.stepStartTime > 0) {
+                const elapsed = Date.now() - this.stepStartTime;
+                this.currentStepDuration = Math.max(100, this.currentStepDuration - elapsed);
+            }
         } else {
             this.startTimer();
-            this.nextStep();
+
+            // Play voice only if not already played for this step
+            if (this.useVoice && !this.voicePlayedForCurrentStep) {
+                this.playCurrentStepVoice();
+                this.voicePlayedForCurrentStep = true;
+            }
+
+            // Resume step timer with remaining time
+            clearTimeout(this.stepInterval);
+            this.stepStartTime = Date.now();
+            this.stepInterval = setTimeout(() => {
+                this.currentStep++;
+                this.nextStep();
+            }, this.currentStepDuration);
         }
     }
 
@@ -408,7 +568,7 @@ class DeskStretches {
     }
 
     completeExercise() {
-        this.stopExercise();
+        this.stopExercise(); // This will stop voice
 
         // Hide exercise interface
         this.elements.exerciseInterface.hidden = true;
@@ -421,7 +581,7 @@ class DeskStretches {
         this.elements.completedReps.textContent = `${this.totalReps} rep${this.totalReps > 1 ? 's' : ''}`;
         this.elements.completedTime.textContent = `${this.totalDuration} seconds`;
 
-        // Play completion bell
+        // Play completion bell (voice already stopped)
         if (this.completionBell) {
             this.completionBell.currentTime = 0;
             this.completionBell.play().catch(e => console.log('Bell failed:', e));
@@ -434,14 +594,19 @@ class DeskStretches {
 
         clearInterval(this.timerInterval);
         clearTimeout(this.stepInterval);
+        this.stopVoice(); // Add this line
     }
 
     showStretchGrid() {
         this.stopExercise();
         this.elements.stretchInterface.hidden = true;
         this.elements.exerciseInterface.hidden = true;
-        this.elements.completionView.hidden = true; // Add this line
+        this.elements.completionView.hidden = true;
         this.elements.stretchGrid.hidden = false;
+
+        // Reset voice settings
+        this.useVoice = false;
+        this.stopVoice();
 
         // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -463,9 +628,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Real-time validation
-customReps.addEventListener('input', function() {
+customReps.addEventListener('input', function () {
     let value = parseInt(this.value) || 0;
-    
+
     if (value < 0) {
         this.value = 1;
     } else if (value > 100) {
@@ -474,7 +639,7 @@ customReps.addEventListener('input', function() {
 });
 
 // Final validation on blur
-customReps.addEventListener('blur', function() {
+customReps.addEventListener('blur', function () {
     if (!this.value || parseInt(this.value) < 1) {
         this.value = 1;
     }

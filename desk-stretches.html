@@ -67,6 +67,22 @@
                     <div class="estimated-time">
                         Estimated time: <span id="estimatedTime">0s</span>
                     </div>
+                    <!-- Add this in stretch-interface div, inside session-controls, after estimated-time -->
+                    <div class="voice-controls-section">
+                        <div class="voice-control">
+                            <label class="voice-toggle">
+                                <input type="checkbox" id="voiceToggle">
+                                <span class="checkmark"></span>
+                                Enable Voice Guidance
+                            </label>
+                            <div class="volume-control" id="volumeControl">
+                                <label for="volumeSlider">Volume:</label>
+                                <input type="range" id="volumeSlider" min="0" max="100" value="50"
+                                    class="volume-slider">
+                                <span id="volumeValue">50%</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="control-buttons">
                         <button id="startBtn" class="btn primary">Start Exercise</button>
                         <button id="backToStretches" class="btn outline">← Back to All Stretches</button>

@@ -436,6 +436,7 @@ class DeskStretches {
 
         // Update exercise display
         this.elements.exerciseName.textContent = this.currentStretch.name;
+        this.elements.exerciseTimer.textContent = this.formatTime(this.totalDuration);
 
         // Initialize rep display
         this.updateRepDisplay();
@@ -512,7 +513,6 @@ class DeskStretches {
 
     startTimer() {
         clearInterval(this.timerInterval);
-        this.elements.exerciseTimer.textContent = this.formatTime(this.totalDuration);
 
         this.timerInterval = setInterval(() => {
             if (!this.isPaused && this.isRunning) {

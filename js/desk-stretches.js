@@ -140,7 +140,6 @@ class DeskStretches {
         this.voiceFiles = {}; // Cache for loaded audio file paths
         this.stepStartTime = 0; // When the current step started
         this.currentStepDuration = 0; // Duration of current step in milliseconds
-        this.voicePlayedForCurrentStep = false;
 
         // DOM Elements
         this.elements = {
@@ -494,13 +493,9 @@ class DeskStretches {
         this.stepStartTime = Date.now();
         this.currentStepDuration = currentStepData.time * 1000;
 
-        // Reset voice played flag for new step
-        this.voicePlayedForCurrentStep = false;
-
         // Play voice for this step if enabled AND not already played
-        if (this.useVoice && !this.voicePlayedForCurrentStep) {
+        if (this.useVoice) {
             this.playCurrentStepVoice();
-            this.voicePlayedForCurrentStep = true;
         }
 
         // Schedule next step
@@ -546,10 +541,9 @@ class DeskStretches {
         } else {
             this.startTimer();
 
-            // Play voice only if not already played for this step
-            if (this.useVoice && !this.voicePlayedForCurrentStep) {
+            // Resume voice if enabled
+            if (this.useVoice) {
                 this.playCurrentStepVoice();
-                this.voicePlayedForCurrentStep = true;
             }
 
             // Resume step timer with remaining time
@@ -557,7 +551,7 @@ class DeskStretches {
             this.stepStartTime = Date.now();
             this.stepInterval = setTimeout(() => {
                 this.currentStep++;
-                this.nextStep();
+                this.nextStep(); // KEEP THIS - it's correct
             }, this.currentStepDuration);
         }
     }

@@ -740,13 +740,12 @@
     }
 
     .instruction-timer-area {
-        height: 100px;
-        gap: 0.5rem;
+        height: 120px;
     }
 
     .exercise-instruction {
-        font-size: 1rem;
-        padding-top: .5rem;
+        font-size: 1.1rem;
+        padding-top: .3rem;
     }
 
     .exercise-timer {

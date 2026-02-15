@@ -1224,7 +1224,7 @@
 @media (max-width: 480px) {
     .tracking-area {
         height: 200px;
-        max-width: 300px;
+        max-width: 80vw;
     }
 
     .tracking-target {

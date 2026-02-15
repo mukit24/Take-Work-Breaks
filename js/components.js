@@ -14,4 +14,5 @@ class ComponentLoader {
 // Load header on every page
 document.addEventListener('DOMContentLoaded', () => {
     ComponentLoader.loadComponent('header-container', 'components/header.html');
+    ComponentLoader.loadComponent('footer-container', 'components/footer.html');
 });

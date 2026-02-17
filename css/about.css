@@ -689,3 +689,80 @@
 .mt-2 {
     margin-top: 0.8rem;
 }
+
+/* Feedback Section */
+.feedback-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f7fafc, #edf2f7);
+    text-align: center;
+}
+
+.feedback-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.feedback-content h2 {
+    font-size: 2.2rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.feedback-subtitle {
+    color: #4a5568;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 1rem 0 2rem;
+}
+
+.feedback-btn {
+    font-size: 1.1rem;
+    padding: .7rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 auto;
+    cursor: pointer;
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.feedback-btn:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.feedback-btn .btn-icon {
+    font-size: 1.2rem;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .feedback-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .feedback-section {
+        padding: 1.5rem 0;
+    }
+
+    .feedback-section h2 {
+        font-size: 1.5rem;
+    }
+    .feedback-btn {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
